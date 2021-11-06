@@ -33,11 +33,12 @@ body{
 }
 .glow {
   font-size: 80px;
+  font-style:oblique;
   color: #fff;
   text-align: center;
-  -webkit-animation: glow 1s ease-in-out infinite alternate;
-  -moz-animation: glow 1s ease-in-out infinite alternate;
-  animation: glow 1s ease-in-out infinite alternate;
+  -webkit-animation: glow 0.5s ease-in-out infinite alternate;
+  -moz-animation: glow 0.5s ease-in-out infinite alternate;
+  animation: glow 0.5s ease-in-out infinite alternate;
 }
 
 @-webkit-keyframes glow {
