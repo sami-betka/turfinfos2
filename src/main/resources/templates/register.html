@@ -15,19 +15,19 @@
        <div style="margin-top: 120px;" class="row">       
           <div class="col-md-1"></div>
           <div class="col-md-10">
-          <div th:if="${errormessage}" th:text="${errormessage}" class="alert alert-danger" role="alert">
+           <div th:if="${usernamealreadyexists}" th:text="${usernamealreadyexists}" class="alert alert-danger" role="alert">
            </div>
             <div class="card op">
               <div class="card-header">
-                <h5 class="title">Se connecter</h5>
+                <h5 class="title">S'inscrire</h5>
               </div>
               <div class="card-body">
-                <form th:action="@{/j_spring_security_check}" name='f' th:object="${emptyUser}" method="POST">
+                <form th:action="@{/save-user}" th:object="${emptyUser}" method="POST">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Nom d'utilisateur</label>
-                        <input name="username" required type="text" class="form-control form-control-user" placeholder="Nom d'utilisateur" value="">
+                        <input th:field="*{userName}" type="text" class="form-control" placeholder="" value="">
                       </div>
                     </div>
                   </div>
@@ -35,31 +35,25 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Mot de passe</label>
-                        <input name="password" required type="password" class="form-control form-control-user" placeholder="Mot de passe" value="">
+                        <input th:field="*{password}" type="text" class="form-control" placeholder="" value="">
                       </div>
                     </div>
-                  </div>  
+                  </div>  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Confirmation mot de passe</label>
+                        <input name="passwordConfirmation" type="text" class="form-control" placeholder="" value="">
+                      </div>
+                    </div>
+                  </div>
                   
-<!--                   <div class="row"> -->
-<!--                     <div class="col-md-12"> -->
-<!--                       <div class="form-group"> -->
-<!--                         <label>Confirmation mot de passe</label> -->
-<!--                         <input name="passwordConfirmation" type="text" class="form-control" placeholder="" value=""> -->
-<!--                       </div> -->
-<!--                     </div> -->
-<!--                   </div> -->
+                 <button type="submit" class="btn btn-primary btn-user btn-block">M'inscrire</button> 
 
-                     			<div class="">Mot de passe oublié ?</div>
-							    <br>
-							
-			              <div class="">Pas encore membre? <a th:href="@{/create-account}">S'inscrire</a></div>
-                  
-                       <button type="submit" class="btn btn-primary btn-user btn-block">Me connecter</button> 
-                       
                 </form>
               </div>
             </div>
           </div>
+
         </div>
 
 	<script type="text/javascript" th:src="@{/js/test.js}"></script>

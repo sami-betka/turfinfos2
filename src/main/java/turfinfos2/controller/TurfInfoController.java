@@ -1,9 +1,14 @@
 package turfinfos2.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -12,7 +17,7 @@ import turfinfos2.repository.TurfInfosRepository;
 
 @Controller
 public class TurfInfoController {
-	
+		
 	@Autowired
 	TurfInfosRepository repo;
 	
@@ -257,5 +262,30 @@ public class TurfInfoController {
 
 			return "redirect:/reunion-infos?jour=" + jour + "&reunion=" + reunion;
 	    }
+	   
+	   ////////////////////////////////////////////////////////////////////////////////
+	   
+	   private void navbarInfos(Model model) {
+		   
+		   List<TurfInfos> allInfos = repo.findAll();
+		   
+		   //DATES
+	  	 Set<String> dates = allInfos.stream()
+					.map(TurfInfos :: getJour)
+					.collect(Collectors.toSet());
+	       model.addAttribute("datesnav", dates);
+		   
+	       //REUNIONS
+	       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	       String jour = LocalDateTime.now().format(formatter);
+	       model.addAttribute("journav", jour);
+//	       System.out.println(jour);
+	       
+	    	 Set<String> reunions = allInfos.stream()
+					.filter(ti-> ti.getJour()==jour)
+	  				.map(TurfInfos :: getR)
+	  				.collect(Collectors.toSet());
+	         model.addAttribute("reunionsofday", reunions);
+	   }
 
 }

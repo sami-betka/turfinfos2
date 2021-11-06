@@ -1,6 +1,7 @@
 package turfinfos2.model;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,9 +35,9 @@ public class UserAccount {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_ACCOUNT_SEQ_GENERATOR")
-
 	private Long id;
 	
+	@Column(name = "user_name", nullable = false, unique = true)
 	private String userName;
 	
 	private String password;

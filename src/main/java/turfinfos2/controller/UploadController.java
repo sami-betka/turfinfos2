@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -51,7 +52,7 @@ public class UploadController {
     }
 
     @PostMapping("/upload-csv-file")
-    public String uploadCSVFileByRace(@RequestParam("file") MultipartFile file, Model model) {
+    public String uploadCSVFileByRace(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirect) {
     	
     	  System.out.println(turfInfosRepository.findAll().size() + "turfinforep.siz 1");
 
@@ -60,7 +61,10 @@ public class UploadController {
     	
         // validate file
         if (file.isEmpty()) {
-            model.addAttribute("messageempty", "Aucun fichier sélectionné, veuillez sélectionner un fichier.");
+        	
+			redirect.addFlashAttribute("messageempty", "Aucun fichier sélectionné, veuillez sélectionner un fichier.");
+
+//            model.addAttribute("messageempty", "Aucun fichier sélectionné, veuillez sélectionner un fichier.");
             model.addAttribute("status", false);
             // Envoyer les dates au model
 //            Set<String> dates = turfInfosRepository.findAll().stream()
@@ -114,11 +118,14 @@ public class UploadController {
 
                 
                 model.addAttribute("status", true);
-                model.addAttribute("messagesuccess", "Fichier: (" + file.getResource().getFilename() + ") importé avec succès");
+    			redirect.addFlashAttribute("messagesuccess", "Fichier: (" + file.getResource().getFilename() + ") importé avec succès");
+//                model.addAttribute("messagesuccess", "Fichier: (" + file.getResource().getFilename() + ") importé avec succès");
 
 
             } catch (Exception ex) {
-                model.addAttribute("messageerror", "Une erreur est apparue durant l'import du fichier.");
+    			redirect.addFlashAttribute("messageerror", "Une erreur est apparue durant l'import du fichier.");
+
+//                model.addAttribute("messageerror", "Une erreur est apparue durant l'import du fichier.");
                 model.addAttribute("status", false);
                 // Envoyer les dates au model
 //                Set<String> dates = turfInfosRepository.findAll().stream()
@@ -131,8 +138,8 @@ public class UploadController {
         }
         
         navbarInfos(model);
-        return "upload";
-//        return "file-upload-status";
+//        return "upload";
+		return "redirect:/upload";
 //        return "races-page";
 
     }
@@ -894,7 +901,6 @@ public class UploadController {
   				.map(TurfInfos :: getR)
   				.collect(Collectors.toSet());
          model.addAttribute("reunionsofday", reunions);
-       
    }
     
 }

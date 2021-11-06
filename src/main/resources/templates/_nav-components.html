@@ -1,6 +1,8 @@
 <!doctype html>
-<html xmlns:th="https://www.thymeleaf.org">
-  <head>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -102,21 +104,26 @@
 <!--         </h4> -->
         <div style="border: solid 3px gold; padding: 5px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         
+        <div th:each="d : ${datesnav}">
         
-          <form style="margin-bottom: 5px;" method="POST" th:action="@{/day-infos}" enctype="multipart/form-data">
+        <a class="text-dark" style="font-weight: bold;" th:text="${d}" th:href="@{/day-infos?jour={jour}(jour=${d})}"></a>
+        
+        </div>
+        
+<!--           <form style="margin-bottom: 5px;" method="POST" th:action="@{/day-infos}" enctype="multipart/form-data"> -->
 
-                            <div class="">
-								<label class="text-dark" style="font-weight: bold;">Choisir une date:</label><br> 
-								<select class="form-control form-control-user" name="jour" required="required">
-									<option value="">--Choisir--</option>
+<!--                             <div class=""> -->
+<!-- 								<label class="text-dark" style="font-weight: bold;">Choisir une date:</label><br>  -->
+<!-- 								<select class="form-control form-control-user" name="jour" required="required"> -->
+<!-- 									<option value="">--Choisir--</option> -->
 
-									<option th:each="d : ${datesnav}" th:value="${d}"
-										th:text="${d}"></option>
-								</select>
-							</div>
+<!-- 									<option th:each="d : ${datesnav}" th:value="${d}" -->
+<!-- 										th:text="${d}"></option> -->
+<!-- 								</select> -->
+<!-- 							</div> -->
 							
-							    <button type="submit" class="btn btn-small btn-primary">Acc&eacute;der</button>					
-                   </form>
+<!-- 							    <button type="submit" class="btn btn-small btn-primary">Acc&eacute;der</button>					 -->
+<!--                    </form> -->
         
         
         </div>
@@ -129,7 +136,9 @@
     
           <li class="nav-item active">
           <h5>
-         <a class="nav-link text-white" href="/login" style="text-align: center; font-weight: bold; text-shadow: 3px 3px 4px #000000;">Se connecter</a>	
+         <a sec:authorize="isAnonymous()" class="nav-link text-white" href="/login" style="text-align: center; font-weight: bold; text-shadow: 3px 3px 4px #000000;">Connexion/inscription</a>	
+          <a sec:authorize="isAuthenticated()" class="nav-link text-white" href="/logout" style="text-align: center; font-weight: bold; text-shadow: 3px 3px 4px #000000;">Déconnexion</a>	
+        
           </h5>
         </li>
     
