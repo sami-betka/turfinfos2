@@ -1,0 +1,9 @@
+.logo {
+  position: absolute;
+  z-index: 1;
+/*   // Use your own values for anything below this line. */
+  left: 20px;
+  top: 20px;
+  height: 50px;
+  width: 200px;
+}

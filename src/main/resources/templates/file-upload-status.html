@@ -1,0 +1,120 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link th:href="@{css/style.css}" rel="stylesheet" />
+<style>
+body{
+  padding-bottom: 50px;
+}
+table, th, td {
+  border: 1px solid black;
+/*   border-collapse: collapse; */
+}
+th, td {
+  text-align: center;
+}
+</style>
+</head>
+<body>
+        		<div th:replace="_nav-components :: nav">...</div>
+
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <h1>File Upload Status</h1>
+            <!--display error if any-->
+            <div class="alert alert-danger" role="alert" th:if="${!status}">
+                <strong>Error:</strong>
+                <span th:text="${message}"></span>
+            </div>
+
+            <!--display users list-->
+            <table class="table table-sm table-striped table-responsive" th:if="${status}">
+                <thead>
+                <tr>
+                    <th scope="col">R&eacute;union</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Num&eacute;ro</th>
+                    <th scope="col">Cheval</th>
+                    <th scope="col">%-V-CHEV-H</th>
+                    <th scope="col">%-V-JOCK-H</th>
+                    <th scope="col">%-V-ENT-H</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="info, i : ${infos}">
+                    <th th:text="${info.R}"></th>
+                    <td th:text="${info.C}"></td>
+                    <th th:text="${info.numero}"></th>
+                    <td th:text="${info.cheval}"></td>
+                    <td th:text="${info.pourcVictChevalHippo}"></td>
+                    <td th:text="${info.pourcVictJockHippo}"></td>
+                    <td th:text="${info.pourcVictEntHippo}"></td>
+                </tr>
+                </tbody>
+            </table><br>
+           
+        </div>
+    </div>
+</div>
+
+
+            
+            
+            <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-8">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table class="table-sm table-striped table-responsive" th:if="${status}">
+                          
+                <thead>       
+    
+                   <tr>
+                    <th scope="">%-V-CHEV-H</th>
+                    <td th:each="p, i : ${pvch}" th:text="${p.numero}"></td>
+                    </tr>
+                    
+                    <tr>
+                    <th scope="">%-V-JOCK-H</th>
+                    <td th:each="info, i : ${infos}" th:text="${info.pourcVictJockHippo}"></td>
+                    </tr>
+                    
+                    <tr>
+                    <th scope="">%-V-ENT-H</th>
+                    <td th:each="info, i : ${infos}" th:text="${info.pourcVictEntHippo}"></td>
+                   </tr>
+                   
+                </thead>
+<!--                 <tbody> -->
+<!--                 <tr th:each="info, i : ${infos}"> -->
+<!--                     <td th:text="${info.age}"></td> -->
+<!--                 </tr> -->
+<!--                 </tbody> -->
+            </table>
+				</div>
+				<div class="col-md-2">
+				
+				</div>
+				<div class="col-md-2">
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+
+</body>
+</html>

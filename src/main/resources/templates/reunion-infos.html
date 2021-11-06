@@ -1,0 +1,1557 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link th:href="@{css/style.css}" rel="stylesheet" />
+        <link th:href="@{css/bounce.css}" rel="stylesheet" />
+    
+</head>
+
+<body>
+
+		        		<video th:replace="_nav-components :: background-video"></video>
+
+
+        		<div th:replace="_nav-components :: nav">...</div>
+        		
+<!-- <h3 style="text-align: center; margin-bottom: 30px; text-decoration: underline;">Bienvenue sur Djetay'Infos</h3> -->
+
+
+<div class="container-fluid" style="margin-top: 120px; opacity: 0.94;">
+
+
+	<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
+		
+		
+		<div class="badge-danger text-wrap" style="width: 22rem; margin: 0 auto; border-radius: 10px;">
+		<h3 class="text-white" th:text="${'Courses du : ' + date}" style="text-align: center; margin-bottom: 20px;margin-top: 20px;"></h3>
+       </div>
+
+            <div class="container-fluid">
+	<div class="row">
+	
+		<div class="col-md-12">		
+		
+<!-- 		FIRST -->
+			<div th:if="${oneexists}" class="row" style="margin-bottom: 10px;">
+<!-- 			    <p th:text="${onetitle}" style="font-weight: bold;"></p> -->
+			    <h4><span th:text="${onetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+			    
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab1" class="table-sm table-striped table-responsive">
+                          
+                <thead>       
+                    
+                    <tr class="chronoscolor">
+<!--                     <th scope=""> -->
+<!--                      <button class="btn btn-outline-dark btn-sm" id="buttonminus1" onclick="HideRow1(); ">Masquer</button>  -->
+<!--                      <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus1" onclick="ShowRow1(); ">Afficher</button>  -->
+<!--                     </th> -->
+                    
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${onechronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td class="borderbold" th:each="p, i : ${onepveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] </strong>- [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${oneppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] </strong>- [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>     
+                    <td th:each="p, i : ${onepvjh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                     </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${oneppjh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>    
+                    
+                   <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${onepvch}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${oneppch}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>  
+                    
+                   <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${onetxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                   <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${onetxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                   <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${onetxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                   <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${onetxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    
+                    <td th:each="j, i : ${onetxph}" th:text="${j.numero}" th:classappend="${j.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                    </tr>      
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Prono:</th>
+                    <td th:each="p, i : ${onepronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                    
+                     <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${onetaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                    
+                     <tr class="chronoscolor" th:if="${#lists.size(oneclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${oneclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                </thead>
+            </table>
+
+         
+            
+<!--             //Collapse chronos BEGIN-->
+
+<div id="parente">
+
+   <button class="btn btn-outline-dark btn-sm" id="buttonminus1" onclick="HideRow1(); ">Masquer les places</button> 
+   <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus1" onclick="ShowRow1(); ">Afficher les places</button> 
+
+        <div th:if="${onechronos eq false}">
+        		<div th:replace="_components :: chronos-buttonone">...</div>
+        		<div th:replace="_components :: chronos-dropdownsone(${onehorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${onechronos eq true}">
+                <div th:replace="_components :: chronos-modifone">...</div>
+		        <div th:replace="_components :: chronos-dropdownsone(${onehorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+            <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${onetaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttonone">...</div>
+        		<div th:replace="_components :: taypronos-dropdownsone(${onehorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${onetaypronos eq true}">
+                <div th:replace="_components :: taypronos-modifone">...</div>
+		        <div th:replace="_components :: taypronos-dropdownsone(${onehorses})">...</div>
+		</div>
+		
+		
+</div>		
+            <!--//Collapse TAYPRONOS END -->
+                        
+				</div>
+					</div>
+					
+<!-- 				SECOND	 -->
+								<div th:if="${twoexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${twotitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab2" class="table-sm table-striped table-responsive">
+                          
+                <thead>       
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${twochronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${twopveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${twoppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${twopvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${twoppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>   
+                    
+                  <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${twopvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${twoppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>   
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${twotxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${twotxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${twotxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${twotxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                  
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${twopronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${twotaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                    
+                     <tr class="chronoscolor" th:if="${#lists.size(twoclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${twoclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                   
+                </thead>
+            </table>
+            
+           
+            
+            <!--             //Collapse chronos BEGIN-->
+            
+  <div id="parente">
+  
+   <button class="btn btn-outline-dark btn-sm" id="buttonminus2" onclick="HideRow2(); ">Masquer les places</button> 
+            <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus2" onclick="ShowRow2(); ">Afficher les places</button>
+  
+     <div th:if="${twochronos eq false}">
+        		<div th:replace="_components :: chronos-buttontwo">...</div>
+        	    <div th:replace="_components :: chronos-dropdownstwo(${twohorses})">...</div>
+        		
+        </div>
+        <div th:if="${twochronos eq true}">
+                <div th:replace="_components :: chronos-modiftwo">...</div>
+		        <div th:replace="_components :: chronos-dropdownstwo(${twohorses})">...</div>
+		</div>
+		
+
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${twotaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttontwo">...</div>
+        		<div th:replace="_components :: taypronos-dropdownstwo(${twohorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${twotaypronos eq true}">
+                <div th:replace="_components :: taypronos-modiftwo">...</div>
+		        <div th:replace="_components :: taypronos-dropdownstwo(${twohorses})">...</div>
+		</div>
+  
+  </div>          
+
+
+            <!--//Collapse TAYPRONOS END -->
+            
+            
+				</div>
+					</div>
+					
+<!-- 					THIRD -->
+								<div th:if="${threeexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${threetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab3" class="table-sm table-striped table-responsive">
+                          
+                <thead>       
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${threechronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${threepveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${threeppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${threepvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${threeppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>  
+                    
+                    <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${threepvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${threeppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>    
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${threetxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${threetxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${threetxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${threetxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${threepronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${threetaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                    
+                     <tr class="chronoscolor" th:if="${#lists.size(threeclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${threeclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                   
+                </thead>
+            </table>
+         
+            
+                     <!--             //Collapse chronos BEGIN-->
+<div id="parente">
+
+    <button class="btn btn-outline-dark btn-sm" id="buttonminus3" onclick="HideRow3(); ">Masquer les places</button> 
+    <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus3" onclick="ShowRow3(); ">Afficher les places</button>
+
+        <div th:if="${threechronos eq false}">
+        		<div th:replace="_components :: chronos-buttonthree">...</div>
+        	    <div th:replace="_components :: chronos-dropdownsthree(${threehorses})">...</div>
+        		
+        </div>
+        <div th:if="${threechronos eq true}">
+                <div th:replace="_components :: chronos-modifthree">...</div>
+		        <div th:replace="_components :: chronos-dropdownsthree(${threehorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${threetaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttonthree">...</div>
+        		<div th:replace="_components :: taypronos-dropdownsthree(${threehorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${threetaypronos eq true}">
+                <div th:replace="_components :: taypronos-modifthree">...</div>
+		        <div th:replace="_components :: taypronos-dropdownsthree(${threehorses})">...</div>
+		</div>
+		
+</div>
+ 
+            <!--//Collapse TAYPRONOS END -->
+            
+            
+				</div>
+					</div>
+					
+<!-- 					FOURTH -->
+
+			<div th:if="${fourexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${fourtitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab4" class="table-sm table-striped table-responsive">
+                          
+                <thead>   
+                     
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${fourchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${fourpveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${fourppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${fourpvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${fourppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>  
+                       
+                   <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${fourpvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${fourppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>    
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${fourtxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${fourtxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${fourtxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${fourtxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                 
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${fourpronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${fourtaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                    
+                     <tr class="chronoscolor" th:if="${#lists.size(fourclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${fourclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                   
+                </thead>
+            </table>
+          
+                     <!--             //Collapse chronos BEGIN-->
+<div id="parente">
+   <button class="btn btn-outline-dark btn-sm" id="buttonminus4" onclick="HideRow4(); ">Masquer les places</button> 
+    <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus4" onclick="ShowRow4(); ">Afficher les places</button>
+
+      <div th:if="${fourchronos eq false}">
+        		<div th:replace="_components :: chronos-buttonfour">...</div>
+        	    <div th:replace="_components :: chronos-dropdownsfour(${fourhorses})">...</div>
+        		
+        </div>
+        <div th:if="${fourchronos eq true}">
+                <div th:replace="_components :: chronos-modiffour">...</div>
+		        <div th:replace="_components :: chronos-dropdownsfour(${fourhorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${fourtaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttonfour">...</div>
+        		<div th:replace="_components :: taypronos-dropdownsfour(${fourhorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${fourtaypronos eq true}">
+                <div th:replace="_components :: taypronos-modiffour">...</div>
+		        <div th:replace="_components :: taypronos-dropdownsfour(${fourhorses})">...</div>
+		</div>
+</div>
+  
+		
+            <!--//Collapse TAYPRONOS END -->
+            
+				</div>
+					</div>			
+			
+                              <!-- COL 6 to 12 -->
+			
+<!-- 					<div class="col-md-12"> -->
+		
+<!-- 		FIFTH -->
+			<div th:if="${fiveexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${fivetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab5" class="table-sm table-striped table-responsive">
+                          
+                <thead>       
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${fivechronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${fivepveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${fiveppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${fivepvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${fiveppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>  
+                    
+                  <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${fivepvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${fiveppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>    
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${fivetxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${fivetxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${fivetxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${fivetxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                  
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${fivepronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${fivetaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                    
+                     <tr class="chronoscolor" th:if="${#lists.size(fiveclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${fiveclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                   
+                </thead>
+            </table>
+            
+                     <!--             //Collapse chronos BEGIN-->
+<div id="parente">
+        <button class="btn btn-outline-dark btn-sm" id="buttonminus5" onclick="HideRow5(); ">Masquer les places</button> 
+        <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus5" onclick="ShowRow5(); ">Afficher les places</button>
+
+       <div th:if="${fivechronos eq false}">
+        		<div th:replace="_components :: chronos-buttonfive">...</div>
+        	    <div th:replace="_components :: chronos-dropdownsfive(${fivehorses})">...</div>
+        		
+        </div>
+        <div th:if="${fivechronos eq true}">
+                <div th:replace="_components :: chronos-modiffive">...</div>
+		        <div th:replace="_components :: chronos-dropdownsfive(${fivehorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${fivetaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttonfive">...</div>
+        		<div th:replace="_components :: taypronos-dropdownsfive(${fivehorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${fivetaypronos eq true}">
+                <div th:replace="_components :: taypronos-modiffive">...</div>
+		        <div th:replace="_components :: taypronos-dropdownsone(${fivehorses})">...</div>
+		</div>
+</div>
+
+		
+            <!--//Collapse TAYPRONOS END -->
+
+            
+				</div>
+					</div>
+					
+<!-- 				SIXTH	 -->
+								<div th:if="${sixexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${sixtitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab6" class="table-sm table-striped table-responsive">
+                          
+                <thead>       
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${sixchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${sixpveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${sixppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${sixpvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${sixppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>    
+                    
+                   <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${sixpvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${sixppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>  
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${sixtxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${sixtxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${sixtxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${sixtxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${sixpronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${sixtaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                    
+                     <tr class="chronoscolor" th:if="${#lists.size(sixclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${sixclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                </thead>                
+            </table>
+            
+            
+            
+                                    <!--             //Collapse chronos BEGIN-->
+<div id="parente">
+ <button class="btn btn-outline-dark btn-sm" id="buttonminus6" onclick="HideRow6(); ">Masquer les places</button> 
+ <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus6" onclick="ShowRow6(); ">Afficher les places</button>
+
+      <div th:if="${sixchronos eq false}">
+        		<div th:replace="_components :: chronos-buttonsix">...</div>
+        	    <div th:replace="_components :: chronos-dropdownssix(${sixhorses})">...</div>
+        		
+        </div>
+        <div th:if="${sixchronos eq true}">
+                <div th:replace="_components :: chronos-modifsix">...</div>
+		        <div th:replace="_components :: chronos-dropdownssix(${sixhorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${sixtaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttonsix">...</div>
+        		<div th:replace="_components :: taypronos-dropdownssix(${sixhorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${sixtaypronos eq true}">
+                <div th:replace="_components :: taypronos-modifsix">...</div>
+		        <div th:replace="_components :: taypronos-dropdownssix(${sixhorses})">...</div>
+		</div>
+</div>
+  
+		
+            <!--//Collapse TAYPRONOS END -->
+            
+				</div>
+					</div>
+					
+<!-- 					SEVENTH -->
+								<div th:if="${sevenexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${seventitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab7" class="table-sm table-striped table-responsive">
+                          
+                <thead>       
+                     
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${sevenchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${sevenpveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${sevenppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${sevenpvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${sevenppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>  
+                    
+                   <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${sevenpvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${sevenppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>    
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${seventxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${seventxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${seventxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${seventxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${sevenpronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${seventaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                     
+                     <tr class="chronoscolor" th:if="${#lists.size(sevenclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${sevenclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                </thead>
+            </table>
+            
+            
+                            <!--             //Collapse chronos BEGIN-->
+<div id="parente">
+   <button class="btn btn-outline-dark btn-sm" id="buttonminus7" onclick="HideRow7(); ">Masquer les places</button> 
+   <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus7" onclick="ShowRow7(); ">Afficher les places</button>
+
+       <div th:if="${sevenchronos eq false}">
+        		<div th:replace="_components :: chronos-buttonseven">...</div>
+        	    <div th:replace="_components :: chronos-dropdownsseven(${sevenhorses})">...</div>
+        		
+        </div>
+        <div th:if="${sevenchronos eq true}">
+                <div th:replace="_components :: chronos-modifseven">...</div>
+		        <div th:replace="_components :: chronos-dropdownsseven(${sevenhorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${seventaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttonseven">...</div>
+        		<div th:replace="_components :: taypronos-dropdownsseven(${sevenhorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${seventaypronos eq true}">
+                <div th:replace="_components :: taypronos-modifseven">...</div>
+		        <div th:replace="_components :: taypronos-dropdownsseven(${sevenhorses})">...</div>
+		</div>
+</div>
+ 
+		
+            <!--//Collapse TAYPRONOS END -->
+            
+				</div>
+					</div>
+					
+<!-- 					EIGHTH -->
+
+			<div th:if="${eightexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${eighttitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab8" class="table-sm table-striped table-responsive">
+                          
+                <thead>   
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${eightchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${eightpveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${eightppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${eightpvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${eightppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>   
+                         
+                    <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${eightpvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${eightppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>   
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${eighttxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${eighttxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${eighttxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${eighttxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                  
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${eightpronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${eighttaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                     
+                     <tr class="chronoscolor" th:if="${#lists.size(eightclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${eightclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                </thead>
+            </table>
+            
+            
+                            <!--             //Collapse chronos BEGIN-->
+<div id="parente">
+       <button class="btn btn-outline-dark btn-sm" id="buttonminus8" onclick="HideRow8(); ">Masquer les places</button> 
+       <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus8" onclick="ShowRow8(); ">Afficher les places</button>
+
+        <div th:if="${eightchronos eq false}">
+        		<div th:replace="_components :: chronos-buttoneight">...</div>
+        	    <div th:replace="_components :: chronos-dropdownseight(${eighthorses})">...</div>
+        		
+        </div>
+        <div th:if="${eightchronos eq true}">
+                <div th:replace="_components :: chronos-modifeight">...</div>
+		        <div th:replace="_components :: chronos-dropdownseight(${eighthorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${eighttaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttoneight">...</div>
+        		<div th:replace="_components :: taypronos-dropdownseight(${eighthorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${eighttaypronos eq true}">
+                <div th:replace="_components :: taypronos-modifeight">...</div>
+		        <div th:replace="_components :: taypronos-dropdownseight(${eighthorses})">...</div>
+		</div>
+</div>
+
+		
+            <!--//Collapse TAYPRONOS END -->
+            
+				</div>
+					</div>
+					
+					
+					<!-- 					NINTH -->
+
+			<div th:if="${nineexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${ninetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab9" class="table-sm table-striped table-responsive">
+                          
+                <thead>   
+                     
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${ninechronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${ninepveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${nineppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${ninepvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${nineppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>  
+                        
+                   <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${ninepvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${nineppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>    
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${ninetxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${ninetxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${ninetxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${ninetxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${ninepronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${ninetaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                     
+                     <tr class="chronoscolor" th:if="${#lists.size(nineclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${nineclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                </thead>
+            </table>
+            
+            
+                            <!--             //Collapse chronos BEGIN-->
+<div id="parente">
+          <button class="btn btn-outline-dark btn-sm" id="buttonminus9" onclick="HideRow9(); ">Masquer les places</button> 
+          <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus9" onclick="ShowRow9(); ">Afficher les places</button>
+
+        <div th:if="${ninechronos eq false}">
+        		<div th:replace="_components :: chronos-buttonnine">...</div>
+        	    <div th:replace="_components :: chronos-dropdownsnine(${ninehorses})">...</div>
+        		
+        </div>
+        <div th:if="${ninechronos eq true}">
+                <div th:replace="_components :: chronos-modifnine">...</div>
+		        <div th:replace="_components :: chronos-dropdownsnine(${ninehorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${ninetaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttonnine">...</div>
+        		<div th:replace="_components :: taypronos-dropdownsnine(${ninehorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${ninetaypronos eq true}">
+                <div th:replace="_components :: taypronos-modifnine">...</div>
+		        <div th:replace="_components :: taypronos-dropdownsnine(${ninehorses})">...</div>
+		</div>
+</div>
+
+		
+            <!--//Collapse TAYPRONOS END -->
+            
+				</div>
+					</div>
+					
+					<!-- 					TENTH -->
+
+			<div th:if="${tenexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${tentitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab10" class="table-sm table-striped table-responsive">
+                          
+                <thead>   
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${tenchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${tenpveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${tenppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${tenpvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${tenppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>  
+                        
+                    <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${tenpvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${tenppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>    
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${tentxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${tentxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${tentxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${tentxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${tenpronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${tentaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                     
+                     <tr class="chronoscolor" th:if="${#lists.size(tenclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${tenclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                </thead>
+            </table>
+            
+
+            
+                            <!--             //Collapse chronos BEGIN-->
+<div id="parente">
+             <button class="btn btn-outline-dark btn-sm" id="buttonminus10" onclick="HideRow10(); ">Masquer les places</button> 
+            <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus10" onclick="ShowRow10(); ">Afficher les places</button>
+
+       <div th:if="${tenchronos eq false}">
+        		<div th:replace="_components :: chronos-buttonten">...</div>
+        	    <div th:replace="_components :: chronos-dropdownsten(${tenhorses})">...</div>
+        		
+        </div>
+        <div th:if="${tenchronos eq true}">
+                <div th:replace="_components :: chronos-modiften">...</div>
+		        <div th:replace="_components :: chronos-dropdownsten(${tenhorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${tentaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttonten">...</div>
+        		<div th:replace="_components :: taypronos-dropdownsten(${tenhorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${tentaypronos eq true}">
+                <div th:replace="_components :: taypronos-modiften">...</div>
+		        <div th:replace="_components :: taypronos-dropdownsten(${tenhorses})">...</div>
+		</div>
+</div>
+ 
+		
+            <!--//Collapse TAYPRONOS END -->
+            
+				</div>
+					</div>
+					
+					<!-- 					ELEVENTH -->
+
+			<div th:if="${elevenexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${eleventitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab11" class="table-sm table-striped table-responsive">
+                          
+                <thead>   
+                     
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${elevenchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${elevenpveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${elevenppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${elevenpvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${elevenppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>    
+                    
+                        <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${elevenpvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${elevenppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>  
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${eleventxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${eleventxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${eleventxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${eleventxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${elevenpronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${eleventaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                     
+                     <tr class="chronoscolor" th:if="${#lists.size(elevenclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${elevenclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                </thead>
+            </table>
+            
+      
+            
+                            <!--             //Collapse chronos BEGIN-->
+<div id="parente">
+       <button class="btn btn-outline-dark btn-sm" id="buttonminus11" onclick="HideRow11(); ">Masquer les places</button> 
+            <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus11" onclick="ShowRow11(); ">Afficher les places</button>
+
+       <div th:if="${elevenchronos eq false}">
+        		<div th:replace="_components :: chronos-buttoneleven">...</div>
+        	    <div th:replace="_components :: chronos-dropdownseleven(${elevenhorses})">...</div>
+        		
+        </div>
+        <div th:if="${elevenchronos eq true}">
+                <div th:replace="_components :: chronos-modifeleven">...</div>
+		        <div th:replace="_components :: chronos-dropdownseleven(${elevenhorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${eleventaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttoneleven">...</div>
+        		<div th:replace="_components :: taypronos-dropdownseleven(${elevenhorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${eleventaypronos eq true}">
+                <div th:replace="_components :: taypronos-modifeleven">...</div>
+		        <div th:replace="_components :: taypronos-dropdownseleven(${elevenhorses})">...</div>
+		</div>
+</div>
+
+		
+            <!--//Collapse TAYPRONOS END -->
+            
+				</div>
+					</div>
+					
+					<!-- 					TWELVTH -->
+
+			<div th:if="${twelveexists}" class="row" style="margin-bottom: 10px;">
+			    <h4><span th:text="${twelvetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
+				<div class="col-md-11 divrace">
+<!-- 				              <table class="" th:if="${status}"> -->
+                          <table id="tab12" class="table-sm table-striped table-responsive">
+                          
+                <thead>   
+                    
+                    <tr class="chronoscolor">
+                    <th scope="">Chronos</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${twelvechronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                    
+                      <tr class="entcolor">
+                    <th scope="">V-E-H(%)</th>
+                    <td th:each="p, i : ${twelvepveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                   </tr>
+                   
+                      <tr class="entcolor">
+                    <th scope="">P-E-H(%)</th>
+                    <td th:each="p, i : ${twelveppeh}" ><p th:inline="text"><strong>[[${p.numeroString}]] - </strong> [[${p.nbrCourseEntHippo}]]([[${p.pourcPlaceEntHippo}]]%) </p></td>
+                   </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">V-J-H(%)</th>
+                    <td th:each="p, i : ${twelvepvjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="jockcolor">
+                    <th scope="">P-J-H(%)</th>
+                    <td th:each="p, i : ${twelveppjh}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseJockHippo}]]([[${p.pourcPlaceJockHippo}]]%) </p></td>
+                    </tr>   
+                       
+                    <tr class="horsecolor">
+                    <th scope="">V-C-H(%)</th>
+                    <td th:each="p, i : ${twelvepvch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="horsecolor">
+                    <th scope="">P-C-H(%)</th>
+                    <td th:each="p, i : ${twelveppch}" ><p th:inline="text"><strong>[[${p.numero}]] - </strong> [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    </tr>   
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO(%)</th>
+                    <td th:each="p, i : ${twelvetxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO(%)</th>
+                    <td th:each="p, i : ${twelvetxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    </tr>      
+                    
+                      <tr class="couplecolor">
+                    <th scope="">V-CO-H(%)</th>
+                    <td th:each="p, i : ${twelvetxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    </tr>
+                    
+                      <tr class="couplecolor">
+                    <th scope="">P-CO-H(%)</th>
+                    <td th:each="p, i : ${twelvetxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    </tr>      
+                 
+                    <tr class="chronoscolor">
+                    <th scope="">Prono:</th>
+                    <td th:each="p, i : ${twelvepronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                   </tr>
+                   
+                    <tr class="chronoscolor">
+                    <th scope="" class="">Le Tay'Prono:</th>
+                    <td th:each="p, i : ${twelvetaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    </tr>
+                     
+                     <tr class="chronoscolor" th:if="${#lists.size(twelveclassementlist) gt 0}">
+                    <th scope="" class="">Arrivée:</th>
+                    <td th:each="p, i : ${twelveclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    </tr>
+                   
+                </thead>
+            </table>
+            
+       
+            
+                            <!--             //Collapse chronos BEGIN-->
+<div id="parente">
+      <button class="btn btn-outline-dark btn-sm" id="buttonminus12" onclick="HideRow12(); ">Masquer les places</button> 
+            <button style="display: none;" class="btn btn-outline-dark btn-sm" id="buttonplus12" onclick="ShowRow12(); ">Afficher les places</button>
+
+      <div th:if="${twelvechronos eq false}">
+        		<div th:replace="_components :: chronos-buttontwelve">...</div>
+        	    <div th:replace="_components :: chronos-dropdownstwelve(${twelvehorses})">...</div>
+        		
+        </div>
+        <div th:if="${twelvechronos eq true}">
+                <div th:replace="_components :: chronos-modiftwelve">...</div>
+		        <div th:replace="_components :: chronos-dropdownstwelve(${twelvehorses})">...</div>
+		</div>
+		
+            <!--//Collapse chronos END -->
+            
+                 <!--             //Collapse TAYPRONOS BEGIN-->
+
+        <div th:if="${twelvetaypronos eq false}">
+        		<div th:replace="_components :: taypronos-buttontwelve">...</div>
+        		<div th:replace="_components :: taypronos-dropdownstwelve(${twelvehorses})">...</div>
+        </div>
+<!--          <div th:if="${onechronos eq true}"> -->
+<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
+<!--         </div> -->
+        <div th:if="${twelvetaypronos eq true}">
+                <div th:replace="_components :: taypronos-modiftwelve">...</div>
+		        <div th:replace="_components :: taypronos-dropdownstwelve(${twelvehorses})">...</div>
+		</div>
+</div>
+
+		
+            <!--//Collapse TAYPRONOS END -->
+            
+				</div>
+					</div>
+							
+			</div>
+			
+
+			
+		</div>
+	</div>
+		
+		</div>
+		<div class="col-md-1">
+		</div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/js/hide.js}"></script>
+
+
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+
+</body>
+</html>

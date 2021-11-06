@@ -1,0 +1,2400 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link th:href="@{css/style.css}" rel="stylesheet" />
+
+
+    <title></title>
+  </head>
+  <body>
+  
+  
+  <!--             //First Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modifone"> -->
+  <a th:fragment="chronos-modifone" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="chronos-buttonone" class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownsone(racehorses)" class="collapse dropdownborder" id="collapseExample1">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Chronos</h1>
+ 
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//First Collapse chronos END -->
+            
+            
+              <!--             //Second Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modiftwo"> -->
+  <a th:fragment="chronos-modiftwo" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttontwo"> -->
+  <a th:fragment="chronos-buttontwo" class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownstwo(racehorses)" class="collapse dropdownborder" id="collapseExample2">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+ 
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Second Collapse chronos END -->
+            
+              <!--             //Third Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modifthree"> -->
+  <a th:fragment="chronos-modifthree" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttonthree"> -->
+  <a th:fragment="chronos-buttonthree" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownsthree(racehorses)" class="collapse dropdownborder" id="collapseExample3">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+ 
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Third Collapse chronos END -->
+            
+              <!--             //Fourth Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modiffour"> -->
+  <a th:fragment="chronos-modiffour" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttonfour"> -->
+  <a th:fragment="chronos-buttonfour" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownsfour(racehorses)" class="collapse dropdownborder" id="collapseExample4">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+ 
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Fourth Collapse chronos END -->
+            
+              <!--             //Five Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modiffive"> -->
+  <a th:fragment="chronos-modiffive" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttonfive"> -->
+  <a th:fragment="chronos-buttonfive" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownsfive(racehorses)" class="collapse dropdownborder" id="collapseExample5">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+ 
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Five Collapse chronos END -->
+            
+              <!--             //Sixth Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modifsix"> -->
+  <a th:fragment="chronos-modifsix" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttonsix"> -->
+  <a th:fragment="chronos-buttonsix" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownssix(racehorses)" class="collapse dropdownborder" id="collapseExample6">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+ 
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Six Collapse chronos END -->
+            
+              <!--             //Seventh Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modifseven"> -->
+  <a th:fragment="chronos-modifseven" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttonseven"> -->
+  <a th:fragment="chronos-buttonseven" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownsseven(racehorses)" class="collapse dropdownborder" id="collapseExample7">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+ 
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Seventh Collapse chronos END -->
+            
+              <!--             //Eighth Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modifeight"> -->
+  <a th:fragment="chronos-modifeight" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample8">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttoneight"> -->
+  <a th:fragment="chronos-buttoneight" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample8">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownseight(racehorses)" class="collapse dropdownborder" id="collapseExample8">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+ 
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Eighth Collapse chronos END -->
+            
+              <!--             //Ninth Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modifnine"> -->
+  <a th:fragment="chronos-modifnine" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample9" role="button" aria-expanded="false" aria-controls="collapseExample9">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttonnine"> -->
+  <a th:fragment="chronos-buttonnine" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample9" role="button" aria-expanded="false" aria-controls="collapseExample9">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownsnine(racehorses)" class="collapse dropdownborder" id="collapseExample9">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+ 
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Ninth Collapse chronos END -->
+            
+              <!--             //Tenth Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modiften"> -->
+  <a th:fragment="chronos-modiften" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample10" role="button" aria-expanded="false" aria-controls="collapseExample10">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttonten"> -->
+  <a th:fragment="chronos-buttonten" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample10" role="button" aria-expanded="false" aria-controls="collapseExample10">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownsten(racehorses)" class="collapse dropdownborder" id="collapseExample10">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Tenth Collapse chronos END -->
+            
+              <!--             //Eleventh Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modifeleven"> -->
+  <a th:fragment="chronos-modifeleven" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample11" role="button" aria-expanded="false" aria-controls="collapseExample11">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttoneleven"> -->
+  <a th:fragment="chronos-buttoneleven" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample11" role="button" aria-expanded="false" aria-controls="collapseExample11">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownseleven(racehorses)" class="collapse dropdownborder" id="collapseExample11">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Eleventh Collapse chronos END -->
+            
+              <!--             //Twelvth Collapse chronos BEGIN-->
+
+<!-- <p th:fragment="chronos-modiftwelve"> -->
+  <a th:fragment="chronos-modiftwelve" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample12" role="button" aria-expanded="false" aria-controls="collapseExample12">
+    Modifier les chronos
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="chronos-buttontwelve"> -->
+  <a th:fragment="chronos-buttontwelve" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample12" role="button" aria-expanded="false" aria-controls="collapseExample12">
+    Renseigner les chronos
+  </a>
+<!-- </p> -->
+
+<div th:fragment="chronos-dropdownstwelve(racehorses)" class="collapse dropdownborder" id="collapseExample12">
+
+ <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er chrono</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me chrono</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me chrono</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me chrono</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me chrono</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">6&egrave;me chrono</label>
+      <select  class="form-control" name="six">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">7&egrave;me chrono</label>
+      <select  class="form-control" name="seven">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">8&egrave;me chrono</label>
+      <select  class="form-control" name="eight">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">9&egrave;me chrono</label>
+      <select  class="form-control" name="nine">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+            <!--//Twelvth Collapse chronos END -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+              <!--//First Collapse TAYPRONO Begin -->
+              
+<!--  <p th:fragment="taypronos-modifone"> -->
+  <a th:fragment="taypronos-modifone" class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample1" role="button" aria-expanded="false" aria-controls="taycollapseExample1">
+    Modifier le Tay'Prono
+  </a>
+<!-- </p> -->
+
+<!-- <p th:fragment="taypronos-buttonone"> -->
+  <a th:fragment="taypronos-buttonone" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample1" role="button" aria-expanded="false" aria-controls="taycollapseExample1">
+    Renseigner le Tay'Prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="taypronos-dropdownsone(racehorses)" class="collapse dropdownborder" id="taycollapseExample1">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+  <h1 style="margin-bottom: 10px;">Tay'Prono</h1> 
+ 
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+<!--       <div class="form-group col-md-4"> -->
+<!--       <label for="">6&egrave;me chrono</label> -->
+<!--       <select  class="form-control" name="six"> -->
+<!--         <option value="">Choisir...</option> -->
+<!--            <option th:each="horse : ${racehorses}" th:value="${horse.id}" -->
+<!-- 		      th:text="${horse.numero}"> -->
+<!-- 		   </option>       -->
+<!--      </select> -->
+<!--     </div> -->
+    
+<!--       <div class="form-group col-md-4"> -->
+<!--       <label for="">7&egrave;me chrono</label> -->
+<!--       <select  class="form-control" name="seven"> -->
+<!--         <option value="">Choisir...</option> -->
+<!--            <option th:each="horse : ${racehorses}" th:value="${horse.id}" -->
+<!-- 		      th:text="${horse.numero}"> -->
+<!-- 		   </option>       -->
+<!--      </select> -->
+<!--     </div> -->
+    
+<!--       <div class="form-group col-md-4"> -->
+<!--       <label for="">8&egrave;me chrono</label> -->
+<!--       <select  class="form-control" name="eight"> -->
+<!--         <option value="">Choisir...</option> -->
+<!--            <option th:each="horse : ${racehorses}" th:value="${horse.id}" -->
+<!-- 		      th:text="${horse.numero}"> -->
+<!-- 		   </option>       -->
+<!--      </select> -->
+<!--     </div> -->
+    
+<!--       <div class="form-group col-md-4"> -->
+<!--       <label for="">9&egrave;me chrono</label> -->
+<!--       <select  class="form-control" name="nine"> -->
+<!--         <option value="">Choisir...</option> -->
+<!--            <option th:each="horse : ${racehorses}" th:value="${horse.id}" -->
+<!-- 		      th:text="${horse.numero}"> -->
+<!-- 		   </option>       -->
+<!--      </select> -->
+<!--     </div> -->
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//First Collapse TAYPRONO END -->
+              
+                            <!--//Second Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modiftwo">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample2" role="button" aria-expanded="false" aria-controls="taycollapseExample2">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttontwo">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample2" role="button" aria-expanded="false" aria-controls="taycollapseExample2">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownstwo(racehorses)" class="collapse dropdownborder" id="taycollapseExample2">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Second Collapse TAYPRONO END -->
+              
+                                          <!--//Third Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modifthree">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample3" role="button" aria-expanded="false" aria-controls="taycollapseExample3">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttonthree">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample3" role="button" aria-expanded="false" aria-controls="taycollapseExample3">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownsthree(racehorses)" class="collapse dropdownborder" id="taycollapseExample3">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Third Collapse TAYPRONO END -->
+              
+                                          <!--//Fourth Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modiffour">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample4" role="button" aria-expanded="false" aria-controls="taycollapseExample4">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttonfour">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample4" role="button" aria-expanded="false" aria-controls="taycollapseExample4">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownsfour(racehorses)" class="collapse dropdownborder" id="taycollapseExample4">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Fourth Collapse TAYPRONO END -->
+              
+                                          <!--//Fifth Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modiffive">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample5" role="button" aria-expanded="false" aria-controls="taycollapseExample5">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttonfive">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample5" role="button" aria-expanded="false" aria-controls="taycollapseExample5">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownsfive(racehorses)" class="collapse dropdownborder" id="taycollapseExample5">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Fifth Collapse TAYPRONO END -->
+              
+                                          <!--//Sixth Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modifsix">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample6" role="button" aria-expanded="false" aria-controls="taycollapseExample6">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttonsix">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample6" role="button" aria-expanded="false" aria-controls="taycollapseExample6">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownssix(racehorses)" class="collapse dropdownborder" id="taycollapseExample6">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Sixth Collapse TAYPRONO END -->
+              
+                                          <!--//Seventh Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modifseven">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample7" role="button" aria-expanded="false" aria-controls="taycollapseExample7">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttonseven">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample7" role="button" aria-expanded="false" aria-controls="taycollapseExample7">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownsseven(racehorses)" class="collapse dropdownborder" id="taycollapseExample7">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Seven Collapse TAYPRONO END -->
+              
+                                          <!--//Eighth Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modifeight">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample8" role="button" aria-expanded="false" aria-controls="taycollapseExample8">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttoneight">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample8" role="button" aria-expanded="false" aria-controls="taycollapseExample8">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownseight(racehorses)" class="collapse dropdownborder" id="taycollapseExample8">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Eighth Collapse TAYPRONO END -->
+              
+                                          <!--//Ninth Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modifnine">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample9" role="button" aria-expanded="false" aria-controls="taycollapseExample9">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttonnine">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample9" role="button" aria-expanded="false" aria-controls="taycollapseExample9">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownsnine(racehorses)" class="collapse dropdownborder" id="taycollapseExample9">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Ninth Collapse TAYPRONO END -->
+              
+                                          <!--//Tenth Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modiften">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample10" role="button" aria-expanded="false" aria-controls="taycollapseExample10">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttonten">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample10" role="button" aria-expanded="false" aria-controls="taycollapseExample10">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownsten(racehorses)" class="collapse dropdownborder" id="taycollapseExample10">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Tenth Collapse TAYPRONO END -->
+              
+                                          <!--//Eleventh Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modifeleven">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample11" role="button" aria-expanded="false" aria-controls="taycollapseExample11">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttoneleven">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample11" role="button" aria-expanded="false" aria-controls="taycollapseExample11">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownseleven(racehorses)" class="collapse dropdownborder" id="taycollapseExample11">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Eleventh Collapse TAYPRONO END -->
+              
+                                          <!--//Twelvth Collapse TAYPRONO Begin -->
+              
+              <p th:fragment="taypronos-modiftwelve">
+  <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#taycollapseExample12" role="button" aria-expanded="false" aria-controls="taycollapseExample12">
+    Modifier le Tay'Prono
+  </a>
+</p>
+
+<p th:fragment="taypronos-buttontwelve">
+  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#taycollapseExample12" role="button" aria-expanded="false" aria-controls="taycollapseExample12">
+    Renseigner le Tay'Prono
+  </a>
+</p>
+
+<div th:fragment="taypronos-dropdownstwelve(racehorses)" class="collapse dropdownborder" id="taycollapseExample12">
+
+ <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
+ 
+   <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+  
+  <div class="form-group col-md-4">
+      <label for="">1er Cheval</label>
+      <select class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for="">2&egrave;me Cheval</label>
+      <select class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">3&egrave;me Cheval</label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">4&egrave;me Cheval</label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+      <div class="form-group col-md-4">
+      <label for="">5&egrave;me Cheval</label>
+      <select  class="form-control" name="five">
+        <option value="">Choisir...</option>
+           <option th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+ </form>
+
+</div>
+
+              <!--//Twelvth Collapse TAYPRONO END -->
+              
+ 
+  
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    
+  </body>
+</html>

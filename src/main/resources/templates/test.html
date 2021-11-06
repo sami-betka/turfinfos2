@@ -1,0 +1,72 @@
+<html> 
+
+<head> 
+<script type="text/javascript"> 
+function HideCol() { 
+var table = document.getElementById ("Tab"); 
+
+// var x = table.rows[0].cells[1].style; 
+// var x2 = table.rows[1].cells[1].style; 
+// var x3 = table.rows[0].cells[2].style; 
+// var x4 = table.rows[1].cells[2].style; 
+// x.display = 'none'; 
+// x2.display = 'none'; 
+// x3.display = 'none'; 
+// x4.display = 'none'; 
+
+// var x = table.rows[0].style; 
+var x2 = table.rows[1].style; 
+// var x3 = table.rows[0].cells[2].style; 
+// var x4 = table.rows[1].cells[2].style; 
+// x.display = 'none'; 
+x2.display = 'none'; 
+// x3.display = 'none'; 
+// x4.display = 'none'; 
+
+} 
+function ShowCol() { 
+var table = document.getElementById ("Tab"); 
+
+// var x = table.rows[0].cells[1].style; 
+// var x2 = table.rows[1].cells[1].style; 
+// var x3 = table.rows[0].cells[2].style; 
+// var x4 = table.rows[1].cells[2].style; 
+// x.display = 'block'; 
+// x2.display = 'block'; 
+// x3.display = 'block'; 
+// x4.display = 'block'; 
+
+// var x = table.rows[0].style; 
+var x2 = table.rows[1].style; 
+// var x3 = table.rows[0].cells[2].style; 
+// var x4 = table.rows[1].cells[2].style; 
+// x.display = 'block'; 
+x2.display = 'block'; 
+// x3.display = 'block'; 
+// x4.display = 'block'; 
+
+} 
+</script> 
+</head> 
+<body> 
+<table border="3px" id="Tab"> 
+<tr> 
+<td>France</td> 
+<td>Paris</td> 
+<td>Lyon</td> 
+<td>Marseille</td> 
+</tr> 
+<tr> 
+<td>Italie</td> 
+<td>Rome</td> 
+<td>Napoli</td> 
+<td>Milan</td> 
+</tr> 
+</table> 
+
+<button onclick="HideCol(); ">-</button> 
+<button onclick="ShowCol(); ">+</button> 
+
+</body> 
+
+</html>
