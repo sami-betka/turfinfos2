@@ -104,7 +104,7 @@
 <!--         </h4> -->
         <div style="border: solid 3px gold; padding: 5px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         
-        <div th:each="d : ${datesnav}">
+        <div th:each="d : ${datesnav}" style="text-align: center;">
         
         <a class="text-dark" style="font-weight: bold;" th:text="${d}" th:href="@{/day-infos?jour={jour}(jour=${d})}"></a>
         
