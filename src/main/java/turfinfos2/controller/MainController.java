@@ -43,7 +43,7 @@ public class MainController {
 	 @GetMapping("/test")
 	    public String test(Model model) {
 
-	        return "test";
+	        return "fire";
 	    }
 
 	 @GetMapping("/redirect-to-reunion-infos")

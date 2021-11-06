@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+<link th:href="@{css/fire.css}" rel="stylesheet" />
+<link th:href="@{css/style.css}" rel="stylesheet" />
+<link th:href="@{css/video.css}" rel="stylesheet" />
+
+
+
+</head>
+<body>
+
+
+<div class="cont">
+<!-- <video src="vid/fire.mp4" autoplay muted></video> -->
+<video class="vvideo" id="myVideo" src="vid/fire.mp4" autoplay muted loop></video>
+<!-- <video class="vvideo" id="myVideo" src="vid/nelheart2.mp4" autoplay muted loop></video> -->
+
+ <div class="text glow">
+  
+    <span>D</span>
+    <span>j</span>
+    <span>e</span>
+    <span>T</span>
+    <span>a</span>
+    <span>y</span>
+    <span>'</span>
+    <span>I</span>
+    <span>n</span>
+    <span>f</span>
+    <span>o</span>
+    <span>s</span>
+     
+   
+  </div>
+  
+</div>
+
+
+
+
+<!--      <a th:href="${leadto}" th:text="${phrase}" class="neon-button"></a> -->
+     
+<script type="text/javascript">
+
+var vid = document.getElementById("myVideo");
+vid.playbackRate = 0.7;
+
+</script>
+
+</body>
+</html>
