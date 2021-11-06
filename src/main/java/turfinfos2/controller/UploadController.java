@@ -144,7 +144,7 @@ public class UploadController {
 
     }
     
-    @PostMapping("/day-infos")
+    @GetMapping("/day-infos")
     public String getDayInfos(@RequestParam("jour") String jour, Model model) {
     	
     	//Récuperer chaque reunion (1, 2, 3, 4...)
