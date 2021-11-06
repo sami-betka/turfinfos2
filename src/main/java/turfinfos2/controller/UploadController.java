@@ -39,7 +39,7 @@ public class UploadController {
 	@Autowired
 	TurfInfoService turfInfoService;
 
-    @GetMapping("/")
+    @GetMapping("/upload")
     public String index(Model model) {
     	
     	 Set<String> dates = turfInfosRepository.findAll().stream()
