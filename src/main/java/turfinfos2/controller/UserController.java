@@ -74,7 +74,7 @@ public class UserController {
 		userRepository.save(user);
 		userRoleRepository.save(userRole);
 
-		return "redirect:/home";
+		return "redirect:/";
 	}	
 	
 	@GetMapping("/my-infos")
