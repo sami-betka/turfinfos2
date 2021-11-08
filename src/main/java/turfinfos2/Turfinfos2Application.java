@@ -64,47 +64,13 @@ public class Turfinfos2Application {
 			userRoleRepository.save(userRole);
 		}
 		
+
+		
+//		ImportJSONService service = ctx.getBean(ImportJSONService.class);
+//		service.createAllRaceInfosFromJson();
 		
 		
-		
-		
-//		TurfInfosRepository  repository = ctx.getBean(TurfInfosRepository.class);
-//
-//		System.out.println(repository.findById(591l).get().getCl().toString());
-		
-		
-		ImportJSONService service = ctx.getBean(ImportJSONService.class);
-		service.createAllRaceInfosFromJson();
-		
-		
-		
-		
-//		File file = new File("src/main/resources/one.json");
-//		
-//		List<TurfInfos> list = new ArrayList<>();
-//		List<String>horsesIds = new ArrayList<>();
-//
-//		  JsonNode productNode;
-//		  ParisTurfJSON ptJSON  = new ParisTurfJSON();
-//		  
-//
-//		try {
-//			productNode = new ObjectMapper().readTree(file);
-//						 	
-//			ptJSON.setRaceId(productNode.get("pageProps").get("race").get("id").intValue());
-//			ptJSON.setHorseId(productNode.get("pageProps").intValue());
-//			ptJSON.setTableId(ptJSON.getRaceId()+"-"+ptJSON.getHorseId());
-//
-//
-//			    
-//		} catch (JsonProcessingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
+
 	}
 	
 
