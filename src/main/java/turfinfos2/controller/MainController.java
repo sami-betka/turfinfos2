@@ -16,6 +16,8 @@ import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.repository.UserAccountRepository;
 import turfinfos2.repository.UserRoleRepository;
+import turfinfos2.service.TwilioService;
+import turfinfos2.twilio.SmsRequest;
 
 @Controller
 public class MainController {
@@ -29,6 +31,9 @@ public class MainController {
 	@Autowired
 	TurfInfosRepository turfInfosRepository;
 	
+	@Autowired
+	TwilioService service;
+	
 	 @GetMapping("/")
 	    public String home(Model model) {
 	    	
@@ -36,7 +41,9 @@ public class MainController {
 	 				.map(TurfInfos :: getJour)
 	 				.collect(Collectors.toSet());
 	    	 
-	         navbarInfos(model);
+	         navbarInfos(model);//"+33752447037"
+	 		SmsRequest smsRequest = new SmsRequest("+33752447037", "          Salut à toi Maitre DjeTay ! Merci pour cette connexion, sache que nous sommes tous avec toi ! Surtout moi, Sami, comme ça un jour on va faire un énorme billet ensemble ! Bonne nuit, et que le Sky soit avec toi !");
+	 		service.sendSms(smsRequest);
 	    	 return "home";
 	    }
 	

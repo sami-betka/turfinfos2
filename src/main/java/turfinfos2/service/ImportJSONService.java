@@ -45,7 +45,7 @@ public class ImportJSONService {
 //	            Lister les ids des réunions
 //				  Et infos réunions
 				String numberofRunners = node.get("pageProps").get("race").get("numberOfInitialRunners").textValue();
-	            System.out.println(numberofRunners);
+	            System.out.println(" nnn" +numberofRunners);
 
 	            List<TurfInfos> byRace = new ArrayList<>();
 	            
@@ -104,41 +104,40 @@ public class ImportJSONService {
 	            //test affichage
 	            for(TurfInfos inf: byRace) {
 	                System.out.println("R" + inf.getR() + "C" + inf.getC() );
-	                System.out.println(inf.getTableId());
-//	                System.out.println(inf.getCoursescheval());
-	                System.out.println(inf.getEntraineur());
+//	                System.out.println(inf.getTableId());
+////	                System.out.println(inf.getCoursescheval());
+//	                System.out.println(inf.getEntraineur());
 	                System.out.println(inf.getNumcourse());
-	                System.out.println(inf.getNumero());
-//	                System.out.println(inf.getTypec());
-	                System.out.println(inf.getNbrCourseChevalHippo());
-	                System.out.println(inf.getPourcVictChevalHippo());
-	                System.out.println(inf.getPourcPlaceChevalHippo());
-	                System.out.println(inf.getNbrCourseJockHippo());
-	                System.out.println(inf.getPourcVictJockHippo());
-	                System.out.println(inf.getPourcPlaceJockHippo());
-	                System.out.println(inf.getNbrCourseEntHippo());
-	                System.out.println(inf.getPourcVictEntHippo());
-	                System.out.println(inf.getPourcPlaceEntHippo());
-	                System.out.println(inf.getNbCourseCouple());
-	                System.out.println(inf.getTxVictCouple());
-	                System.out.println(inf.getTxPlaceCouple());
-
-
-	                System.out.println();
+//	                System.out.println(inf.getNumero());
+////	                System.out.println(inf.getTypec());
+//	                System.out.println(inf.getNbrCourseChevalHippo());
+//	                System.out.println(inf.getPourcVictChevalHippo());
+//	                System.out.println(inf.getPourcPlaceChevalHippo());
+//	                System.out.println(inf.getNbrCourseJockHippo());
+//	                System.out.println(inf.getPourcVictJockHippo());
+//	                System.out.println(inf.getPourcPlaceJockHippo());
+//	                System.out.println(inf.getNbrCourseEntHippo());
+//	                System.out.println(inf.getPourcVictEntHippo());
+//	                System.out.println(inf.getPourcPlaceEntHippo());
+//	                System.out.println(inf.getNbCourseCouple());
+//	                System.out.println(inf.getTxVictCouple());
+//	                System.out.println(inf.getTxPlaceCouple());
+//
+//	                System.out.println();
 	            }
 	            
-	            List<Integer> allPvch = turfInfosRepository.findAll().stream()
+	            List<Integer> allNumCourses = turfInfosRepository.findAll().stream()
         				.map(TurfInfos :: getNumcourse)
         				.collect(Collectors.toList());
 	            
 	            for(TurfInfos info : byRace) {
-                	if(!allPvch.contains(info.getNumcourse())) {
+                	if(!allNumCourses.contains(info.getNumcourse())) {
                 	turfInfosRepository.save(info);
                 	}
-                	if(allPvch.contains(info.getNumcourse())) {
+                	if(allNumCourses.contains(info.getNumcourse())) {
                 		turfInfoService.updateFromJSON(info);
                     	}
-                }
+                }	 
 	            
 
 			} catch (JsonProcessingException e) {
@@ -265,5 +264,6 @@ public class ImportJSONService {
 
 		return list;
 	}
+	
 
 }
