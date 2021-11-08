@@ -30,7 +30,6 @@
     </div>
     <button type="submit" class="btn btn-primary">Importer le fichier</button>
                        
-
 </form>
 
 <!--    <div class="text-white" th:if="${messagesuccess}" style="text-align: center; border: 1px solid black; margin: 5px; background-color: green;" > -->
@@ -89,6 +88,50 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="container-fluid" style="margin-top: 120px;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4" style=" border: 1px solid black;">
+				
+				<form method="POST" th:action="@{/upload-json-file}" enctype="multipart/form-data">
+    <div class="form-group mt-3">
+        <label style="font-weight: bold;" for="file">Importer un nouveau fichier .JSON</label>
+        <input type="file" name="file" class="form-control-file" id="file" accept="*.json">
+    </div>
+    <button type="submit" class="btn btn-primary">Importer le fichier</button>
+                       
+</form>
+
+<!--    <div class="text-white" th:if="${messagesuccess}" style="text-align: center; border: 1px solid black; margin: 5px; background-color: green;" > -->
+<!-- 	                 	<h2 th:text="${messagesuccess}"/></h2> -->
+<!-- 	               </div> -->
+<!-- 	                <div class="" th:if="${messageempty}" style="text-align: center; border: 1px solid black; margin: 5px; background-color: yellow;" > -->
+<!-- 	                 	<h2 th:text="${messageempty}"/></h2> -->
+<!-- 	               </div> -->
+<!-- 	                <div class="text-white" th:if="${messageerror}" style="text-align: center; border: 1px solid black; margin: 5px; background-color: red;" > -->
+<!-- 	                 	<h2 th:text="${messageerror}"/></h2> -->
+<!-- 	               </div> -->
+
+<div th:if="${messagesuccess}" th:text="${messagesuccess}" class="alert alert-success" role="alert">
+</div>
+<div th:if="${messageerror}" th:text="${messageerror}" class="alert alert-danger" role="alert">
+</div>
+<div th:if="${messageempty}" th:text="${messageempty}" class="alert alert-warning" role="alert">
+</div>
+
+				</div>
+				<div class="col-md-4">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
 
 
 	<script type="text/javascript" th:src="@{/js/test.js}"></script>

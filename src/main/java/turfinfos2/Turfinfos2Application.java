@@ -1,15 +1,32 @@
 package turfinfos2;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import turfinfos2.model.AppRole;
+import turfinfos2.model.ParisTurfJSON;
+import turfinfos2.model.TestJson;
+import turfinfos2.model.TurfInfos;
 import turfinfos2.model.UserAccount;
 import turfinfos2.model.UserRole;
 import turfinfos2.repository.AppRoleRepository;
+import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.repository.UserAccountRepository;
 import turfinfos2.repository.UserRoleRepository;
+import turfinfos2.service.ImportJSONService;
 import turfinfos2.utils.EncrytedPasswordUtils;
 
 @SpringBootApplication
@@ -46,6 +63,49 @@ public class Turfinfos2Application {
 			userAccountRepository.save(user);
 			userRoleRepository.save(userRole);
 		}
+		
+		
+		
+		
+		
+//		TurfInfosRepository  repository = ctx.getBean(TurfInfosRepository.class);
+//
+//		System.out.println(repository.findById(591l).get().getCl().toString());
+		
+		
+		ImportJSONService service = ctx.getBean(ImportJSONService.class);
+		service.createAllRaceInfosFromJson();
+		
+		
+		
+		
+//		File file = new File("src/main/resources/one.json");
+//		
+//		List<TurfInfos> list = new ArrayList<>();
+//		List<String>horsesIds = new ArrayList<>();
+//
+//		  JsonNode productNode;
+//		  ParisTurfJSON ptJSON  = new ParisTurfJSON();
+//		  
+//
+//		try {
+//			productNode = new ObjectMapper().readTree(file);
+//						 	
+//			ptJSON.setRaceId(productNode.get("pageProps").get("race").get("id").intValue());
+//			ptJSON.setHorseId(productNode.get("pageProps").intValue());
+//			ptJSON.setTableId(ptJSON.getRaceId()+"-"+ptJSON.getHorseId());
+//
+//
+//			    
+//		} catch (JsonProcessingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 	}
+	
 
 }

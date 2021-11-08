@@ -53,10 +53,7 @@ public class UploadController {
 
     @PostMapping("/upload-csv-file")
     public String uploadCSVFileByRace(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirect) {
-    	
-    	  System.out.println(turfInfosRepository.findAll().size() + "turfinforep.siz 1");
-
-    	
+    	    	
     	List<TurfInfos> infos = new ArrayList<>();
     	
         // validate file
@@ -110,13 +107,9 @@ public class UploadController {
 //                model.addAttribute("dates", dates);
                 navbarInfos(model);
 
-
-                model.addAttribute("infos", infos);
-                model.addAttribute("pvch", turfInfosRepository.findAllByOrderByPourcVictChevalHippoDesc());
-                
-          	  System.out.println(turfInfosRepository.findAll().size() + "turfinforep.siz 2");
-
-                
+//                model.addAttribute("infos", infos);
+//                model.addAttribute("pvch", turfInfosRepository.findAllByOrderByPourcVictChevalHippoDesc());
+                                
                 model.addAttribute("status", true);
     			redirect.addFlashAttribute("messagesuccess", "Fichier: (" + file.getResource().getFilename() + ") importé avec succès");
 //                model.addAttribute("messagesuccess", "Fichier: (" + file.getResource().getFilename() + ") importé avec succès");
@@ -209,19 +202,19 @@ public class UploadController {
 			
 			//création des listes filtrées et triées par parametre voulu
 			
-			List<TurfInfos> listBypvch =  allraceInfos.stream()
+			List<TurfInfos> listBypvch = allraceInfos.stream()
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictChevalHippo))
 					.filter(ti -> !ti.getPourcVictChevalHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listBypvch);			
 			
-			List<TurfInfos> listBypvjh =  allraceInfos.stream()
+			List<TurfInfos> listBypvjh = allraceInfos.stream()
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictJockHippo))
 					.filter(ti -> !ti.getPourcVictJockHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listBypvjh);
 			
-			List<TurfInfos> listBypveh =  calculateEntraineur(allraceInfos).stream()
+			List<TurfInfos> listBypveh = calculateEntraineur(allraceInfos).stream()
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictEntHippo))
 					.filter(ti -> !ti.getPourcVictEntHippo().equals(0d))
 					.collect(Collectors.toList());
@@ -233,13 +226,13 @@ public class UploadController {
 					ti.setPourcPlaceChevalHippo(0d);
 				}
 			});	
-			List<TurfInfos> listByppch =  allraceInfos.stream()
+			List<TurfInfos> listByppch = allraceInfos.stream()
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceChevalHippo))
 					.filter(ti -> !ti.getPourcPlaceChevalHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listByppch);		
 						
-			List<TurfInfos> listByppjh =  allraceInfos.stream()
+			List<TurfInfos> listByppjh = allraceInfos.stream()
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceJockHippo))
 					.filter(ti -> !ti.getPourcPlaceJockHippo().equals(0d))
 					.collect(Collectors.toList());
@@ -251,7 +244,7 @@ public class UploadController {
 					.collect(Collectors.toList());
 			Collections.reverse(listByppeh);
 		
-			List<TurfInfos> listBytxv =  allraceInfos.stream()
+			List<TurfInfos> listBytxv = allraceInfos.stream()
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxVictCouple))
 					.filter(ti -> !ti.getTxVictCouple().equals(0d))
 					.collect(Collectors.toList());
@@ -262,45 +255,45 @@ public class UploadController {
 					ti.setTxPlaceCouple(0d);
 				}
 			});	
-			List<TurfInfos> listBytxp =  allraceInfos.stream()
+			List<TurfInfos> listBytxp = allraceInfos.stream()
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxPlaceCouple))
 					.filter(ti -> !ti.getTxPlaceCouple().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listBytxp);
 				
-			List<TurfInfos> listBytxvh =  allraceInfos.stream()
+			List<TurfInfos> listBytxvh = allraceInfos.stream()
+					.filter(ti -> ti.getTxVictCoupleHippo() != null && ti.getTxVictCoupleHippo() != 0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxVictCoupleHippo))
-					.filter(ti -> !ti.getTxVictCoupleHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listBytxvh);
 				
 			allraceInfos.forEach(ti -> {
-				if(ti.getTxVictCoupleHippo()==100) {
+				if(ti.getTxVictCoupleHippo() != null && ti.getTxVictCoupleHippo() == 100) {
 					ti.setTxPlaceCoupleHippo(0d);
 				}
 			});	
-			List<TurfInfos> listBytxph =  allraceInfos.stream()
+			List<TurfInfos> listBytxph = allraceInfos.stream()
+					.filter(ti -> ti.getTxPlaceCoupleHippo() != null && ti.getTxPlaceCoupleHippo() != 0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxPlaceCoupleHippo))
-					.filter(ti -> !ti.getTxPlaceCoupleHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listBytxph);
 		
 			//CHRONOS
-			List<TurfInfos> listByChronos =  allraceInfos.stream()
+			List<TurfInfos> listByChronos = allraceInfos.stream()
 					.filter(ti -> ti.getChrono()!= null)
 					.sorted(Comparator.comparingInt(TurfInfos::getChrono))
 					.collect(Collectors.toList());
 //			Collections.reverse(listBypvch);
 			
 			//TayPronos
-			List<TurfInfos> listByTayPronos =  allraceInfos.stream()
+			List<TurfInfos> listByTayPronos = allraceInfos.stream()
 					.filter(ti -> ti.getTayProno()!= null)
 					.sorted(Comparator.comparingInt(TurfInfos::getTayProno))
 					.collect(Collectors.toList());
 //			Collections.reverse(listBypvch);
 			
 			//Calcul de la note
-			List<TurfInfos> listByNoteProno =  calculateFinalNoteProno(allraceInfos,
+			List<TurfInfos> listByNoteProno = calculateFinalNoteProno(allraceInfos,
 				    listBypvch,
 				    listBypvjh,
 				    listBypveh,
@@ -413,32 +406,7 @@ public class UploadController {
 			
 			model.addAttribute(numToString(num) + "horses", listByNumCheval);
 			
-	
-
-	}
-		
-//		 -if 0% ne pas afficher
-//		
-//		 -place cheval hippodrome %
-//		 
-//		 
-//		 -couple
-//		 -v
-//		 -vh
-//		 -p
-//		 -ph
-//		 
-//		 -entraineur: que sur l'hippodrome
-//		 
-//		 
-//		 + nouvelle page pour entrer les chronos
-//	
-//		ORDRE:
-//			-chronos
-//			-vict ent hippo
-//			-vict jock hippo
-//			-vict chev 
-//			-vict chev hippo
+		}
 				
 		navbarInfos(model);
     	
@@ -774,6 +742,7 @@ public class UploadController {
 
 	   for(TurfInfos t: allraceInfos) {
 //			System.out.println(t.getCl());
+		   
 			if(t.getCl().equals("1er")) {
 				t.setClInt(1);
 				list.add(t);
@@ -894,7 +863,7 @@ public class UploadController {
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
        String jour = LocalDateTime.now().format(formatter);
        model.addAttribute("journav", jour);
-//       System.out.println(jour);
+       
        
     	 Set<String> reunions = allInfos.stream()
 				.filter(ti-> ti.getJour()==jour)
