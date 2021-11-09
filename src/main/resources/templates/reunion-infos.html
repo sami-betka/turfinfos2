@@ -33,13 +33,12 @@
        
 <!--        ///////Pagination réunions -->
 
-<div class=" text-wrap" style="width: 22rem; margin: 0 auto; border-radius: 10px;">
-<div style="text-align: center;" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+<div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="Toolbar with button groups" style="margin-bottom: 20px;">
+<h5 class="text-white" style=" margin-right: 10px;">Réunions du jour:</h5><br>
   <div th:each="r: ${reusofday}" class="btn-group mr-2" role="group" aria-label="First group">
-    <button type="button" th:text="${r}" class="btn btn-secondary"></button>
+    <a th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${r})}" ><button type="button" th:text="${r}" class="btn btn-primary"></button></a>
   </div>
 </div>       
-</div>
        
 <!-- <div style="text-align: center;" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"> -->
 <!--   <div th:each="r: ${reusofday}" class="btn-group mr-2" role="group" aria-label="First group"> -->
@@ -1557,9 +1556,16 @@
 
 		</div>
 	</div>
-
+	
+	
+		<div th:replace="_components :: buttonup">...</div>
+		
+		
+	
+	<script src="https://unpkg.com/feather-icons"></script>
 	<script type="text/javascript" th:src="@{/js/hide.js}"></script>
-
+		<script type="text/javascript" th:src="@{/js/test.js}"></script>
+	
 
  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

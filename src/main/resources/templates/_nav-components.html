@@ -45,8 +45,8 @@
 <!--                     <span>o</span> -->
 <!--                     <span>s</span> -->
           
-<!--            DjeTay'Infos  -->
-           &Agrave; la recherche du spécialiste 
+           DjeTay'Infos 
+<!--            &Agrave; la recherche du spécialiste  -->
                
 		</a>		
        </h4>
@@ -80,7 +80,7 @@
          
          <div th:each="r : ${reunionsofday}" style="text-align: center;">
         
-        <a class="text-dark" style="font-weight: bold;" th:text="${r}" th:href="@{/day-infos?jour={jour}&reunion=${r}(jour=${journav})}"></a>
+        <a class="text-dark" style="font-weight: bold;" th:text="${r}" th:href="@{/reunion-infos?jour={jour}&reunion=${r}(jour=${journav})}"></a>
         
         </div>
         

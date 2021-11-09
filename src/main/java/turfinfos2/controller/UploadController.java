@@ -382,13 +382,7 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "exists", true);
 						
 
-			}
-			
-			model.addAttribute("jour", jour);
-			model.addAttribute("reunion", reunion);
-//			model.addAttribute("num", num);
-
-	
+			}	
 			
 //			LinkedList<String> distinctNums = new LinkedList<>();
 //			for(int i =0; i<8 ; i++) {
@@ -413,6 +407,8 @@ public class UploadController {
 	 				.collect(Collectors.toSet());
 	         model.addAttribute("reusofday", reunions);
 	         model.addAttribute("reunion", reunion);
+	         model.addAttribute("jour", jour);
+
 
 	         
 		navbarInfos(model);
