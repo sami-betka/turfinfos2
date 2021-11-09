@@ -67,11 +67,14 @@ public class ImportJSONService {
 	                    turfInfosMetting.setNumcourse(Integer.valueOf(numcourse));
 	                    turfInfosMetting.setNumero(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("saddle").intValue());
 	                    turfInfosMetting.setCl("");
-	                    //	                	turfInfosMetting.setRecence(null);
+		                System.out.println(turfInfosMetting.getTableId());
+		                System.out.println(turfInfosMetting.getNumcourse());
+
+//	                	turfInfosMetting.setRecence(null);
 //	                    turfInfosMetting.setTypec(node.get("pageProps").get("race").get("discipline").textValue());
-	                    
 //	                	turfInfosMetting.setCoursescheval(String.valueOf(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("numberOfRuns").intValue()));
-	                    turfInfosMetting.setNbrCourseChevalHippo(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsHorseRacecourse").get("runs").intValue()));
+	                   if(!node.get("pageProps").get("initialState").get("currentPage").get("stats").isEmpty()) {
+		                turfInfosMetting.setNbrCourseChevalHippo(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsHorseRacecourse").get("runs").intValue()));
 	                    turfInfosMetting.setPourcVictChevalHippo(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsHorseRacecourse").get("winRate").doubleValue());
 	                    turfInfosMetting.setPourcPlaceChevalHippo(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsHorseRacecourse").get("inFirst3Rate").doubleValue());
 	                    
@@ -89,7 +92,7 @@ public class ImportJSONService {
 	                    turfInfosMetting.setTxPlaceCouple(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsJockeyHorse").get("inFirst3Rate").doubleValue());
 //	                    turfInfosMetting.setTxVictCoupleHippo(null);
 //	                    turfInfosMetting.setTxPlaceCoupleHippo(null);
-
+	                   }
 //	                	turfInfosMetting.setNbrCourseChevalHippo(numcourse)
 //	                	turfInfosMetting.setNbCourseCouple(numcourse)
 	                	
@@ -104,10 +107,11 @@ public class ImportJSONService {
 	                    turfInfosMetting.setNumcourse(Integer.valueOf(numcourse));
 	                    turfInfosMetting.setNumero(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("saddle").intValue());
 	                    turfInfosMetting.setCl("");
-	                    //	                	turfInfosMetting.setRecence(null);
+//	                	turfInfosMetting.setRecence(null);
 //	                    turfInfosMetting.setTypec(node.get("pageProps").get("race").get("discipline").textValue());
 	                    
 //	                	turfInfosMetting.setCoursescheval(String.valueOf(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("numberOfRuns").intValue()));
+		               if(!node.get("pageProps").get("initialState").get("currentPage").get("stats").isEmpty()) {
 	                    turfInfosMetting.setNbrCourseChevalHippo(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsHorseRacecourse").get("runs").intValue()));
 	                    turfInfosMetting.setPourcVictChevalHippo(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsHorseRacecourse").get("winRate").doubleValue());
 	                    turfInfosMetting.setPourcPlaceChevalHippo(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsHorseRacecourse").get("inFirst3Rate").doubleValue());
@@ -126,7 +130,7 @@ public class ImportJSONService {
 	                    turfInfosMetting.setTxPlaceCouple(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsJockeyHorse").get("inFirst3Rate").doubleValue());
 //	                    turfInfosMetting.setTxVictCoupleHippo(null);
 //	                    turfInfosMetting.setTxPlaceCoupleHippo(null);
-
+		               }
 //	                	turfInfosMetting.setNbrCourseChevalHippo(numcourse)
 //	                	turfInfosMetting.setNbCourseCouple(numcourse)
 	                	
@@ -185,13 +189,14 @@ public class ImportJSONService {
 			}
 			
 		System.out.println(fromRace.size());
+		
 		return fromRace;
 	}
 
 	public void createAllDayInfosFromJson(String url) {
 		
 		String firstPartOfUrl = "https://www.paris-turf.com/_next/data/";
-		String parisTurfId = "3ZY_4rMcpwzYwArtQJLKf";
+		String parisTurfId = "ediYgbHAnLpyNE-ORCO1N";
 		String thirdPartOfUrl = "/fr/course/-idc-";
 		String raceUuid = "";
 		String extension = ".json";
@@ -224,7 +229,7 @@ public class ImportJSONService {
 			e.printStackTrace();
 		}
 
-
+		System.out.println("STOP");
 		
 	}
 	

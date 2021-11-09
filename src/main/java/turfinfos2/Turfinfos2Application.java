@@ -35,36 +35,34 @@ public class Turfinfos2Application {
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(Turfinfos2Application.class, args);
 		
-		AppRoleRepository appRoleRepository = ctx.getBean(AppRoleRepository.class);
-		if (appRoleRepository.findAll().isEmpty()) {
-			appRoleRepository.save(new AppRole(1l, "ROLE_ADMIN"));
-			appRoleRepository.save(new AppRole(2l, "ROLE_USER"));
-		}
-
-		UserAccountRepository userAccountRepository = ctx.getBean(UserAccountRepository.class);
-		UserRoleRepository userRoleRepository = ctx.getBean(UserRoleRepository.class);
-
-		if (userAccountRepository.findByUserName("admin") == null) {
-			UserAccount user = new UserAccount();
-			user.setUserName("admin");
-			user.setPassword(EncrytedPasswordUtils.encrytePassword("123"));
-			UserRole userRole = new UserRole(user, appRoleRepository.findById(1L).get());
-
-			userAccountRepository.save(user);
-			userRoleRepository.save(userRole);
-		}
-
-		if (userAccountRepository.findByUserName("user") == null) {
-			UserAccount user = new UserAccount();
-			user.setUserName("user");
-			user.setPassword(EncrytedPasswordUtils.encrytePassword("123"));
-			UserRole userRole = new UserRole(user, appRoleRepository.findById(2L).get());
-
-			userAccountRepository.save(user);
-			userRoleRepository.save(userRole);
-		}
-		
-
+//		AppRoleRepository appRoleRepository = ctx.getBean(AppRoleRepository.class);
+//		if (appRoleRepository.findAll().isEmpty()) {
+//			appRoleRepository.save(new AppRole(1l, "ROLE_ADMIN"));
+//			appRoleRepository.save(new AppRole(2l, "ROLE_USER"));
+//		}
+//
+//		UserAccountRepository userAccountRepository = ctx.getBean(UserAccountRepository.class);
+//		UserRoleRepository userRoleRepository = ctx.getBean(UserRoleRepository.class);
+//
+//		if (userAccountRepository.findByUserName("admin") == null) {
+//			UserAccount user = new UserAccount();
+//			user.setUserName("admin");
+//			user.setPassword(EncrytedPasswordUtils.encrytePassword("123"));
+//			UserRole userRole = new UserRole(user, appRoleRepository.findById(1L).get());
+//
+//			userAccountRepository.save(user);
+//			userRoleRepository.save(userRole);
+//		}
+//
+//		if (userAccountRepository.findByUserName("user") == null) {
+//			UserAccount user = new UserAccount();
+//			user.setUserName("user");
+//			user.setPassword(EncrytedPasswordUtils.encrytePassword("123"));
+//			UserRole userRole = new UserRole(user, appRoleRepository.findById(2L).get());
+//
+//			userAccountRepository.save(user);
+//			userRoleRepository.save(userRole);
+//		}
 		
 //		ImportJSONService service = ctx.getBean(ImportJSONService.class);
 //		service.createAllRaceInfosFromJson();

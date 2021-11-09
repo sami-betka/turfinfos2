@@ -46,7 +46,7 @@
 <!--                     <span>s</span> -->
           
 <!--            DjeTay'Infos  -->
-           A la recherche du spécialiste 
+           &Agrave; la recherche du spécialiste 
                
 		</a>		
        </h4>
@@ -78,21 +78,27 @@
         </a>
         <div style="border: solid 3px gold; padding: 5px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
          
-          <form style="margin-bottom: 5px;" method="" th:action="@{/redirect-to-reunion-infos}" enctype="multipart/form-data">
+         <div th:each="r : ${reunionsofday}" style="text-align: center;">
+        
+        <a class="text-dark" style="font-weight: bold;" th:text="${r}" th:href="@{/day-infos?jour={jour}&reunion=${r}(jour=${journav})}"></a>
+        
+        </div>
+        
+<!--           <form style="margin-bottom: 5px;" method="" th:action="@{/redirect-to-reunion-infos}" enctype="multipart/form-data"> -->
 
-                            <div class="">
-                            <input type="hidden" name="jour" th:value="${journav}"></input>
-								<label class="text-dark" style="font-weight: bold;">Choisir une R&eacute;union:</label><br> 
-								<select class="form-control form-control-user" name="reunion" required="required">
-									<option value="">--Choisir--</option>
+<!--                             <div class=""> -->
+<!--                             <input type="hidden" name="jour" th:value="${journav}"></input> -->
+<!-- 								<label class="text-dark" style="font-weight: bold;">Choisir une R&eacute;union:</label><br>  -->
+<!-- 								<select class="form-control form-control-user" name="reunion" required="required"> -->
+<!-- 									<option value="">--Choisir--</option> -->
 
-									<option th:each="r : ${reunionsofday}" th:value="${r}"
-										th:text="${r}"></option>
-								</select>
-							</div>
+<!-- 									<option th:each="r : ${reunionsofday}" th:value="${r}" -->
+<!-- 										th:text="${r}"></option> -->
+<!-- 								</select> -->
+<!-- 							</div> -->
 							
-							    <button type="submit" class="btn btn-small btn-primary">Acc&eacute;der</button>					
-                   </form>
+<!-- 							    <button type="submit" class="btn btn-small btn-primary">Acc&eacute;der</button>					 -->
+<!--                    </form> -->
          
         </div>
       </li>

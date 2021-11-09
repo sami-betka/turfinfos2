@@ -26,10 +26,26 @@
 		</div>
 		<div class="col-md-10">
 		
-		
+<!-- 		///////Date -->
 		<div class="badge-danger text-wrap" style="width: 22rem; margin: 0 auto; border-radius: 10px;">
-		<h3 class="text-white" th:text="${'Courses du : ' + date}" style="text-align: center; margin-bottom: 20px;margin-top: 20px;"></h3>
+		<h3 class="text-white" th:text="${date + ' - Réunion ' + reunion}" style="text-align: center; margin-bottom: 20px;margin-top: 20px;"></h3>
        </div>
+       
+<!--        ///////Pagination réunions -->
+
+<div class=" text-wrap" style="width: 22rem; margin: 0 auto; border-radius: 10px;">
+<div style="text-align: center;" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div th:each="r: ${reusofday}" class="btn-group mr-2" role="group" aria-label="First group">
+    <button type="button" th:text="${r}" class="btn btn-secondary"></button>
+  </div>
+</div>       
+</div>
+       
+<!-- <div style="text-align: center;" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"> -->
+<!--   <div th:each="r: ${reusofday}" class="btn-group mr-2" role="group" aria-label="First group"> -->
+<!--     <button type="button" th:text="${r}" class="btn btn-secondary"></button> -->
+<!--   </div> -->
+<!-- </div> -->
 
             <div class="container-fluid">
 	<div class="row">

@@ -21,14 +21,20 @@
 			<div class="row">
 				<div class="col-md-4">
 				</div>
-				<div class="col-md-4" style=" border: 1px solid black;">
+				<div class="col-md-4" style=" border: 1px solid black; padding: 15px;">
 				
 				<form method="POST" th:action="@{/upload-csv-file}" enctype="multipart/form-data">
     <div class="form-group mt-3">
         <label style="font-weight: bold;" for="file">Importer un nouveau fichier .CSV</label>
         <input type="file" name="file" class="form-control-file" id="file" accept=".csv">
     </div>
-    <button type="submit" class="btn btn-primary">Importer le fichier</button>
+<!--     <button type="submit" class="btn btn-primary">Importer le fichier</button> -->
+<!--   <div class="form-group" id="btnSpinner"> <input value="Envoyer" type="button" class="btn btn-success btn-lg form-control" style="font-size: .8rem;" onclick="location.href='/';"> </div> -->
+     <button onclick="spinnerFunction()" class="btn btn-primary" type="button">
+  <span id="mySpinner" class="" role="status" aria-hidden="true"></span>
+  <span id="myTextToHide">Importer</span>
+    <span id="myTextToShow" style="display: none">Importation en cours...</span>
+</button>
                        
 </form>
 
@@ -90,13 +96,13 @@
 <!-- </div> -->
 
 
-<div class="container-fluid" style="">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-4">
 				</div>
-				<div class="col-md-4" style=" border: 1px solid black;">
+				<div class="col-md-4" style=" border: 1px solid black; padding: 15px;">
 				
 				<form method="POST" th:action="@{/upload-json-data-from-url}" enctype="multipart/form-data">
     <div class="form-group mt-3">
@@ -105,19 +111,14 @@
         <input type="text" name="url" class="form-control-file" id="url">
 
     </div>
-    <button type="submit" class="btn btn-primary">Envoyer</button>
+<!--     <button type="submit" class="btn btn-primary">Envoyer</button> -->
+ <button onclick="spinnerFunction2()" class="btn btn-primary" type="submit">
+  <span id="mySpinner2" class="" role="status" aria-hidden="true"></span>
+  <span id="myTextToHide2">Importer</span>
+    <span id="myTextToShow2" style="display: none">Importation en cours...</span>
+</button>
                        
 </form>
-
-<!--    <div class="text-white" th:if="${messagesuccess}" style="text-align: center; border: 1px solid black; margin: 5px; background-color: green;" > -->
-<!-- 	                 	<h2 th:text="${messagesuccess}"/></h2> -->
-<!-- 	               </div> -->
-<!-- 	                <div class="" th:if="${messageempty}" style="text-align: center; border: 1px solid black; margin: 5px; background-color: yellow;" > -->
-<!-- 	                 	<h2 th:text="${messageempty}"/></h2> -->
-<!-- 	               </div> -->
-<!-- 	                <div class="text-white" th:if="${messageerror}" style="text-align: center; border: 1px solid black; margin: 5px; background-color: red;" > -->
-<!-- 	                 	<h2 th:text="${messageerror}"/></h2> -->
-<!-- 	               </div> -->
 
 <div th:if="${messagesuccess}" th:text="${messagesuccess}" class="alert alert-success" role="alert">
 </div>
@@ -136,7 +137,11 @@
 <br>
 
 
+
+
 	<script type="text/javascript" th:src="@{/js/test.js}"></script>
+		<script type="text/javascript" th:src="@{/js/style.js}"></script>
+	
 
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

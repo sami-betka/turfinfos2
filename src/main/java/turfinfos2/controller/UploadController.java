@@ -203,61 +203,61 @@ public class UploadController {
 			//création des listes filtrées et triées par parametre voulu
 			
 			List<TurfInfos> listBypvch = allraceInfos.stream()
+					.filter(ti -> ti.getPourcVictChevalHippo() != null && ti.getPourcVictChevalHippo() != 0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictChevalHippo))
-					.filter(ti -> !ti.getPourcVictChevalHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listBypvch);			
 			
 			List<TurfInfos> listBypvjh = allraceInfos.stream()
+					.filter(ti -> ti.getPourcVictJockHippo() != null && ti.getPourcVictJockHippo() != 0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictJockHippo))
-					.filter(ti -> !ti.getPourcVictJockHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listBypvjh);
 			
 			List<TurfInfos> listBypveh = calculateEntraineur(allraceInfos).stream()
+					.filter(ti -> ti.getPourcVictEntHippo() != null && ti.getPourcVictEntHippo() != 0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictEntHippo))
-					.filter(ti -> !ti.getPourcVictEntHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listBypveh);
 			
 			
 			allraceInfos.forEach(ti -> {
-				if(ti.getPourcVictChevalHippo()==100) {
+				if(ti.getPourcVictChevalHippo()!= null && ti.getPourcVictChevalHippo()==100) {
 					ti.setPourcPlaceChevalHippo(0d);
 				}
 			});	
 			List<TurfInfos> listByppch = allraceInfos.stream()
+					.filter(ti -> ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() != 0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceChevalHippo))
-					.filter(ti -> !ti.getPourcPlaceChevalHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listByppch);		
 						
 			List<TurfInfos> listByppjh = allraceInfos.stream()
+					.filter(ti -> ti.getPourcPlaceJockHippo() != null && ti.getPourcPlaceJockHippo() != 0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceJockHippo))
-					.filter(ti -> !ti.getPourcPlaceJockHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listByppjh);
 				
 			List<TurfInfos> listByppeh =  calculateEntraineur(allraceInfos).stream()
+					.filter(ti -> ti.getPourcPlaceEntHippo() != null && ti.getPourcPlaceEntHippo() != 0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceEntHippo))
-					.filter(ti -> !ti.getPourcPlaceEntHippo().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listByppeh);
 		
 			List<TurfInfos> listBytxv = allraceInfos.stream()
+					.filter(ti -> ti.getTxVictCouple() != null && ti.getTxVictCouple() != 0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxVictCouple))
-					.filter(ti -> !ti.getTxVictCouple().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listBytxv);
 					
 			allraceInfos.forEach(ti -> {
-				if(ti.getTxVictCouple()==100) {
+				if(ti.getTxVictCouple() != null && ti.getTxVictCouple()==100) {
 					ti.setTxPlaceCouple(0d);
 				}
 			});	
 			List<TurfInfos> listBytxp = allraceInfos.stream()
+					.filter(ti -> ti.getPourcVictEntHippo() != null && ti.getPourcVictEntHippo() != 0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxPlaceCouple))
-					.filter(ti -> !ti.getTxPlaceCouple().equals(0d))
 					.collect(Collectors.toList());
 			Collections.reverse(listBytxp);
 				
@@ -336,10 +336,10 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "chronoslist", listByChronos);
 			model.addAttribute(numToString(num) + "taypronoslist", listByTayPronos);
 						
-			if(listByNoteProno.size() < 9) {
+			if(listByNoteProno.get(0).getNoteProno() > 0 && listByNoteProno.size() < 9) {
 				model.addAttribute(numToString(num) + "pronoslist", listByNoteProno);
 			}
-			if(listByNoteProno.size() >= 9){
+			if(listByNoteProno.get(0).getNoteProno() > 0 &&  listByNoteProno.size() >= 9){
 				model.addAttribute(numToString(num) + "pronoslist", listByNoteProno.subList(0, 9));
 			}
 			
@@ -407,7 +407,14 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "horses", listByNumCheval);
 			
 		}
-				
+				/////////////reusOfDay
+		 Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
+	 				.map(TurfInfos :: getR)
+	 				.collect(Collectors.toSet());
+	         model.addAttribute("reusofday", reunions);
+	         model.addAttribute("reunion", reunion);
+
+	         
 		navbarInfos(model);
     	
     	return "reunion-infos";
@@ -864,7 +871,6 @@ public class UploadController {
        String jour = LocalDateTime.now().format(formatter);
        model.addAttribute("journav", jour);
        System.out.println(jour);
-       System.out.println(allInfos.get(0).getJour());
        
        
     	 Set<String> reunions = allInfos.stream()
@@ -872,7 +878,7 @@ public class UploadController {
   				.map(TurfInfos :: getR)
   				.collect(Collectors.toSet());
          model.addAttribute("reunionsofday", reunions);
-         System.out.println(reunions.size());
+//         System.out.println(reunions.size());
    }
     
 }

@@ -25,6 +25,14 @@ public class ImportJSONController {
 		return "redirect:/";
 	}
 	
+	@PostMapping("/upload-json-race-data")
+    public String uploadJSONFileByRace(@RequestParam("url") String url, Model model, RedirectAttributes redirect) {
+
+		importJSONService.createAllRaceInfosFromJson(url);
+		
+		return "redirect:/";
+	}
+	
 	///////////////////////////////////////////////////////////
 	
 
