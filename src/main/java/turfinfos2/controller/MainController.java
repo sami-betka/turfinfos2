@@ -42,8 +42,8 @@ public class MainController {
 	 				.collect(Collectors.toSet());
 	    	 
 	         navbarInfos(model);//"+33752447037"
-	 		SmsRequest smsRequest = new SmsRequest("+33652463080", "          Salut à toi Maitre DjeTay ! Merci pour cette connexion, sache que nous sommes tous avec toi ! Surtout moi, Sami, comme ça un jour on va faire un énorme billet ensemble ! Bonne nuit, et que le Sky soit avec toi !");
-	 		service.sendSms(smsRequest);
+//	 		SmsRequest smsRequest = new SmsRequest("+33652463080", "          Salut à toi Maitre DjeTay ! Merci pour cette connexion, sache que nous sommes tous avec toi ! Surtout moi, Sami, comme ça un jour on va faire un énorme billet ensemble ! Bonne nuit, et que le Sky soit avec toi !");
+//	 		service.sendSms(smsRequest);
 	    	 return "home";
 	    }
 	

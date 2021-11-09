@@ -1,13 +1,13 @@
 * :not(nav){
-	margin: 0;
-	padding: 0;
+/* 	margin: 0; */
+/* 	padding: 0; */
 /* 	width: 100%; */
 }
 body{
 /* 	background: black; */
 }
 .vvideo{
-	position: absolute;
+	position: fixed;
 	top: 50%;
 	transform: translateY(-50%);
 }
@@ -20,7 +20,7 @@ body{
 	display: flex;
 }
 .text span{
-	width: 100%;
+	width: 70%;
 	font-weight: 800;
 	font-size: 80px;
 	color: #FFFFFF;
