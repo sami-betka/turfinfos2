@@ -863,13 +863,16 @@ public class UploadController {
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
        String jour = LocalDateTime.now().format(formatter);
        model.addAttribute("journav", jour);
+       System.out.println(jour);
+       System.out.println(allInfos.get(0).getJour());
        
        
     	 Set<String> reunions = allInfos.stream()
-				.filter(ti-> ti.getJour()==jour)
+				.filter(ti-> ti.getJour().equals(jour))
   				.map(TurfInfos :: getR)
   				.collect(Collectors.toSet());
          model.addAttribute("reunionsofday", reunions);
+         System.out.println(reunions.size());
    }
     
 }

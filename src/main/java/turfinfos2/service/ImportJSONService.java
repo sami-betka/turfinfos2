@@ -2,6 +2,8 @@ package turfinfos2.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,17 +27,18 @@ public class ImportJSONService {
 	@Autowired
 	TurfInfoService turfInfoService;
 
-	public List<TurfInfos> createAllRaceInfosFromJson() {
+	public List<TurfInfos> createAllRaceInfosFromJson(String url) {
 
 		List<TurfInfos> fromRace = new ArrayList<>();
 
-		File file = new File("src/main/resources/static/uploadedfiles/one.json");
+//		File file = new File("src/main/resources/static/uploadedfiles/one.json");
 
 		JsonNode node;
 //		TurfInfos infoToCreate = new TurfInfos();
 
 				try {
-				node = new ObjectMapper().readTree(file);
+//				node = new ObjectMapper().readTree(file);
+			    node = new ObjectMapper().readTree(new URL(url));
 
 	            //Jour
 				String jour = node.get("pageProps").get("race").get("date").textValue();
@@ -44,12 +47,14 @@ public class ImportJSONService {
 				
 //	            Lister les ids des réunions
 //				  Et infos réunions
-				String numberofRunners = node.get("pageProps").get("race").get("numberOfInitialRunners").textValue();
+//				String numberofRunners = node.get("pageProps").get("race").get("numberOfInitialRunners").textValue();
+				Integer numberofRunners = node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).size();
+
 	            System.out.println(" nnn" +numberofRunners);
 
 	            List<TurfInfos> byRace = new ArrayList<>();
 	            
-	            for(int i= 0; i<Integer.valueOf(numberofRunners); i++) {
+	            for(int i= 0; i<numberofRunners; i++) {
 	            	TurfInfos turfInfosMetting = new TurfInfos();
 	            	turfInfosMetting.setJour(jour);
 	            	if(node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("pmuNumber").intValue() != 0) {
@@ -85,8 +90,6 @@ public class ImportJSONService {
 //	                    turfInfosMetting.setTxVictCoupleHippo(null);
 //	                    turfInfosMetting.setTxPlaceCoupleHippo(null);
 
-	                	
-	                	
 //	                	turfInfosMetting.setNbrCourseChevalHippo(numcourse)
 //	                	turfInfosMetting.setNbCourseCouple(numcourse)
 	                	
@@ -95,7 +98,40 @@ public class ImportJSONService {
 	            	}else {
 	                	turfInfosMetting.setR(node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("name").textValue());
 	                	
+	                	turfInfosMetting.setC(node.get("pageProps").get("initialState").get("currentPage").get("race").get("number").intValue());
+	                	turfInfosMetting.setTableId(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("id").textValue());
+	                	turfInfosMetting.setEntraineur(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("trainerName").textValue());
+	                    turfInfosMetting.setNumcourse(Integer.valueOf(numcourse));
+	                    turfInfosMetting.setNumero(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("saddle").intValue());
+	                    turfInfosMetting.setCl("");
+	                    //	                	turfInfosMetting.setRecence(null);
+//	                    turfInfosMetting.setTypec(node.get("pageProps").get("race").get("discipline").textValue());
+	                    
+//	                	turfInfosMetting.setCoursescheval(String.valueOf(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("numberOfRuns").intValue()));
+	                    turfInfosMetting.setNbrCourseChevalHippo(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsHorseRacecourse").get("runs").intValue()));
+	                    turfInfosMetting.setPourcVictChevalHippo(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsHorseRacecourse").get("winRate").doubleValue());
+	                    turfInfosMetting.setPourcPlaceChevalHippo(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsHorseRacecourse").get("inFirst3Rate").doubleValue());
+	                    
+	                    turfInfosMetting.setNbrCourseJockHippo(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsJockeyRacecourse").get("runs").intValue()));
+	                    turfInfosMetting.setPourcVictJockHippo(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsJockeyRacecourse").get("winRate").doubleValue());
+	                    turfInfosMetting.setPourcPlaceJockHippo(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsJockeyRacecourse").get("inFirst3Rate").doubleValue());
+
+	                	turfInfosMetting.setNbrCourseEntHippo(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsTrainerRacecourse").get("runs").intValue()));
+	                    turfInfosMetting.setPourcVictEntHippo(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsTrainerRacecourse").get("winRate").doubleValue());
+	                    turfInfosMetting.setPourcPlaceEntHippo(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsTrainerRacecourse").get("inFirst3Rate").doubleValue());
+	                    
+	                    turfInfosMetting.setNbCourseCouple(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsJockeyHorse").get("runs").intValue()));
+//	                    turfInfosMetting.setNbCourseCoupleHippo(numcourse);
+	                    turfInfosMetting.setTxVictCouple(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsJockeyHorse").get("winRate").doubleValue());
+	                    turfInfosMetting.setTxPlaceCouple(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfosMetting.getTableId()).get("statsJockeyHorse").get("inFirst3Rate").doubleValue());
+//	                    turfInfosMetting.setTxVictCoupleHippo(null);
+//	                    turfInfosMetting.setTxPlaceCoupleHippo(null);
+
+//	                	turfInfosMetting.setNbrCourseChevalHippo(numcourse)
+//	                	turfInfosMetting.setNbCourseCouple(numcourse)
 	                	
+
+	            	
 	            	}
 	            	
 	            	byRace.add(turfInfosMetting);
@@ -108,7 +144,7 @@ public class ImportJSONService {
 ////	                System.out.println(inf.getCoursescheval());
 //	                System.out.println(inf.getEntraineur());
 	                System.out.println(inf.getNumcourse());
-//	                System.out.println(inf.getNumero());
+	                System.out.println(inf.getNumero());
 ////	                System.out.println(inf.getTypec());
 //	                System.out.println(inf.getNbrCourseChevalHippo());
 //	                System.out.println(inf.getPourcVictChevalHippo());
@@ -148,85 +184,39 @@ public class ImportJSONService {
 				e.printStackTrace();
 			}
 			
-		
+		System.out.println(fromRace.size());
 		return fromRace;
 	}
 
-	public List<TurfInfos> createAllDayInfosFromJson() {
+	public void createAllDayInfosFromJson(String url) {
+		
+		String firstPartOfUrl = "https://www.paris-turf.com/_next/data/";
+		String parisTurfId = "3ZY_4rMcpwzYwArtQJLKf";
+		String thirdPartOfUrl = "/fr/course/-idc-";
+		String raceUuid = "";
+		String extension = ".json";
 
-		List<TurfInfos> list = new ArrayList<>();
-		List<String> horsesIds = new ArrayList<>();
-
-		File file = new File("src/main/resources/static/uploadedfiles/one.json");
-
-		JsonNode productNode;
-		TurfInfos infoToCreate = new TurfInfos();
-
-		try {
-			productNode = new ObjectMapper().readTree(file);
-
-            //Jour
-			String jour = productNode.get("pageProps").get("race").get("date").textValue();
+		JsonNode node;
+		
+	    try {
+			node = new ObjectMapper().readTree(new URL(url));
+			String jour = node.get("pageProps").get("date").textValue();
+			Integer numberofRaces = node.get("pageProps").get("initialState").get("racecards").get("races").get(jour).size();
+			List<String> uuids = new ArrayList<>();
 			
-//            Lister les ids des réunions
-//			  Et infos réunions
-			Integer numberofreunions = productNode.get("pageProps").get("initialState").get("racecards").get("meetings").get(jour).size();
-            System.out.println(numberofreunions);
+			for(int i= 0; i<numberofRaces; i++) {
+				
+				String uuid = node.get("pageProps").get("initialState").get("racecards").get("races").get(jour).get(i).get("uuid").textValue();
+				uuids.add(uuid);
+			}
+			for(String uuid: uuids) {
+				raceUuid = uuid;
+				String raceUrl = firstPartOfUrl + parisTurfId + thirdPartOfUrl + raceUuid + extension;
+				createAllRaceInfosFromJson(raceUrl);
+			}
 
-            List<TurfInfos> byReunions = new ArrayList<>();
-            
-            for(int i= 0; i<numberofreunions; i++) {
-            	TurfInfos turfInfosMetting = new TurfInfos();
-            	turfInfosMetting.setJour(jour);
-            	if(productNode.get("pageProps").get("initialState").get("racecards").get("meetings").get(jour).get(i).get("pmuNumber").intValue() != 0) {
-                	turfInfosMetting.setR(String.valueOf(productNode.get("pageProps").get("initialState").get("racecards").get("meetings").get(jour).get(i).get("pmuNumber").intValue()));
-            	}else {
-                	turfInfosMetting.setR(productNode.get("pageProps").get("initialState").get("racecards").get("meetings").get(jour).get(i).get("name").textValue());
-            	}
-            	
-            	byReunions.add(turfInfosMetting);
-            }            
-            
-            //test affichage
-            for(TurfInfos inf: byReunions) {
-                System.out.println(inf.getR());
-            }
-            
 			
-//			infoToCreate.setC(productNode.get("pageProps"));
-//			infoToCreate.setCheval(productNode.get("pageProps"));
-//			infoToCreate.setJour(productNode.get("pageProps"));
-//			infoToCreate.setNumcourse(productNode.get("pageProps"));
-//			infoToCreate.setNumero(productNode.get("pageProps"));
-//			infoToCreate.setPourcPlaceChevalHippo(productNode.get("pageProps"));
-//			infoToCreate.setPourcPlaceEntHippo(productNode.get("pageProps"));
-//			infoToCreate.setPourcPlaceJockHippo(productNode.get("pageProps"));
-//			infoToCreate.setPourcVictChevalHippo(productNode.get("pageProps"));
-//			infoToCreate.setPourcVictEntHippo(productNode.get("pageProps"));
-//			infoToCreate.setPourcVictJockHippo(productNode.get("pageProps"));
-//			infoToCreate.setR(productNode.get("pageProps"));
-//			infoToCreate.setRecence(productNode.get("pageProps"));
-//			infoToCreate.setTxPlaceCouple(productNode.get("pageProps"));
-//			infoToCreate.setTxPlaceCoupleHippo(productNode.get("pageProps"));
-//			infoToCreate.setTxVictCouple(productNode.get("pageProps"));
-//			infoToCreate.setTxVictCoupleHippo(productNode.get("pageProps"));
-//
-//			infoToCreate.setCoursescheval(productNode.get("pageProps"));
-////	    	infoToUpdate.setCoursesentraineur(info.getCoursesentraineur());
-////	    	infoToUpdate.setCoursesjockey(info.getCoursesjockey());
-//			infoToCreate.setNbCourseCouple(productNode.get("pageProps"));
-//			infoToCreate.setNbrCourseChevalHippo(productNode.get("pageProps"));
-//			infoToCreate.setNbrCourseJockHippo(productNode.get("pageProps"));
-//			infoToCreate.setNbrCourseEntHippo(productNode.get("pageProps"));
-//			infoToCreate.setNbCourseCoupleHippo(productNode.get("pageProps"));
-////	    	infoToUpdate.setTypec(info.getTypec());
-//			infoToCreate.setEntraineur(productNode.get("pageProps"));
-//			infoToCreate.setCl(productNode.get("pageProps"));
-//			infoToCreate.setCotedirect(productNode.get("pageProps"));
-
-//			System.out.println(infoToCreate.toString());
-
-		} catch (JsonProcessingException e) {
+		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -234,35 +224,8 @@ public class ImportJSONService {
 			e.printStackTrace();
 		}
 
-		return list;
-	}
 
-	public List<TurfInfos> populateHorseFromMeetings() {
-
-		List<TurfInfos> list = new ArrayList<>();
-
-		return list;
-	}
-
-	public List<TurfInfos> populateHorseFromRaces() {
-
-		List<TurfInfos> list = new ArrayList<>();
-
-		return list;
-	}
-
-	public List<TurfInfos> populateHorseFromRunners() {
-
-		List<TurfInfos> list = new ArrayList<>();
-
-		return list;
-	}
-
-	public List<TurfInfos> populateHorseFromStats() {
-
-		List<TurfInfos> list = new ArrayList<>();
-
-		return list;
+		
 	}
 	
 

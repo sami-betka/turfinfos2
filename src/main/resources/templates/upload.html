@@ -59,38 +59,38 @@
 <br>
 
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-4">
-				</div>
-				<div class="col-md-4" style="border: 1px solid black;">
+<!-- <div class="container-fluid"> -->
+<!-- 	<div class="row"> -->
+<!-- 		<div class="col-md-12"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4" style="border: 1px solid black;"> -->
 				
-                   <form style="margin-bottom: 5px;" method="POST" th:action="@{/day-infos}" enctype="multipart/form-data">
+<!--                    <form style="margin-bottom: 5px;" method="POST" th:action="@{/day-infos}" enctype="multipart/form-data"> -->
 
-                            <div class="">
-								<label class="text-dark" style="font-weight: bold;">Choisir une date et acc&eacute;der aux infos:</label><br> 
-								<select class="form-control form-control-user" name="jour" required="required">
-									<option value="">--Choisir--</option>
+<!--                             <div class=""> -->
+<!-- 								<label class="text-dark" style="font-weight: bold;">Choisir une date et acc&eacute;der aux infos:</label><br>  -->
+<!-- 								<select class="form-control form-control-user" name="jour" required="required"> -->
+<!-- 									<option value="">--Choisir--</option> -->
 
-									<option th:each="d : ${datesnav}" th:value="${d}"
-										th:text="${d}"></option>
-								</select>
-							</div>
-							    <button type="submit" class="btn btn-small btn-primary">Acc&eacute;der</button>					
-                   </form>
+<!-- 									<option th:each="d : ${datesnav}" th:value="${d}" -->
+<!-- 										th:text="${d}"></option> -->
+<!-- 								</select> -->
+<!-- 							</div> -->
+<!-- 							    <button type="submit" class="btn btn-small btn-primary">Acc&eacute;der</button>					 -->
+<!--                    </form> -->
 	               
-				</div>
-				<div class="col-md-4">
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 
-<div class="container-fluid" style="margin-top: 120px;">
+<div class="container-fluid" style="">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
@@ -98,12 +98,14 @@
 				</div>
 				<div class="col-md-4" style=" border: 1px solid black;">
 				
-				<form method="POST" th:action="@{/upload-json-file}" enctype="multipart/form-data">
+				<form method="POST" th:action="@{/upload-json-data-from-url}" enctype="multipart/form-data">
     <div class="form-group mt-3">
-        <label style="font-weight: bold;" for="file">Importer un nouveau fichier .JSON</label>
-        <input type="file" name="file" class="form-control-file" id="file" accept="*.json">
+        <label style="font-weight: bold;" for="url">Importer donn&eacute;es JSON via une URL</label>
+<!--         <input type="file" name="file" class="form-control-file" id="file" accept="*.json"> -->
+        <input type="text" name="url" class="form-control-file" id="url">
+
     </div>
-    <button type="submit" class="btn btn-primary">Importer le fichier</button>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
                        
 </form>
 
