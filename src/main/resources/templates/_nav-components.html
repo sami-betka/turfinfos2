@@ -80,7 +80,7 @@
          
          <div th:each="r : ${reunionsofday}" style="text-align: center;">
         
-        <a class="text-dark" style="font-weight: bold;" th:text="${r}" th:href="@{/reunion-infos?jour={jour}&reunion=${r}(jour=${journav})}"></a>
+        <a class="text-dark" style="font-weight: bold;" th:text="${r}" th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${journav}, reunion=${r})}"></a>
         
         </div>
         

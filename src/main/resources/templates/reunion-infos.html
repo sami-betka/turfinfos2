@@ -36,7 +36,7 @@
 <div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="Toolbar with button groups" style="margin-bottom: 20px;">
 <h5 class="text-white" style=" margin-right: 10px;">Réunions du jour:</h5><br>
   <div th:each="r: ${reusofday}" class="btn-group mr-2" role="group" aria-label="First group">
-    <a th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${r})}" ><button type="button" th:text="${r}" class="btn btn-primary"></button></a>
+    <a th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${r})}"><button type="button" th:text="${r}" class="btn btn-primary"></button></a>
   </div>
 </div>       
        
