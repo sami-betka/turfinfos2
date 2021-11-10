@@ -3,6 +3,7 @@ package turfinfos2.controller;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -156,7 +157,12 @@ public class UploadController {
     @GetMapping("/reunion-infos")
     public String getReunionInfos(@RequestParam("jour") String jour,
     		@RequestParam("reunion") String reunion,
-    		Model model) {    	
+    		Model model, Principal principal) {   
+    	
+    	if(principal == null) {
+			return "redirect:/login";
+
+    	}
     	
     	model.addAttribute("date", jour);
     	

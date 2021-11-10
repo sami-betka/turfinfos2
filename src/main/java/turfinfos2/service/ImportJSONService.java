@@ -194,9 +194,9 @@ public class ImportJSONService {
 	}
 
 	public void createAllDayInfosFromJson(String url) {
-		
+				
 		String firstPartOfUrl = "https://www.paris-turf.com/_next/data/";
-		String parisTurfId = "ediYgbHAnLpyNE-ORCO1N";
+		String parisTurfId = "d7lsdp4kqsZsUGSJ5gBnM";
 		String thirdPartOfUrl = "/fr/course/-idc-";
 		String raceUuid = "";
 		String extension = ".json";

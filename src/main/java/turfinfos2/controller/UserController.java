@@ -80,17 +80,17 @@ public class UserController {
 	@GetMapping("/my-infos")
 	public String getMyInfos (Model model, Principal principal) {
 		
-		if (principal == null) {
-			return "redirect:/login";
-		}
+//		if (principal == null) {
+//			return "redirect:/login";
+//		}
 		
 		model.addAttribute("active", true);
 		navbarInfos(model);
 
-		return "user";
+		return "upload";
 	}	
 	 
-		@RequestMapping(value = "/login", method = RequestMethod.GET)
+		@GetMapping("/login")
 		public String loginPage(@RequestParam(name = "error", required = false) boolean error, Model model, Principal principal) {
 
 //			if (principal != null) {
@@ -120,11 +120,13 @@ public class UserController {
 			UserAccount user = userRepository.findByUserName(principal.getName());
 			for (UserRole userRole : userRoleRepository.findAll()) {
 				if (userRole.getAppRole().getRoleId() == 1 && userRole.getUser().getId() == user.getId()) {
+					navbarInfos(model);
 					return "redirect:/admingate";
 				}
 			}
 //			SmsRequest smsRequest = new SmsRequest("+33652463080", "Youhou !");
 //			service.sendSms(smsRequest);
+			navbarInfos(model);
 			return "redirect:/";
 		}
 		

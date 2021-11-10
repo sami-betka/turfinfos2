@@ -17,7 +17,6 @@ import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.repository.UserAccountRepository;
 import turfinfos2.repository.UserRoleRepository;
 import turfinfos2.service.TwilioService;
-import turfinfos2.twilio.SmsRequest;
 
 @Controller
 public class MainController {
@@ -37,11 +36,13 @@ public class MainController {
 	 @GetMapping("/")
 	    public String home(Model model) {
 	    	
-	    	 Set<String> dates = turfInfosRepository.findAll().stream()
-	 				.map(TurfInfos :: getJour)
-	 				.collect(Collectors.toSet());
+//	    	 Set<String> dates = turfInfosRepository.findAll().stream()
+//	 				.map(TurfInfos :: getJour)
+//	 				.collect(Collectors.toSet());
 	    	 
-	         navbarInfos(model);//"+33752447037"
+	         navbarInfos(model);
+	         
+	         //"+33752447037"
 //	 		SmsRequest smsRequest = new SmsRequest("+33652463080", "          Salut à toi Maitre DjeTay ! Merci pour cette connexion, sache que nous sommes tous avec toi ! Surtout moi, Sami, comme ça un jour on va faire un énorme billet ensemble ! Bonne nuit, et que le Sky soit avec toi !");
 //	 		service.sendSms(smsRequest);
 	    	 return "home";
@@ -58,6 +59,8 @@ public class MainController {
 	    		@RequestParam("jour") String jour,
 	    		@RequestParam("reunion") String reunion,
 	    		Model model) {
+		 
+		 navbarInfos(model);
 
 			return "redirect:/reunion-infos?jour=" + jour + "&reunion=" + reunion;
 	    }
@@ -90,14 +93,15 @@ public class MainController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String jour = LocalDateTime.now().format(formatter);
         model.addAttribute("journav", jour);
-//        System.out.println(jour);
+        System.out.println(jour);
+        
         
      	 Set<String> reunions = allInfos.stream()
- 				.filter(ti-> ti.getJour()==jour)
+ 				.filter(ti-> ti.getJour().equals(jour))
    				.map(TurfInfos :: getR)
    				.collect(Collectors.toSet());
           model.addAttribute("reunionsofday", reunions);
-        
+//          System.out.println(reunions.size());
     }
         
 }
