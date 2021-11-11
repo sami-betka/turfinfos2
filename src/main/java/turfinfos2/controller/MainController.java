@@ -51,8 +51,8 @@ public class MainController {
 	         
 	         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	         String jour = LocalDateTime.now().format(formatter);
-	    	 return "redirect:/day-infos?jour=" + jour;
-//	    	 return "home";
+//	    	 return "redirect:/day-infos?jour=" + jour;
+	    	 return "home";
 
 	    }
 	

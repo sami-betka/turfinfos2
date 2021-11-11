@@ -14,8 +14,7 @@
 
 <body>
         		<div th:replace="_nav-components :: nav">...</div>
-
-		        		<video th:replace="_nav-components :: background-video"></video>
+<!-- 		        		<video th:replace="_nav-components :: background-video"></video> -->
 
 
 <div class="container-fluid" style="margin-top: 180px; opacity: 0.94;">
@@ -34,7 +33,7 @@
 <!--        ///////Pagination réunions -->
 
 <div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="Toolbar with button groups" style="margin-bottom: 20px;">
-<h5 class="text-white" style=" margin-right: 10px;">Réunions du jour:</h5><br>
+<h5 class="text-dark" style=" margin-right: 10px;">Réunions du jour:</h5><br>
   <div th:each="r: ${reusofday}" class="btn-group mr-2" role="group" aria-label="First group">
     <a th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${r})}"><button type="button" th:text="${r}" class="btn btn-primary"></button></a>
   </div>
@@ -65,8 +64,12 @@
                     <tr class="chronoscolor">
                     <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
-                    
                     <td style="font-weight: bold;" th:each="c, i : ${onechronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                   
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${oneparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
                     
                       <tr class="entcolor">
@@ -187,6 +190,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>                    
                     <td style="font-weight: bold;" th:each="c, i : ${twochronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${twoparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
                     
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -306,6 +314,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>                    
                     <td style="font-weight: bold;" th:each="c, i : ${threechronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${threeparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
                     
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -421,6 +434,11 @@
                      <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td style="font-weight: bold;" th:each="c, i : ${fourchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${fourparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
                     
                       <tr class="entcolor">
@@ -538,6 +556,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td style="font-weight: bold;" th:each="c, i : ${fivechronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${fiveparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
                     
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -650,6 +673,11 @@
                      <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td style="font-weight: bold;" th:each="c, i : ${sixchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${sixparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
                     
                       <tr class="entcolor">
@@ -764,6 +792,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td style="font-weight: bold;" th:each="c, i : ${sevenchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${sevenparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
                     
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -876,6 +909,11 @@
                      <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td style="font-weight: bold;" th:each="c, i : ${eightchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${eightparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
                     
                       <tr class="entcolor">
@@ -991,6 +1029,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td style="font-weight: bold;" th:each="c, i : ${ninechronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${nineparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
                     
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -1103,6 +1146,11 @@
                      <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td style="font-weight: bold;" th:each="c, i : ${tenchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${tenparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
                     
                       <tr class="entcolor">
@@ -1218,6 +1266,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td style="font-weight: bold;" th:each="c, i : ${elevenchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${elevenparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
                     
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -1331,6 +1384,11 @@
                      <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td style="font-weight: bold;" th:each="c, i : ${twelvechronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+                   </tr>
+                                      
+                    <tr th:if="${specialty == 'trot'}" class="chronoscolor">
+                    <th scope="">Chr PTurf</th>
+                    <td style="font-weight: bold;" th:each="c, i : ${twelveparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
                    </tr>
                     
                       <tr class="entcolor">

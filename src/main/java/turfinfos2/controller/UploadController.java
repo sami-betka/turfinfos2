@@ -327,17 +327,13 @@ public class UploadController {
 //					.collect(Collectors.toList());
 ////			Collections.reverse(listBypvch);
 			
-			 Set<TurfInfos> setByChronoParisTurf = allraceInfos.stream()
+			 List<TurfInfos> listByChronoParisTurf = allraceInfos.stream()
 						    .filter(ti -> ti.getDistanceAndSpecialtyChrono()!= null)
 							.sorted(Comparator.comparing(TurfInfos::getDistanceAndSpecialtyChrono))
-		        			.collect(Collectors.toSet());
-		        			List<TurfInfos> listByChronoParisTurf = new ArrayList<TurfInfos>(setByChronoParisTurf);
-//		        			Collections.sort(listByChronoParisTurf);        			
-//		        			reunions = new LinkedHashSet<>(list2);
-		        			
-		        			for(TurfInfos info: allraceInfos) {
-		        				System.out.println(info.getDistanceAndSpecialtyChrono());
-		        			}
+		        			.collect(Collectors.toList());
+//		        			for(TurfInfos info: listByChronoParisTurf) {
+//		        				System.out.println(info.getDistanceAndSpecialtyChrono());
+//		        			}
 			
 			//Calcul de la note
 			List<TurfInfos> listByNoteProno = calculateFinalNoteProno(allraceInfos,
@@ -379,6 +375,14 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "txp", listBytxp);
 			model.addAttribute(numToString(num) + "txvh", listBytxvh);
 			model.addAttribute(numToString(num) + "txph", listBytxph);
+			
+			
+			if(listByChronoParisTurf.size() < 9) {
+				model.addAttribute(numToString(num) + "paristurfchronoslist", listByChronoParisTurf);
+			}
+			if(listByChronoParisTurf.size() >= 9){
+				model.addAttribute(numToString(num) + "paristurfchronoslist", listByChronoParisTurf.subList(0, 9));
+			}
 
 			model.addAttribute(numToString(num) + "chronoslist", listByChronos);
 			model.addAttribute(numToString(num) + "taypronoslist", listByTayPronos);
