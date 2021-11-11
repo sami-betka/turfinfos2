@@ -155,8 +155,10 @@ public class TurfInfos {
 	private String cl;
 
 //@Column(name = "")
-	@CsvBindByName
+//	@CsvBindByName
 //@CsvNumber("###.##")
+	
+	private Integer nbVictChevalHippo;
 	
 	private boolean blinkersFirstTime;
 	
@@ -204,7 +206,7 @@ public class TurfInfos {
 			String nbrCourseEntHippo, Integer tayProno, String typec, String entraineur, Double notePercentageParameter,
 			String cl, Integer clInt, Double cotedirect, String tableId, boolean blinkersFirstTime, boolean noShoesFirstTime,
 			boolean protectionFirstTime, String raceSpecialty, String distanceAndSpecialtyChrono, String reunionstring, String libel_hippo,
-			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo) {
+			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo, Integer nbVictChevalHippo) {
 		
 		this.id = id;
 		this.R = R;
@@ -244,6 +246,8 @@ public class TurfInfos {
 		this.nbVictCouple = nbVictCouple;
 		this.coupleTwoOrThree = coupleTwoOrThree;
 		this.chevalTwoOrThreeHippo = chevalTwoOrThreeHippo;
+		this.nbVictChevalHippo = nbVictChevalHippo;
+
 
 
 
@@ -647,6 +651,14 @@ public class TurfInfos {
 
 	public void setChevalTwoOrThreeHippo(Integer chevalTwoOrThreeHippo) {
 		this.chevalTwoOrThreeHippo = chevalTwoOrThreeHippo;
+	}
+
+	public Integer getNbVictChevalHippo() {
+		return nbVictChevalHippo;
+	}
+
+	public void setNbVictChevalHippo(Integer nbVictChevalHippo) {
+		this.nbVictChevalHippo = nbVictChevalHippo;
 	}
 
 }

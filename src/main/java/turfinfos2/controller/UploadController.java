@@ -236,7 +236,7 @@ public class UploadController {
 			
 			allraceInfos.forEach(ti -> {
 				if(ti.getChevalTwoOrThreeHippo() != null && !ti.getChevalTwoOrThreeHippo().equals(0) && !ti.getNbrCourseChevalHippo().equals(null) && !ti.getNbrCourseChevalHippo().equals(String.valueOf(0))) {
-				ti.setPourcPlaceChevalHippo(calculateNewPlacePercentage(ti.getChevalTwoOrThreeHippo(), Integer.valueOf(ti.getNbrCourseChevalHippo())).doubleValue());
+				ti.setPourcPlaceChevalHippo(calculateNewPlacePercentage(ti.getChevalTwoOrThreeHippo(), Integer.valueOf(Integer.valueOf(ti.getNbrCourseChevalHippo())- ti.getNbVictChevalHippo())).doubleValue());
 				}
 				if(ti.getChevalTwoOrThreeHippo() != null && ti.getChevalTwoOrThreeHippo() == 0) {
 					ti.setPourcPlaceChevalHippo(0d);
@@ -277,7 +277,7 @@ public class UploadController {
 				System.out.println("t-"+ti.getTxVictCouple());
 				System.out.println("tttt-"+ti.getTxPlaceCouple());
 				if(ti.getCoupleTwoOrThree() != null && !ti.getCoupleTwoOrThree().equals(0) && ti.getNbCourseCouple() != null && !ti.getNbCourseCouple().equals( 0)) {
-				ti.setTxPlaceCouple(calculateNewPlacePercentage(ti.getCoupleTwoOrThree(), ti.getNbCourseCouple()).doubleValue());
+				ti.setTxPlaceCouple(calculateNewPlacePercentage(ti.getCoupleTwoOrThree(), ti.getNbCourseCouple()-ti.getNbVictCouple()).doubleValue());
 				}
 				if(ti.getCoupleTwoOrThree() != null && ti.getCoupleTwoOrThree().equals(0)) {
 					ti.setTxPlaceCouple(0d);
@@ -467,6 +467,8 @@ public class UploadController {
 	         model.addAttribute("jour", jour);
 
 
+	         
+//	         allraceInfos.forEach(null)
 	         
 		navbarInfos(model);
     	

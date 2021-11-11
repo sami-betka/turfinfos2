@@ -112,6 +112,7 @@ public class TurfInfoService {
 //    	infoToUpdate.setCoursesentraineur(info.getCoursesentraineur());
 //    	infoToUpdate.setCoursesjockey(info.getCoursesjockey());
     	infoToUpdate.setNbCourseCouple(info.getNbCourseCouple());
+    	infoToUpdate.setNbVictCouple(info.getNbVictCouple());
     	infoToUpdate.setNbrCourseChevalHippo(info.getNbrCourseChevalHippo());
     	infoToUpdate.setNbrCourseJockHippo(info.getNbrCourseJockHippo());
     	infoToUpdate.setNbrCourseEntHippo(info.getNbrCourseEntHippo());
@@ -125,6 +126,8 @@ public class TurfInfoService {
     	infoToUpdate.setProtectionFirstTime(info.isProtectionFirstTime());
     	
     	infoToUpdate.setChevalTwoOrThreeHippo(info.getChevalTwoOrThreeHippo());
+    	infoToUpdate.setNbVictChevalHippo(info.getNbVictChevalHippo());
+
     	
     	
 //    	infoToUpdate.setNoteProno(null);
