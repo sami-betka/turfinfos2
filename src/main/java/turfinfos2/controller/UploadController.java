@@ -235,18 +235,9 @@ public class UploadController {
 			
 			
 			allraceInfos.forEach(ti -> {
-				if(ti.getChevalTwoOrThreeHippo() != null && !ti.getChevalTwoOrThreeHippo().equals(0) && !ti.getNbrCourseChevalHippo().equals(null) && !ti.getNbrCourseChevalHippo().equals(String.valueOf(0))) {
-				ti.setPourcPlaceChevalHippo(calculateNewPlacePercentage(ti.getChevalTwoOrThreeHippo(), Integer.valueOf(Integer.valueOf(ti.getNbrCourseChevalHippo())- ti.getNbVictChevalHippo())).doubleValue());
-				}
-				if(ti.getChevalTwoOrThreeHippo() != null && ti.getChevalTwoOrThreeHippo() == 0) {
-					ti.setPourcPlaceChevalHippo(0d);
-					}
 				if(ti.getPourcVictChevalHippo()!= null && ti.getPourcVictChevalHippo()==100d) {
 					ti.setPourcPlaceChevalHippo(0d);
 				}
-//				if(ti.getPourcVictChevalHippo()== null) {
-//					ti.setPourcPlaceChevalHippo(0d);
-//				}
 			});	
 			List<TurfInfos> listByppch = allraceInfos.stream()
 					.filter(ti -> ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() != 0d)
@@ -273,17 +264,18 @@ public class UploadController {
 			Collections.reverse(listBytxv);
 					
 			allraceInfos.forEach(ti -> {
-				System.out.println(ti.getR()+ti.getC());
-				System.out.println("t-"+ti.getTxVictCouple());
-				System.out.println("tttt-"+ti.getTxPlaceCouple());
-				if(ti.getCoupleTwoOrThree() != null && !ti.getCoupleTwoOrThree().equals(0) && ti.getNbCourseCouple() != null && !ti.getNbCourseCouple().equals( 0)) {
-				ti.setTxPlaceCouple(calculateNewPlacePercentage(ti.getCoupleTwoOrThree(), ti.getNbCourseCouple()-ti.getNbVictCouple()).doubleValue());
-				}
-				if(ti.getCoupleTwoOrThree() != null && ti.getCoupleTwoOrThree().equals(0)) {
-					ti.setTxPlaceCouple(0d);
-					}
-				System.out.println("tttt-"+ti.getTxPlaceCouple());
-				System.out.println();
+//				System.out.println(ti.getR()+ti.getC());
+//				System.out.println("t-"+ti.getTxVictCouple());
+//				System.out.println("tttt-"+ti.getTxPlaceCouple());
+//				if(ti.getCoupleTwoOrThree() != null && !ti.getCoupleTwoOrThree().equals(0) && ti.getNbCourseCouple() != null && !ti.getNbCourseCouple().equals( 0)) {
+//				ti.setTxPlaceCouple(calculateNewPlacePercentage(ti.getCoupleTwoOrThree(), ti.getNbCourseCouple()-ti.getNbVictCouple()).doubleValue());
+//				}
+//				if(ti.getCoupleTwoOrThree() != null && ti.getCoupleTwoOrThree().equals(0)) {
+//					ti.setTxPlaceCouple(0d);
+//					}
+//				System.out.println("tttt-"+ti.getTxPlaceCouple());
+//				System.out.println();
+//				
 				if(ti.getTxVictCouple() != null && ti.getTxVictCouple()==100d) {
 					ti.setTxPlaceCouple(0d);
 				}
@@ -764,7 +756,7 @@ public class UploadController {
 //		   List<TurfInfos> listByEnt = turfInfosRepository.findAllByNumcourseAndEntraineur(numcourse, entraineur);
 		   
 		   List<TurfInfos> listByEnt = AllRaceinfos.stream()
-				   .filter(ti-> ti.getEntraineur()==entraineur)
+				   .filter(ti-> ti.getEntraineur().equals(entraineur))
 				   .collect(Collectors.toList());
 
 		   
@@ -778,15 +770,19 @@ public class UploadController {
 		   if(listByEnt.size() > 1) {
 			   
 			   TurfInfos tinf = new TurfInfos();
+			   System.out.println(tinf.getNumeroString() + "     bbbbbbbbbbbbbbb");
+
 			   
 			   tinf.setNumeroString("[" + listByEnt.get(0).getNumero().toString());
 			   tinf.setPourcPlaceEntHippo(listByEnt.get(0).getPourcPlaceEntHippo());
 			   tinf.setPourcVictEntHippo(listByEnt.get(0).getPourcVictEntHippo());
+//			   tinf.setPourcVictEntHippo(listByEnt.get(0).getPourcVictEntHippo());
+
 			   
 			   for(int i =1; i<listByEnt.size(); i++) {
 				   
 				   tinf.setNumeroString(tinf.getNumeroString() + ", " + listByEnt.get(i).getNumero().toString());
-				   System.out.println(tinf.getNumeroString());
+				   System.out.println(tinf.getNumeroString() + "     bbbbbbbbbbbbbbb");
 			   }
 			   tinf.setNumeroString(tinf.getNumeroString() + "]");
 
