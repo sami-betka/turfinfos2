@@ -235,15 +235,18 @@ public class UploadController {
 			
 			
 			allraceInfos.forEach(ti -> {
-				if(ti.getChevalTwoOrThreeHippo() != null && ti.getChevalTwoOrThreeHippo() != 0 && ti.getNbrCourseChevalHippo() != null && ti.getNbrCourseChevalHippo() != String.valueOf(0)) {
-				ti.setPourcPlaceChevalHippo(calculateNewPlacePercentage(ti.getChevalTwoOrThreeHippo(),Integer.valueOf(ti.getNbrCourseChevalHippo())).doubleValue());
+				if(ti.getChevalTwoOrThreeHippo() != null && !ti.getChevalTwoOrThreeHippo().equals(0) && !ti.getNbrCourseChevalHippo().equals(null) && !ti.getNbrCourseChevalHippo().equals(String.valueOf(0))) {
+				ti.setPourcPlaceChevalHippo(calculateNewPlacePercentage(ti.getChevalTwoOrThreeHippo(), Integer.valueOf(ti.getNbrCourseChevalHippo())).doubleValue());
 				}
-				if(ti.getChevalTwoOrThreeHippo() == 0) {
+				if(ti.getChevalTwoOrThreeHippo() != null && ti.getChevalTwoOrThreeHippo() == 0) {
 					ti.setPourcPlaceChevalHippo(0d);
 					}
 				if(ti.getPourcVictChevalHippo()!= null && ti.getPourcVictChevalHippo()==100) {
 					ti.setPourcPlaceChevalHippo(0d);
 				}
+//				if(ti.getPourcVictChevalHippo()== null) {
+//					ti.setPourcPlaceChevalHippo(0d);
+//				}
 			});	
 			List<TurfInfos> listByppch = allraceInfos.stream()
 					.filter(ti -> ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() != 0d)
@@ -273,10 +276,10 @@ public class UploadController {
 				System.out.println(ti.getR()+ti.getC());
 				System.out.println("t-"+ti.getTxVictCouple());
 				System.out.println("tttt-"+ti.getTxPlaceCouple());
-				if(ti.getCoupleTwoOrThree() != null && ti.getCoupleTwoOrThree() != 0 && ti.getNbCourseCouple() != null && ti.getNbCourseCouple() != 0) {
+				if(ti.getCoupleTwoOrThree() != null && !ti.getCoupleTwoOrThree().equals(0) && ti.getNbCourseCouple() != null && !ti.getNbCourseCouple().equals( 0)) {
 				ti.setTxPlaceCouple(calculateNewPlacePercentage(ti.getCoupleTwoOrThree(), ti.getNbCourseCouple()).doubleValue());
 				}
-				if(ti.getCoupleTwoOrThree() == 0) {
+				if(ti.getCoupleTwoOrThree() != null && ti.getCoupleTwoOrThree().equals(0)) {
 					ti.setTxPlaceCouple(0d);
 					}
 				System.out.println("tttt-"+ti.getTxPlaceCouple());
