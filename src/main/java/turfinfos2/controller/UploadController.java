@@ -241,7 +241,7 @@ public class UploadController {
 				if(ti.getChevalTwoOrThreeHippo() != null && ti.getChevalTwoOrThreeHippo() == 0) {
 					ti.setPourcPlaceChevalHippo(0d);
 					}
-				if(ti.getPourcVictChevalHippo()!= null && ti.getPourcVictChevalHippo()==100) {
+				if(ti.getPourcVictChevalHippo()!= null && ti.getPourcVictChevalHippo()==100d) {
 					ti.setPourcPlaceChevalHippo(0d);
 				}
 //				if(ti.getPourcVictChevalHippo()== null) {
@@ -284,7 +284,7 @@ public class UploadController {
 					}
 				System.out.println("tttt-"+ti.getTxPlaceCouple());
 				System.out.println();
-				if(ti.getTxVictCouple() != null && ti.getTxVictCouple()==100) {
+				if(ti.getTxVictCouple() != null && ti.getTxVictCouple()==100d) {
 					ti.setTxPlaceCouple(0d);
 				}
 			});	
