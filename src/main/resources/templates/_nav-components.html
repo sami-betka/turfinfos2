@@ -80,7 +80,7 @@
          
          <div th:each="r : ${reunionsofday}" style="text-align: center;">
         
-        <a class="text-dark" style="font-weight: bold;" th:text="${r}" th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${journav}, reunion=${r})}"></a>
+        <a type="" class="text-dark btn btn-outline-info" style="font-weight: bold; margin-bottom: 3px;" th:text="${r}" th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${journav}, reunion=${r})}"></a>
         
         </div>
         
@@ -115,7 +115,7 @@
         
         <div th:each="d : ${datesnav}" style="text-align: center;">
         
-        <a class="text-dark" style="font-weight: bold;" th:text="${d}" th:href="@{/day-infos?jour={jour}(jour=${d})}"></a>
+        <a class="text-dark btn btn-outline-info" style="font-weight: bold; margin-bottom: 3px;" th:text="${d}" th:href="@{/day-infos?jour={jour}(jour=${d})}"></a>
         
         </div>
         

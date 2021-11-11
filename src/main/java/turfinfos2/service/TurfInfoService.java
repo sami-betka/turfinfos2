@@ -192,7 +192,7 @@ public class TurfInfoService {
 			return info;
 		}
 
-		info.setReunionstring(info.getR() + " (" + info.getLibel_hippo() + ")");
+		info.setReunionstring(info.getR() + " - (" + info.getLibel_hippo() + ")");
 
 		return info;
 	}
