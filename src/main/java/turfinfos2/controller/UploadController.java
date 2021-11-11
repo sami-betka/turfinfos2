@@ -216,77 +216,97 @@ public class UploadController {
 			//création des listes filtrées et triées par parametre voulu
 			
 			List<TurfInfos> listBypvch = allraceInfos.stream()
-					.filter(ti -> ti.getPourcVictChevalHippo() != null && ti.getPourcVictChevalHippo() != 0)
+					.filter(ti -> ti.getPourcVictChevalHippo() != null && ti.getPourcVictChevalHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictChevalHippo))
 					.collect(Collectors.toList());
 			Collections.reverse(listBypvch);			
 			
 			List<TurfInfos> listBypvjh = allraceInfos.stream()
-					.filter(ti -> ti.getPourcVictJockHippo() != null && ti.getPourcVictJockHippo() != 0)
+					.filter(ti -> ti.getPourcVictJockHippo() != null && ti.getPourcVictJockHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictJockHippo))
 					.collect(Collectors.toList());
 			Collections.reverse(listBypvjh);
 			
 			List<TurfInfos> listBypveh = calculateEntraineur(allraceInfos).stream()
-					.filter(ti -> ti.getPourcVictEntHippo() != null && ti.getPourcVictEntHippo() != 0)
+					.filter(ti -> ti.getPourcVictEntHippo() != null && ti.getPourcVictEntHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictEntHippo))
 					.collect(Collectors.toList());
 			Collections.reverse(listBypveh);
 			
 			
 			allraceInfos.forEach(ti -> {
+				if(ti.getChevalTwoOrThreeHippo() != null && ti.getChevalTwoOrThreeHippo() != 0 && ti.getNbrCourseChevalHippo() != null && ti.getNbrCourseChevalHippo() != String.valueOf(0)) {
+				ti.setPourcPlaceChevalHippo(calculateNewPlacePercentage(ti.getChevalTwoOrThreeHippo(),Integer.valueOf(ti.getNbrCourseChevalHippo())).doubleValue());
+				}
+				if(ti.getChevalTwoOrThreeHippo() == 0) {
+					ti.setPourcPlaceChevalHippo(0d);
+					}
 				if(ti.getPourcVictChevalHippo()!= null && ti.getPourcVictChevalHippo()==100) {
 					ti.setPourcPlaceChevalHippo(0d);
 				}
 			});	
 			List<TurfInfos> listByppch = allraceInfos.stream()
-					.filter(ti -> ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() != 0)
+					.filter(ti -> ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceChevalHippo))
 					.collect(Collectors.toList());
 			Collections.reverse(listByppch);		
 						
 			List<TurfInfos> listByppjh = allraceInfos.stream()
-					.filter(ti -> ti.getPourcPlaceJockHippo() != null && ti.getPourcPlaceJockHippo() != 0)
+					.filter(ti -> ti.getPourcPlaceJockHippo() != null && ti.getPourcPlaceJockHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceJockHippo))
 					.collect(Collectors.toList());
 			Collections.reverse(listByppjh);
 				
 			List<TurfInfos> listByppeh =  calculateEntraineur(allraceInfos).stream()
-					.filter(ti -> ti.getPourcPlaceEntHippo() != null && ti.getPourcPlaceEntHippo() != 0)
+					.filter(ti -> ti.getPourcPlaceEntHippo() != null && ti.getPourcPlaceEntHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceEntHippo))
 					.collect(Collectors.toList());
 			Collections.reverse(listByppeh);
 		
 			List<TurfInfos> listBytxv = allraceInfos.stream()
-					.filter(ti -> ti.getTxVictCouple() != null && ti.getTxVictCouple() != 0)
+					.filter(ti -> ti.getTxVictCouple() != null && ti.getTxVictCouple() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxVictCouple))
 					.collect(Collectors.toList());
 			Collections.reverse(listBytxv);
 					
 			allraceInfos.forEach(ti -> {
+				System.out.println(ti.getR()+ti.getC());
+				System.out.println("t-"+ti.getTxVictCouple());
+				System.out.println("tttt-"+ti.getTxPlaceCouple());
+				if(ti.getCoupleTwoOrThree() != null && ti.getCoupleTwoOrThree() != 0 && ti.getNbCourseCouple() != null && ti.getNbCourseCouple() != 0) {
+				ti.setTxPlaceCouple(calculateNewPlacePercentage(ti.getCoupleTwoOrThree(), ti.getNbCourseCouple()).doubleValue());
+				}
+				if(ti.getCoupleTwoOrThree() == 0) {
+					ti.setTxPlaceCouple(0d);
+					}
+				System.out.println("tttt-"+ti.getTxPlaceCouple());
+				System.out.println();
 				if(ti.getTxVictCouple() != null && ti.getTxVictCouple()==100) {
 					ti.setTxPlaceCouple(0d);
 				}
 			});	
 			List<TurfInfos> listBytxp = allraceInfos.stream()
-					.filter(ti -> ti.getPourcVictEntHippo() != null && ti.getPourcVictEntHippo() != 0)
+					.filter(ti -> ti.getTxPlaceCouple() != null && ti.getTxPlaceCouple() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxPlaceCouple))
 					.collect(Collectors.toList());
 			Collections.reverse(listBytxp);
 				
 			List<TurfInfos> listBytxvh = allraceInfos.stream()
-					.filter(ti -> ti.getTxVictCoupleHippo() != null && ti.getTxVictCoupleHippo() != 0)
+					.filter(ti -> ti.getTxVictCoupleHippo() != null && ti.getTxVictCoupleHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxVictCoupleHippo))
 					.collect(Collectors.toList());
 			Collections.reverse(listBytxvh);
 				
-			allraceInfos.forEach(ti -> {
-				if(ti.getTxVictCoupleHippo() != null && ti.getTxVictCoupleHippo() == 100) {
-					ti.setTxPlaceCoupleHippo(0d);
-				}
-			});	
+//			allraceInfos.forEach(ti -> {
+//				ti.setTxPlaceCoupleHippo(calculateNewPlacePercentage(ti.getNbCourseCoupleHippo()-ti.getnb, ti.getNbCourseCoupleHippo()).doubleValue());
+//
+//				if(ti.getTxVictCoupleHippo() != null && ti.getTxVictCoupleHippo() == 100) {
+//					ti.setTxPlaceCoupleHippo(0d);
+//				};
+//				
+//			});	
 			List<TurfInfos> listBytxph = allraceInfos.stream()
-					.filter(ti -> ti.getTxPlaceCoupleHippo() != null && ti.getTxPlaceCoupleHippo() != 0)
+					.filter(ti -> ti.getTxPlaceCoupleHippo() != null && ti.getTxPlaceCoupleHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxPlaceCoupleHippo))
 					.collect(Collectors.toList());
 			Collections.reverse(listBytxph);
@@ -304,6 +324,25 @@ public class UploadController {
 					.sorted(Comparator.comparingInt(TurfInfos::getTayProno))
 					.collect(Collectors.toList());
 //			Collections.reverse(listBypvch);
+			
+			//list par chrono Paris turf
+//			List<TurfInfos> listByChronoParisTurf = allraceInfos.stream()
+//					.filter(ti -> ti.getDistanceAndSpecialtyChrono()!= null)
+//					.sorted(Comparator.comparingInt(TurfInfos::getTayProno))
+//					.collect(Collectors.toList());
+////			Collections.reverse(listBypvch);
+			
+			 Set<TurfInfos> setByChronoParisTurf = allraceInfos.stream()
+						    .filter(ti -> ti.getDistanceAndSpecialtyChrono()!= null)
+							.sorted(Comparator.comparing(TurfInfos::getDistanceAndSpecialtyChrono))
+		        			.collect(Collectors.toSet());
+		        			List<TurfInfos> listByChronoParisTurf = new ArrayList<TurfInfos>(setByChronoParisTurf);
+//		        			Collections.sort(listByChronoParisTurf);        			
+//		        			reunions = new LinkedHashSet<>(list2);
+		        			
+		        			for(TurfInfos info: allraceInfos) {
+		        				System.out.println(info.getDistanceAndSpecialtyChrono());
+		        			}
 			
 			//Calcul de la note
 			List<TurfInfos> listByNoteProno = calculateFinalNoteProno(allraceInfos,
@@ -396,12 +435,7 @@ public class UploadController {
 						
 
 			}	
-			
-//			LinkedList<String> distinctNums = new LinkedList<>();
-//			for(int i =0; i<8 ; i++) {
-//				distinctNums.add(numToString(i+1));
-//			}
-//			model.addAttribute("numeros", distinctNums);
+
 			
 			List<TurfInfos> listByNumCheval = allraceInfos.stream()
 //					.map(TurfInfos :: getNumero)
@@ -906,7 +940,12 @@ public class UploadController {
         			Collections.sort(list);        			
         			reunions = new LinkedHashSet<>(list);
         	         model.addAttribute("reunionsofday", reunions);
-
+   }
+   
+   private Integer calculateNewPlacePercentage(Integer twoOrThreeRank, Integer nbCourses) {
+	   
+	   return (twoOrThreeRank * 100) /  nbCourses ;
+	   	   
    }
     
 }

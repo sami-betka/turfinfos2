@@ -132,7 +132,7 @@ public class TurfInfos {
 //@Column(name = "")
 	@CsvBindByName
 //@CsvNumber("###.##")
-	private String nbCourseCouple;
+	private Integer nbCourseCouple;
 
 //@Column(name = "")
 	@CsvBindByName
@@ -187,16 +187,25 @@ public class TurfInfos {
 	private String tableId;
 	
 	private String libel_hippo;
+	
+	private Integer nbVictCouple;
+	
+	private Integer coupleTwoOrThree;
+	
+	private Integer chevalTwoOrThreeHippo;
+
 
 	public TurfInfos(Long id, String jour, String R, Integer C, Integer numcourse, Integer numero, String cheval,
 			Double pourcVictChevalHippo, Double pourcVictJockHippo, Double pourcVictEntHippo,
 			Double pourcPlaceChevalHippo, Double pourcPlaceJockHippo, Double pourcPlaceEntHippo, Double TxVictCouple,
 			Double TxPlaceCouple, Double TxVictCoupleHippo, Double TxPlaceCoupleHippo, Integer chrono,
 			Integer noteProno, Integer recence, String numeroString, String coursescheval, String coursesjockey,
-			String coursesentraineur, String nbCourseCouple, String nbrCourseChevalHippo, String nbrCourseJockHippo,
+			String coursesentraineur, Integer nbCourseCouple, String nbrCourseChevalHippo, String nbrCourseJockHippo,
 			String nbrCourseEntHippo, Integer tayProno, String typec, String entraineur, Double notePercentageParameter,
 			String cl, Integer clInt, Double cotedirect, String tableId, boolean blinkersFirstTime, boolean noShoesFirstTime,
-			boolean protectionFirstTime, String raceSpecialty, String distanceAndSpecialtyChrono, String reunionstring, String libel_hippo) {
+			boolean protectionFirstTime, String raceSpecialty, String distanceAndSpecialtyChrono, String reunionstring, String libel_hippo,
+			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo) {
+		
 		this.id = id;
 		this.R = R;
 		this.C = C;
@@ -232,8 +241,10 @@ public class TurfInfos {
 		this.distanceAndSpecialtyChrono = distanceAndSpecialtyChrono;
 		this.reunionstring = reunionstring;
 		this.libel_hippo = libel_hippo;
+		this.nbVictCouple = nbVictCouple;
+		this.coupleTwoOrThree = coupleTwoOrThree;
+		this.chevalTwoOrThreeHippo = chevalTwoOrThreeHippo;
 
-		
 
 
 		// Paramètres crées
@@ -446,11 +457,11 @@ public class TurfInfos {
 //	this.coursesentraineur = coursesentraineur;
 //}
 
-	public String getNbCourseCouple() {
+	public Integer getNbCourseCouple() {
 		return nbCourseCouple;
 	}
 
-	public void setNbCourseCouple(String nbCourseCouple) {
+	public void setNbCourseCouple(Integer nbCourseCouple) {
 		this.nbCourseCouple = nbCourseCouple;
 	}
 
@@ -604,6 +615,38 @@ public class TurfInfos {
 
 	public void setLibel_hippo(String libel_hippo) {
 		this.libel_hippo = libel_hippo;
+	}
+
+	public Integer getNbVictCouple() {
+		return nbVictCouple;
+	}
+
+	public void setNbVictCouple(Integer nbVictCouple) {
+		this.nbVictCouple = nbVictCouple;
+	}
+
+	public String getCoursescheval() {
+		return coursescheval;
+	}
+
+	public void setCoursescheval(String coursescheval) {
+		this.coursescheval = coursescheval;
+	}
+
+	public Integer getCoupleTwoOrThree() {
+		return coupleTwoOrThree;
+	}
+
+	public void setCoupleTwoOrThree(Integer coupleTwoOrThree) {
+		this.coupleTwoOrThree = coupleTwoOrThree;
+	}
+
+	public Integer getChevalTwoOrThreeHippo() {
+		return chevalTwoOrThreeHippo;
+	}
+
+	public void setChevalTwoOrThreeHippo(Integer chevalTwoOrThreeHippo) {
+		this.chevalTwoOrThreeHippo = chevalTwoOrThreeHippo;
 	}
 
 }
