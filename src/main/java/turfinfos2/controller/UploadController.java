@@ -93,6 +93,8 @@ public class UploadController {
         				.collect(Collectors.toList());
                 
                 for(TurfInfos info : infos) {
+	            	turfInfoService.setMadeUpParams(info);
+
                 	if(!allPvch.contains(info.getNumcourse())) {
                 	turfInfosRepository.save(info);
                 	}
@@ -142,9 +144,13 @@ public class UploadController {
     public String getDayInfos(@RequestParam("jour") String jour, Model model) {
     	
     	//Récuperer chaque reunion (1, 2, 3, 4...)
-    	 Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
- 				.map(TurfInfos :: getR)
- 				.collect(Collectors.toSet());
+   	 Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
+	 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+	        			.map(TurfInfos :: getReunionstring)
+	        			.collect(Collectors.toSet());
+	        			List<String> list2 = new ArrayList<String>(reunions);
+	        			Collections.sort(list2);        			
+	        			reunions = new LinkedHashSet<>(list2);
     	     	 
     	 
      	model.addAttribute("reunions", reunions);
@@ -156,18 +162,19 @@ public class UploadController {
     
     @GetMapping("/reunion-infos")
     public String getReunionInfos(@RequestParam("jour") String jour,
-    		@RequestParam("reunion") String reunion,
+    		@RequestParam("reunion") String reunionstring,
     		Model model, Principal principal) {   
     	
-    	if(principal == null) {
-			return "redirect:/login";
-
-    	}
+//    	if(principal == null) {
+//			return "redirect:/login";
+//    	}
     	
     	model.addAttribute("date", jour);
     	
     	//RACELIST
-    	List<TurfInfos> allReunionInfos = turfInfosRepository.findAllByJourAndByReunion(jour, reunion);
+//    	List<TurfInfos> allReunionInfos = turfInfosRepository.findAllByJourAndByReunion(jour, reunion);
+    	List<TurfInfos> allReunionInfos = turfInfosRepository.findAllByJourAndByReunionstring(jour, reunionstring);
+
     	
     	//biglist
 //		LinkedList<LinkedList<TurfInfos>> biglist = new LinkedList<LinkedList<TurfInfos>>();
@@ -323,7 +330,7 @@ public class UploadController {
 			Optional<TurfInfos> optTinf = allraceInfos.stream().findFirst();
 			if(optTinf.isPresent()) {
 				TurfInfos tinf = optTinf.get();
-			model.addAttribute(numToString(num) + "title","R" + tinf.getR() + "C" + num );
+			model.addAttribute(numToString(num) + "title","R" + tinf.getR() + "-C" + num );
 			
 			model.addAttribute(numToString(num) + "pvch", listBypvch);
 			model.addAttribute(numToString(num) + "pvjh", listBypvjh);
@@ -376,12 +383,12 @@ public class UploadController {
 			}
 			
 			
-//			System.out.println(allraceInfos.get(0).getTypec());
+			System.out.println(allraceInfos.get(0).getRaceSpecialty());
 			
-			if(allraceInfos.get(0).getTypec() == "Attelé" || allraceInfos.get(0).getTypec() == "Monté") {
-				model.addAttribute("chronovaleur", true);
+			if(allraceInfos.get(0).getRaceSpecialty().equals("A") || allraceInfos.get(0).getRaceSpecialty().equals("M")) {
+				model.addAttribute("specialty", "trot");
 			} else {
-				model.addAttribute("chronovaleur", false);
+				model.addAttribute("specialty", "galop");
 			}
 			
 						
@@ -405,14 +412,21 @@ public class UploadController {
 //					distinctNumsCheval = new LinkedHashSet<>(listNums);
 			
 			model.addAttribute(numToString(num) + "horses", listByNumCheval);
-			
+						
 		}
 				/////////////reusOfDay
 		 Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
-	 				.map(TurfInfos :: getR)
-	 				.collect(Collectors.toSet());
+	 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+	        			.map(TurfInfos :: getReunionstring)
+	        			.collect(Collectors.toSet());
+	        			List<String> list2 = new ArrayList<String>(reunions);
+	        			Collections.sort(list2);        			
+	        			reunions = new LinkedHashSet<>(list2);
+	        	         model.addAttribute("reunionsofday", reunions);
+		 
+		 
 	         model.addAttribute("reusofday", reunions);
-	         model.addAttribute("reunion", reunion);
+	         model.addAttribute("reunionstring", reunionstring);
 	         model.addAttribute("jour", jour);
 
 
@@ -562,8 +576,8 @@ public class UploadController {
 	   calculateNoteProno(allraceInfos, listBypveh, 2D, 3d);
 
 	   calculateNoteProno(allraceInfos, listByppch, 1D, 4d);
-	   calculateNoteProno(allraceInfos, listByppjh, 2D, 5d);
-	   calculateNoteProno(allraceInfos, listByppeh, 2D, 6d);
+//	   calculateNoteProno(allraceInfos, listByppjh, 2D, 5d);
+//	   calculateNoteProno(allraceInfos, listByppeh, 2D, 6d);
 
 	   calculateNoteProno(allraceInfos, listBytxv, 1d, 7d);
 	   calculateNoteProno(allraceInfos, listBytxp, 1d, 8d);
@@ -875,12 +889,24 @@ public class UploadController {
        System.out.println(jour);
        
        
-    	 Set<String> reunions = allInfos.stream()
-				.filter(ti-> ti.getJour().equals(jour))
-  				.map(TurfInfos :: getR)
-  				.collect(Collectors.toSet());
-         model.addAttribute("reunionsofday", reunions);
-//         System.out.println(reunions.size());
+//    	 Set<String> reunions = allInfos.stream()
+//				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+//  				.map(TurfInfos :: getReunionstring)
+////  				.sorted()
+//  				.collect(Collectors.toSet());
+////    	 reunions.sort( Comparator.comparing( String::toString));
+//         model.addAttribute("reunionsofday", reunions);
+
+   
+         Set<String> reunions = allInfos.stream()
+ 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+        			.map(TurfInfos :: getReunionstring)
+        			.collect(Collectors.toSet());
+        			List<String> list = new ArrayList<String>(reunions);
+        			Collections.sort(list);        			
+        			reunions = new LinkedHashSet<>(list);
+        	         model.addAttribute("reunionsofday", reunions);
+
    }
     
 }

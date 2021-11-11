@@ -50,9 +50,14 @@ public class TurfInfoService {
     	infoToUpdate.setEntraineur(info.getEntraineur());
     	infoToUpdate.setCl(info.getCl());
     	infoToUpdate.setCotedirect(info.getCotedirect());
-
-
     	
+    	infoToUpdate.setBlinkersFirstTime(info.isBlinkersFirstTime());
+    	infoToUpdate.setNoShoesFirstTime(info.isNoShoesFirstTime());
+    	infoToUpdate.setProtectionFirstTime(info.isProtectionFirstTime());
+    	
+    	infoToUpdate.setDistanceAndSpecialtyChrono(info.getDistanceAndSpecialtyChrono());
+//    	infoToUpdate.setReunionstring(info.getReunionstring());
+   	
     	
 //    	infoToUpdate.setNoteProno(null);
 //    	infoToUpdate.setChrono(info.getChrono());
@@ -66,7 +71,7 @@ public class TurfInfoService {
     	
     }
     
-    public void updateFromJSON(TurfInfos info) {
+    public void updateFromJSON(TurfInfos info, boolean nulStats) {
     	
     	TurfInfos infoToUpdate = turfInfosRepository.findByNumeroAndNumcourse(info.getNumero(), info.getNumcourse());
     	
@@ -75,18 +80,25 @@ public class TurfInfoService {
     	infoToUpdate.setJour(info.getJour());
     	infoToUpdate.setNumcourse(info.getNumcourse());
     	infoToUpdate.setNumero(info.getNumero());
+    	infoToUpdate.setR(info.getR());
+//    	infoToUpdate.setRecence(info.getRecence());
+    	
+    	//STATS
+    	if(nulStats == false) {
     	infoToUpdate.setPourcPlaceChevalHippo(info.getPourcPlaceChevalHippo());
     	infoToUpdate.setPourcPlaceEntHippo(info.getPourcPlaceEntHippo());
     	infoToUpdate.setPourcPlaceJockHippo(info.getPourcPlaceJockHippo());
     	infoToUpdate.setPourcVictChevalHippo(info.getPourcVictChevalHippo());
     	infoToUpdate.setPourcVictEntHippo(info.getPourcVictEntHippo());
     	infoToUpdate.setPourcVictJockHippo(info.getPourcVictJockHippo());
-    	infoToUpdate.setR(info.getR());
-//    	infoToUpdate.setRecence(info.getRecence());
-    	infoToUpdate.setTxPlaceCouple(info.getTxPlaceCouple());
-//    	infoToUpdate.setTxPlaceCoupleHippo(info.getTxPlaceCoupleHippo());
     	infoToUpdate.setTxVictCouple(info.getTxVictCouple());
-//    	infoToUpdate.setTxVictCoupleHippo(info.getTxVictCoupleHippo());
+    	infoToUpdate.setTxPlaceCouple(info.getTxPlaceCouple());
+    	if(info.getTxPlaceCoupleHippo() != null) {
+    	infoToUpdate.setTxPlaceCoupleHippo(info.getTxPlaceCoupleHippo());
+    	}
+    	if(info.getTxVictCoupleHippo() != null) {
+    	infoToUpdate.setTxVictCoupleHippo(info.getTxVictCoupleHippo());
+    	}
     	
 //    	infoToUpdate.setCoursescheval(info.getCoursescheval());
 //    	infoToUpdate.setCoursesentraineur(info.getCoursesentraineur());
@@ -100,20 +112,21 @@ public class TurfInfoService {
     	infoToUpdate.setEntraineur(info.getEntraineur());
     	infoToUpdate.setCl(info.getCl());
 //    	infoToUpdate.setCotedirect(info.getCotedirect());
-
-
+    	
+    	infoToUpdate.setBlinkersFirstTime(info.isBlinkersFirstTime());
+    	infoToUpdate.setNoShoesFirstTime(info.isNoShoesFirstTime());
+    	infoToUpdate.setProtectionFirstTime(info.isProtectionFirstTime());
+    	
+    	infoToUpdate.setDistanceAndSpecialtyChrono(info.getDistanceAndSpecialtyChrono());
+    	infoToUpdate.setReunionstring(info.getReunionstring());
     	
     	
 //    	infoToUpdate.setNoteProno(null);
 //    	infoToUpdate.setChrono(info.getChrono());
 //    	infoToUpdate.setNumeroString(info.getNumero().toString());
-
-
-
-    	
-    	
     	turfInfosRepository.save(infoToUpdate);
-    	
+    	 
+    	}
     }
 	
 	public LinkedList<List<String>> createRaceInfosList(List<TurfInfos> raceInfos){
@@ -164,10 +177,24 @@ public class TurfInfoService {
 		return raceInfosList;
 	}
 	
-	public LinkedList<Integer> orderedChronosList(List<TurfInfos> list){
+	public TurfInfos setMadeUpParams(TurfInfos info){
+		
+		if(info.getLibel_hippo() == null) {
+			info.setReunionstring(info.getR());
+			return info;
+		}
 			 
+		try {
+			Integer test = Integer.valueOf(info.getR());
 
-		return null;
+		} catch (Exception e) {
+			info.setReunionstring(info.getR());
+			return info;
+		}
+
+		info.setReunionstring(info.getR() + " (" + info.getLibel_hippo() + ")");
+
+		return info;
 	}
 
 }

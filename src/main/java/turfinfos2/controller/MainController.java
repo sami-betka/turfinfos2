@@ -2,6 +2,9 @@ package turfinfos2.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -96,12 +99,24 @@ public class MainController {
         System.out.println(jour);
         
         
-     	 Set<String> reunions = allInfos.stream()
- 				.filter(ti-> ti.getJour().equals(jour))
-   				.map(TurfInfos :: getR)
-   				.collect(Collectors.toSet());
-          model.addAttribute("reunionsofday", reunions);
-//          System.out.println(reunions.size());
+//     	 Set<String> reunions = allInfos.stream()
+// 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+//   				.map(TurfInfos :: getReunionstring)
+////   				.sorted()
+//   				.collect(Collectors.toSet());
+////     	 reunions.sort( Comparator.comparing( String::toString));
+//          model.addAttribute("reunionsofday", reunions);
+
+    
+          Set<String> reunions = allInfos.stream()
+  				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+         			.map(TurfInfos :: getReunionstring)
+         			.collect(Collectors.toSet());
+         			List<String> list = new ArrayList<String>(reunions);
+         			Collections.sort(list);        			
+         			reunions = new LinkedHashSet<>(list);
+         	         model.addAttribute("reunionsofday", reunions);
+
     }
         
 }

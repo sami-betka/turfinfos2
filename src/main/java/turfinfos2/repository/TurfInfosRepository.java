@@ -34,6 +34,15 @@ public interface TurfInfosRepository extends JpaRepository<TurfInfos, Long> {
 			)
 	List<TurfInfos> findAllByJourAndByReunion(String jour, String reunion);
 	
+	@Query("SELECT ti FROM TurfInfos ti "
+			+ "WHERE ti.jour = :jour AND ti.reunionstring = :reunionstring "
+//			+ "AND ti.pourcVictChevalHippo != 0 "
+//			+ "AND ti.pourcVictJockHippo != 0 "
+//			+ "AND ti.pourcVictEntHippo != 0 "
+
+			)
+	List<TurfInfos> findAllByJourAndByReunionstring(String jour, String reunionstring);
+	
 	List<TurfInfos> findAllByNumcourseAndChrono(Integer numcourse, Integer chrono);
 
 	List<TurfInfos> findAllByNumcourseAndTayProno(Integer numcourse, Integer tayprono);

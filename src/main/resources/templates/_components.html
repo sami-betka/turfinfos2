@@ -29,13 +29,13 @@
 
 <!-- <p th:fragment="chronos-modifone"> -->
   <a th:fragment="chronos-modifone" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttonone"> -->
   <a th:fragment="chronos-buttonone" class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -43,10 +43,10 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
- <h1 style="margin-bottom: 10px;">Chronos</h1>
+ <h1 style="margin-bottom: 10px;">Chronos/valeurs</h1>
  
   <div class="form-group col-md-4">
-      <label for="">1er chrono</label>
+      <label for="">1er</label>
       <select class="form-control" name="one">
         <option value="">Choisir...</option>
            <option th:each="horse : ${racehorses}" th:value="${horse.id}"
@@ -56,7 +56,7 @@
     </div>
     
      <div class="form-group col-md-4">
-      <label for="">2&egrave;me chrono</label>
+      <label for="">2&egrave;me</label>
       <select class="form-control" name="two">
         <option value="">Choisir...</option>
            <option th:each="horse : ${racehorses}" th:value="${horse.id}"
@@ -66,7 +66,7 @@
     </div>
     
       <div class="form-group col-md-4">
-      <label for="">3&egrave;me chrono</label>
+      <label for="">3&egrave;me</label>
       <select  class="form-control" name="three">
         <option value="">Choisir...</option>
            <option th:each="horse : ${racehorses}" th:value="${horse.id}"
@@ -76,7 +76,7 @@
     </div>
     
       <div class="form-group col-md-4">
-      <label for="">4&egrave;me chrono</label>
+      <label for="">4&egrave;me</label>
       <select  class="form-control" name="four">
         <option value="">Choisir...</option>
            <option th:each="horse : ${racehorses}" th:value="${horse.id}"
@@ -86,7 +86,7 @@
     </div>
     
       <div class="form-group col-md-4">
-      <label for="">5&egrave;me chrono</label>
+      <label for="">5&egrave;me</label>
       <select  class="form-control" name="five">
         <option value="">Choisir...</option>
            <option th:each="horse : ${racehorses}" th:value="${horse.id}"
@@ -96,7 +96,7 @@
     </div>
     
       <div class="form-group col-md-4">
-      <label for="">6&egrave;me chrono</label>
+      <label for="">6&egrave;me</label>
       <select  class="form-control" name="six">
         <option value="">Choisir...</option>
            <option th:each="horse : ${racehorses}" th:value="${horse.id}"
@@ -106,7 +106,7 @@
     </div>
     
       <div class="form-group col-md-4">
-      <label for="">7&egrave;me chrono</label>
+      <label for="">7&egrave;me</label>
       <select  class="form-control" name="seven">
         <option value="">Choisir...</option>
            <option th:each="horse : ${racehorses}" th:value="${horse.id}"
@@ -116,7 +116,7 @@
     </div>
     
       <div class="form-group col-md-4">
-      <label for="">8&egrave;me chrono</label>
+      <label for="">8&egrave;me</label>
       <select  class="form-control" name="eight">
         <option value="">Choisir...</option>
            <option th:each="horse : ${racehorses}" th:value="${horse.id}"
@@ -126,7 +126,7 @@
     </div>
     
      <div class="form-group col-md-4">
-      <label for="">9&egrave;me chrono</label>
+      <label for="">9&egrave;me</label>
       <select  class="form-control" name="nine">
         <option value="">Choisir...</option>
            <option th:each="horse : ${racehorses}" th:value="${horse.id}"
@@ -146,13 +146,13 @@
 
 <!-- <p th:fragment="chronos-modiftwo"> -->
   <a th:fragment="chronos-modiftwo" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttontwo"> -->
   <a th:fragment="chronos-buttontwo" class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -160,7 +160,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
  
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>
@@ -262,13 +262,13 @@
 
 <!-- <p th:fragment="chronos-modifthree"> -->
   <a th:fragment="chronos-modifthree" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttonthree"> -->
   <a th:fragment="chronos-buttonthree" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -276,7 +276,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
  
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>
@@ -378,13 +378,13 @@
 
 <!-- <p th:fragment="chronos-modiffour"> -->
   <a th:fragment="chronos-modiffour" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttonfour"> -->
   <a th:fragment="chronos-buttonfour" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -392,7 +392,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
  
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>
@@ -494,13 +494,13 @@
 
 <!-- <p th:fragment="chronos-modiffive"> -->
   <a th:fragment="chronos-modiffive" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttonfive"> -->
   <a th:fragment="chronos-buttonfive" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -508,7 +508,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
  
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>
@@ -610,13 +610,13 @@
 
 <!-- <p th:fragment="chronos-modifsix"> -->
   <a th:fragment="chronos-modifsix" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttonsix"> -->
   <a th:fragment="chronos-buttonsix" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -624,7 +624,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
  
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>
@@ -726,13 +726,13 @@
 
 <!-- <p th:fragment="chronos-modifseven"> -->
   <a th:fragment="chronos-modifseven" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttonseven"> -->
   <a th:fragment="chronos-buttonseven" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -740,7 +740,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
  
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>
@@ -842,13 +842,13 @@
 
 <!-- <p th:fragment="chronos-modifeight"> -->
   <a th:fragment="chronos-modifeight" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample8">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttoneight"> -->
   <a th:fragment="chronos-buttoneight" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample8">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -856,7 +856,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
  
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>
@@ -958,13 +958,13 @@
 
 <!-- <p th:fragment="chronos-modifnine"> -->
   <a th:fragment="chronos-modifnine" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample9" role="button" aria-expanded="false" aria-controls="collapseExample9">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttonnine"> -->
   <a th:fragment="chronos-buttonnine" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample9" role="button" aria-expanded="false" aria-controls="collapseExample9">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -972,7 +972,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
  
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>
@@ -1074,13 +1074,13 @@
 
 <!-- <p th:fragment="chronos-modiften"> -->
   <a th:fragment="chronos-modiften" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample10" role="button" aria-expanded="false" aria-controls="collapseExample10">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttonten"> -->
   <a th:fragment="chronos-buttonten" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample10" role="button" aria-expanded="false" aria-controls="collapseExample10">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -1088,7 +1088,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
   
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>
@@ -1190,13 +1190,13 @@
 
 <!-- <p th:fragment="chronos-modifeleven"> -->
   <a th:fragment="chronos-modifeleven" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample11" role="button" aria-expanded="false" aria-controls="collapseExample11">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttoneleven"> -->
   <a th:fragment="chronos-buttoneleven" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample11" role="button" aria-expanded="false" aria-controls="collapseExample11">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -1204,7 +1204,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
   
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>
@@ -1306,13 +1306,13 @@
 
 <!-- <p th:fragment="chronos-modiftwelve"> -->
   <a th:fragment="chronos-modiftwelve" class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapseExample12" role="button" aria-expanded="false" aria-controls="collapseExample12">
-    Modifier les chronos
+    Modifier les chronos/valeurs
   </a>
 <!-- </p> -->
 
 <!-- <p th:fragment="chronos-buttontwelve"> -->
   <a th:fragment="chronos-buttontwelve" class="btn  btn-primary btn-sm" data-toggle="collapse" href="#collapseExample12" role="button" aria-expanded="false" aria-controls="collapseExample12">
-    Renseigner les chronos
+    Renseigner les chronos/valeurs
   </a>
 <!-- </p> -->
 
@@ -1320,7 +1320,7 @@
 
  <form th:action="@{set-chronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
-  <h1 style="margin-bottom: 10px;">Chronos</h1>
+  <h1 style="margin-bottom: 10px;">Chronos/Valeurs</h1>
   
   <div class="form-group col-md-4">
       <label for="">1er chrono</label>

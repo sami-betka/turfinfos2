@@ -1,7 +1,5 @@
 package turfinfos2.model;
 
-import java.text.NumberFormat;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -159,6 +157,17 @@ public class TurfInfos {
 //@Column(name = "")
 	@CsvBindByName
 //@CsvNumber("###.##")
+	
+	private boolean blinkersFirstTime;
+	
+	private boolean noShoesFirstTime;
+	
+	private boolean protectionFirstTime;
+	
+	private String raceSpecialty;
+	
+	private String distanceAndSpecialtyChrono;
+	
 	private Double cotedirect;
 
 	private Integer chrono;
@@ -168,12 +177,16 @@ public class TurfInfos {
 	private Double noteProno;
 
 	private String numeroString;
+	
+	private String reunionstring;
 
 	private Double notePercentageParameter;
 
 	private Integer clInt;
 
 	private String tableId;
+	
+	private String libel_hippo;
 
 	public TurfInfos(Long id, String jour, String R, Integer C, Integer numcourse, Integer numero, String cheval,
 			Double pourcVictChevalHippo, Double pourcVictJockHippo, Double pourcVictEntHippo,
@@ -182,7 +195,8 @@ public class TurfInfos {
 			Integer noteProno, Integer recence, String numeroString, String coursescheval, String coursesjockey,
 			String coursesentraineur, String nbCourseCouple, String nbrCourseChevalHippo, String nbrCourseJockHippo,
 			String nbrCourseEntHippo, Integer tayProno, String typec, String entraineur, Double notePercentageParameter,
-			String cl, Integer clInt, Double cotedirect, String tableId) {
+			String cl, Integer clInt, Double cotedirect, String tableId, boolean blinkersFirstTime, boolean noShoesFirstTime,
+			boolean protectionFirstTime, String raceSpecialty, String distanceAndSpecialtyChrono, String reunionstring, String libel_hippo) {
 		this.id = id;
 		this.R = R;
 		this.C = C;
@@ -211,6 +225,16 @@ public class TurfInfos {
 		this.entraineur = entraineur;
 		this.cl = cl;
 		this.cotedirect = cotedirect;
+		this.blinkersFirstTime = blinkersFirstTime;
+		this.noShoesFirstTime = blinkersFirstTime;
+		this.protectionFirstTime = protectionFirstTime;
+		this.raceSpecialty = raceSpecialty;
+		this.distanceAndSpecialtyChrono = distanceAndSpecialtyChrono;
+		this.reunionstring = reunionstring;
+		this.libel_hippo = libel_hippo;
+
+		
+
 
 		// Paramètres crées
 
@@ -524,6 +548,62 @@ public class TurfInfos {
 
 	public void setTableId(String tableId) {
 		this.tableId = tableId;
+	}
+
+	public boolean isBlinkersFirstTime() {
+		return blinkersFirstTime;
+	}
+
+	public void setBlinkersFirstTime(boolean blinkersFirstTime) {
+		this.blinkersFirstTime = blinkersFirstTime;
+	}
+
+	public boolean isNoShoesFirstTime() {
+		return noShoesFirstTime;
+	}
+
+	public void setNoShoesFirstTime(boolean noShoesFirstTime) {
+		this.noShoesFirstTime = noShoesFirstTime;
+	}
+
+	public boolean isProtectionFirstTime() {
+		return protectionFirstTime;
+	}
+
+	public void setProtectionFirstTime(boolean protectionFirstTime) {
+		this.protectionFirstTime = protectionFirstTime;
+	}
+
+	public String getRaceSpecialty() {
+		return raceSpecialty;
+	}
+
+	public void setRaceSpecialty(String raceSpecialty) {
+		this.raceSpecialty = raceSpecialty;
+	}
+
+	public String getDistanceAndSpecialtyChrono() {
+		return distanceAndSpecialtyChrono;
+	}
+
+	public void setDistanceAndSpecialtyChrono(String distanceAndSpecialtyChrono) {
+		this.distanceAndSpecialtyChrono = distanceAndSpecialtyChrono;
+	}
+
+	public String getReunionstring() {
+		return reunionstring;
+	}
+
+	public void setReunionstring(String reunionString) {
+		this.reunionstring = reunionString;
+	}
+
+	public String getLibel_hippo() {
+		return libel_hippo;
+	}
+
+	public void setLibel_hippo(String libel_hippo) {
+		this.libel_hippo = libel_hippo;
 	}
 
 }
