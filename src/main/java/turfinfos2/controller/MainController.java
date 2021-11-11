@@ -85,6 +85,7 @@ public class MainController {
     private void navbarInfos(Model model) {
  	   
  	   List<TurfInfos> allInfos = turfInfosRepository.findAll();
+ 	   System.out.println("gggg" +allInfos.size());
  	   
  	   //DATES
    	 Set<String> dates = allInfos.stream()
@@ -104,19 +105,17 @@ public class MainController {
 //   				.map(TurfInfos :: getReunionstring)
 ////   				.sorted()
 //   				.collect(Collectors.toSet());
-////     	 reunions.sort( Comparator.comparing( String::toString));
 //          model.addAttribute("reunionsofday", reunions);
 
     
           Set<String> reunions = allInfos.stream()
-  				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+  				.filter(ti-> ti.getReunionstring() != null && ti.getJour().equals(jour) && ti.getR().length()<3)
          			.map(TurfInfos :: getReunionstring)
          			.collect(Collectors.toSet());
          			List<String> list = new ArrayList<String>(reunions);
          			Collections.sort(list);        			
          			reunions = new LinkedHashSet<>(list);
          	         model.addAttribute("reunionsofday", reunions);
-
     }
         
 }

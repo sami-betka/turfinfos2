@@ -899,7 +899,7 @@ public class UploadController {
 
    
          Set<String> reunions = allInfos.stream()
- 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+ 				.filter(ti->ti.getReunionstring() != null &&  ti.getJour().equals(jour) && ti.getR().length()<3)
         			.map(TurfInfos :: getReunionstring)
         			.collect(Collectors.toSet());
         			List<String> list = new ArrayList<String>(reunions);
