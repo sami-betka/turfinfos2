@@ -329,7 +329,7 @@ public class UploadController {
 			
 			 List<TurfInfos> listByChronoParisTurf = allraceInfos.stream()
 						    .filter(ti -> ti.getDistanceAndSpecialtyChrono()!= null)
-							.sorted(Comparator.comparing(TurfInfos::getDistanceAndSpecialtyChrono))
+							.sorted(Comparator.comparing(TurfInfos::getDistanceAndSpecialtyChrono).thenComparing(TurfInfos::getNumero))
 		        			.collect(Collectors.toList());
 //		        			for(TurfInfos info: listByChronoParisTurf) {
 //		        				System.out.println(info.getDistanceAndSpecialtyChrono());
@@ -351,7 +351,7 @@ public class UploadController {
 				    listBytxph,
 				   
 				    listByChronos).stream()
-//					.filter(ti -> ti.)
+					.filter(ti -> ti.getNoteProno()>0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getNoteProno))
 					.collect(Collectors.toList());
 			Collections.reverse(listByNoteProno);

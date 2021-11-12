@@ -69,64 +69,65 @@
                    
                     <tr th:if="${specialty == 'trot'}" class="chronoscolor">
                     <th scope="">Chr PTurf</th>
-                    <td style="font-weight: bold;" th:each="c, i : ${oneparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td>
+<!--                     <td style="font-weight: bold;" th:each="c, i : ${oneparisturfchronoslist}" th:text="${c.numero}" th:classappend="${c.recence gt 60 ? 'recence text-danger' : ''}"></td> -->
+                    <td class="borderbold" th:each="p, i : ${oneparisturfchronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>  [[${p.numero}]] </strong></p></td>
                    </tr>
                     
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
-                    <td class="borderbold" th:each="p, i : ${onepveh}" ><p th:inline="text"><strong>[[${p.numeroString}]] </strong>- [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
+                    <td class="borderbold" th:each="p, i : ${onepveh}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numeroString}]] </strong>- [[${p.nbrCourseEntHippo}]]([[${p.pourcVictEntHippo}]]%) </p></td>
                    </tr>
                    
                       <tr class="jockcolor">
                     <th scope="">V-J-H(%)</th>     
-                    <td th:each="p, i : ${onepvjh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
+                    <td th:each="p, i : ${onepvjh}" ><p th:inline="text"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><strong>[[${p.numero}]] </strong>- [[${p.nbrCourseJockHippo}]]([[${p.pourcVictJockHippo}]]%) </p></td>
                      </tr>
                     
                    <tr class="horsecolor">
                     <th scope="">V-C-H(%)</th>
-                    <td th:each="p, i : ${onepvch}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
+                    <td th:each="p, i : ${onepvch}" ><p th:inline="text"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><strong>[[${p.numero}]] </strong>- [[${p.nbrCourseChevalHippo}]]([[${p.pourcVictChevalHippo}]]%) </p></td>
                     </tr>
                     
                       <tr class="horsecolor">
                     <th scope="">P-C-H(%)</th>
-                    <td th:each="p, i : ${oneppch}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
+                    <td th:each="p, i : ${oneppch}" ><p th:inline="text"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><strong>[[${p.numero}]] </strong>- [[${p.nbrCourseChevalHippo}]]([[${p.pourcPlaceChevalHippo}]]%) </p></td>
                     </tr>  
                     
                    <tr class="couplecolor">
                     <th scope="">V-CO(%)</th>
-                    <td th:each="p, i : ${onetxv}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
+                    <td th:each="p, i : ${onetxv}" ><p th:inline="text"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxVictCouple}]]%) </p></td>
                     </tr>
                     
                    <tr class="couplecolor">
                     <th scope="">P-CO(%)</th>
-                    <td th:each="p, i : ${onetxp}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
+                    <td th:each="p, i : ${onetxp}" ><p th:inline="text"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCouple}]]([[${p.TxPlaceCouple}]]%) </p></td>
                     </tr>      
                     
                    <tr class="couplecolor">
                     <th scope="">V-CO-H(%)</th>
-                    <td th:each="p, i : ${onetxvh}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
+                    <td th:each="p, i : ${onetxvh}" ><p th:inline="text"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxVictCoupleHippo}]]%) </p></td>
                     </tr>
                     
                    <tr class="couplecolor">
                     <th scope="">P-CO-H(%)</th>
-                    <td th:each="p, i : ${onetxph}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
+                    <td th:each="p, i : ${onetxph}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- [[${p.nbCourseCoupleHippo}]]([[${p.TxPlaceCoupleHippo}]]%) </p></td>
                     
-                    <td th:each="j, i : ${onetxph}" th:text="${j.numero}" th:classappend="${j.recence gt 60 ? 'recence text-danger' : ''}"></td>
+<!--                     <td th:each="j, i : ${onetxph}" th:text="${j.numero}" th:classappend="${j.recence gt 60 ? 'recence text-danger' : ''}"></td> -->
                     </tr>      
                    
                     <tr class="chronoscolor">
                     <th scope="" class="">Le Prono:</th>
-                    <td th:each="p, i : ${onepronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    <td th:each="p, i : ${onepronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
                     </tr>
                     
                      <tr class="chronoscolor">
                     <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:each="p, i : ${onetaypronoslist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
+                    <td th:each="p, i : ${onetaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.noteProno}]]) </p></td>
                     </tr>
                     
                      <tr class="chronoscolor" th:if="${#lists.size(oneclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
-                    <td th:each="p, i : ${oneclassementlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
+                    <td th:each="p, i : ${oneclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.cotedirect}]]/1) </p></td>
                     </tr>
                    
                 </thead>
