@@ -235,7 +235,7 @@ public class UploadController {
 			
 			
 			allraceInfos.forEach(ti -> {
-				if(ti.getPourcVictChevalHippo()!= null && ti.getPourcVictChevalHippo()==100d) {
+				if(ti.getPourcVictChevalHippo()!= null && ti.getPourcVictChevalHippo().equals(ti.getPourcPlaceChevalHippo())) {
 					ti.setPourcPlaceChevalHippo(0d);
 				}
 			});	
@@ -276,7 +276,7 @@ public class UploadController {
 //				System.out.println("tttt-"+ti.getTxPlaceCouple());
 //				System.out.println();
 //				
-				if(ti.getTxVictCouple() != null && ti.getTxVictCouple()==100d) {
+				if(ti.getTxVictCouple() != null && ti.getTxVictCouple().equals(ti.getTxPlaceCouple())) {
 					ti.setTxPlaceCouple(0d);
 				}
 			});	
