@@ -56,7 +56,6 @@ public class UploadController {
     public String uploadCSVFileByRace(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirect) {
     	    	
     	List<TurfInfos> infos = new ArrayList<>();
-    	List<TurfInfos> all = turfInfosRepository.findAll();
     	
         // validate file
         if (file.isEmpty()) {
@@ -88,6 +87,8 @@ public class UploadController {
 //                if(infos.get(0).getKey().)
 
                 // TODO: save users in DB?
+                
+            	List<TurfInfos> all = turfInfosRepository.findAll();
                
                 List<Integer> numcourses = all.stream()
         				.map(TurfInfos :: getNumcourse)
