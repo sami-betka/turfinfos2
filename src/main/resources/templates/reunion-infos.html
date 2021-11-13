@@ -36,17 +36,17 @@
 <div class="btn-toolbar d-flex justify-content-center" role="toolbar" aria-label="Toolbar with button groups" style="margin-bottom: 20px;">
 <h5 class="text-dark" style=" margin-right: 10px;">Réunions du jour:</h5><br>
   <div th:each="r: ${reusofday}" class="btn-group mr-2" role="group" aria-label="First group">
-    <a th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${r})}"><button type="button" th:text="${r}" class="btn btn-primary"></button></a>
+    <a th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${r})}"><button type="button" th:text="${r}" class="btn btn-primary" style="margin: 1px;"></button></a>
   </div>
 </div>  
 
 <div id="info" class="row">
-<div class="infodiv" style="border: 5px solid red; width: 220px; padding: 10px; margin-bottom: 5px;">
+<div th:if="${#lists.size(cracklist) gt 0}" class="infodiv" style="border: 3px solid red; width: 220px; padding: 10px; margin-bottom: 5px; background-color: white;">
 <h5 style="border-bottom: 1px solid black; padding-bottom: 2px;">Cracks du jour R[[${reunionstring}]] (+75%):</h5>
   <p th:each="c : ${cracklist}"><strong th:if="${c.numero lt 10}">[[${c.C}]]0[[${c.numero}]] </strong><strong th:if="${c.numero gt 9}">[[${c.C}]][[${c.numero}]] </strong> ([[${c.noteProno}]] pts)</p>
 </div> 
 
-<div class="" style="border: 2px solid blue; width: 220px; padding: 10px; margin-bottom: 5px;">
+<div th:if="${#lists.size(couples) gt 0}" class="" style="border: 3px solid blue; width: 220px; padding: 10px; margin-bottom: 5px; background-color: white;">
 <h5 style="border-bottom: 1px solid black; padding-bottom: 2px;">Couplés du jour R[[${reunionstring}]] (+75%):</h5>
   <p th:each="c : ${couples}"><strong>[[${c}]]</strong></p>
 </div> 

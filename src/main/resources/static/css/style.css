@@ -111,10 +111,17 @@ table{
     line-height: 22px;
     margin-right: 6px;
 }
+#info{
+    margin-bottom: 8px;
+    margin-left: 75px;
+	
+}
+
 #info div{
     float: left;
     line-height: 22px;
-    margin-right: 6px;
+/*     margin-right: 6px; */
+    
 }
 .clear{
     clear: both;
