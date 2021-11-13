@@ -43,21 +43,30 @@ public class ImportJSONController {
 		
 			try {
 				node = new ObjectMapper().readTree(new URL(url));
+				
+				if(node.get("pageProps") == null) {
+					jour = node.get(0).get("numcourse").get("jour").textValue();
+					importJSONService.createAllDayInfosFromAspiJson(url);
+					navbarInfos(model);
+					return "redirect:/day-infos?jour=" + jour;
+				}
 				if(node.get("pageProps").get("name").textValue().equals("program")) {
 					System.out.println(node.get("pageProps").get("name").textValue());
 
 					jour = node.get("pageProps").get("date").textValue();
-					importJSONService.createAllDayInfosFromJson(url);
+					importJSONService.createAllDayInfosFromParisTurfJson(url);
 					navbarInfos(model);
 					return "redirect:/day-infos?jour=" + jour;
 				}
 				if(node.get("pageProps").get("name").textValue().equals("race")) {
 					System.out.println(node.get("pageProps").get("name").textValue());
 					jour = node.get("pageProps").get("race").get("date").textValue();
-					importJSONService.createAllRaceInfosFromJson(url);
+					importJSONService.createAllRaceInfosFromParisTurfJson(url);
 					navbarInfos(model);
 					return "redirect:/day-infos?jour=" + jour;
 				}
+				System.out.println("NODE EMPTY ? " + node.isEmpty());
+				
 
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block

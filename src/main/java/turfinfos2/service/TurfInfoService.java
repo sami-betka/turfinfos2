@@ -75,7 +75,7 @@ public class TurfInfoService {
     	
     }
     
-    public void updateFromJSON(TurfInfos info, boolean nulStats) {
+    public void updateFromParisTurfJSON(TurfInfos info, boolean nulStats) {
     	
     	TurfInfos infoToUpdate = turfInfosRepository.findByNumeroAndNumcourse(info.getNumero(), info.getNumcourse());
     	
@@ -136,6 +136,16 @@ public class TurfInfoService {
     	turfInfosRepository.save(infoToUpdate);
     	 
     	}
+    }
+    
+    public void updateFromAspiJSON(TurfInfos info) {
+    
+        TurfInfos infoToUpdate = turfInfosRepository.findByNumeroAndNumcourse(info.getNumero(), info.getNumcourse());
+    	
+    	infoToUpdate.setRecence(info.getRecence());
+    
+    	turfInfosRepository.save(infoToUpdate);
+    
     }
 	
 	public LinkedList<List<String>> createRaceInfosList(List<TurfInfos> raceInfos){

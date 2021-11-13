@@ -209,6 +209,10 @@ public class UploadController {
 					.filter(ti -> ti.getC().equals(num))
 					.collect(Collectors.toList());
 			
+			allraceInfos.forEach(ti-> {
+			       System.out.println(ti.getR()+ti.getC()+ "--" +ti.getRecence());
+			});
+			
 			createClassementList(allraceInfos);
 			
 
@@ -351,11 +355,10 @@ public class UploadController {
 				    listBytxph,
 				   
 				    listByChronos).stream()
-					.filter(ti -> ti.getNoteProno()>0)
+					.filter(ti -> ti.getNoteProno() != null && ti.getNoteProno()>0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getNoteProno))
 					.collect(Collectors.toList());
 			Collections.reverse(listByNoteProno);
-
 			
 			Optional<TurfInfos> optTinf = allraceInfos.stream().findFirst();
 			if(optTinf.isPresent()) {
@@ -387,12 +390,17 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "chronoslist", listByChronos);
 			model.addAttribute(numToString(num) + "taypronoslist", listByTayPronos);
 						
-			if(listByNoteProno.get(0).getNoteProno() > 0 && listByNoteProno.size() < 9) {
+			
+			if(!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0 && listByNoteProno.size() < 9) {
 				model.addAttribute(numToString(num) + "pronoslist", listByNoteProno);
 			}
-			if(listByNoteProno.get(0).getNoteProno() > 0 &&  listByNoteProno.size() >= 9){
+			if(!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0 &&  listByNoteProno.size() >= 9){
 				model.addAttribute(numToString(num) + "pronoslist", listByNoteProno.subList(0, 9));
 			}
+			if(listByNoteProno.isEmpty()) {
+				model.addAttribute(numToString(num) + "pronoslist", new ArrayList<>());
+			}
+			
 			
 			
 			if(createClassementList(allraceInfos).size() < 8) {
@@ -423,12 +431,16 @@ public class UploadController {
 			
 			System.out.println(allraceInfos.get(0).getRaceSpecialty());
 			
+			if(allraceInfos.get(0).getRaceSpecialty() != null) {
+
 			if(allraceInfos.get(0).getRaceSpecialty().equals("A") || allraceInfos.get(0).getRaceSpecialty().equals("M")) {
 				model.addAttribute("specialty", "trot");
 			} else {
 				model.addAttribute("specialty", "galop");
 			}
-			
+			}else {
+				model.addAttribute("specialty", "");
+			}
 						
 			model.addAttribute(numToString(num) + "exists", true);
 						
@@ -778,10 +790,13 @@ public class UploadController {
 
 			   
 			   tinf.setNumeroString("[" + listByEnt.get(0).getNumero().toString());
+			   if(listByEnt.get(0).getPourcPlaceEntHippo()!=null) {
 			   tinf.setPourcPlaceEntHippo(listByEnt.get(0).getPourcPlaceEntHippo());
+			   }
+			   if(listByEnt.get(0).getPourcVictEntHippo()!=null) {
 			   tinf.setPourcVictEntHippo(listByEnt.get(0).getPourcVictEntHippo());
 //			   tinf.setPourcVictEntHippo(listByEnt.get(0).getPourcVictEntHippo());
-
+			   }
 			   
 			   for(int i =1; i<listByEnt.size(); i++) {
 				   
@@ -925,7 +940,6 @@ public class UploadController {
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
        String jour = LocalDateTime.now().format(formatter);
        model.addAttribute("journav", jour);
-       System.out.println(jour);
        
        
 //    	 Set<String> reunions = allInfos.stream()

@@ -30,7 +30,7 @@
     </div>
 <!--     <button type="submit" class="btn btn-primary">Importer le fichier</button> -->
 <!--   <div class="form-group" id="btnSpinner"> <input value="Envoyer" type="button" class="btn btn-success btn-lg form-control" style="font-size: .8rem;" onclick="location.href='/';"> </div> -->
-     <button onclick="spinnerFunction()" class="btn btn-primary" type="button">
+     <button onclick="spinnerFunction()" class="btn btn-primary" type="submit">
   <span id="mySpinner" class="" role="status" aria-hidden="true"></span>
   <span id="myTextToHide">Importer</span>
     <span id="myTextToShow" style="display: none">Importation en cours...</span>
@@ -120,12 +120,12 @@
                        
 </form>
 
-<div th:if="${messagesuccess}" th:text="${messagesuccess}" class="alert alert-success" role="alert">
-</div>
-<div th:if="${messageerror}" th:text="${messageerror}" class="alert alert-danger" role="alert">
-</div>
-<div th:if="${messageempty}" th:text="${messageempty}" class="alert alert-warning" role="alert">
-</div>
+<!-- <div th:if="${messagesuccess}" th:text="${messagesuccess}" class="alert alert-success" role="alert"> -->
+<!-- </div> -->
+<!-- <div th:if="${messageerror}" th:text="${messageerror}" class="alert alert-danger" role="alert"> -->
+<!-- </div> -->
+<!-- <div th:if="${messageempty}" th:text="${messageempty}" class="alert alert-warning" role="alert"> -->
+<!-- </div> -->
 
 				</div>
 				<div class="col-md-4">
