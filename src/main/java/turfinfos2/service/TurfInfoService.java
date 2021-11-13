@@ -16,9 +16,9 @@ public class TurfInfoService {
 	@Autowired
 	TurfInfosRepository turfInfosRepository;
 	
-    public void update(TurfInfos info) {
+    public void update(TurfInfos info, TurfInfos infoToUpdate) {
     	
-    	TurfInfos infoToUpdate = turfInfosRepository.findByNumeroAndNumcourse(info.getNumero(), info.getNumcourse());
+//    	TurfInfos infoToUpdate = turfInfosRepository.findByNumeroAndNumcourse(info.getNumero(), info.getNumcourse());
     	
     	infoToUpdate.setC(info.getC());
     	infoToUpdate.setCheval(info.getCheval());
@@ -138,9 +138,14 @@ public class TurfInfoService {
     	}
     }
     
-    public void updateFromAspiJSON(TurfInfos info) {
+    public void updateFromAspiJSON(TurfInfos info, TurfInfos infoToUpdate) {
+    	    	
+    	infoToUpdate.setRecence(info.getRecence());
     
-        TurfInfos infoToUpdate = turfInfosRepository.findByNumeroAndNumcourse(info.getNumero(), info.getNumcourse());
+    	turfInfosRepository.save(infoToUpdate);
+    
+    }
+    public void patchCSVFromAspi(TurfInfos info, TurfInfos infoToUpdate) {
     	
     	infoToUpdate.setRecence(info.getRecence());
     

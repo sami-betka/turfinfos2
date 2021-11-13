@@ -56,6 +56,7 @@ public class UploadController {
     public String uploadCSVFileByRace(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirect) {
     	    	
     	List<TurfInfos> infos = new ArrayList<>();
+    	List<TurfInfos> all = turfInfosRepository.findAll();
     	
         // validate file
         if (file.isEmpty()) {
@@ -88,18 +89,22 @@ public class UploadController {
 
                 // TODO: save users in DB?
                
-                List<Integer> allPvch = turfInfosRepository.findAll().stream()
+                List<Integer> numcourses = all.stream()
         				.map(TurfInfos :: getNumcourse)
         				.collect(Collectors.toList());
                 
+                             
                 for(TurfInfos info : infos) {
 	            	turfInfoService.setMadeUpParams(info);
 
-                	if(!allPvch.contains(info.getNumcourse())) {
+                	if(!numcourses.contains(info.getNumcourse())) {
                 	turfInfosRepository.save(info);
                 	}
-                	if(allPvch.contains(info.getNumcourse())) {
-                		turfInfoService.update(info);
+                	if(numcourses.contains(info.getNumcourse())) {
+                		  TurfInfos infoToUpdate = all.stream()
+                     				.filter(ti-> ti.getNumero().equals(info.getNumero()) && ti.getNumcourse().equals(info.getNumcourse()))
+                     				.findFirst().get(); 
+                		turfInfoService.patchCSVFromAspi(info, infoToUpdate);
                     	}
                 }
 
@@ -170,6 +175,7 @@ public class UploadController {
 //    	}
     	
     	model.addAttribute("date", jour);
+    	model.addAttribute("recencemax", 60);
     	
     	//RACELIST
 //    	List<TurfInfos> allReunionInfos = turfInfosRepository.findAllByJourAndByReunion(jour, reunion);
@@ -618,37 +624,37 @@ public class UploadController {
 		   
 		   List<TurfInfos> listByChronos) {	 
 	   
-	   calculateNoteProno(allraceInfos, listBypvch, 1D, 1d);
-	   calculateNoteProno(allraceInfos, listBypvjh, 2D, 2d);
-	   calculateNoteProno(allraceInfos, listBypveh, 2D, 3d);
+	   calculateNoteProno(allraceInfos, listBypvch, 1d);
+	   calculateNoteProno(allraceInfos, listBypvjh, 2d);
+	   calculateNoteProno(allraceInfos, listBypveh, 3d);
 
-	   calculateNoteProno(allraceInfos, listByppch, 1D, 4d);
-//	   calculateNoteProno(allraceInfos, listByppjh, 2D, 5d);
-//	   calculateNoteProno(allraceInfos, listByppeh, 2D, 6d);
+	   calculateNoteProno(allraceInfos, listByppch, 4d);
+//	   calculateNoteProno(allraceInfos, listByppjh, 5d);
+//	   calculateNoteProno(allraceInfos, listByppeh, 6d);
 
-	   calculateNoteProno(allraceInfos, listBytxv, 1d, 7d);
-	   calculateNoteProno(allraceInfos, listBytxp, 1d, 8d);
-	   calculateNoteProno(allraceInfos, listBytxvh, 2d, 9d);
-	   calculateNoteProno(allraceInfos, listBytxph, 2d, 10d);
+	   calculateNoteProno(allraceInfos, listBytxv, 7d);
+	   calculateNoteProno(allraceInfos, listBytxp, 8d);
+	   calculateNoteProno(allraceInfos, listBytxvh, 9d);
+	   calculateNoteProno(allraceInfos, listBytxph, 10d);
 
-	   calculateNoteProno(allraceInfos, listByChronos, 2D, 11d);
+	   calculateNoteProno(allraceInfos, listByChronos, 11d);
 
 		return allraceInfos;
    }
    
-   private List<TurfInfos> calculateNoteProno(List<TurfInfos>allRaceInfos, List<TurfInfos>list, Double coeff, Double percentageParameter) {
+   private List<TurfInfos> calculateNoteProno(List<TurfInfos>allRaceInfos, List<TurfInfos>list, Double percentageParameter) {
 	   	   
 	   
 	for(int i =0; i<list.size(); i++) {
 			
 			if(list.size() > 0 && i == 0) {
 				setPercentageParam(list.get(i), percentageParameter);
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 10 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 10 );
 			}	
 			if(list.size() > 1 && i == 1) {
 				setPercentageParam(list.get(i), percentageParameter);
 				if(list.get(i).getNotePercentageParameter()!=list.get(i-1).getNotePercentageParameter()) {
-					list.get(i).setNoteProno(list.get(i).getNoteProno() + 9 * coeff);
+					list.get(i).setNoteProno(list.get(i).getNoteProno() + 9 );
 				}
 				if(list.get(i).getNotePercentageParameter()==list.get(i-1).getNotePercentageParameter()) {
 					list.get(i).setNoteProno(list.get(i-1).getNoteProno());
@@ -656,61 +662,61 @@ public class UploadController {
 				
 			}
 			if(list.size() > 2 && i == 2) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 8 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 8 );
 			}
 			if(list.size() > 3 && i == 3) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 7 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 7 );
 			}
 			if(list.size() > 4 && i == 4) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 6 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 6 );
 			}
 			if(list.size() > 5 && i == 5) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 5 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 5 );
 			}
 			if(list.size() > 6 && i == 6) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 4 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 4);
 			}
 			if(list.size() > 7 && i == 7) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 3 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 3);
 			}
 			if(list.size() > 8 && i == 8) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 2 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 2);
 			}
 			if(list.size() > 9 && i == 9) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}	
 			if(list.size() > 10 && i == 10) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 			if(list.size() > 11 && i == 11) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 			if(list.size() > 12 && i == 12) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 			if(list.size() > 13 && i == 13) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 			if(list.size() > 14 && i == 14) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 			if(list.size() > 15 && i == 15) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 			if(list.size() > 16 && i == 16) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 			if(list.size() > 17 && i == 17) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 			if(list.size() > 18 && i == 18) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 			if(list.size() > 19 && i == 19) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 			if(list.size() > 20 && i == 20) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1 * coeff);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
 			}
 		}
 	

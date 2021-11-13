@@ -276,6 +276,8 @@ public class ImportJSONService {
 	public void createAllDayInfosFromAspiJson(String url) {
 		
 		JsonNode node;
+    	List<TurfInfos> all = turfInfosRepository.findAll();
+
 		
 	    try {
 			node = new ObjectMapper().readTree(new URL(url));
@@ -284,7 +286,7 @@ public class ImportJSONService {
 
             System.out.println(" nnn" +numberofRunners);
 
-            List<TurfInfos> byRace = new ArrayList<>();
+            List<TurfInfos> toRace = new ArrayList<>();
             
             for(int i= 0; i<numberofRunners; i++) {
             	TurfInfos turfInfo = new TurfInfos();
@@ -295,19 +297,25 @@ public class ImportJSONService {
             	turfInfo.setRecence(node.get(i).get("recence").intValue());
         		System.out.println(i);
 
-            	byRace.add(turfInfo);
+            	toRace.add(turfInfo);
 
             	
-            	   List<Integer> allNumCourses = turfInfosRepository.findAll().stream()
+            	   List<Integer> allNumCourses = all.stream()
            				.map(TurfInfos :: getNumcourse)
            				.collect(Collectors.toList());
+            	   
+            	   TurfInfos infoToUpdate = all.stream()
+           				.filter(ti-> ti.getNumero().equals(turfInfo.getNumero()) && ti.getNumcourse().equals(turfInfo.getNumcourse()))
+           				.findFirst().get();
+            	   
             	
-                for(TurfInfos info : byRace) {
+                for(TurfInfos info : toRace) {
                 	if(!allNumCourses.contains(info.getNumcourse())) {
                 	turfInfosRepository.save(info);
                 	}
                 	if(allNumCourses.contains(info.getNumcourse())) {
-                		turfInfoService.updateFromAspiJSON(info);
+                		                				
+                		turfInfoService.updateFromAspiJSON(info, infoToUpdate);
                     	}
                 }	
                 
