@@ -40,10 +40,17 @@
   </div>
 </div>  
 
-<div style="border: 3px solid red; width: 220px; padding: 10px; margin-bottom: 5px;">
+<div id="info" class="row">
+<div class="infodiv" style="border: 5px solid red; width: 220px; padding: 10px; margin-bottom: 5px;">
 <h5 style="border-bottom: 1px solid black; padding-bottom: 2px;">Cracks du jour R[[${reunionstring}]] (+75%):</h5>
   <p th:each="c : ${cracklist}"><strong th:if="${c.numero lt 10}">[[${c.C}]]0[[${c.numero}]] </strong><strong th:if="${c.numero gt 9}">[[${c.C}]][[${c.numero}]] </strong> ([[${c.noteProno}]] pts)</p>
-</div>      
+</div> 
+
+<div class="" style="border: 2px solid blue; width: 220px; padding: 10px; margin-bottom: 5px;">
+<h5 style="border-bottom: 1px solid black; padding-bottom: 2px;">Couplés du jour R[[${reunionstring}]] (+75%):</h5>
+  <p th:each="c : ${couples}"><strong>[[${c}]]</strong></p>
+</div> 
+</div>     
        
 <!-- <div style="text-align: center;" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"> -->
 <!--   <div th:each="r: ${reusofday}" class="btn-group mr-2" role="group" aria-label="First group"> -->

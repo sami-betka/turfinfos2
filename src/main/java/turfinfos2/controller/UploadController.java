@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -479,15 +480,44 @@ public class UploadController {
 		.collect(Collectors.toList());
 		Collections.reverse(crackList);
 
-crackList.forEach(ti-> {
-	if(ti.getNumero()<10) {
-		ti.setNumero(Integer.valueOf("0"+ti.getNumero()));
-	}
-});
-		
+          crackList.forEach(ti-> {
+	       if(ti.getNumero()<10) {
+	         	ti.setNumero(Integer.valueOf("0"+ti.getNumero()));
+	        }
+           });
 		model.addAttribute("cracklist", crackList);
-
 		
+		//////////COUPLES DU JOUR//////////////
+		Set<String> cples = new HashSet<>();
+		for(TurfInfos info : crackList) {
+			
+			List<TurfInfos> couple = crackList.stream()
+					.filter(ti-> ti.getC() == info.getC())
+					.sorted(Comparator.comparingInt(TurfInfos::getNumero))
+					.collect(Collectors.toList());
+			if(couple.size()>=2) {
+				String C = couple.get(0).getC().toString();
+				String one = couple.get(0).getNumero().toString();
+				String two = couple.get(1).getNumero().toString();
+				
+				if(couple.get(0).getNumero()<10) {
+					one = "0" + couple.get(0).getNumero();
+				}
+				if(couple.get(1).getNumero()<10) {
+					two = "0" + couple.get(1).getNumero().toString();
+				}
+				
+				String cple = C + one + " - " + C +two ;
+				cples.add(cple);
+			}
+		}
+		List<String> couples = cples.stream()
+				.sorted()
+				.collect(Collectors.toList());
+		model.addAttribute("couples", couples);
+		
+		
+				
 				/////////////reusOfDay
 		 Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
 	 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
@@ -658,8 +688,8 @@ crackList.forEach(ti-> {
 
 	   calculateNoteProno(allraceInfos, listBytxv, 7d);
 	   calculateNoteProno(allraceInfos, listBytxp, 8d);
-	   calculateNoteProno(allraceInfos, listBytxvh, 9d);
-	   calculateNoteProno(allraceInfos, listBytxph, 10d);
+//	   calculateNoteProno(allraceInfos, listBytxvh, 9d);
+//	   calculateNoteProno(allraceInfos, listBytxph, 10d);
 
 	   calculateNoteProno(allraceInfos, listByChronos, 11d);
 	   
@@ -674,19 +704,20 @@ crackList.forEach(ti-> {
 	for(int i =0; i<list.size(); i++) {
 			
 			if(list.size() > 0 && i == 0) {
-				setPercentageParam(list.get(i), percentageParameter);
+//				setPercentageParam(list.get(i), percentageParameter);
 				list.get(i).setNoteProno(list.get(i).getNoteProno() + 10 );
 			}	
+			
 			if(list.size() > 1 && i == 1) {
-				setPercentageParam(list.get(i), percentageParameter);
-				if(list.get(i).getNotePercentageParameter()!=list.get(i-1).getNotePercentageParameter()) {
+//				setPercentageParam(list.get(i), percentageParameter);
+//				if(list.get(i).getNotePercentageParameter()!=(list.get(i-1).getNotePercentageParameter())) {
 					list.get(i).setNoteProno(list.get(i).getNoteProno() + 9 );
-				}
-				if(list.get(i).getNotePercentageParameter()==list.get(i-1).getNotePercentageParameter()) {
-					list.get(i).setNoteProno(list.get(i-1).getNoteProno());
-				}
-				
+//				}
+//				if(list.get(i).getNotePercentageParameter()==(list.get(i-1).getNotePercentageParameter())) {
+//					list.get(i).setNoteProno(list.get(i-1).getNoteProno());
+//				}
 			}
+			
 			if(list.size() > 2 && i == 2) {
 				list.get(i).setNoteProno(list.get(i).getNoteProno() + 8 );
 			}
@@ -776,12 +807,13 @@ crackList.forEach(ti-> {
 	   if(percentParam == 8d) {
 		   tinf.setNotePercentageParameter(tinf.getTxPlaceCouple());
 	   }
-	   if(percentParam == 9d) {
-		   tinf.setNotePercentageParameter(tinf.getTxVictCoupleHippo());
-	   }
-	   if(percentParam == 10d) {
-		   tinf.setNotePercentageParameter(tinf.getTxPlaceCoupleHippo());
-	   }
+//	   if(percentParam == 9d) {
+//		   tinf.setNotePercentageParameter(tinf.getTxVictCoupleHippo());
+//	   }
+//	   if(percentParam == 10d) {
+//		   tinf.setNotePercentageParameter(tinf.getTxPlaceCoupleHippo());
+//	   }
+	   
 //	   if(percentParam == 11d) {
 //		   tinf.setNotePercentageParameter(tinf.getChrono().doubleValue());
 //	   }
