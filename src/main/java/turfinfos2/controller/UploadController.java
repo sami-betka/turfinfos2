@@ -473,7 +473,7 @@ public class UploadController {
 						
 		}
 		
-		////////////CRACKLIST/////////////////
+		////////////INFOS/////////////////
 		List<TurfInfos> crackList = reunionCracks.stream()
 		.filter(ti-> ti.getNoteProno()>= 52.5)
 		.sorted(Comparator.comparingDouble(TurfInfos::getNoteProno))
@@ -517,7 +517,8 @@ public class UploadController {
 		model.addAttribute("couples", couples);
 		
 		
-				
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				/////////////reusOfDay
 		 Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
 	 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
