@@ -178,9 +178,10 @@ public class UploadController {
     	model.addAttribute("date", jour);
     	model.addAttribute("recencemax", 60);
     	
-    	//RACELIST
-//    	List<TurfInfos> allReunionInfos = turfInfosRepository.findAllByJourAndByReunion(jour, reunion);
+    	//RACESLIST
     	List<TurfInfos> allReunionInfos = turfInfosRepository.findAllByJourAndByReunionstring(jour, reunionstring);
+    	List<TurfInfos> reunionCracks = new ArrayList<>();
+
 
     	
     	//biglist
@@ -361,11 +362,15 @@ public class UploadController {
 				    listBytxvh,
 				    listBytxph,
 				   
-				    listByChronos).stream()
+				    listByChronos, model).stream()
 					.filter(ti -> ti.getNoteProno() != null && ti.getNoteProno()>0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getNoteProno))
 					.collect(Collectors.toList());
 			Collections.reverse(listByNoteProno);
+			
+			reunionCracks.addAll(listByNoteProno);
+						
+			
 			
 			Optional<TurfInfos> optTinf = allraceInfos.stream().findFirst();
 			if(optTinf.isPresent()) {
@@ -416,7 +421,7 @@ public class UploadController {
 			if(createClassementList(allraceInfos).size() >= 8){
 				model.addAttribute(numToString(num) + "classementlist", createClassementList(allraceInfos).subList(0, 8));
 			}
-			
+						
 						
 			
 //			model.addAttribute(numToString(num) + "pronoslist", listByPronos);
@@ -466,6 +471,23 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "horses", listByNumCheval);
 						
 		}
+		
+		////////////CRACKLIST/////////////////
+		List<TurfInfos> crackList = reunionCracks.stream()
+		.filter(ti-> ti.getNoteProno()>= 52.5)
+		.sorted(Comparator.comparingDouble(TurfInfos::getNoteProno))
+		.collect(Collectors.toList());
+		Collections.reverse(crackList);
+
+crackList.forEach(ti-> {
+	if(ti.getNumero()<10) {
+		ti.setNumero(Integer.valueOf("0"+ti.getNumero()));
+	}
+});
+		
+		model.addAttribute("cracklist", crackList);
+
+		
 				/////////////reusOfDay
 		 Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
 	 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
@@ -623,7 +645,8 @@ public class UploadController {
 		   List<TurfInfos> listBytxvh,
 		   List<TurfInfos> listBytxph,
 		   
-		   List<TurfInfos> listByChronos) {	 
+		   List<TurfInfos> listByChronos,
+		   Model model) {	 
 	   
 	   calculateNoteProno(allraceInfos, listBypvch, 1d);
 	   calculateNoteProno(allraceInfos, listBypvjh, 2d);
@@ -639,6 +662,8 @@ public class UploadController {
 	   calculateNoteProno(allraceInfos, listBytxph, 10d);
 
 	   calculateNoteProno(allraceInfos, listByChronos, 11d);
+	   
+//	   System.out.println((70d/100)*75d + "tauxcrack");
 
 		return allraceInfos;
    }
@@ -968,10 +993,9 @@ public class UploadController {
         	         model.addAttribute("reunionsofday", reunions);
    }
    
-   private Integer calculateNewPlacePercentage(Integer twoOrThreeRank, Integer nbCourses) {
-	   
-	   return (twoOrThreeRank * 100) /  nbCourses ;
-	   	   
-   }
+//   private Integer calculateNewPlacePercentage(Integer twoOrThreeRank, Integer nbCourses) {
+//	   
+//	   return (twoOrThreeRank * 100) /  nbCourses ;
+//   }
     
 }

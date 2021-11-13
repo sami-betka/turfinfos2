@@ -176,7 +176,7 @@ public class TurfInfos {
 
 	private Integer tayProno;
 
-	private Double noteProno;
+	private Integer noteProno;
 
 	private String numeroString;
 	
@@ -255,7 +255,7 @@ public class TurfInfos {
 
 		this.chrono = chrono;
 		this.tayProno = tayProno;
-		this.noteProno = 0d;
+		this.noteProno = 0;
 		this.numeroString = numeroString;
 		this.notePercentageParameter = notePercentageParameter;
 		this.clInt = clInt;
@@ -265,7 +265,7 @@ public class TurfInfos {
 
 	public TurfInfos() {
 
-		this.noteProno = 0d;
+		this.noteProno = 0;
 
 	}
 
@@ -413,11 +413,11 @@ public class TurfInfos {
 		TxPlaceCoupleHippo =  Precision.round(txPlaceCoupleHippo, 2);
 	}
 
-	public Double getNoteProno() {
+	public Integer getNoteProno() {
 		return noteProno;
 	}
 
-	public void setNoteProno(Double noteProno) {
+	public void setNoteProno(Integer noteProno) {
 		this.noteProno = noteProno;
 	}
 
