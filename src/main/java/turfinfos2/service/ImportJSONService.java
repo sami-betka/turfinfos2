@@ -30,6 +30,9 @@ public class ImportJSONService {
 	public List<TurfInfos> createAllRaceInfosFromParisTurfJson(String url) {
 
 		List<TurfInfos> fromRace = new ArrayList<>();
+	    List<Integer> allNumCourses = turfInfosRepository.findAll().stream()
+				.map(TurfInfos :: getNumcourse)
+				.collect(Collectors.toList());
 
 //		File file = new File("src/main/resources/static/uploadedfiles/one.json");
 
@@ -193,8 +196,14 @@ public class ImportJSONService {
 	            	}
 	            	
 	                System.out.println(turfInfo.getRanking());
-	            	byRace.add(turfInfo);
-	            }            
+	                
+	            	turfInfoService.setMadeUpParams(turfInfo);
+                	if(!allNumCourses.contains(turfInfo.getNumcourse())) {
+                	turfInfosRepository.save(turfInfo);
+                	}
+                	if(allNumCourses.contains(turfInfo.getNumcourse())) {
+                		turfInfoService.updateFromParisTurfJSON(turfInfo, nulStats);
+                    	}	            }            
 	            
 	            //test affichage
 	            for(TurfInfos inf: byRace) {
@@ -220,20 +229,8 @@ public class ImportJSONService {
 //	                System.out.println(inf.getRaceSpecialty());
 //	                System.out.println(inf.getDistanceAndSpecialtyChrono());
 	            }
-	            
-	            List<Integer> allNumCourses = turfInfosRepository.findAll().stream()
-        				.map(TurfInfos :: getNumcourse)
-        				.collect(Collectors.toList());
-	            
-	            for(TurfInfos info : byRace) {
-	            	turfInfoService.setMadeUpParams(info);
-                	if(!allNumCourses.contains(info.getNumcourse())) {
-                	turfInfosRepository.save(info);
-                	}
-                	if(allNumCourses.contains(info.getNumcourse())) {
-                		turfInfoService.updateFromParisTurfJSON(info, nulStats);
-                    	}
-                }	 
+	                     
+	 
 	            
 
 			} catch (JsonProcessingException e) {
@@ -292,6 +289,10 @@ public class ImportJSONService {
 		
 		JsonNode node;
     	List<TurfInfos> all = turfInfosRepository.findAll();
+    	
+ 	   List<Integer> allNumCourses = all.stream()
+				.map(TurfInfos :: getNumcourse)
+				.collect(Collectors.toList());
 
 		
 	    try {
@@ -312,27 +313,18 @@ public class ImportJSONService {
             	turfInfo.setRecence(node.get(i).get("recence").intValue());
         		System.out.println(i);
 
-            	toRace.add(turfInfo);
-
-            	
-            	   List<Integer> allNumCourses = all.stream()
-           				.map(TurfInfos :: getNumcourse)
-           				.collect(Collectors.toList());
             	   
             	   TurfInfos infoToUpdate = all.stream()
            				.filter(ti-> ti.getNumero().equals(turfInfo.getNumero()) && ti.getNumcourse().equals(turfInfo.getNumcourse()))
            				.findFirst().get();
             	   
             	
-                for(TurfInfos info : toRace) {
-                	if(!allNumCourses.contains(info.getNumcourse())) {
-                	turfInfosRepository.save(info);
+                	if(!allNumCourses.contains(turfInfo.getNumcourse())) {
+                	turfInfosRepository.save(turfInfo);
                 	}
-                	if(allNumCourses.contains(info.getNumcourse())) {
-                		                				
-                		turfInfoService.updateFromAspiJSON(info, infoToUpdate);
+                	if(allNumCourses.contains(turfInfo.getNumcourse())) {
+                		turfInfoService.updateFromAspiJSON(turfInfo, infoToUpdate);
                     	}
-                }	
                 
                 
             	
