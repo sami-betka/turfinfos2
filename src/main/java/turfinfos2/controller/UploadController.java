@@ -240,7 +240,7 @@ public class UploadController {
 					.collect(Collectors.toList());
 			Collections.reverse(listBypvjh);
 			
-			List<TurfInfos> listBypveh = calculateEntraineur(allraceInfos).stream()
+			List<TurfInfos> listBypveh = allraceInfos.stream()
 					.filter(ti -> ti.getPourcVictEntHippo() != null && ti.getPourcVictEntHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictEntHippo))
 					.collect(Collectors.toList());
@@ -256,7 +256,13 @@ public class UploadController {
 					.filter(ti -> ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceChevalHippo))
 					.collect(Collectors.toList());
-			Collections.reverse(listByppch);		
+			Collections.reverse(listByppch);	
+			
+			List<TurfInfos> listByppc = allraceInfos.stream()
+					.filter(ti -> ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval() != 0d)
+					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceCheval))
+					.collect(Collectors.toList());
+			Collections.reverse(listByppc);
 						
 			List<TurfInfos> listByppjh = allraceInfos.stream()
 					.filter(ti -> ti.getPourcPlaceJockHippo() != null && ti.getPourcPlaceJockHippo() != 0d)
@@ -264,7 +270,7 @@ public class UploadController {
 					.collect(Collectors.toList());
 			Collections.reverse(listByppjh);
 				
-			List<TurfInfos> listByppeh =  calculateEntraineur(allraceInfos).stream()
+			List<TurfInfos> listByppeh = allraceInfos.stream()
 					.filter(ti -> ti.getPourcPlaceEntHippo() != null && ti.getPourcPlaceEntHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceEntHippo))
 					.collect(Collectors.toList());
@@ -363,7 +369,11 @@ public class UploadController {
 				    listBytxvh,
 				    listBytxph,
 				   
-				    listByChronos, model).stream()
+				    listByChronos,
+				    listByppc,
+				    model)
+					
+					.stream()
 					.filter(ti -> ti.getNoteProno() != null && ti.getNoteProno()>0)
 					.sorted(Comparator.comparingDouble(TurfInfos::getNoteProno))
 					.collect(Collectors.toList());
@@ -380,11 +390,13 @@ public class UploadController {
 			
 			model.addAttribute(numToString(num) + "pvch", listBypvch);
 			model.addAttribute(numToString(num) + "pvjh", listBypvjh);
-			model.addAttribute(numToString(num) + "pveh", listBypveh);
+			model.addAttribute(numToString(num) + "pveh", calculateEntraineur(listBypveh));
 			
 			model.addAttribute(numToString(num) + "ppch", listByppch);
-			model.addAttribute(numToString(num) + "ppjh", listByppjh);
-			model.addAttribute(numToString(num) + "ppeh", listByppeh);
+			model.addAttribute(numToString(num) + "ppc", listByppc);
+
+//			model.addAttribute(numToString(num) + "ppjh", listByppjh);
+//			model.addAttribute(numToString(num) + "ppeh", calculateEntraineur(listByppeh));
 			
 			
 			model.addAttribute(numToString(num) + "txv", listBytxv);
@@ -480,12 +492,13 @@ public class UploadController {
 		.collect(Collectors.toList());
 		Collections.reverse(crackList);
 
-          crackList.forEach(ti-> {
-	       if(ti.getNumero()<10) {
-	         	ti.setNumero(Integer.valueOf("0"+ti.getNumero()));
-	        }
-           });
-		model.addAttribute("cracklist", crackList);
+//          crackList.forEach(ti-> {
+//	       if(ti.getNumero()<10) {
+//	         	ti.setNumero(Integer.valueOf("0"+ti.getNumero()));
+//	        }
+//           });
+  		model.addAttribute("cracklist", new ArrayList<>());
+//		model.addAttribute("cracklist", crackList);
 		
 		//////////COUPLES DU JOUR//////////////
 		Set<String> cples = new HashSet<>();
@@ -514,7 +527,8 @@ public class UploadController {
 		List<String> couples = cples.stream()
 				.sorted()
 				.collect(Collectors.toList());
-		model.addAttribute("couples", couples);
+  		model.addAttribute("couples", new ArrayList<>());
+//		model.addAttribute("couples", couples);
 		
 		
 
@@ -675,6 +689,8 @@ public class UploadController {
 		   List<TurfInfos> listBytxp,
 		   List<TurfInfos> listBytxvh,
 		   List<TurfInfos> listBytxph,
+		   List<TurfInfos> listByppc,
+
 		   
 		   List<TurfInfos> listByChronos,
 		   Model model) {	 
@@ -692,7 +708,9 @@ public class UploadController {
 //	   calculateNoteProno(allraceInfos, listBytxvh, 9d);
 //	   calculateNoteProno(allraceInfos, listBytxph, 10d);
 
-	   calculateNoteProno(allraceInfos, listByChronos, 11d);
+//	   calculateNoteProno(allraceInfos, listByChronos, 11d);
+	   calculateNoteProno(allraceInfos, listByppc, 12d);
+
 	   
 //	   System.out.println((70d/100)*75d + "tauxcrack");
 
@@ -705,80 +723,94 @@ public class UploadController {
 	for(int i =0; i<list.size(); i++) {
 			
 			if(list.size() > 0 && i == 0) {
-//				setPercentageParam(list.get(i), percentageParameter);
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 10 );
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				System.out.println(list.get(i).getNoteProno());
 			}	
 			
 			if(list.size() > 1 && i == 1) {
-//				setPercentageParam(list.get(i), percentageParameter);
-//				if(list.get(i).getNotePercentageParameter()!=(list.get(i-1).getNotePercentageParameter())) {
-					list.get(i).setNoteProno(list.get(i).getNoteProno() + 9 );
-//				}
-//				if(list.get(i).getNotePercentageParameter()==(list.get(i-1).getNotePercentageParameter())) {
-//					list.get(i).setNoteProno(list.get(i-1).getNoteProno());
-//				}
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			
 			if(list.size() > 2 && i == 2) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 8 );
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 3 && i == 3) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 7 );
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 4 && i == 4) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 6 );
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 5 && i == 5) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 5 );
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 6 && i == 6) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 4);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 7 && i == 7) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 3);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 8 && i == 8) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 2);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 9 && i == 9) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}	
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}	
 			if(list.size() > 10 && i == 10) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 11 && i == 11) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 12 && i == 12) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 13 && i == 13) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 14 && i == 14) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 15 && i == 15) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 16 && i == 16) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 17 && i == 17) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 18 && i == 18) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 19 && i == 19) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 			if(list.size() > 20 && i == 20) {
-				list.get(i).setNoteProno(list.get(i).getNoteProno() + 1);
-			}
+				setPercentageParam(list.get(i), percentageParameter);
+				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
+				}
 		}
 	
-		
 	   return list;
    }
    
@@ -818,6 +850,9 @@ public class UploadController {
 //	   if(percentParam == 11d) {
 //		   tinf.setNotePercentageParameter(tinf.getChrono().doubleValue());
 //	   }
+	   if(percentParam == 12d) {
+		   tinf.setNotePercentageParameter(tinf.getPourcPlaceCheval());
+	   }
 	   
 	   return tinf;
    }

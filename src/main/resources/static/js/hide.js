@@ -10,7 +10,7 @@ function HideRow1() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -51,7 +51,7 @@ function HideRow2() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -92,7 +92,7 @@ function HideRow3() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -133,7 +133,7 @@ function HideRow4() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -174,7 +174,7 @@ function HideRow5() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -215,7 +215,7 @@ function HideRow6() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -256,7 +256,7 @@ function HideRow7() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -297,7 +297,7 @@ function HideRow8() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -338,7 +338,7 @@ function HideRow9() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -379,7 +379,7 @@ function HideRow10() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -420,7 +420,7 @@ function HideRow11() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 
@@ -461,7 +461,7 @@ function HideRow12() {
     var x4 = table.rows[8].style; 
     var x5 = table.rows[10].style; 
 
-    x1.display = 'none'; 
+    // x1.display = 'none'; 
     x2.display = 'none'; 
     x3.display = 'none'; 
     x4.display = 'none'; 

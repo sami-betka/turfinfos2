@@ -58,6 +58,8 @@ public class TurfInfos {
 	@CsvBindByName
 //  @CsvNumber("###.##")
 	private Double pourcVictChevalHippo;
+	
+	private Double pourcPlaceCheval;
 
 //  @Column(name = "")
 	@CsvBindByName
@@ -176,7 +178,7 @@ public class TurfInfos {
 
 	private Integer tayProno;
 
-	private Integer noteProno;
+	private Double noteProno;
 
 	private String numeroString;
 	
@@ -198,10 +200,10 @@ public class TurfInfos {
 
 
 	public TurfInfos(Long id, String jour, String R, Integer C, Integer numcourse, Integer numero, String cheval,
-			Double pourcVictChevalHippo, Double pourcVictJockHippo, Double pourcVictEntHippo,
+			Double pourcVictChevalHippo, Double pourcPlaceCheval, Double pourcVictJockHippo, Double pourcVictEntHippo,
 			Double pourcPlaceChevalHippo, Double pourcPlaceJockHippo, Double pourcPlaceEntHippo, Double TxVictCouple,
 			Double TxPlaceCouple, Double TxVictCoupleHippo, Double TxPlaceCoupleHippo, Integer chrono,
-			Integer noteProno, Integer recence, String numeroString, String coursescheval, String coursesjockey,
+			Double noteProno, Integer recence, String numeroString, String coursescheval, String coursesjockey,
 			String coursesentraineur, Integer nbCourseCouple, String nbrCourseChevalHippo, String nbrCourseJockHippo,
 			String nbrCourseEntHippo, Integer tayProno, String typec, String entraineur, Double notePercentageParameter,
 			String cl, Integer clInt, Double cotedirect, String tableId, boolean blinkersFirstTime, boolean noShoesFirstTime,
@@ -247,6 +249,7 @@ public class TurfInfos {
 		this.coupleTwoOrThree = coupleTwoOrThree;
 		this.chevalTwoOrThreeHippo = chevalTwoOrThreeHippo;
 		this.nbVictChevalHippo = nbVictChevalHippo;
+		this.pourcPlaceCheval = pourcPlaceCheval;
 
 
 
@@ -255,7 +258,7 @@ public class TurfInfos {
 
 		this.chrono = chrono;
 		this.tayProno = tayProno;
-		this.noteProno = 0;
+		this.noteProno = 0d;
 		this.numeroString = numeroString;
 		this.notePercentageParameter = notePercentageParameter;
 		this.clInt = clInt;
@@ -265,7 +268,7 @@ public class TurfInfos {
 
 	public TurfInfos() {
 
-		this.noteProno = 0;
+		this.noteProno = 0d;
 
 	}
 
@@ -413,12 +416,12 @@ public class TurfInfos {
 		TxPlaceCoupleHippo =  Precision.round(txPlaceCoupleHippo, 2);
 	}
 
-	public Integer getNoteProno() {
+	public Double getNoteProno() {
 		return noteProno;
 	}
 
-	public void setNoteProno(Integer noteProno) {
-		this.noteProno = noteProno;
+	public void setNoteProno(Double noteProno) {
+		this.noteProno =  Precision.round(noteProno, 2);
 	}
 
 	public Integer getRecence() {
@@ -437,13 +440,6 @@ public class TurfInfos {
 		this.numeroString = numeroString;
 	}
 
-//	public String getCoursescheval() {
-//		return coursescheval;
-//	}
-//
-//	public void setCoursescheval(String coursescheval) {
-//		this.coursescheval = coursescheval;
-//	}
 //
 //public String getCoursesjockey() {
 //	return coursesjockey;
@@ -659,6 +655,14 @@ public class TurfInfos {
 
 	public void setNbVictChevalHippo(Integer nbVictChevalHippo) {
 		this.nbVictChevalHippo = nbVictChevalHippo;
+	}
+
+	public Double getPourcPlaceCheval() {
+		return pourcPlaceCheval;
+	}
+
+	public void setPourcPlaceCheval(Double pourcPlaceCheval) {
+		this.pourcPlaceCheval = Precision.round(pourcPlaceCheval, 2);
 	}
 
 }
