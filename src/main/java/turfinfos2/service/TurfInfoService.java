@@ -129,6 +129,12 @@ public class TurfInfoService {
     	
     	infoToUpdate.setChevalTwoOrThreeHippo(info.getChevalTwoOrThreeHippo());
     	infoToUpdate.setNbVictChevalHippo(info.getNbVictChevalHippo());
+    	infoToUpdate.setRanking(info.getRanking());
+    	infoToUpdate.setLiveOdd(info.getLiveOdd());
+    	infoToUpdate.setRunning(info.isRunning());
+
+
+
 
     	
     	

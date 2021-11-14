@@ -44,6 +44,9 @@ public class ImportJSONService {
 				String jour = node.get("pageProps").get("race").get("date").textValue();
 				//numcourse
 				String numcourse = String.valueOf(node.get("pageProps").get("race").get("id").intValue());
+				String uuid = node.get("pageProps").get("race").get("uuid").textValue();
+
+				System.out.println(uuid + "     nnnnnnnnnnnnnnnn");
 				//Verifie si les stats sont à null
             	boolean nulStats = true;
 				
@@ -51,8 +54,6 @@ public class ImportJSONService {
 //				  Et infos réunions
 //				String numberofRunners = node.get("pageProps").get("race").get("numberOfInitialRunners").textValue();
 				Integer numberofRunners = node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).size();
-
-	            System.out.println(" nnn" +numberofRunners);
 
 	            List<TurfInfos> byRace = new ArrayList<>();
 	            
@@ -118,6 +119,10 @@ public class ImportJSONService {
 			                   turfInfo.setDistanceAndSpecialtyChrono(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("records").get("distance").get("redkm").textValue());
 	                	   }
 	                   }
+	                   
+	                	turfInfo.setRanking(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("ranking").intValue());
+		                turfInfo.setLiveOdd(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("operatorOdds").get("PMU").get("liveOdd").doubleValue());
+		                turfInfo.setRunning(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("isRunning").booleanValue());
 	                	
 
 	            	
@@ -176,17 +181,24 @@ public class ImportJSONService {
 			                   turfInfo.setDistanceAndSpecialtyChrono(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("records").get("distance").get("redkm").textValue());
 	                	   }
 	                   }
+		               
+	                	turfInfo.setRanking(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("ranking").intValue());
+		                turfInfo.setLiveOdd(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("operatorOdds").get("PMU").get("liveOdd").doubleValue());
+		                turfInfo.setRunning(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("isRunning").booleanValue());
+
+
 	                	
 
 	            	
 	            	}
 	            	
+	                System.out.println(turfInfo.getRanking());
 	            	byRace.add(turfInfo);
 	            }            
 	            
 	            //test affichage
 	            for(TurfInfos inf: byRace) {
-	                System.out.println("R" + inf.getR() + "C" + inf.getC() );
+//	                System.out.println("R" + inf.getR() + "C" + inf.getC() );
 //	                System.out.println(inf.getTableId());
 ////	                System.out.println(inf.getCoursescheval());
 //	                System.out.println(inf.getEntraineur());
@@ -205,8 +217,8 @@ public class ImportJSONService {
 //	                System.out.println(inf.getNbCourseCouple());
 //	                System.out.println(inf.getTxVictCouple());
 //	                System.out.println(inf.getTxPlaceCouple());
-	                System.out.println(inf.getRaceSpecialty());
-	                System.out.println(inf.getDistanceAndSpecialtyChrono());
+//	                System.out.println(inf.getRaceSpecialty());
+//	                System.out.println(inf.getDistanceAndSpecialtyChrono());
 	            }
 	            
 	            List<Integer> allNumCourses = turfInfosRepository.findAll().stream()
@@ -232,7 +244,6 @@ public class ImportJSONService {
 				e.printStackTrace();
 			}
 			
-		System.out.println(fromRace.size());
 		
 		return fromRace;
 	}

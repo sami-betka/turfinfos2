@@ -197,6 +197,12 @@ public class TurfInfos {
 	private Integer coupleTwoOrThree;
 	
 	private Integer chevalTwoOrThreeHippo;
+	
+	private Integer ranking;
+	
+	private Double liveOdd;
+	
+	private Boolean isRunning;
 
 
 	public TurfInfos(Long id, String jour, String R, Integer C, Integer numcourse, Integer numero, String cheval,
@@ -208,7 +214,8 @@ public class TurfInfos {
 			String nbrCourseEntHippo, Integer tayProno, String typec, String entraineur, Double notePercentageParameter,
 			String cl, Integer clInt, Double cotedirect, String tableId, boolean blinkersFirstTime, boolean noShoesFirstTime,
 			boolean protectionFirstTime, String raceSpecialty, String distanceAndSpecialtyChrono, String reunionstring, String libel_hippo,
-			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo, Integer nbVictChevalHippo) {
+			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo, Integer nbVictChevalHippo,
+			Integer ranking, Double liveOdd, Boolean isRunning) {
 		
 		this.id = id;
 		this.R = R;
@@ -250,6 +257,9 @@ public class TurfInfos {
 		this.chevalTwoOrThreeHippo = chevalTwoOrThreeHippo;
 		this.nbVictChevalHippo = nbVictChevalHippo;
 		this.pourcPlaceCheval = pourcPlaceCheval;
+		this.ranking = ranking;
+		this.liveOdd = liveOdd;
+		this.isRunning = isRunning;
 
 
 
@@ -663,6 +673,30 @@ public class TurfInfos {
 
 	public void setPourcPlaceCheval(Double pourcPlaceCheval) {
 		this.pourcPlaceCheval = Precision.round(pourcPlaceCheval, 2);
+	}
+
+	public Integer getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(Integer ranking) {
+		this.ranking = ranking;
+	}
+
+	public Double getLiveOdd() {
+		return liveOdd;
+	}
+
+	public void setLiveOdd(Double liveOdd) {
+		this.liveOdd = liveOdd;
+	}
+
+	public Boolean isRunning() {
+		return isRunning;
+	}
+
+	public void setRunning(Boolean isRunning) {
+		this.isRunning = isRunning;
 	}
 
 }

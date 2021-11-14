@@ -180,7 +180,11 @@ public class UploadController {
     	model.addAttribute("recencemax", 60);
     	
     	//RACESLIST
-    	List<TurfInfos> allReunionInfos = turfInfosRepository.findAllByJourAndByReunionstring(jour, reunionstring);
+    	List<TurfInfos> allReunionInfos = turfInfosRepository.findAllByJourAndByReunionstring(jour, reunionstring)
+    			.stream()
+    			.filter(ti-> ti.isRunning() != null && ti.isRunning() == true)
+				.collect(Collectors.toList());
+    			
     	List<TurfInfos> reunionCracks = new ArrayList<>();
 
 
@@ -219,10 +223,9 @@ public class UploadController {
 					.collect(Collectors.toList());
 			
 			allraceInfos.forEach(ti-> {
-			       System.out.println(ti.getR()+ti.getC()+ "--" +ti.getRecence());
 			});
 			
-			createClassementList(allraceInfos);
+//			createClassementList(allraceInfos);
 			
 
 			
@@ -353,6 +356,12 @@ public class UploadController {
 //		        			for(TurfInfos info: listByChronoParisTurf) {
 //		        				System.out.println(info.getDistanceAndSpecialtyChrono());
 //		        			}
+			 
+			//CLASSEMENT A L'ARRIVEE
+				List<TurfInfos> listByRanking = allraceInfos.stream()
+						.filter(ti -> ti.getRanking()!= null && ti.getRanking()!= 0)
+						.sorted(Comparator.comparingInt(TurfInfos::getRanking))
+						.collect(Collectors.toList());
 			
 			//Calcul de la note
 			List<TurfInfos> listByNoteProno = calculateFinalNoteProno(allraceInfos,
@@ -428,11 +437,11 @@ public class UploadController {
 			
 			
 			
-			if(createClassementList(allraceInfos).size() < 8) {
-				model.addAttribute(numToString(num) + "classementlist", createClassementList(allraceInfos));
+			if(listByRanking.size() < 8) {
+				model.addAttribute(numToString(num) + "classementlist", listByRanking);
 			}
-			if(createClassementList(allraceInfos).size() >= 8){
-				model.addAttribute(numToString(num) + "classementlist", createClassementList(allraceInfos).subList(0, 8));
+			if(listByRanking.size() >= 8){
+				model.addAttribute(numToString(num) + "classementlist", listByRanking.subList(0, 8));
 			}
 						
 						
@@ -487,7 +496,7 @@ public class UploadController {
 		
 		////////////INFOS/////////////////
 		List<TurfInfos> crackList = reunionCracks.stream()
-		.filter(ti-> ti.getNoteProno()>= 52.5)
+		.filter(ti-> ti.getNoteProno()>= 30)
 		.sorted(Comparator.comparingDouble(TurfInfos::getNoteProno))
 		.collect(Collectors.toList());
 		Collections.reverse(crackList);
@@ -497,8 +506,8 @@ public class UploadController {
 //	         	ti.setNumero(Integer.valueOf("0"+ti.getNumero()));
 //	        }
 //           });
-  		model.addAttribute("cracklist", new ArrayList<>());
-//		model.addAttribute("cracklist", crackList);
+//  		model.addAttribute("cracklist", new ArrayList<>());
+		model.addAttribute("cracklist", crackList);
 		
 		//////////COUPLES DU JOUR//////////////
 		Set<String> cples = new HashSet<>();
@@ -527,8 +536,8 @@ public class UploadController {
 		List<String> couples = cples.stream()
 				.sorted()
 				.collect(Collectors.toList());
-  		model.addAttribute("couples", new ArrayList<>());
-//		model.addAttribute("couples", couples);
+//  		model.addAttribute("couples", new ArrayList<>());
+		model.addAttribute("couples", couples);
 		
 		
 
@@ -725,7 +734,6 @@ public class UploadController {
 			if(list.size() > 0 && i == 0) {
 				setPercentageParam(list.get(i), percentageParameter);
 				list.get(i).setNoteProno(list.get(i).getNoteProno() + list.get(i).getNotePercentageParameter() / 10 );
-				System.out.println(list.get(i).getNoteProno());
 			}	
 			
 			if(list.size() > 1 && i == 1) {
@@ -886,8 +894,6 @@ public class UploadController {
 		   if(listByEnt.size() > 1) {
 			   
 			   TurfInfos tinf = new TurfInfos();
-			   System.out.println(tinf.getNumeroString() + "     bbbbbbbbbbbbbbb");
-
 			   
 			   tinf.setNumeroString("[" + listByEnt.get(0).getNumero().toString());
 			   if(listByEnt.get(0).getPourcPlaceEntHippo()!=null) {
@@ -901,7 +907,6 @@ public class UploadController {
 			   for(int i =1; i<listByEnt.size(); i++) {
 				   
 				   tinf.setNumeroString(tinf.getNumeroString() + ", " + listByEnt.get(i).getNumero().toString());
-				   System.out.println(tinf.getNumeroString() + "     bbbbbbbbbbbbbbb");
 			   }
 			   tinf.setNumeroString(tinf.getNumeroString() + "]");
 
@@ -912,119 +917,120 @@ public class UploadController {
 	   return newList;
    }
    
-   private List<TurfInfos> createClassementList(List<TurfInfos> allraceInfos){
-
-	   LinkedList<TurfInfos> list = new LinkedList<>();
-	   
-
-	   for(TurfInfos t: allraceInfos) {
-//			System.out.println(t.getCl());
-		   
-			if(t.getCl().equals("1er")) {
-				t.setClInt(1);
-				list.add(t);
-			}
-			if(t.getCl().equals("2e")) {
-				t.setClInt(2);
-				list.add(t);
-
-			}
-			if(t.getCl().equals("3e")) {
-				t.setClInt(3);
-				list.add(t);
-
-			}
-			if(t.getCl().equals("4e")) {
-				t.setClInt(4);
-				list.add(t);
-
-			}
-			if(t.getCl().equals("5e")) {
-				t.setClInt(5);
-				list.add(t);
-
-			}
-			if(t.getCl().equals("6e")) {
-				t.setClInt(6);
-				list.add(t);
-
-			}
-			if(t.getCl().equals("7e")) {
-				t.setClInt(7);
-				list.add(t);
-
-			}
-			if(t.getCl().equals("8e")) {
-				t.setClInt(8);
-				list.add(t);
-
-			}
-			if(t.getCl().equals("9e")) {
-				t.setClInt(9);
-				list.add(t);
-
-			}
-			if(t.getCl().equals("10e")) {
-				t.setClInt(10);
-				list.add(t);
-			}
-			if(t.getCl().equals("11e")) {
-				t.setClInt(11);
-				list.add(t);
-			}
-			if(t.getCl().equals("12e")) {
-				t.setClInt(12);
-				list.add(t);
-			}
-			if(t.getCl().equals("13e")) {
-				t.setClInt(13);
-				list.add(t);
-
-			}
-			if(t.getCl().equals("14e")) {
-				t.setClInt(14);
-				list.add(t);
-			}
-			if(t.getCl().equals("15e")) {
-				t.setClInt(15);
-				list.add(t);
-			}
-			if(t.getCl().equals("16e")) {
-				t.setClInt(16);
-				list.add(t);
-			}
-			if(t.getCl().equals("17e")) {
-				t.setClInt(17);
-				list.add(t);
-			}
-			if(t.getCl().equals("18e")) {
-				t.setClInt(18);
-				list.add(t);
-			}
-			if(t.getCl().equals("19e")) {
-				t.setClInt(19);
-				list.add(t);
-			}
-			if(t.getCl().equals("20e")) {
-				t.setClInt(20);
-				list.add(t);
-			}
-		}
-	   
-	   List<TurfInfos> listByCl =  list.stream()
-				.filter(ti -> ti.getClInt()!= null)
-				.sorted(Comparator.comparingInt(TurfInfos::getClInt))
-				.collect(Collectors.toList());
-	   
+//   private List<TurfInfos> createClassementList(List<TurfInfos> allraceInfos){
+//
+//	   LinkedList<TurfInfos> list = new LinkedList<>();
+//	   
+//
+//	   for(TurfInfos t: allraceInfos) {
+////			System.out.println(t.getCl());
+//		   
+//			if(t.getRanking() == 1) {
+//				t.setRanking(1);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 2) {
+//				t.setRanking(2);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 3) {
+//				t.setRanking(3);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 4) {
+//				t.setRanking(4);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 5) {
+//				t.setRanking(5);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 6) {
+//				t.setRanking(6);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 7) {
+//				t.setRanking(7);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 8) {
+//				t.setRanking(8);
+//				list.add(t);
+//
+//			}
+//			
+//			if(t.getCl().equals("9e")) {
+//				t.setClInt(9);
+//				list.add(t);
+//
+//			}
+//			if(t.getCl().equals("10e")) {
+//				t.setClInt(10);
+//				list.add(t);
+//			}
+//			if(t.getCl().equals("11e")) {
+//				t.setClInt(11);
+//				list.add(t);
+//			}
+//			if(t.getCl().equals("12e")) {
+//				t.setClInt(12);
+//				list.add(t);
+//			}
+//			if(t.getCl().equals("13e")) {
+//				t.setClInt(13);
+//				list.add(t);
+//
+//			}
+//			if(t.getCl().equals("14e")) {
+//				t.setClInt(14);
+//				list.add(t);
+//			}
+//			if(t.getCl().equals("15e")) {
+//				t.setClInt(15);
+//				list.add(t);
+//			}
+//			if(t.getCl().equals("16e")) {
+//				t.setClInt(16);
+//				list.add(t);
+//			}
+//			if(t.getCl().equals("17e")) {
+//				t.setClInt(17);
+//				list.add(t);
+//			}
+//			if(t.getCl().equals("18e")) {
+//				t.setClInt(18);
+//				list.add(t);
+//			}
+//			if(t.getCl().equals("19e")) {
+//				t.setClInt(19);
+//				list.add(t);
+//			}
+//			if(t.getCl().equals("20e")) {
+//				t.setClInt(20);
+//				list.add(t);
+//			}
+//		}
+//	   
+//	   List<TurfInfos> listByCl =  list.stream()
+//				.filter(ti -> ti.getClInt()!= null)
+//				.sorted(Comparator.comparingInt(TurfInfos::getClInt))
+//				.collect(Collectors.toList());
+//	   
 //	   for(TurfInfos t: listByCl) {
 //		   System.out.println(t.getClInt());
 ////		   System.out.println(t.getCl());
 //
 //	   }
 //		System.out.println("Stop");
-	   
-	   return listByCl;
-   }
+//	   
+//	   return listByCl;
+//   }
    
    private void navbarInfos(Model model) {
 	   
