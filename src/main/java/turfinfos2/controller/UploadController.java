@@ -502,6 +502,7 @@ public class UploadController {
 //					distinctNumsCheval = new LinkedHashSet<>(listNums);
 			
 			model.addAttribute(numToString(num) + "horses", listByNumCheval);
+			model.addAttribute(numToString(num) + "numcourse", allraceInfos.get(0).getNumcourse());
 						
 		}
 		

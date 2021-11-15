@@ -1446,12 +1446,14 @@
   </a>
 <!-- </p> -->
 
-<div th:fragment="taypronos-dropdownsone(racehorses)" class="collapse dropdownborder" id="taycollapseExample1">
+<div th:fragment="taypronos-dropdownsone(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample1">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
   <h1 style="margin-bottom: 10px;">Tay'Prono</h1> 
- 
+  
+  <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
       <select class="form-control" name="one">
@@ -1563,11 +1565,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownstwo(racehorses)" class="collapse dropdownborder" id="taycollapseExample2">
+<div th:fragment="taypronos-dropdownstwo(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample2">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+     <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
@@ -1640,11 +1644,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownsthree(racehorses)" class="collapse dropdownborder" id="taycollapseExample3">
+<div th:fragment="taypronos-dropdownsthree(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample3">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+        <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
@@ -1717,11 +1723,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownsfour(racehorses)" class="collapse dropdownborder" id="taycollapseExample4">
+<div th:fragment="taypronos-dropdownsfour(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample4">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+        <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
@@ -1794,11 +1802,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownsfive(racehorses)" class="collapse dropdownborder" id="taycollapseExample5">
+<div th:fragment="taypronos-dropdownsfive(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample5">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+        <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
@@ -1871,11 +1881,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownssix(racehorses)" class="collapse dropdownborder" id="taycollapseExample6">
+<div th:fragment="taypronos-dropdownssix(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample6">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+        <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
@@ -1948,11 +1960,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownsseven(racehorses)" class="collapse dropdownborder" id="taycollapseExample7">
+<div th:fragment="taypronos-dropdownsseven(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample7">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+        <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
@@ -2025,11 +2039,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownseight(racehorses)" class="collapse dropdownborder" id="taycollapseExample8">
+<div th:fragment="taypronos-dropdownseight(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample8">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+        <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
@@ -2102,11 +2118,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownsnine(racehorses)" class="collapse dropdownborder" id="taycollapseExample9">
+<div th:fragment="taypronos-dropdownsnine(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample9">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+        <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
@@ -2179,11 +2197,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownsten(racehorses)" class="collapse dropdownborder" id="taycollapseExample10">
+<div th:fragment="taypronos-dropdownsten(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample10">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+        <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
@@ -2256,11 +2276,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownseleven(racehorses)" class="collapse dropdownborder" id="taycollapseExample11">
+<div th:fragment="taypronos-dropdownseleven(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample11">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+        <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>
@@ -2333,11 +2355,13 @@
   </a>
 </p>
 
-<div th:fragment="taypronos-dropdownstwelve(racehorses)" class="collapse dropdownborder" id="taycollapseExample12">
+<div th:fragment="taypronos-dropdownstwelve(racehorses, numcourse)" class="collapse dropdownborder" id="taycollapseExample12">
 
  <form th:action="@{set-tay-pronos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" method="POST">
  
    <h1 style="margin-bottom: 10px;">Tay'Prono</h1>
+        <input name="numcourse" type="hidden" th:value="${numcourse}"> 
+   
   
   <div class="form-group col-md-4">
       <label for="">1er Cheval</label>

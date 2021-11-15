@@ -113,14 +113,14 @@ table{
 }
 #info{
     margin-bottom: 8px;
-    margin-left: 75px;
+/*     margin-left: 75px; */
 	
 }
 
 #info div{
     float: left;
-    line-height: 22px;
-    margin-right: 6px;
+/*     line-height: 22px; */
+/*     margin-right: 6px; */
     
 }
 .clear{
