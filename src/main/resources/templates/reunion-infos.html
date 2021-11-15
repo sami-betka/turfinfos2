@@ -50,7 +50,13 @@
 <h5 style="border-bottom: 1px solid black; padding-bottom: 2px;">Couplés du jour R[[${reunionstring}]] (+30pts):</h5>
   <p th:each="c : ${couples}"><strong>[[${c}]]</strong></p>
 </div> 
-</div>     
+</div>  
+
+<div th:if="${#maps.size(taypronos) gt 0}" class="" style="border: 3px solid blue; width: 220px; padding: 10px; margin-bottom: 5px; background-color: white;">
+<h5 style="border-bottom: 1px solid black; padding-bottom: 2px;">TayPronos du jour R[[${reunionstring}]]</h5>
+  <p th:each="entry : ${taypronos}"><strong>[[${entry.key}]]) [[${entry.value}]]</strong></p>
+</div> 
+</div>    
        
 <!-- <div style="text-align: center;" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"> -->
 <!--   <div th:each="r: ${reusofday}" class="btn-group mr-2" role="group" aria-label="First group"> -->
@@ -129,12 +135,7 @@
                     <th scope="" class="">Le Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${onepronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                     </tr>
-                    
-                     <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${onetaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                    
+                                    
                      <tr class="chronoscolor" th:if="${#lists.size(oneclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${oneclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -251,12 +252,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${twopronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${twotaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                    
+                                  
                      <tr class="chronoscolor" th:if="${#lists.size(twoclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${twoclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -375,12 +371,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${threepronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${threetaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                    
+                 
                      <tr class="chronoscolor" th:if="${#lists.size(threeclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${threeclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -496,12 +487,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${fourpronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${fourtaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                    
+                
                      <tr class="chronoscolor" th:if="${#lists.size(fourclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${fourclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -617,12 +603,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${fivepronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${fivetaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                    
+                
                      <tr class="chronoscolor" th:if="${#lists.size(fiveclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${fiveclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -735,12 +716,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${sixpronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${sixtaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                    
+               
                      <tr class="chronoscolor" th:if="${#lists.size(sixclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${sixclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -853,12 +829,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${sevenpronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${seventaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                     
+                
                      <tr class="chronoscolor" th:if="${#lists.size(sevenclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${sevenclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -971,12 +942,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${eightpronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${eighttaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                     
+                
                      <tr class="chronoscolor" th:if="${#lists.size(eightclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${eightclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -1090,12 +1056,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${ninepronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${ninetaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                     
+               
                      <tr class="chronoscolor" th:if="${#lists.size(nineclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${nineclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -1208,12 +1169,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${tenpronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${tentaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                     
+                  
                      <tr class="chronoscolor" th:if="${#lists.size(tenclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${tenclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -1327,12 +1283,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${elevenpronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${eleventaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                     
+                 
                      <tr class="chronoscolor" th:if="${#lists.size(elevenclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${elevenclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>
@@ -1446,12 +1397,7 @@
                     <th scope="">Prono:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${twelvepronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
-                   
-                    <tr class="chronoscolor">
-                    <th scope="" class="">Le Tay'Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${twelvetaypronoslist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]]) </p></td>
-                    </tr>
-                     
+                 
                      <tr class="chronoscolor" th:if="${#lists.size(twelveclassementlist) gt 0}">
                     <th scope="" class="">Arrivée:</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${twelveclassementlist}" ><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.liveOdd}]]/1) </p></td>

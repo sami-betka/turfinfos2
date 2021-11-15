@@ -9,10 +9,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -186,7 +188,7 @@ public class UploadController {
 				.collect(Collectors.toList());
     			
     	List<TurfInfos> reunionCracks = new ArrayList<>();
-
+    	Map<String, String> tayPronos = new HashMap<>();
 
     	
     	//biglist
@@ -342,6 +344,15 @@ public class UploadController {
 					.collect(Collectors.toList());
 //			Collections.reverse(listBypvch);
 			
+			if(listByTayPronos.size()>0) {
+			            String prono = "";	
+                        for(TurfInfos info : listByTayPronos) {
+    			            prono = prono + " - " + info.getNumero();
+                        }
+                        String result = prono.substring(3);
+						System.out.println(result + "PRONO C " +num);
+			tayPronos.put("C" + num, result);
+			}
 			//list par chrono Paris turf
 //			List<TurfInfos> listByChronoParisTurf = allraceInfos.stream()
 //					.filter(ti -> ti.getDistanceAndSpecialtyChrono()!= null)
@@ -538,6 +549,8 @@ public class UploadController {
 				.collect(Collectors.toList());
 //  		model.addAttribute("couples", new ArrayList<>());
 		model.addAttribute("couples", couples);
+		
+		model.addAttribute("taypronos", tayPronos);
 		
 		
 

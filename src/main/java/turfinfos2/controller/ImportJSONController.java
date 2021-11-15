@@ -45,6 +45,8 @@ public class ImportJSONController {
 				node = new ObjectMapper().readTree(new URL(url));
 				
 				if(node.get("pageProps") == null) {
+					System.out.println("Aspi");
+
 					jour = node.get(0).get("numcourse").get("jour").textValue();
 					importJSONService.createAllDayInfosFromAspiJson(url);
 					navbarInfos(model);
