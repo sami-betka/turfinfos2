@@ -195,7 +195,7 @@ public class ImportJSONService {
 	            	
 	            	}
 	            	
-	                System.out.println(turfInfo.getRanking());
+	                System.out.println(i);
 	                
 	            	turfInfoService.setMadeUpParams(turfInfo);
                 	if(!allNumCourses.contains(turfInfo.getNumcourse())) {

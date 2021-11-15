@@ -924,11 +924,15 @@ public class UploadController {
 			   }
 			   tinf.setNumeroString(tinf.getNumeroString() + "]");
 
+			   
 			   newList.add(tinf);
 		   }
 	   }
+	   List<TurfInfos> reverseList = newList.stream().sorted(Comparator.comparingDouble(TurfInfos::getPourcVictEntHippo)).collect(Collectors.toList());
+	   Collections.reverse(reverseList);
+
 	   
-	   return newList;
+	   return reverseList;
    }
    
 //   private List<TurfInfos> createClassementList(List<TurfInfos> allraceInfos){
