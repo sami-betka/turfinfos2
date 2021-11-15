@@ -79,6 +79,7 @@ table{
 
 .recence{
 	background-color: #DCDCDC;
+	color:red;
 }
 
 .divrace{
@@ -125,6 +126,13 @@ table{
 }
 .clear{
     clear: both;
+}
+.inprono{
+/* 	border: 1px solid; */
+/* 	border-radius: 50px; */
+/* 	border-color: green; */
+background-color: #90EE90;
+/* 	color: white; */
 }
 
 .dropdownborder{

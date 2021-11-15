@@ -29,7 +29,7 @@
      <br>
    
   <div th:each="reunion : ${reunions}" class="btn-group mr-2" role="group" aria-label="First group">
-   <a th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" type="button" class="btn btn-secondary" th:text="${reunion}"></a>
+   <a style="margin: 1px;" th:href="@{/reunion-infos?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunion})}" type="button" class="btn btn-secondary" th:text="${reunion}"></a>
   </div>
   
   
