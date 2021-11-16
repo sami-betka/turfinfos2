@@ -23,6 +23,20 @@
 		<i data-feather="arrow-up"></i>
 	</button>
 	</div>
+	
+<!-- 	///////////ICONS PMU BET TYPE///////////// -->
+
+<div th:fragment="bettypes(runners, istqq, ispick5)">
+                <div style="margin-bottom: 5px;" th:if="${runners gt 4 and runners lt 8}"><img th:src="@{img/minisuper4.png}" style="height: 35px;"> </div>
+                <div style="margin-bottom: 5px;" th:if="${runners gt 7 and runners lt 10}"><img th:src="@{img/super4.png}" style="height: 35px;"> </div>
+                <div style="margin-bottom: 5px;" th:if="${istqq and runners lt 14}"><img th:src="@{img/miniquinte.png}" style="height: 35px;"> </div>
+                <div style="margin-bottom: 5px;" th:if="${istqq and runners gt 13}"><img th:src="@{img/quinte.png}" style="height: 35px;"> </div>
+                <div style="margin-bottom: 5px;" th:if="${ispick5 and runners lt 14}"><img th:src="@{img/minipick5.png}" style="height: 35px;"> </div>
+                <div style="margin-bottom: 5px;" th:if="${ispick5 and runners gt 13}"><img th:src="@{img/pick5.png}" style="height: 35px;"> </div>
+                   <div style="margin-bottom: 5px;" th:if="${istqq eq false and ispick5 eq false and runners gt 9 and runners lt 14}"><img th:src="@{img/minimulti.png}" style="height: 35px;"> </div>
+                   <div style="margin-bottom: 5px;" th:if="${istqq eq false and ispick5 eq false and runners gt 13}"><img th:src="@{img/multi.png}" style="height: 35px;"> </div>
+                   
+</div>
   
   
   <!--             //First Collapse chronos BEGIN-->

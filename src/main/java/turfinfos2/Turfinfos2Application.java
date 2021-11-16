@@ -1,9 +1,12 @@
 package turfinfos2;
 
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.TurfInfosRepository;
 
 @SpringBootApplication
@@ -42,8 +45,23 @@ public class Turfinfos2Application {
 //		}
 		
 //		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
-	
-
+//	
+//        List<TurfInfos> all = turfInfosRepository.findAll();
+//        
+//        all.forEach(ti-> {
+//        	if(ti.getNumberOfInitialRunners() == null) {
+//        		ti.setNumberOfInitialRunners(0);
+//        	}
+//        	if(ti.getIsTQQ() == null) {
+//        		ti.setIsTQQ(false);
+//        	}
+//        	if(ti.getIsPick5() == null) {
+//        		ti.setIsPick5(false);
+//        	}
+//        	
+//        	turfInfosRepository.save(ti);
+//        });
+//        System.out.println("STOP");
 		
 //		ImportJSONService service = ctx.getBean(ImportJSONService.class);
 //		service.createAllRaceInfosFromJson();

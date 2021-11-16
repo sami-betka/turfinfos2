@@ -55,8 +55,13 @@ public class ImportJSONService {
 				
 //	            Lister les ids des réunions
 //				  Et infos réunions
-//				String numberofRunners = node.get("pageProps").get("race").get("numberOfInitialRunners").textValue();
-				Integer numberofRunners = node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).size();
+            	Integer numberofRunners = null;
+            	if(node.get("pageProps").get("race").get("numberOfInitialRunners") != null) {
+				numberofRunners = Integer.valueOf(node.get("pageProps").get("race").get("numberOfInitialRunners").textValue());
+            	}else {
+    				numberofRunners = node.get("pageProps").get("race").get("numberOfRunners").intValue();
+//				numberofRunners = node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).size();
+            	}
 
 	            List<TurfInfos> byRace = new ArrayList<>();
 	            

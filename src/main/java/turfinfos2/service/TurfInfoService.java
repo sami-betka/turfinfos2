@@ -132,6 +132,7 @@ public class TurfInfoService {
     	infoToUpdate.setRanking(info.getRanking());
     	infoToUpdate.setLiveOdd(info.getLiveOdd());
     	infoToUpdate.setIsRunning(info.getIsRunning());
+    	
     	infoToUpdate.setIsTQQ(info.getIsTQQ());
     	infoToUpdate.setNumberOfInitialRunners(info.getNumberOfInitialRunners());
     	infoToUpdate.setIsPick5(info.getIsPick5());
