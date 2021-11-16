@@ -182,20 +182,18 @@ public class UploadController {
     	model.addAttribute("recencemax", 60);
     	
     	//RACESLIST
-    	List<TurfInfos> allReunionInfos = turfInfosRepository.findAllByJourAndByReunionstring(jour, reunionstring)
+    	List<TurfInfos> allPremiumReunionInfos = turfInfosRepository.findAllByJourAndByReunionstring(jour, reunionstring)
     			.stream()
-    			.filter(ti-> ti.getIsRunning() != null && ti.getIsRunning() == true)
+    			.filter(ti-> ti.getIsRunning() != null && ti.getIsRunning() == true && ti.getIsPremium().equals(true))
 				.collect(Collectors.toList());
     			
     	List<TurfInfos> reunionCracks = new ArrayList<>();
     	Map<String, String> tayPronos = new HashMap<>();
 
     	
-    	//biglist
-//		LinkedList<LinkedList<TurfInfos>> biglist = new LinkedList<LinkedList<TurfInfos>>();
 
     	//Num des courses
-		Set<Integer> distinctNumraces = allReunionInfos.stream()
+		Set<Integer> distinctNumraces = allPremiumReunionInfos.stream()
 		.map(TurfInfos :: getC)
 		.sorted()
 		.collect(Collectors.toSet());
@@ -219,7 +217,7 @@ public class UploadController {
 					
 			//Infos de la course en question
 			allraceInfos = 
-					allReunionInfos
+					allPremiumReunionInfos
 					.stream()
 					.filter(ti -> ti.getC().equals(num))
 					.collect(Collectors.toList());
@@ -229,6 +227,9 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "ispick5", allraceInfos.get(0).getIsPick5());
 			model.addAttribute(numToString(num) + "istqq", allraceInfos.get(0).getIsTQQ());
 			model.addAttribute(numToString(num) + "runners", allraceInfos.get(0).getNumberOfInitialRunners());
+			model.addAttribute(numToString(num) + "caraList", allraceInfos.get(0).getCaraList1() + " - " + allraceInfos.get(0).getCaraList2());
+			model.addAttribute(numToString(num) + "hasbettypes", allraceInfos.get(0).getHasBetTypes());
+
 
 //			});
 			

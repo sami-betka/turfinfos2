@@ -108,7 +108,6 @@ public class TurfInfoService {
     	infoToUpdate.setTxVictCoupleHippo(info.getTxVictCoupleHippo());
     	}
     	
-    	infoToUpdate.setCoursescheval(info.getCoursescheval());
     	infoToUpdate.setPourcPlaceCheval(info.getPourcPlaceCheval());
 
 //    	infoToUpdate.setCoursesentraineur(info.getCoursesentraineur());
@@ -118,24 +117,40 @@ public class TurfInfoService {
     	infoToUpdate.setNbrCourseChevalHippo(info.getNbrCourseChevalHippo());
     	infoToUpdate.setNbrCourseJockHippo(info.getNbrCourseJockHippo());
     	infoToUpdate.setNbrCourseEntHippo(info.getNbrCourseEntHippo());
+    	
+    	infoToUpdate.setChevalTwoOrThreeHippo(info.getChevalTwoOrThreeHippo());
+    	infoToUpdate.setNbVictChevalHippo(info.getNbVictChevalHippo());
 //    	infoToUpdate.setNbCourseCoupleHippo(info.getNbCourseCoupleHippo());
+    	
+    	
+    	} //////////STATS END
+    	
+    	
 //    	infoToUpdate.setTypec(info.getTypec());
 
 //    	infoToUpdate.setCotedirect(info.getCotedirect());
-    	
+    	infoToUpdate.setCoursescheval(info.getCoursescheval());
+
     	infoToUpdate.setBlinkersFirstTime(info.isBlinkersFirstTime());
     	infoToUpdate.setNoShoesFirstTime(info.isNoShoesFirstTime());
     	infoToUpdate.setProtectionFirstTime(info.isProtectionFirstTime());
     	
-    	infoToUpdate.setChevalTwoOrThreeHippo(info.getChevalTwoOrThreeHippo());
-    	infoToUpdate.setNbVictChevalHippo(info.getNbVictChevalHippo());
+    	
     	infoToUpdate.setRanking(info.getRanking());
     	infoToUpdate.setLiveOdd(info.getLiveOdd());
     	infoToUpdate.setIsRunning(info.getIsRunning());
-    	
     	infoToUpdate.setIsTQQ(info.getIsTQQ());
     	infoToUpdate.setNumberOfInitialRunners(info.getNumberOfInitialRunners());
     	infoToUpdate.setIsPick5(info.getIsPick5());
+    	
+    	infoToUpdate.setCaraList1(info.getCaraList1());
+    	infoToUpdate.setCaraList2(info.getCaraList2());
+    	infoToUpdate.setIsPremium(info.getIsPremium());
+    	
+    	infoToUpdate.setHasBetTypes(info.getHasBetTypes());
+
+
+
 
 
 
@@ -146,9 +161,9 @@ public class TurfInfoService {
 //    	infoToUpdate.setNoteProno(null);
 //    	infoToUpdate.setChrono(info.getChrono());
 //    	infoToUpdate.setNumeroString(info.getNumero().toString());
-    	turfInfosRepository.save(infoToUpdate);
     	 
-    	}
+    	turfInfosRepository.save(infoToUpdate);
+
     }
     
     public void updateFromAspiJSON(TurfInfos info, TurfInfos infoToUpdate) {

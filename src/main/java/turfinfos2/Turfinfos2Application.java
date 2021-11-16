@@ -44,24 +44,39 @@ public class Turfinfos2Application {
 //			userRoleRepository.save(userRole);
 //		}
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 //		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
-//	
+//
+//		
+//		
 //        List<TurfInfos> all = turfInfosRepository.findAll();
 //        
 //        all.forEach(ti-> {
-//        	if(ti.getNumberOfInitialRunners() == null) {
-//        		ti.setNumberOfInitialRunners(0);
-//        	}
-//        	if(ti.getIsTQQ() == null) {
-//        		ti.setIsTQQ(false);
-//        	}
-//        	if(ti.getIsPick5() == null) {
-//        		ti.setIsPick5(false);
-//        	}
 //        	
-//        	turfInfosRepository.save(ti);
+//        	if(ti.getHasBetTypes() == null) {
+//        		ti.setHasBetTypes(false);
+//            	turfInfosRepository.save(ti);
+//        	}
+//        
 //        });
 //        System.out.println("STOP");
+		
+		
+		
+		
+		
 		
 //		ImportJSONService service = ctx.getBean(ImportJSONService.class);
 //		service.createAllRaceInfosFromJson();

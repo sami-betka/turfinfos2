@@ -62,9 +62,11 @@ public class ImportJSONService {
     				numberofRunners = node.get("pageProps").get("race").get("numberOfRunners").intValue();
 //				numberofRunners = node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).size();
             	}
-
-	            List<TurfInfos> byRace = new ArrayList<>();
-	            
+            	
+            
+            		System.out.println(numberofRunners + "" + numcourse);
+                    
+            		
 	            for(int i= 0; i<numberofRunners; i++) {
 	            	TurfInfos turfInfo = new TurfInfos();
 	            	turfInfo.setJour(jour);
@@ -135,6 +137,8 @@ public class ImportJSONService {
 		                turfInfo.setNumberOfInitialRunners(numberofRunners);
 
 		                if(node.get("pageProps").get("race").get("operatorBetTypes") != null && node.get("pageProps").get("race").get("operatorBetTypes").size() >0 && node.get("pageProps").get("race").get("operatorBetTypes").get("PMU") != null && node.get("pageProps").get("race").get("operatorBetTypes").get("PMU").size() >0) {
+			                turfInfo.setHasBetTypes(true);
+
 			                List<String>strs = new ArrayList<>();
 			                for(int j=0; j< node.get("pageProps").get("race").get("operatorBetTypes").get("PMU").size(); j++) {
 			                	
@@ -142,12 +146,24 @@ public class ImportJSONService {
 			                }
 			                for(String str : strs) {
 				                turfInfo.setIsPick5(false);
-			                	if(str == "PK5") {
+			                	if(str != null && str.equals("PK5")) {
 					                turfInfo.setIsPick5(true);
 			                	}
 			                }
 
 			                }
+		                else {
+				                turfInfo.setIsPick5(false);
+				                turfInfo.setHasBetTypes(false);
+
+			                }
+		                
+		                turfInfo.setCaraList1(node.get("pageProps").get("race").get("caraList1").textValue());
+		                turfInfo.setCaraList2(node.get("pageProps").get("race").get("caraList2").textValue());
+		                
+		                turfInfo.setIsPremium(node.get("pageProps").get("race").get("isPremium").booleanValue());
+
+
 
 	            	
 	            	}else {
@@ -213,6 +229,8 @@ public class ImportJSONService {
 		                turfInfo.setNumberOfInitialRunners(numberofRunners);
 
 		                if(node.get("pageProps").get("race").get("operatorBetTypes") != null && node.get("pageProps").get("race").get("operatorBetTypes").size() >0 && node.get("pageProps").get("race").get("operatorBetTypes").get("PMU") != null && node.get("pageProps").get("race").get("operatorBetTypes").get("PMU").size() >0) {
+			                turfInfo.setHasBetTypes(true);
+
 			                List<String>strs = new ArrayList<>();
 			                for(int j=0; j< node.get("pageProps").get("race").get("operatorBetTypes").get("PMU").size(); j++) {
 			                	
@@ -220,20 +238,27 @@ public class ImportJSONService {
 			                }
 			                for(String str : strs) {
 				                turfInfo.setIsPick5(false);
-			                	if(str == "PK5") {
+			                	if(str != null && str.equals("PK5")) {
 					                turfInfo.setIsPick5(true);
 			                	}
 			                }
+			                } else {
+				                turfInfo.setIsPick5(false);
+				                turfInfo.setHasBetTypes(false);
 
 			                }
 
-	                	
+		                turfInfo.setCaraList1(node.get("pageProps").get("race").get("caraList1").textValue());
+		                turfInfo.setCaraList2(node.get("pageProps").get("race").get("caraList2").textValue());
+		                
+		                turfInfo.setIsPremium(node.get("pageProps").get("race").get("isPremium").booleanValue());
+
 
 	            	
 	            	}
 	            	
-	                System.out.println(i);
-	                System.out.println("R" + turfInfo.getR() + "C" + turfInfo.getC() );
+//	                System.out.println(iter);
+//	                System.out.println("R" + turfInfo.getR() + "C" + turfInfo.getC() );
 
 	                
 	            	turfInfoService.setMadeUpParams(turfInfo);
@@ -242,35 +267,13 @@ public class ImportJSONService {
                 	}
                 	if(allNumCourses.contains(turfInfo.getNumcourse())) {
                 		turfInfoService.updateFromParisTurfJSON(turfInfo, nulStats);
-                    	}	            }            
-	            
-	            //test affichage
-	            for(TurfInfos inf: byRace) {
-//	                System.out.println("R" + inf.getR() + "C" + inf.getC() );
-//	                System.out.println(inf.getTableId());
-////	                System.out.println(inf.getCoursescheval());
-//	                System.out.println(inf.getEntraineur());
-//	                System.out.println(inf.getNumcourse());
-//	                System.out.println(inf.getNumero());
-////	                System.out.println(inf.getTypec());
-//	                System.out.println(inf.getNbrCourseChevalHippo());
-//	                System.out.println(inf.getPourcVictChevalHippo());
-//	                System.out.println(inf.getPourcPlaceChevalHippo());
-//	                System.out.println(inf.getNbrCourseJockHippo());
-//	                System.out.println(inf.getPourcVictJockHippo());
-//	                System.out.println(inf.getPourcPlaceJockHippo());
-//	                System.out.println(inf.getNbrCourseEntHippo());
-//	                System.out.println(inf.getPourcVictEntHippo());
-//	                System.out.println(inf.getPourcPlaceEntHippo());
-//	                System.out.println(inf.getNbCourseCouple());
-//	                System.out.println(inf.getTxVictCouple());
-//	                System.out.println(inf.getTxPlaceCouple());
-//	                System.out.println(inf.getRaceSpecialty());
-//	                System.out.println(inf.getDistanceAndSpecialtyChrono());
+                    	}	           
+                	
+                	
+                	
+    	            //For LOOP END
 	            }
-	                     
-	 
-	            
+	                               
 
 			} catch (JsonProcessingException e) {
 				// TODO Auto-generated catch block
@@ -293,6 +296,7 @@ public class ImportJSONService {
 		String extension = ".json";
 
 		JsonNode node;
+		int iter = 0;
 		
 	    try {
 			node = new ObjectMapper().readTree(new URL(url));
@@ -302,13 +306,18 @@ public class ImportJSONService {
 			
 			for(int i= 0; i<numberofRaces; i++) {
 				
-				String uuid = node.get("pageProps").get("initialState").get("racecards").get("races").get(jour).get(i).get("uuid").textValue();
-				uuids.add(uuid);
+				if(node.get("pageProps").get("initialState").get("racecards").get("races").get(jour).get(i).get("isPremium").booleanValue() == true) {
+					String uuid = node.get("pageProps").get("initialState").get("racecards").get("races").get(jour).get(i).get("uuid").textValue();
+					uuids.add(uuid);
+				}
+			
 			}
 			for(String uuid: uuids) {
 				raceUuid = uuid;
 				String raceUrl = firstPartOfUrl + parisTurfId + thirdPartOfUrl + raceUuid + extension;
 				createAllRaceInfosFromParisTurfJson(raceUrl);
+				iter+=1;
+				System.out.println(iter + " / " + uuids.size());
 			}
 
 			

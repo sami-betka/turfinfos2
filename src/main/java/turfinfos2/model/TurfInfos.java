@@ -209,6 +209,18 @@ public class TurfInfos {
 	private Boolean isTQQ;
 	
 	private Boolean isPick5;
+	
+	
+	private String caraList1;
+	
+	private String caraList2;
+	
+	private Boolean isPremium;
+	
+	private Boolean hasBetTypes;
+
+
+
 
 
 
@@ -222,8 +234,8 @@ public class TurfInfos {
 			String cl, Integer clInt, Double cotedirect, String tableId, boolean blinkersFirstTime, boolean noShoesFirstTime,
 			boolean protectionFirstTime, String raceSpecialty, String distanceAndSpecialtyChrono, String reunionstring, String libel_hippo,
 			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo, Integer nbVictChevalHippo,
-			Integer ranking, Double liveOdd, Boolean isRunning, Integer numberOfInitialRunners, Boolean isTQQ, Boolean isPick5
-			) {
+			Integer ranking, Double liveOdd, Boolean isRunning, Integer numberOfInitialRunners, Boolean isTQQ, Boolean isPick5,
+			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes) {
 		
 		this.id = id;
 		this.R = R;
@@ -268,10 +280,15 @@ public class TurfInfos {
 		this.ranking = ranking;
 		this.liveOdd = liveOdd;
 		this.isRunning = isRunning;
-		
 		this.numberOfInitialRunners = numberOfInitialRunners;
 		this.isTQQ = isTQQ;
 		this.isPick5 = isPick5;
+		
+		this.caraList1 = caraList1;
+		this.caraList2 = caraList2;
+		
+		this.isPremium = isPremium;
+
 
 
 
@@ -286,6 +303,7 @@ public class TurfInfos {
 		this.notePercentageParameter = notePercentageParameter;
 		this.clInt = clInt;
 		this.tableId = tableId;
+		this.hasBetTypes = hasBetTypes;
 
 	}
 
@@ -734,6 +752,38 @@ public class TurfInfos {
 
 	public void setIsPick5(Boolean isPick5) {
 		this.isPick5 = isPick5;
+	}
+
+	public String getCaraList1() {
+		return caraList1;
+	}
+
+	public void setCaraList1(String caraList1) {
+		this.caraList1 = caraList1;
+	}
+
+	public String getCaraList2() {
+		return caraList2;
+	}
+
+	public void setCaraList2(String caraList2) {
+		this.caraList2 = caraList2;
+	}
+
+	public Boolean getIsPremium() {
+		return isPremium;
+	}
+
+	public void setIsPremium(Boolean isPremium) {
+		this.isPremium = isPremium;
+	}
+
+	public Boolean getHasBetTypes() {
+		return hasBetTypes;
+	}
+
+	public void setHasBetTypes(Boolean hasBetTypes) {
+		this.hasBetTypes = hasBetTypes;
 	}
 
 }
