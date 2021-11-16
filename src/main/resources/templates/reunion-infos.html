@@ -82,7 +82,21 @@
 			    <h4><span th:text="${onetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 			    
 				<div class="col-md-11 divrace">
-<!-- 				              <table class="" th:if="${status}"> -->
+
+
+<!--                 <div style="margin-bottom: 5px;" th:if="${onerunners gt 4 and onerunners lt 8}"><img th:src="@{img/minisuper4.png}" style="height: 35px;"> </div> -->
+<!--                 <div style="margin-bottom: 5px;" th:if="${onerunners gt 7 and onerunners lt 10}"><img th:src="@{img/super4.png}" style="height: 35px;"> </div> -->
+<!--                 <div style="margin-bottom: 5px;" th:if="${oneistqq and onerunners lt 14}"><img th:src="@{img/miniquinte.png}" style="height: 35px;"> </div> -->
+<!--                 <div style="margin-bottom: 5px;" th:if="${oneistqq and onerunners gt 13}"><img th:src="@{img/quinte.png}" style="height: 35px;"> </div> -->
+<!--                 <div style="margin-bottom: 5px;" th:if="${oneispick5 and onerunners lt 14}"><img th:src="@{img/minipick5.png}" style="height: 35px;"> </div> -->
+<!--                 <div style="margin-bottom: 5px;" th:if="${oneispick5 and onerunners gt 13}"><img th:src="@{img/pick5.png}" style="height: 35px;"> </div> -->
+<!--                    <div style="margin-bottom: 5px;" th:if="${oneistqq eq false and oneispick5 eq false and onerunners gt 9 and onerunners lt 14}"><img th:src="@{img/minimulti.png}" style="height: 35px;"> </div> -->
+<!--                    <div style="margin-bottom: 5px;" th:if="${oneistqq eq false and oneispick5 eq false and onerunners gt 13}"><img th:src="@{img/multi.png}" style="height: 35px;"> </div> -->
+                   
+                
+                
+                
+
                           <table id="tab1" class="table-sm table-striped table-responsive">
                           
                 <thead>       
@@ -200,7 +214,8 @@
 								<div th:if="${twoexists}" class="row" style="margin-bottom: 10px;">
 			    <h4><span th:text="${twotitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11 divrace">
-<!-- 				              <table class="" th:if="${status}"> -->
+
+          
                           <table id="tab2" class="table-sm table-striped table-responsive">
                           
                 <thead>       
@@ -435,7 +450,12 @@
 			<div th:if="${fourexists}" class="row" style="margin-bottom: 10px;">
 			    <h4><span th:text="${fourtitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11 divrace">
-<!-- 				              <table class="" th:if="${status}"> -->
+
+                <div style="margin-bottom: 5px;" th:if="${fouristqq eq false and fourrunners gt 4 and fourrunners lt 8}"><img th:src="@{img/minisuper4.png}" style="height: 35px;"> </div>
+                <div style="margin-bottom: 5px;" th:if="${fouristqq eq false and fourrunners gt 7 and fourrunners lt 10}"><img th:src="@{img/super4.png}" style="height: 35px;"> </div>
+                <div style="margin-bottom: 5px;" th:if="${fouristqq and fourrunners lt 14}"><img th:src="@{img/miniquinte.png}" style="height: 35px;"> </div>
+                <div style="margin-bottom: 5px;" th:if="${fouristqq and fourrunners gt 13}"><img th:src="@{img/quinte.png}" style="height: 35px;"> </div>
+
                           <table id="tab4" class="table-sm table-striped table-responsive">
                           
                 <thead>   
@@ -1345,7 +1365,7 @@
 			<div th:if="${twelveexists}" class="row" style="margin-bottom: 10px;">
 			    <h4><span th:text="${twelvetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11 divrace">
-<!-- 				              <table class="" th:if="${status}"> -->
+
                           <table id="tab12" class="table-sm table-striped table-responsive">
                           
                 <thead>   

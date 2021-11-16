@@ -184,7 +184,7 @@ public class UploadController {
     	//RACESLIST
     	List<TurfInfos> allReunionInfos = turfInfosRepository.findAllByJourAndByReunionstring(jour, reunionstring)
     			.stream()
-    			.filter(ti-> ti.isRunning() != null && ti.isRunning() == true)
+    			.filter(ti-> ti.getIsRunning() != null && ti.getIsRunning() == true)
 				.collect(Collectors.toList());
     			
     	List<TurfInfos> reunionCracks = new ArrayList<>();
@@ -224,8 +224,13 @@ public class UploadController {
 					.filter(ti -> ti.getC().equals(num))
 					.collect(Collectors.toList());
 			
-			allraceInfos.forEach(ti-> {
-			});
+			model.addAttribute("racesize", allraceInfos.size());
+			
+			model.addAttribute(numToString(num) + "ispick5", allraceInfos.get(0).getIsPick5());
+			model.addAttribute(numToString(num) + "istqq", allraceInfos.get(0).getIsTQQ());
+			model.addAttribute(numToString(num) + "runners", allraceInfos.get(0).getNumberOfInitialRunners());
+
+//			});
 			
 //			createClassementList(allraceInfos);
 			
@@ -389,8 +394,8 @@ public class UploadController {
 				    listBytxvh,
 				    listBytxph,
 				   
-				    listByChronos,
 				    listByppc,
+				    listByChronos,
 				    model)
 					
 					.stream()

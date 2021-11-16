@@ -131,7 +131,11 @@ public class TurfInfoService {
     	infoToUpdate.setNbVictChevalHippo(info.getNbVictChevalHippo());
     	infoToUpdate.setRanking(info.getRanking());
     	infoToUpdate.setLiveOdd(info.getLiveOdd());
-    	infoToUpdate.setRunning(info.isRunning());
+    	infoToUpdate.setIsRunning(info.getIsRunning());
+    	infoToUpdate.setIsTQQ(info.getIsTQQ());
+    	infoToUpdate.setNumberOfInitialRunners(info.getNumberOfInitialRunners());
+    	infoToUpdate.setIsPick5(info.getIsPick5());
+
 
 
 

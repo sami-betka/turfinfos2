@@ -203,6 +203,13 @@ public class TurfInfos {
 	private Double liveOdd;
 	
 	private Boolean isRunning;
+	
+	private Integer numberOfInitialRunners;
+	
+	private Boolean isTQQ;
+	
+	private Boolean isPick5;
+
 
 
 	public TurfInfos(Long id, String jour, String R, Integer C, Integer numcourse, Integer numero, String cheval,
@@ -215,7 +222,8 @@ public class TurfInfos {
 			String cl, Integer clInt, Double cotedirect, String tableId, boolean blinkersFirstTime, boolean noShoesFirstTime,
 			boolean protectionFirstTime, String raceSpecialty, String distanceAndSpecialtyChrono, String reunionstring, String libel_hippo,
 			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo, Integer nbVictChevalHippo,
-			Integer ranking, Double liveOdd, Boolean isRunning) {
+			Integer ranking, Double liveOdd, Boolean isRunning, Integer numberOfInitialRunners, Boolean isTQQ, Boolean isPick5
+			) {
 		
 		this.id = id;
 		this.R = R;
@@ -260,6 +268,11 @@ public class TurfInfos {
 		this.ranking = ranking;
 		this.liveOdd = liveOdd;
 		this.isRunning = isRunning;
+		
+		this.numberOfInitialRunners = numberOfInitialRunners;
+		this.isTQQ = isTQQ;
+		this.isPick5 = isPick5;
+
 
 
 
@@ -691,12 +704,36 @@ public class TurfInfos {
 		this.liveOdd = liveOdd;
 	}
 
-	public Boolean isRunning() {
+	public Integer getNumberOfInitialRunners() {
+		return numberOfInitialRunners;
+	}
+
+	public void setNumberOfInitialRunners(Integer numberOfInitialRunners) {
+		this.numberOfInitialRunners = numberOfInitialRunners;
+	}
+
+	public Boolean getIsTQQ() {
+		return isTQQ;
+	}
+
+	public void setIsTQQ(Boolean isTQQ) {
+		this.isTQQ = isTQQ;
+	}
+
+	public Boolean getIsRunning() {
 		return isRunning;
 	}
 
-	public void setRunning(Boolean isRunning) {
+	public void setIsRunning(Boolean isRunning) {
 		this.isRunning = isRunning;
+	}
+
+	public Boolean getIsPick5() {
+		return isPick5;
+	}
+
+	public void setIsPick5(Boolean isPick5) {
+		this.isPick5 = isPick5;
 	}
 
 }

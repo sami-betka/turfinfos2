@@ -125,8 +125,24 @@ public class ImportJSONService {
 	                   
 	                	turfInfo.setRanking(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("ranking").intValue());
 		                turfInfo.setLiveOdd(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("operatorOdds").get("PMU").get("liveOdd").doubleValue());
-		                turfInfo.setRunning(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("isRunning").booleanValue());
-	                	
+		                turfInfo.setIsRunning(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("isRunning").booleanValue());
+		                turfInfo.setIsTQQ(node.get("pageProps").get("race").get("isTQQ").booleanValue());
+		                turfInfo.setNumberOfInitialRunners(numberofRunners);
+
+		                if(node.get("pageProps").get("race").get("operatorBetTypes") != null && node.get("pageProps").get("race").get("operatorBetTypes").size() >0 && node.get("pageProps").get("race").get("operatorBetTypes").get("PMU") != null && node.get("pageProps").get("race").get("operatorBetTypes").get("PMU").size() >0) {
+			                List<String>strs = new ArrayList<>();
+			                for(int j=0; j< node.get("pageProps").get("race").get("operatorBetTypes").get("PMU").size(); j++) {
+			                	
+			                	strs.add(node.get("pageProps").get("race").get("operatorBetTypes").get("PMU").get(j).textValue());
+			                }
+			                for(String str : strs) {
+				                turfInfo.setIsPick5(false);
+			                	if(str == "PK5") {
+					                turfInfo.setIsPick5(true);
+			                	}
+			                }
+
+			                }
 
 	            	
 	            	}else {
@@ -187,8 +203,24 @@ public class ImportJSONService {
 		               
 	                	turfInfo.setRanking(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("ranking").intValue());
 		                turfInfo.setLiveOdd(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("operatorOdds").get("PMU").get("liveOdd").doubleValue());
-		                turfInfo.setRunning(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("isRunning").booleanValue());
+		                turfInfo.setIsRunning(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("isRunning").booleanValue());
+		                turfInfo.setIsTQQ(node.get("pageProps").get("race").get("isTQQ").booleanValue());
+		                turfInfo.setNumberOfInitialRunners(numberofRunners);
 
+		                if(node.get("pageProps").get("race").get("operatorBetTypes") != null && node.get("pageProps").get("race").get("operatorBetTypes").size() >0 && node.get("pageProps").get("race").get("operatorBetTypes").get("PMU") != null && node.get("pageProps").get("race").get("operatorBetTypes").get("PMU").size() >0) {
+			                List<String>strs = new ArrayList<>();
+			                for(int j=0; j< node.get("pageProps").get("race").get("operatorBetTypes").get("PMU").size(); j++) {
+			                	
+			                	strs.add(node.get("pageProps").get("race").get("operatorBetTypes").get("PMU").get(j).textValue());
+			                }
+			                for(String str : strs) {
+				                turfInfo.setIsPick5(false);
+			                	if(str == "PK5") {
+					                turfInfo.setIsPick5(true);
+			                	}
+			                }
+
+			                }
 
 	                	
 
@@ -196,6 +228,8 @@ public class ImportJSONService {
 	            	}
 	            	
 	                System.out.println(i);
+	                System.out.println("R" + turfInfo.getR() + "C" + turfInfo.getC() );
+
 	                
 	            	turfInfoService.setMadeUpParams(turfInfo);
                 	if(!allNumCourses.contains(turfInfo.getNumcourse())) {
