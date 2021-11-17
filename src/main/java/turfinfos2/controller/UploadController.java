@@ -271,7 +271,7 @@ public class UploadController {
 			
 			List<TurfInfos> listByppc = allraceInfos.stream()
 					.filter(ti -> ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval() != 0d)
-					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceCheval))
+					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceCheval).thenComparingInt(TurfInfos::getNumero))
 					.collect(Collectors.toList());
 			Collections.reverse(listByppc);
 						

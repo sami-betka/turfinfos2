@@ -22,3 +22,15 @@ function spinnerFunction() {
     textToHide.style.display = 'none';
     textToShow.style.display = '';
   }
+
+   //3//
+   function spinnerFunction3() {
+    var spinner = document.getElementById("mySpinner3");
+    var textToHide = document.getElementById("myTextToHide3");
+    var textToShow = document.getElementById("myTextToShow3");
+
+    spinner.classList.add("spinner-border");
+    spinner.classList.add("spinner-border-sm");
+    textToHide.style.display = 'none';
+    textToShow.style.display = '';
+  }

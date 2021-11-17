@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -287,7 +288,7 @@ public class ImportJSONService {
 		return fromRace;
 	}
 
-	public void createAllDayInfosFromParisTurfJson(String url) {
+	public void createAllDayInfosFromParisTurfJson(String url, Boolean isUpdate) {
 				
 		String firstPartOfUrl = "https://www.paris-turf.com/_next/data/";
 		String parisTurfId = "d7lsdp4kqsZsUGSJ5gBnM";
@@ -314,7 +315,12 @@ public class ImportJSONService {
 			for(String uuid: uuids) {
 				raceUuid = uuid;
 				String raceUrl = firstPartOfUrl + parisTurfId + thirdPartOfUrl + raceUuid + extension;
-				createAllRaceInfosFromParisTurfJson(raceUrl);
+				if(isUpdate.equals(false)) {
+					createAllRaceInfosFromParisTurfJson(raceUrl);
+				}
+				if(isUpdate.equals(true)) {
+					updateAllRaceInfosFromParisTurfJson(raceUrl);
+				}
 				iter+=1;
 				System.out.println(iter + " / " + uuids.size());
 			}
@@ -332,7 +338,103 @@ public class ImportJSONService {
 		
 	}
 	
-	public void createAllDayInfosFromAspiJson(String url) {
+	public void updateAllRaceInfosFromParisTurfJson(String url) {
+		
+    	List<TurfInfos> all = turfInfosRepository.findAll();
+
+	    List<Integer> allNumCourses = all.stream()
+				.map(TurfInfos :: getNumcourse)
+				.collect(Collectors.toList());
+
+
+		JsonNode node;
+
+				try {
+//				node = new ObjectMapper().readTree(file);
+			    node = new ObjectMapper().readTree(new URL(url));
+
+	            //Jour
+				String jour = node.get("pageProps").get("race").get("date").textValue();
+				//numcourse
+				String numcourse = String.valueOf(node.get("pageProps").get("race").get("id").intValue());
+				String uuid = node.get("pageProps").get("race").get("uuid").textValue();
+
+				System.out.println(uuid + "     nnnnnnnnnnnnnnnn");
+				//Verifie si les stats sont à null
+            	boolean nulStats = true;
+				
+//	            Lister les ids des réunions
+//				  Et infos réunions
+            	Integer numberofRunners = null;
+            	if(node.get("pageProps").get("race").get("numberOfInitialRunners") != null) {
+				numberofRunners = Integer.valueOf(node.get("pageProps").get("race").get("numberOfInitialRunners").textValue());
+            	}else {
+    				numberofRunners = node.get("pageProps").get("race").get("numberOfRunners").intValue();
+//				numberofRunners = node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).size();
+            	}
+            	
+            
+            		System.out.println(numberofRunners + "" + numcourse);
+    
+            		/////////////Début///////////////
+            		
+//	            	if(!allNumCourses.contains(numcourse)) {
+//	                    for(int i= 0; i<numberofRunners; i++) {
+//	    	            	TurfInfos turfInfo = new TurfInfos();
+//	    	            	turfInfo.setNumcourse(Integer.valueOf(numcourse));
+//		                    turfInfo.setNumero(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("saddle").intValue());
+//	    	            	turfInfo.setRanking(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("ranking").intValue());
+//	    	                turfInfo.setLiveOdd(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("operatorOdds").get("PMU").get("liveOdd").doubleValue());	                	
+//	    	          
+////	    	                TurfInfos infoToUpdate = all.stream()
+////	    	           				.filter(ti-> ti.getNumero().equals(turfInfo.getNumero()) && ti.getNumcourse().equals(turfInfo.getNumcourse()))
+////	    	           				.findFirst().get();
+//	    	                
+//	    	                	turfInfosRepository.save(turfInfo);
+//
+//	        	            //For LOOP END
+//	    	            }
+//	            	}
+	            	
+	            	if(allNumCourses.contains(Integer.valueOf(numcourse))) {
+	            		   for(int i= 0; i<numberofRunners; i++) {
+		    	            	TurfInfos turfInfo = new TurfInfos();
+		    	            	turfInfo.setNumcourse(Integer.valueOf(numcourse));
+			                    turfInfo.setNumero(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("saddle").intValue());
+		    	            	turfInfo.setRanking(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("ranking").intValue());
+		    	                turfInfo.setLiveOdd(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("operatorOdds").get("PMU").get("liveOdd").doubleValue());	                	
+		    	          
+		    	                TurfInfos infoToUpdate = all.stream()
+		    	           				.filter(ti-> ti.getNumero().equals(turfInfo.getNumero()) && ti.getNumcourse().equals(turfInfo.getNumcourse()))
+		    	           				.findFirst().get();
+		    	                
+    	                		turfInfoService.updateRankingsFromParisTurfJSON(turfInfo, infoToUpdate);
+
+		        	            //For LOOP END
+		    	            }                    	
+	            		   }
+            		
+	  
+	                               
+
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+				catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//				catch (NullPointerException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+			
+	
+	
+	}
+	
+	public void updateAllDayInfosFromAspiJson(String url) {
 		
 		JsonNode node;
     	List<TurfInfos> all = turfInfosRepository.findAll();
@@ -355,21 +457,25 @@ public class ImportJSONService {
             	TurfInfos turfInfo = new TurfInfos();
             	
             	turfInfo.setNumcourse(node.get(i).get("numcourse").get("id").intValue());
+                System.out.println(" numcccc" +turfInfo.getNumcourse());
             	turfInfo.setNumero(node.get(i).get("numero").intValue());
+                System.out.println(" numerrrr" +turfInfo.getNumero());
+
 
             	turfInfo.setRecence(node.get(i).get("recence").intValue());
         		System.out.println(i);
 
             	   
-            	   TurfInfos infoToUpdate = all.stream()
-           				.filter(ti-> ti.getNumero().equals(turfInfo.getNumero()) && ti.getNumcourse().equals(turfInfo.getNumcourse()))
-           				.findFirst().get();
+            	   Optional<TurfInfos> optInfoToUpdate = all.stream()
+           				.filter(ti-> ti.getNumero().equals(turfInfo.getNumero()) && ti.getNumcourse().equals(turfInfo.getNumcourse()) && ti.getIsPremium().equals(true))
+           				.findFirst();
             	   
             	
-                	if(!allNumCourses.contains(turfInfo.getNumcourse())) {
-                	turfInfosRepository.save(turfInfo);
-                	}
-                	if(allNumCourses.contains(turfInfo.getNumcourse())) {
+//                	if(!allNumCourses.contains(turfInfo.getNumcourse())) {
+//                	turfInfosRepository.save(turfInfo);
+//                	}
+                	if(optInfoToUpdate.isPresent()) {
+                		TurfInfos infoToUpdate = optInfoToUpdate.get();
                 		turfInfoService.updateFromAspiJSON(turfInfo, infoToUpdate);
                     	}
                 

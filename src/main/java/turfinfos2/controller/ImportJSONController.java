@@ -48,23 +48,23 @@ public class ImportJSONController {
 					System.out.println("Aspi");
 
 					jour = node.get(0).get("numcourse").get("jour").textValue();
-					importJSONService.createAllDayInfosFromAspiJson(url);
-					navbarInfos(model);
+					importJSONService.updateAllDayInfosFromAspiJson(url);
+//					navbarInfos(model);
 					return "redirect:/day-infos?jour=" + jour;
 				}
 				if(node.get("pageProps").get("name").textValue().equals("program")) {
 					System.out.println(node.get("pageProps").get("name").textValue());
 
 					jour = node.get("pageProps").get("date").textValue();
-					importJSONService.createAllDayInfosFromParisTurfJson(url);
-					navbarInfos(model);
+					importJSONService.createAllDayInfosFromParisTurfJson(url, false);
+//					navbarInfos(model);
 					return "redirect:/day-infos?jour=" + jour;
 				}
 				if(node.get("pageProps").get("name").textValue().equals("race")) {
 					System.out.println(node.get("pageProps").get("name").textValue());
 					jour = node.get("pageProps").get("race").get("date").textValue();
 					importJSONService.createAllRaceInfosFromParisTurfJson(url);
-					navbarInfos(model);
+//					navbarInfos(model);
 					return "redirect:/day-infos?jour=" + jour;
 				}
 				System.out.println("NODE EMPTY ? " + node.isEmpty());
@@ -78,18 +78,36 @@ public class ImportJSONController {
 				e.printStackTrace();
 			}
 			
-			navbarInfos(model);
+//			navbarInfos(model);
 
 			return "redirect:/";
 	}
 	
-//	@PostMapping("/upload-json-race-data")
-//    public String uploadJSONFileByRace(@RequestParam("url") String url, Model model, RedirectAttributes redirect) {
-//
-//		importJSONService.createAllRaceInfosFromJson(url);
-//		
-//		return "redirect:/";
-//	}
+	@PostMapping("/update-paris-turf-json-data-from-url")
+    public String uploadJSONFileByRace(@RequestParam("url") String url, Model model, RedirectAttributes redirect) {
+
+		 JsonNode node;
+         String jour = "";
+         
+			try {
+				node = new ObjectMapper().readTree(new URL(url));
+				jour = node.get("pageProps").get("date").textValue();
+				importJSONService.createAllDayInfosFromParisTurfJson(url, true);
+				return "redirect:/day-infos?jour=" + jour;
+
+
+				
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		
+		return "redirect:/";
+	}
 	
 	///////////////////////////////////////////////////////////
 	
@@ -120,7 +138,7 @@ public class ImportJSONController {
 
 	   
 	         Set<String> reunions = allInfos.stream()
-	 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+	 				.filter(ti-> ti.getJour().equals(jour))
 	        			.map(TurfInfos :: getReunionstring)
 	        			.collect(Collectors.toSet());
 	        			List<String> list = new ArrayList<String>(reunions);

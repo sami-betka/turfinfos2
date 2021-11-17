@@ -68,36 +68,6 @@
 <br>
 
 
-<!-- <div class="container-fluid"> -->
-<!-- 	<div class="row"> -->
-<!-- 		<div class="col-md-12"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-md-4"> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-md-4" style="border: 1px solid black;"> -->
-				
-<!--                    <form style="margin-bottom: 5px;" method="POST" th:action="@{/day-infos}" enctype="multipart/form-data"> -->
-
-<!--                             <div class=""> -->
-<!-- 								<label class="text-dark" style="font-weight: bold;">Choisir une date et acc&eacute;der aux infos:</label><br>  -->
-<!-- 								<select class="form-control form-control-user" name="jour" required="required"> -->
-<!-- 									<option value="">--Choisir--</option> -->
-
-<!-- 									<option th:each="d : ${datesnav}" th:value="${d}" -->
-<!-- 										th:text="${d}"></option> -->
-<!-- 								</select> -->
-<!-- 							</div> -->
-<!-- 							    <button type="submit" class="btn btn-small btn-primary">Acc&eacute;der</button>					 -->
-<!--                    </form> -->
-	               
-<!-- 				</div> -->
-<!-- 				<div class="col-md-4"> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->
-
 
 <div class="container-fluid">
 	<div class="row">
@@ -109,7 +79,7 @@
 				
 				<form method="POST" th:action="@{/upload-json-data-from-url}" enctype="multipart/form-data">
     <div class="form-group mt-3">
-        <label style="font-weight: bold;" for="url">Importer donn&eacute;es JSON via une URL</label>
+        <label style="font-weight: bold;" for="url">Importer donn&eacute;es via une URL (JSON)</label>
 <!--         <input type="file" name="file" class="form-control-file" id="file" accept="*.json"> -->
         <input type="text" name="url" class="form-control-file" id="url">
 
@@ -138,6 +108,47 @@
 	</div>
 </div>
 <br>
+
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4" style=" border: 1px solid black; padding: 15px;">
+				
+				<form method="POST" th:action="@{/update-paris-turf-json-data-from-url}" enctype="multipart/form-data">
+    <div class="form-group mt-3">
+        <label style="font-weight: bold;" for="url">Importer les classements via une URL (JSON)</label>
+<!--         <input type="file" name="file" class="form-control-file" id="file" accept="*.json"> -->
+        <input type="text" name="url" class="form-control-file" id="url">
+
+    </div>
+<!--     <button type="submit" class="btn btn-primary">Envoyer</button> -->
+ <button onclick="spinnerFunction3()" class="btn btn-primary" type="submit">
+  <span id="mySpinner3" class="" role="status" aria-hidden="true"></span>
+  <span id="myTextToHide3">Importer</span>
+    <span id="myTextToShow3" style="display: none">Importation en cours...</span>
+</button>
+                       
+</form>
+
+<!-- <div th:if="${messagesuccess}" th:text="${messagesuccess}" class="alert alert-success" role="alert"> -->
+<!-- </div> -->
+<!-- <div th:if="${messageerror}" th:text="${messageerror}" class="alert alert-danger" role="alert"> -->
+<!-- </div> -->
+<!-- <div th:if="${messageempty}" th:text="${messageempty}" class="alert alert-warning" role="alert"> -->
+<!-- </div> -->
+
+				</div>
+				<div class="col-md-4">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 				<div th:replace="_nav-components :: footer">...</div>

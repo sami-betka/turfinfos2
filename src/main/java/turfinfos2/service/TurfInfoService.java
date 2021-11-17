@@ -173,6 +173,16 @@ public class TurfInfoService {
     	turfInfosRepository.save(infoToUpdate);
     
     }
+    
+    public void updateRankingsFromParisTurfJSON(TurfInfos info, TurfInfos infoToUpdate) {
+    	
+    	infoToUpdate.setRanking(info.getRanking());
+    	infoToUpdate.setLiveOdd(info.getLiveOdd());
+
+    
+    	turfInfosRepository.save(infoToUpdate);
+    
+    }
     public void patchCSVFromAspi(TurfInfos info, TurfInfos infoToUpdate) {
     	
     	infoToUpdate.setRecence(info.getRecence());
