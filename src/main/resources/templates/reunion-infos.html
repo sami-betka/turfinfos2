@@ -50,13 +50,13 @@
 			<div class="col-md-4">
 		<div th:if="${#maps.size(taypronos) gt 0}" class="" style="width:100%; border: 3px solid red; padding: 10px; margin-bottom: 5px; background-color: white;">
 <h5 style="border-bottom: 1px solid black; padding-bottom: 2px;">TayPronos du jour R[[${reunionstring}]]</h5>
-  <p th:each="entry : ${taypronos}"><strong>[[${entry.key}]]) [[${entry.value}]]</strong></p>
+  <p th:each="entry : ${taypronos}"><strong>[[${entry.key}]]) &nbsp; [[${entry.value}]]</strong></p>
 </div> 
 		</div>
 		<div class="col-md-4">
 		<div th:if="${#lists.size(cracklist) gt 0}" class="" style="width:100%; border: 3px solid green; padding: 10px; margin-bottom: 5px; background-color: white;">
 <h5 style="border-bottom: 1px solid black; padding-bottom: 2px;">Cracks du jour R[[${reunionstring}]] (+30pts):</h5>
-  <p th:each="c : ${cracklist}"><strong th:if="${c.numero lt 10}">[[${c.C}]]0[[${c.numero}]] </strong><strong th:if="${c.numero gt 9}">[[${c.C}]][[${c.numero}]] </strong> ([[${c.noteProno}]] pts)</p>
+  <p th:each="c : ${cracklist}"><strong th:if="${c.numero lt 10}">[[${c.C}]]0[[${c.numero}]] </strong><strong th:if="${c.numero gt 9}">[[${c.C}]][[${c.numero}]] </strong> ([[${c.noteProno}]] pts) <strong th:if="${c.ranking == 1}" class="text-success">&nbsp; Gagnant ([[${c.liveOdd}]]/1) </strong><strong class="text-danger" th:if="${c.isRunning eq false}">&nbsp; Non-partant </strong></p>
 </div> 
 		</div>
 		<div class="col-md-4">
