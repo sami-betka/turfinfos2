@@ -519,13 +519,16 @@ public class UploadController {
 		.collect(Collectors.toList());
 		Collections.reverse(crackList);
 
-//          crackList.forEach(ti-> {
-//	       if(ti.getNumero()<10) {
-//	         	ti.setNumero(Integer.valueOf("0"+ti.getNumero()));
-//	        }
-//           });
-//  		model.addAttribute("cracklist", new ArrayList<>());
 		model.addAttribute("cracklist", crackList);
+		
+////////////Placés du jour/////////////////
+	List<TurfInfos> placeList = allPremiumReunionInfos.stream()
+	.filter(ti-> ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval()== 100)
+	.sorted(Comparator.comparingInt(TurfInfos::getC).thenComparingInt(TurfInfos::getNumero))
+	.collect(Collectors.toList());
+//	Collections.reverse(placeList);
+
+	model.addAttribute("placelist", placeList);
 		
 		//////////COUPLES DU JOUR//////////////
 		Set<String> cples = new HashSet<>();
