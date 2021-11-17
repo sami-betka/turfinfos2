@@ -310,7 +310,6 @@ public class ImportJSONService {
 					String uuid = node.get("pageProps").get("initialState").get("racecards").get("races").get(jour).get(i).get("uuid").textValue();
 					uuids.add(uuid);
 				}
-			
 			}
 			for(String uuid: uuids) {
 				raceUuid = uuid;

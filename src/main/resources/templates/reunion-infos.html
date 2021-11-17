@@ -4,10 +4,13 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
 <!--     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link th:href="@{css/style.css}" rel="stylesheet" />
+    <link th:href="@{css/footer.css}" rel="stylesheet" />
     <link th:href="@{css/fire.css}" rel="stylesheet" />
     
 </head>
@@ -77,16 +80,18 @@
 		<div class="col-md-12">		
 		
 <!-- 		FIRST -->
-			<div th:if="${oneexists}" class="row" style="margin-bottom: 10px; margin-top: 20px">
+			<div th:if="${oneexists}" class="row" style="margin-bottom: 30px; margin-top: 20px">
 <!-- 			    <p th:text="${onetitle}" style="font-weight: bold;"></p> -->
 			    <h4><span th:text="${onetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 			    
 				<div class="col-md-11">
 
                <div th:if="${onehasbettypes}">
-                              <div th:replace="_components :: bettypes(${onerunners}, ${oneistqq}, ${oneispick5})">...</div>
-               
+                  <div th:replace="_components :: bettypes(${onerunners}, ${oneistqq}, ${oneispick5})">...</div>
                </div>
+               
+              <h5 th:text="${onecaralist}"></h5>
+               
 
                           <table id="tab1" class="table-sm table-striped table-responsive divrace">
                           
@@ -202,15 +207,16 @@
 					</div>
 					
 <!-- 				SECOND	 -->
-								<div th:if="${twoexists}" class="row" style="margin-bottom: 10px;">
+								<div th:if="${twoexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${twotitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11 ">
 
                <div th:if="${twohasbettypes}">
-                              <div th:replace="_components :: bettypes(${tworunners}, ${twoistqq}, ${twoispick5})">...</div>
-               
+                      <div th:replace="_components :: bettypes(${tworunners}, ${twoistqq}, ${twoispick5})">...</div>
                </div>
-
+                   
+                    <h5 th:text="${twocaralist}"></h5>
+                   
           
                           <table id="tab2" class="table-sm table-striped table-responsive divrace">
                           
@@ -327,15 +333,16 @@
 					</div>
 					
 <!-- 					THIRD -->
-								<div th:if="${threeexists}" class="row" style="margin-bottom: 10px;">
+								<div th:if="${threeexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${threetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11">
 
               <div th:if="${threehasbettypes}">
-                              <div th:replace="_components :: bettypes(${threerunners}, ${threeistqq}, ${threeispick5})">...</div>
-               
+                   <div th:replace="_components :: bettypes(${threerunners}, ${threeistqq}, ${threeispick5})">...</div>
                </div>
-
+               
+                             <h5 th:text="${threecaralist}"></h5>
+               
 
                           <table id="tab3" class="table-sm table-striped table-responsive divrace">
                           
@@ -449,14 +456,16 @@
 					
 <!-- 					FOURTH -->
 
-			<div th:if="${fourexists}" class="row" style="margin-bottom: 10px;">
+			<div th:if="${fourexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${fourtitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11 ">
 
                <div th:if="${fourhasbettypes}">
-                              <div th:replace="_components :: bettypes(${fourrunners}, ${fouristqq}, ${fourispick5})">...</div>
-               
+                    <div th:replace="_components :: bettypes(${fourrunners}, ${fouristqq}, ${fourispick5})">...</div>
                </div>
+               
+                 <h5 th:text="${fourcaralist}"></h5>
+               
 
                           <table id="tab4" class="table-sm table-striped table-responsive divrace">
                           
@@ -570,15 +579,15 @@
 <!-- 					<div class="col-md-12"> -->
 		
 <!-- 		FIFTH -->
-			<div th:if="${fiveexists}" class="row" style="margin-bottom: 10px;">
+			<div th:if="${fiveexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${fivetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11 ">
 
                <div th:if="${fivehasbettypes}">
-                              <div th:replace="_components :: bettypes(${fiverunners}, ${fiveistqq}, ${fiveispick5})">...</div>
-               
+                      <div th:replace="_components :: bettypes(${fiverunners}, ${fiveistqq}, ${fiveispick5})">...</div>
                </div>
-
+               
+                             <h5 th:text="${fivecaralist}"></h5>
 
                           <table id="tab5" class="table-sm table-striped table-responsive divrace">
                           
@@ -689,15 +698,16 @@
 					</div>
 					
 <!-- 				SIXTH	 -->
-								<div th:if="${sixexists}" class="row" style="margin-bottom: 10px;">
+								<div th:if="${sixexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${sixtitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11 ">
 
                <div th:if="${sixhasbettypes}">
-                              <div th:replace="_components :: bettypes(${sixrunners}, ${sixistqq}, ${sixispick5})">...</div>
-               
+                    <div th:replace="_components :: bettypes(${sixrunners}, ${sixistqq}, ${sixispick5})">...</div>
                </div>
-
+               
+                             <h5 th:text="${sixcaralist}"></h5>
+               
                           <table id="tab6" class="table-sm table-striped table-responsive divrace">
                           
                 <thead>       
@@ -807,15 +817,16 @@
 					</div>
 					
 <!-- 					SEVENTH -->
-								<div th:if="${sevenexists}" class="row" style="margin-bottom: 10px;">
+								<div th:if="${sevenexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${seventitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11">
 				
 				<div th:if="${sevenhasbettypes}">
-               				       <div th:replace="_components :: bettypes(${sevenrunners}, ${sevenistqq}, ${sevenispick5})">...</div>
-               
+               		  <div th:replace="_components :: bettypes(${sevenrunners}, ${sevenistqq}, ${sevenispick5})">...</div>
                </div>
-				
+               
+                             <h5 th:text="${sevencaralist}"></h5>
+               				
 
                           <table id="tab7" class="table-sm table-striped table-responsive divrace">
                           
@@ -926,15 +937,16 @@
 					
 <!-- 					EIGHTH -->
 
-			<div th:if="${eightexists}" class="row" style="margin-bottom: 10px;">
+			<div th:if="${eightexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${eighttitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11">
 
                <div th:if="${eighthasbettypes}">
-                              <div th:replace="_components :: bettypes(${eightrunners}, ${eightistqq}, ${eightispick5})">...</div>
-               
+                    <div th:replace="_components :: bettypes(${eightrunners}, ${eightistqq}, ${eightispick5})">...</div>
                </div>
-
+               
+                             <h5 th:text="${eightcaralist}"></h5>
+               
                           <table id="tab8" class="table-sm table-striped table-responsive divrace">
                           
                 <thead>   
@@ -1045,14 +1057,16 @@
 					
 					<!-- 					NINTH -->
 
-			<div th:if="${nineexists}" class="row" style="margin-bottom: 10px;">
+			<div th:if="${nineexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${ninetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11">
 
                  <div th:if="${ninehasbettypes}">
-                              <div th:replace="_components :: bettypes(${ninerunners}, ${nineistqq}, ${nineispick5})">...</div>
-               
+                      <div th:replace="_components :: bettypes(${ninerunners}, ${nineistqq}, ${nineispick5})">...</div>
                </div>
+               
+                             <h5 th:text="${ninecaralist}"></h5>
+               
 
                           <table id="tab9" class="table-sm table-striped table-responsive divrace">
                           
@@ -1163,14 +1177,16 @@
 					
 					<!-- 					TENTH -->
 
-			<div th:if="${tenexists}" class="row" style="margin-bottom: 10px;">
+			<div th:if="${tenexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${tentitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11">
 
               <div th:if="${tenhasbettypes}">
-                              <div th:replace="_components :: bettypes(${tenrunners}, ${tenistqq}, ${tenispick5})">...</div>
-               
+                    <div th:replace="_components :: bettypes(${tenrunners}, ${tenistqq}, ${tenispick5})">...</div>
                </div>
+               
+                             <h5 th:text="${tencaralist}"></h5>
+               
 
                           <table id="tab10" class="table-sm table-striped table-responsive divrace">
                           
@@ -1282,14 +1298,16 @@
 					
 					<!-- 					ELEVENTH -->
 
-			<div th:if="${elevenexists}" class="row" style="margin-bottom: 10px;">
+			<div th:if="${elevenexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${eleventitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11">
 
                 <div th:if="${elevenhasbettypes}">
-                              <div th:replace="_components :: bettypes(${elevenrunners}, ${elevenistqq}, ${elevenispick5})">...</div>
-               
+                       <div th:replace="_components :: bettypes(${elevenrunners}, ${elevenistqq}, ${elevenispick5})">...</div>
                </div>
+               
+                             <h5 th:text="${elevencaralist}"></h5>
+               
 
                           <table id="tab11" class="table-sm table-striped table-responsive divrace">
                           
@@ -1401,14 +1419,16 @@
 					
 					<!-- 					TWELVTH -->
 
-			<div th:if="${twelveexists}" class="row" style="margin-bottom: 10px;">
+			<div th:if="${twelveexists}" class="row" style="margin-bottom: 30px;">
 			    <h4><span th:text="${twelvetitle}" class="badge badge-info" style="margin-right: 6px;"></span></h4>
 				<div class="col-md-11">
 
                <div th:if="${twelvehasbettypes}">
-                              <div th:replace="_components :: bettypes(${twelverunners}, ${twelveistqq}, ${twelveispick5})">...</div>
-               
+                   <div th:replace="_components :: bettypes(${twelverunners}, ${twelveistqq}, ${twelveispick5})">...</div>
                </div>
+               
+                             <h5 th:text="${twelvecaralist}"></h5>
+               
 
                           <table id="tab12" class="table-sm table-striped table-responsive divrace">
                           
@@ -1535,6 +1555,7 @@
 	
 		<div th:replace="_components :: buttonup">...</div>
 		
+				<div th:replace="_nav-components :: footer">...</div>
 		
 	
 	<script src="https://unpkg.com/feather-icons"></script>
