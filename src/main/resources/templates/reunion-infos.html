@@ -62,7 +62,7 @@
 		<div class="col-md-3">
 		<div th:if="${#lists.size(placelist) gt 0}" class="" style="width:100%; border: 3px solid green; padding: 10px; margin-bottom: 5px; background-color: white;">
 <h5 style="border-bottom: 1px solid black; padding-bottom: 2px;">Placés du jour R[[${reunionstring}]] (100% dans les 3):</h5>
-  <p th:each="c : ${placelist}"><strong th:if="${c.numero lt 10}">[[${c.C}]]0[[${c.numero}]] - ([[${c.coursescheval}]]/[[${c.coursescheval}]]) </strong><strong th:if="${c.numero gt 9}">[[${c.C}]][[${c.numero}]] - ([[${c.coursescheval}]]/[[${c.coursescheval}]]) </strong><strong th:if="${c.liveOddPlace != null}" class="text-success">&nbsp; P  ([[${c.liveOddPlace}]]) </strong><strong class="text-danger" th:if="${c.isRunning eq false}">&nbsp; Non-partant </strong></p>
+  <p th:each="c : ${placelist}"><strong th:if="${c.numero lt 10}">[[${c.C}]]0[[${c.numero}]] - ([[${c.coursescheval}]]/[[${c.coursescheval}]]) </strong><strong th:if="${c.numero gt 9}">[[${c.C}]][[${c.numero}]] - ([[${c.coursescheval}]]/[[${c.coursescheval}]]) </strong><strong th:if="${c.ranking == 1}" class="text-danger">&nbsp; G ([[${c.liveOdd}]]/1) </strong><strong th:if="${c.liveOddPlace != null}" class="text-success">&nbsp; P  ([[${c.liveOddPlace}]]) </strong><strong class="text-danger" th:if="${c.isRunning eq false}">&nbsp; Non-partant </strong></p>
 </div> 
 		</div>
 		
