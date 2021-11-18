@@ -3,10 +3,13 @@ package turfinfos2.controller;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -109,6 +112,22 @@ public class ImportJSONController {
 		return "redirect:/";
 	}
 	
+	@PostMapping("/upload-rapports-json-data-from-url")
+    public String uploadRapportsFile(@RequestParam("date") String date, Model model, RedirectAttributes redirect) {
+
+		
+			try {
+				importJSONService.createRapportsInfosFromPMUJson(date);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			return "redirect:/day-infos?jour=" + date;
+		
+	}
+	
 	///////////////////////////////////////////////////////////
 	
 	   private void navbarInfos(Model model) {
@@ -145,7 +164,6 @@ public class ImportJSONController {
 	        			Collections.sort(list);        			
 	        			reunions = new LinkedHashSet<>(list);
 	        	         model.addAttribute("reunionsofday", reunions);
-
 	   }
 
 }

@@ -148,6 +148,8 @@ public class TurfInfoService {
     	infoToUpdate.setIsPremium(info.getIsPremium());
     	
     	infoToUpdate.setHasBetTypes(info.getHasBetTypes());
+    	infoToUpdate.setDraw(info.getDraw());
+
 
 
 

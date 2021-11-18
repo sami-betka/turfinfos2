@@ -1,13 +1,11 @@
 package turfinfos2;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-
-import turfinfos2.model.TurfInfos;
-import turfinfos2.repository.TurfInfosRepository;
 
 @SpringBootApplication
 public class Turfinfos2Application {
@@ -82,6 +80,12 @@ public class Turfinfos2Application {
 //		service.createAllRaceInfosFromJson();
 		
 		
+		
+//		String jour = "2021-11-17";
+//		
+//		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+//	       String jour2 = formatter.parse(jour).toString();
+//	       System.out.println(jour2);
 
 	}
 	

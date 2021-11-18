@@ -202,6 +202,8 @@ public class TurfInfos {
 	
 	private Double liveOdd;
 	
+	private Double liveOddPlace;
+	
 	private Boolean isRunning;
 	
 	private Integer numberOfInitialRunners;
@@ -218,6 +220,8 @@ public class TurfInfos {
 	private Boolean isPremium;
 	
 	private Boolean hasBetTypes;
+	
+	private Integer draw;
 
 
 
@@ -235,7 +239,7 @@ public class TurfInfos {
 			boolean protectionFirstTime, String raceSpecialty, String distanceAndSpecialtyChrono, String reunionstring, String libel_hippo,
 			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo, Integer nbVictChevalHippo,
 			Integer ranking, Double liveOdd, Boolean isRunning, Integer numberOfInitialRunners, Boolean isTQQ, Boolean isPick5,
-			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes) {
+			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes, Integer draw, Double liveOddPlace) {
 		
 		this.id = id;
 		this.R = R;
@@ -279,6 +283,7 @@ public class TurfInfos {
 		this.pourcPlaceCheval = pourcPlaceCheval;
 		this.ranking = ranking;
 		this.liveOdd = liveOdd;
+		this.liveOddPlace = liveOddPlace;
 		this.isRunning = isRunning;
 		this.numberOfInitialRunners = numberOfInitialRunners;
 		this.isTQQ = isTQQ;
@@ -288,6 +293,8 @@ public class TurfInfos {
 		this.caraList2 = caraList2;
 		
 		this.isPremium = isPremium;
+		this.draw = draw;
+
 
 
 
@@ -784,6 +791,22 @@ public class TurfInfos {
 
 	public void setHasBetTypes(Boolean hasBetTypes) {
 		this.hasBetTypes = hasBetTypes;
+	}
+
+	public Integer getDraw() {
+		return draw;
+	}
+
+	public void setDraw(Integer draw) {
+		this.draw = draw;
+	}
+
+	public Double getLiveOddPlace() {
+		return liveOddPlace;
+	}
+
+	public void setLiveOddPlace(Double liveOddPlace) {
+		this.liveOddPlace = liveOddPlace;
 	}
 
 }

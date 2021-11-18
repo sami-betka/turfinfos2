@@ -121,7 +121,7 @@
 				
 				<form method="POST" th:action="@{/update-paris-turf-json-data-from-url}" enctype="multipart/form-data">
     <div class="form-group mt-3">
-        <label style="font-weight: bold;" for="url">Importer les classements via une URL (JSON)</label>
+        <label style="font-weight: bold;" for="url">Actualiser les classements via une URL (JSON)</label>
 <!--         <input type="file" name="file" class="form-control-file" id="file" accept="*.json"> -->
         <input type="text" name="url" class="form-control-file" id="url">
 
@@ -131,6 +131,45 @@
   <span id="mySpinner3" class="" role="status" aria-hidden="true"></span>
   <span id="myTextToHide3">Importer</span>
     <span id="myTextToShow3" style="display: none">Importation en cours...</span>
+</button>
+                       
+</form>
+
+<!-- <div th:if="${messagesuccess}" th:text="${messagesuccess}" class="alert alert-success" role="alert"> -->
+<!-- </div> -->
+<!-- <div th:if="${messageerror}" th:text="${messageerror}" class="alert alert-danger" role="alert"> -->
+<!-- </div> -->
+<!-- <div th:if="${messageempty}" th:text="${messageempty}" class="alert alert-warning" role="alert"> -->
+<!-- </div> -->
+
+				</div>
+				<div class="col-md-4">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4" style=" border: 1px solid black; padding: 15px;">
+				
+				<form method="POST" th:action="@{/upload-rapports-json-data-from-url}" enctype="">
+    <div class="form-group mt-3">
+        <label style="font-weight: bold;" for="url">Importer les rapports</label>
+<!--         <input type="file" name="file" class="form-control-file" id="file" accept="*.json"> -->
+        <input type="date" name="date" class="form-control-file" id="">
+
+    </div>
+<!--     <button type="submit" class="btn btn-primary">Envoyer</button> -->
+ <button onclick="spinnerFunction4()" class="btn btn-primary" type="submit">
+  <span id="mySpinner4" class="" role="status" aria-hidden="true"></span>
+  <span id="myTextToHide4">Importer</span>
+    <span id="myTextToShow4" style="display: none">Importation en cours...</span>
 </button>
                        
 </form>
