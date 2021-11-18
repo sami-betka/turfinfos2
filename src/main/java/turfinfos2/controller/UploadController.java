@@ -227,7 +227,7 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "ispick5", allraceInfos.get(0).getIsPick5());
 			model.addAttribute(numToString(num) + "istqq", allraceInfos.get(0).getIsTQQ());
 			model.addAttribute(numToString(num) + "runners", allraceInfos.get(0).getNumberOfInitialRunners());
-			model.addAttribute(numToString(num) + "caralist", allraceInfos.get(0).getCaraList1() + " - " + allraceInfos.get(0).getCaraList2());
+			model.addAttribute(numToString(num) + "caralist", allraceInfos.get(0).getHour() + " - " + allraceInfos.get(0).getCaraList1() + " - " + allraceInfos.get(0).getCaraList2());
 			model.addAttribute(numToString(num) + "hasbettypes", allraceInfos.get(0).getHasBetTypes());
 
 

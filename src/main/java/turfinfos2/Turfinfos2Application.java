@@ -2,6 +2,7 @@ package turfinfos2;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -86,6 +87,23 @@ public class Turfinfos2Application {
 //		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
 //	       String jour2 = formatter.parse(jour).toString();
 //	       System.out.println(jour2);
+		
+		
+		
+//		String hour = "16:27:00";
+//
+//		DateTimeFormatter format1 = DateTimeFormatter.ofPattern("H:mm:ss");
+//		DateTimeFormatter format2 = DateTimeFormatter.ofPattern("H");
+//		DateTimeFormatter format3 = DateTimeFormatter.ofPattern("mm");
+//
+//		TemporalAccessor hour2 = format1.parse(hour);
+//		
+//	    String hourParse1 = format2.format(hour2).toString();
+//	    String hourParse2 = format3.format(hour2).toString();
+//	    String finalHour = hourParse1 + "h" + hourParse2;
+//
+//	       System.out.println(hourParse1 + "h" + hourParse2);
+
 
 	}
 	

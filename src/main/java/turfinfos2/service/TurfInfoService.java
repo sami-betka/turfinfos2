@@ -82,6 +82,7 @@ public class TurfInfoService {
     	infoToUpdate.setC(info.getC());
 //    	infoToUpdate.setCheval(info.getCheval());
     	infoToUpdate.setJour(info.getJour());
+    	infoToUpdate.setHour(info.getHour());
     	infoToUpdate.setNumcourse(info.getNumcourse());
     	infoToUpdate.setNumero(info.getNumero());
     	infoToUpdate.setR(info.getR());

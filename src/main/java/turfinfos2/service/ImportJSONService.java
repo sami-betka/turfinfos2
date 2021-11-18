@@ -5,6 +5,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,6 +37,7 @@ public class ImportJSONService {
 	TurfInfoService turfInfoService;
 
 	public List<TurfInfos> createAllRaceInfosFromParisTurfJson(String url) {
+		
 
 		List<TurfInfos> fromRace = new ArrayList<>();
 	    List<Integer> allNumCourses = turfInfosRepository.findAll().stream()
@@ -52,6 +55,16 @@ public class ImportJSONService {
 
 	            //Jour
 				String jour = node.get("pageProps").get("race").get("date").textValue();
+				//Heure
+				String hour = node.get("pageProps").get("race").get("time").textValue();
+				DateTimeFormatter format1 = DateTimeFormatter.ofPattern("H:mm:ss");
+				DateTimeFormatter format2 = DateTimeFormatter.ofPattern("H");
+				DateTimeFormatter format3 = DateTimeFormatter.ofPattern("mm");
+				TemporalAccessor hour2 = format1.parse(hour);
+			    String hourParse1 = format2.format(hour2).toString();
+			    String hourParse2 = format3.format(hour2).toString();
+			    String finalHour = hourParse1 + "h" + hourParse2;
+
 				//numcourse
 				String numcourse = String.valueOf(node.get("pageProps").get("race").get("id").intValue());
 				String uuid = node.get("pageProps").get("race").get("uuid").textValue();
@@ -77,6 +90,8 @@ public class ImportJSONService {
 	            for(int i= 0; i<numberofRunners; i++) {
 	            	TurfInfos turfInfo = new TurfInfos();
 	            	turfInfo.setJour(jour);
+	            	turfInfo.setHour(finalHour);
+
 	            	if(node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("pmuNumber").intValue() != 0) {
 	                	turfInfo.setR(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("pmuNumber").intValue()));	       
 	                	
@@ -303,9 +318,10 @@ public class ImportJSONService {
 
 	public void createAllDayInfosFromParisTurfJson(String url, Boolean isUpdate) {
 				
-		String firstPartOfUrl = "https://www.paris-turf.com/_next/data/";
+		////////Create race url////////////
+		String firstPartOfRaceUrl = "https://www.paris-turf.com/_next/data/";
 		String parisTurfId = "d7lsdp4kqsZsUGSJ5gBnM";
-		String thirdPartOfUrl = "/fr/course/-idc-";
+		String thirdPartOfRaceUrl = "/fr/course/-idc-";
 		String raceUuid = "";
 		String extension = ".json";
 
@@ -327,7 +343,7 @@ public class ImportJSONService {
 			}
 			for(String uuid: uuids) {
 				raceUuid = uuid;
-				String raceUrl = firstPartOfUrl + parisTurfId + thirdPartOfUrl + raceUuid + extension;
+				String raceUrl = firstPartOfRaceUrl + parisTurfId + thirdPartOfRaceUrl + raceUuid + extension;
 				if(isUpdate.equals(false)) {
 					createAllRaceInfosFromParisTurfJson(raceUrl);
 				}
@@ -356,8 +372,8 @@ public class ImportJSONService {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat format2 = new SimpleDateFormat("ddMMyyyy");
 		
-			Date date2 = format1.parse(jour);
-			System.out.println(format2.format(date2).toString());
+		Date date2 = format1.parse(jour);
+	    String finalDate = format2.format(date2).toString();
 		
 		String firstPartOfUrl = "https://offline.turfinfo.api.pmu.fr/rest/client/1/programme/";
 		String day = format2.format(date2).toString();

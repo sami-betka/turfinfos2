@@ -222,7 +222,8 @@ public class TurfInfos {
 	private Boolean hasBetTypes;
 	
 	private Integer draw;
-
+	
+	private String hour;
 
 
 
@@ -239,7 +240,8 @@ public class TurfInfos {
 			boolean protectionFirstTime, String raceSpecialty, String distanceAndSpecialtyChrono, String reunionstring, String libel_hippo,
 			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo, Integer nbVictChevalHippo,
 			Integer ranking, Double liveOdd, Boolean isRunning, Integer numberOfInitialRunners, Boolean isTQQ, Boolean isPick5,
-			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes, Integer draw, Double liveOddPlace) {
+			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes, Integer draw, Double liveOddPlace,
+			String hour) {
 		
 		this.id = id;
 		this.R = R;
@@ -250,6 +252,7 @@ public class TurfInfos {
 		this.numero = numero;
 		this.cheval = cheval;
 		this.jour = jour;
+		this.hour = hour;
 		this.pourcPlaceChevalHippo = pourcPlaceChevalHippo;
 		this.pourcPlaceJockHippo = pourcPlaceJockHippo;
 		this.pourcPlaceEntHippo = pourcPlaceEntHippo;
@@ -807,6 +810,14 @@ public class TurfInfos {
 
 	public void setLiveOddPlace(Double liveOddPlace) {
 		this.liveOddPlace = liveOddPlace;
+	}
+
+	public String getHour() {
+		return hour;
+	}
+
+	public void setHour(String hour) {
+		this.hour = hour;
 	}
 
 }
