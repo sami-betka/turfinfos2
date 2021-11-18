@@ -316,21 +316,28 @@ public class ImportJSONService {
 		return fromRace;
 	}
 
-	public void createAllDayInfosFromParisTurfJson(String url, Boolean isUpdate) {
-				
+	public void createAllDayInfosFromParisTurfJson(String jour, Boolean isUpdate) {
+		
+		String parisTurfId = "d7lsdp4kqsZsUGSJ5gBnM";
+		String extension = ".json";
+
+		///////////create all day url/////////
+		String firstPartOfDayUrl = "https://www.paris-turf.com/_next/data/";
+		String thirdPartOfDayUrl = "/fr/programme-courses/";
+		String day = jour;
+		String finaldayUrl = firstPartOfDayUrl + parisTurfId + thirdPartOfDayUrl + day + extension;
+		
 		////////Create race url////////////
 		String firstPartOfRaceUrl = "https://www.paris-turf.com/_next/data/";
-		String parisTurfId = "d7lsdp4kqsZsUGSJ5gBnM";
 		String thirdPartOfRaceUrl = "/fr/course/-idc-";
 		String raceUuid = "";
-		String extension = ".json";
 
 		JsonNode node;
 		int iter = 0;
 		
 	    try {
-			node = new ObjectMapper().readTree(new URL(url));
-			String jour = node.get("pageProps").get("date").textValue();
+			node = new ObjectMapper().readTree(new URL(finaldayUrl));
+//			String jour = node.get("pageProps").get("date").textValue();
 			Integer numberofRaces = node.get("pageProps").get("initialState").get("racecards").get("races").get(jour).size();
 			List<String> uuids = new ArrayList<>();
 			
@@ -376,7 +383,7 @@ public class ImportJSONService {
 	    String finalDate = format2.format(date2).toString();
 		
 		String firstPartOfUrl = "https://offline.turfinfo.api.pmu.fr/rest/client/1/programme/";
-		String day = format2.format(date2).toString();
+		String day = finalDate;
 		String RC;
 		String finalPartOfUrl = "rapports-definitifs";
 
@@ -386,7 +393,7 @@ public class ImportJSONService {
 		Map<String, Set<Integer>> reunionsAndRaces = new HashMap<>();
 		
 	    Set<String> distinctReunions = allByJour.stream()
- 				.filter(ti-> ti.getJour().equals(jour))
+ 				.filter(ti-> ti.getJour().equals(jour) && ti.getIsPremium().equals(true) && ti.getR().length()<3)
         			.map(TurfInfos :: getR)
         			.collect(Collectors.toSet());
 	    
@@ -554,9 +561,17 @@ public class ImportJSONService {
 	
 	}
 	
-	public void updateAllDayInfosFromAspiJson(String url) {
+	public void updateAllDayInfosFromAspiJson(String jour) {
 		
 		JsonNode node;
+		/////////Create URL///////////
+		String firstpartOfUrl = "https://aspiturf.com/api/api?uid=";
+		String userId = "oG0cgLS6U8UmNPNvBlQm3ovrl0n1";
+		String thirdPartOfUrl = "&jour[]=";
+		String day = jour;
+		
+		String finalUrl = firstpartOfUrl + userId + thirdPartOfUrl + day;
+		
     	List<TurfInfos> all = turfInfosRepository.findAll();
     	
  	   List<Integer> allNumCourses = all.stream()
@@ -565,7 +580,7 @@ public class ImportJSONService {
 
 		
 	    try {
-			node = new ObjectMapper().readTree(new URL(url));
+			node = new ObjectMapper().readTree(new URL(finalUrl));
 			
 			Integer numberofRunners = node.size();
 

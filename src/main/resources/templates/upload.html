@@ -18,58 +18,47 @@
 
 <!-- <h3 style="text-align: center; margin-bottom: 30px; text-decoration: underline;">Bienvenue sur Djetay'Infos</h3> -->
 
-<div class="container-fluid" style="margin-top: 120px;">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-4">
-				</div>
-				<div class="col-md-4" style=" border: 1px solid black; padding: 15px;">
+<!-- <div class="container-fluid" style="margin-top: 120px;"> -->
+<!-- 	<div class="row"> -->
+<!-- 		<div class="col-md-12"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4" style=" border: 1px solid black; padding: 15px;"> -->
 				
-				<form method="POST" th:action="@{/upload-csv-file}" enctype="multipart/form-data">
-    <div class="form-group mt-3">
-        <label style="font-weight: bold;" for="file">Importer un nouveau fichier .CSV</label>
-        <input type="file" name="file" class="form-control-file" id="file" accept=".csv">
-    </div>
-<!--     <button type="submit" class="btn btn-primary">Importer le fichier</button> -->
-<!--   <div class="form-group" id="btnSpinner"> <input value="Envoyer" type="button" class="btn btn-success btn-lg form-control" style="font-size: .8rem;" onclick="location.href='/';"> </div> -->
-     <button onclick="spinnerFunction()" class="btn btn-primary" type="submit">
-  <span id="mySpinner" class="" role="status" aria-hidden="true"></span>
-  <span id="myTextToHide">Importer</span>
-    <span id="myTextToShow" style="display: none">Importation en cours...</span>
-</button>
+<!-- 				<form method="POST" th:action="@{/upload-csv-file}" enctype="multipart/form-data"> -->
+<!--     <div class="form-group mt-3"> -->
+<!--         <label style="font-weight: bold;" for="file">Importer un nouveau fichier .CSV</label> -->
+<!--         <input type="file" name="file" class="form-control-file" id="file" accept=".csv"> -->
+<!--     </div> -->
+
+<!--      <button onclick="spinnerFunction()" class="btn btn-primary" type="submit"> -->
+<!--   <span id="mySpinner" class="" role="status" aria-hidden="true"></span> -->
+<!--   <span id="myTextToHide">Importer</span> -->
+<!--     <span id="myTextToShow" style="display: none">Importation en cours...</span> -->
+<!-- </button> -->
                        
-</form>
+<!-- </form> -->
 
-<!--    <div class="text-white" th:if="${messagesuccess}" style="text-align: center; border: 1px solid black; margin: 5px; background-color: green;" > -->
-<!-- 	                 	<h2 th:text="${messagesuccess}"/></h2> -->
-<!-- 	               </div> -->
-<!-- 	                <div class="" th:if="${messageempty}" style="text-align: center; border: 1px solid black; margin: 5px; background-color: yellow;" > -->
-<!-- 	                 	<h2 th:text="${messageempty}"/></h2> -->
-<!-- 	               </div> -->
-<!-- 	                <div class="text-white" th:if="${messageerror}" style="text-align: center; border: 1px solid black; margin: 5px; background-color: red;" > -->
-<!-- 	                 	<h2 th:text="${messageerror}"/></h2> -->
-<!-- 	               </div> -->
+<!-- <div th:if="${messagesuccess}" th:text="${messagesuccess}" class="alert alert-success" role="alert"> -->
+<!-- </div> -->
+<!-- <div th:if="${messageerror}" th:text="${messageerror}" class="alert alert-danger" role="alert"> -->
+<!-- </div> -->
+<!-- <div th:if="${messageempty}" th:text="${messageempty}" class="alert alert-warning" role="alert"> -->
+<!-- </div> -->
 
-<div th:if="${messagesuccess}" th:text="${messagesuccess}" class="alert alert-success" role="alert">
-</div>
-<div th:if="${messageerror}" th:text="${messageerror}" class="alert alert-danger" role="alert">
-</div>
-<div th:if="${messageempty}" th:text="${messageempty}" class="alert alert-warning" role="alert">
-</div>
-
-				</div>
-				<div class="col-md-4">
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<br>
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
+<!-- <br> -->
 
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 120px;">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
@@ -80,8 +69,9 @@
 				<form method="POST" th:action="@{/upload-json-data-from-url}" enctype="multipart/form-data">
     <div class="form-group mt-3">
         <label style="font-weight: bold;" for="url">Importer donn&eacute;es via une URL (JSON)</label>
-<!--         <input type="file" name="file" class="form-control-file" id="file" accept="*.json"> -->
-        <input type="text" name="url" class="form-control-file" id="url">
+      
+        <input type="date" name="jour" class="form-control-file" id="">
+<!--         <input type="text" name="url" class="form-control-file" id="url"> -->
 
     </div>
 <!--     <button type="submit" class="btn btn-primary">Envoyer</button> -->
@@ -111,45 +101,37 @@
 
 
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-4">
-				</div>
-				<div class="col-md-4" style=" border: 1px solid black; padding: 15px;">
+<!-- <div class="container-fluid"> -->
+<!-- 	<div class="row"> -->
+<!-- 		<div class="col-md-12"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4" style=" border: 1px solid black; padding: 15px;"> -->
 				
-				<form method="POST" th:action="@{/update-paris-turf-json-data-from-url}" enctype="multipart/form-data">
-    <div class="form-group mt-3">
-        <label style="font-weight: bold;" for="url">Actualiser les classements via une URL (JSON)</label>
-<!--         <input type="file" name="file" class="form-control-file" id="file" accept="*.json"> -->
-        <input type="text" name="url" class="form-control-file" id="url">
+<!-- 				<form method="POST" th:action="@{/update-paris-turf-json-data-from-url}" enctype="multipart/form-data"> -->
+<!--     <div class="form-group mt-3"> -->
+<!--         <label style="font-weight: bold;" for="url">Actualiser les classements via une URL (JSON)</label> -->
+<!--         <input type="text" name="url" class="form-control-file" id="url"> -->
 
-    </div>
-<!--     <button type="submit" class="btn btn-primary">Envoyer</button> -->
- <button onclick="spinnerFunction3()" class="btn btn-primary" type="submit">
-  <span id="mySpinner3" class="" role="status" aria-hidden="true"></span>
-  <span id="myTextToHide3">Importer</span>
-    <span id="myTextToShow3" style="display: none">Importation en cours...</span>
-</button>
+<!--     </div> -->
+<!--  <button onclick="spinnerFunction3()" class="btn btn-primary" type="submit"> -->
+<!--   <span id="mySpinner3" class="" role="status" aria-hidden="true"></span> -->
+<!--   <span id="myTextToHide3">Importer</span> -->
+<!--     <span id="myTextToShow3" style="display: none">Importation en cours...</span> -->
+<!-- </button> -->
                        
-</form>
+<!-- </form> -->
 
-<!-- <div th:if="${messagesuccess}" th:text="${messagesuccess}" class="alert alert-success" role="alert"> -->
-<!-- </div> -->
-<!-- <div th:if="${messageerror}" th:text="${messageerror}" class="alert alert-danger" role="alert"> -->
-<!-- </div> -->
-<!-- <div th:if="${messageempty}" th:text="${messageempty}" class="alert alert-warning" role="alert"> -->
-<!-- </div> -->
 
-				</div>
-				<div class="col-md-4">
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<br>
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
+<!-- <br> -->
 
 <div class="container-fluid">
 	<div class="row">
@@ -163,7 +145,7 @@
     <div class="form-group mt-3">
         <label style="font-weight: bold;" for="url">Importer les rapports</label>
 <!--         <input type="file" name="file" class="form-control-file" id="file" accept="*.json"> -->
-        <input type="date" name="date" class="form-control-file" id="">
+        <input type="date" name="jour" class="form-control-file" id="">
 
     </div>
 <!--     <button type="submit" class="btn btn-primary">Envoyer</button> -->
