@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +23,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import turfinfos2.model.ParisTurfInfosConfig;
 import turfinfos2.model.TurfInfos;
+import turfinfos2.repository.ParisTurfInfoConfigRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.service.ImportJSONService;
 
@@ -37,6 +37,9 @@ public class ImportJSONController {
 	
 	@Autowired
 	TurfInfosRepository turfInfosRepository;
+	
+	@Autowired
+	ParisTurfInfoConfigRepository parisTurfInfoConfigRepository;
 	
 	@PostMapping("/upload-json-data-from-url")
     public String uploadJSONFileByDay(@RequestParam("jour") String jour, Model model, RedirectAttributes redirect) {
@@ -99,6 +102,18 @@ public class ImportJSONController {
 	
 	///////////////////////////////////////////////////////////
 	
+	private String setParisTurfId (String parisTurfId, Model model) {
+		ParisTurfInfosConfig configToUpdate = parisTurfInfoConfigRepository.findAll().stream().findFirst().get();
+		
+		configToUpdate.setParisTurfId(parisTurfId);
+		parisTurfInfoConfigRepository.save(configToUpdate);
+		
+		model.addAttribute("idupdated", true);
+		
+		return "update";
+		
+	}
+	
 	   private void navbarInfos(Model model) {
 		   
 		   List<TurfInfos> allInfos = turfInfosRepository.findAll();
@@ -106,6 +121,7 @@ public class ImportJSONController {
 		   //DATES
 	  	 Set<String> dates = allInfos.stream()
 					.map(TurfInfos :: getJour)
+					.sorted()
 					.collect(Collectors.toSet());
 	       model.addAttribute("datesnav", dates);
 		   

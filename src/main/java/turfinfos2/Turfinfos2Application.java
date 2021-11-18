@@ -1,12 +1,13 @@
 package turfinfos2;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
+import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+
+import turfinfos2.model.TurfInfos;
+import turfinfos2.repository.TurfInfosRepository;
 
 @SpringBootApplication
 public class Turfinfos2Application {
@@ -45,27 +46,23 @@ public class Turfinfos2Application {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		
 		
 //		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
 //
 //		
-//		
 //        List<TurfInfos> all = turfInfosRepository.findAll();
 //        
 //        all.forEach(ti-> {
 //        	
-//        	if(ti.getHasBetTypes() == null) {
-//        		ti.setHasBetTypes(false);
+//        	if(ti.getChronoPastille() == null) {
+//        		ti.setChronoPastille(false);
+//            	turfInfosRepository.save(ti);
+//        	}
+//        	if(ti.getJockeyPastille() == null) {
+//        		ti.setJockeyPastille(false);
 //            	turfInfosRepository.save(ti);
 //        	}
 //        
@@ -104,7 +101,9 @@ public class Turfinfos2Application {
 //
 //	       System.out.println(hourParse1 + "h" + hourParse2);
 
-
+		
+		
+		
 	}
 	
 

@@ -101,9 +101,9 @@ public class UploadController {
                 for(TurfInfos info : infos) {
 	            	turfInfoService.setMadeUpParams(info);
 
-                	if(!numcourses.contains(info.getNumcourse())) {
-                	turfInfosRepository.save(info);
-                	}
+//                	if(!numcourses.contains(info.getNumcourse())) {
+//                	turfInfosRepository.save(info);
+//                	}
                 	if(numcourses.contains(info.getNumcourse())) {
                 		  TurfInfos infoToUpdate = all.stream()
                      				.filter(ti-> ti.getNumero().equals(info.getNumero()) && ti.getNumcourse().equals(info.getNumcourse()))
@@ -184,7 +184,7 @@ public class UploadController {
     	//RACESLIST
     	List<TurfInfos> allPremiumReunionInfos = turfInfosRepository.findAllByJourAndByReunionstring(jour, reunionstring)
     			.stream()
-    			.filter(ti-> ti.getIsRunning() != null && ti.getIsRunning() == true && ti.getIsPremium().equals(true))
+    			.filter(ti-> ti.getIsRunning() != null && ti.getIsRunning() == true && ti.getIsPremium() != null && ti.getIsPremium().equals(true))
 				.collect(Collectors.toList());
     			
     	List<TurfInfos> reunionCracks = new ArrayList<>();
@@ -227,7 +227,12 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "ispick5", allraceInfos.get(0).getIsPick5());
 			model.addAttribute(numToString(num) + "istqq", allraceInfos.get(0).getIsTQQ());
 			model.addAttribute(numToString(num) + "runners", allraceInfos.get(0).getNumberOfInitialRunners());
-			model.addAttribute(numToString(num) + "caralist", allraceInfos.get(0).getHour() + " - " + allraceInfos.get(0).getCaraList1() + " - " + allraceInfos.get(0).getCaraList2());
+			
+			String nonPartants = "";
+			if(allraceInfos.get(0).getNumberOfNonRunners() != null && allraceInfos.get(0).getNumberOfNonRunners() > 0) {
+				 nonPartants = "(" + allraceInfos.get(0).getNumberOfNonRunners() + " NP)";
+			}
+			model.addAttribute(numToString(num) + "caralist", allraceInfos.get(0).getHour() + " - " + allraceInfos.get(0).getCaraList1() + " - " + allraceInfos.get(0).getCaraList2() + " - " + allraceInfos.get(0).getNumberOfInitialRunners() + " partants " + nonPartants);
 			model.addAttribute(numToString(num) + "hasbettypes", allraceInfos.get(0).getHasBetTypes());
 
 
@@ -406,6 +411,9 @@ public class UploadController {
 			Collections.reverse(listByNoteProno);
 			
 			reunionCracks.addAll(listByNoteProno);
+			
+			/////////////AFFECTER PASTILLES///////////////
+			setPastilles(listBypvjh, listByChronos, listByNoteProno, allraceInfos.size());
 						
 			
 			
@@ -442,11 +450,11 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "taypronoslist", listByTayPronos);
 						
 			
-			if(!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0 && listByNoteProno.size() < 9) {
+			if(!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0 && listByNoteProno.size() < 11) {
 				model.addAttribute(numToString(num) + "pronoslist", listByNoteProno);
 			}
-			if(!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0 &&  listByNoteProno.size() >= 9){
-				model.addAttribute(numToString(num) + "pronoslist", listByNoteProno.subList(0, 9));
+			if(!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0 &&  listByNoteProno.size() >= 11){
+				model.addAttribute(numToString(num) + "pronoslist", listByNoteProno.subList(0, 11));
 			}
 			if(listByNoteProno.isEmpty()) {
 				model.addAttribute(numToString(num) + "pronoslist", new ArrayList<>());
@@ -512,7 +520,7 @@ public class UploadController {
 						
 		}
 		
-		////////////INFOS/////////////////
+		////////////CRACKS/////////////////
 		List<TurfInfos> crackList = reunionCracks.stream()
 		.filter(ti-> ti.getNoteProno()>= 30)
 		.sorted(Comparator.comparingDouble(TurfInfos::getNoteProno))
@@ -1057,6 +1065,87 @@ public class UploadController {
 		System.out.println("Stop");
 	   
 	   return listByCl;
+   }
+   
+   private List<TurfInfos> setPastilles(List<TurfInfos> jockeys, List<TurfInfos> chronos, List<TurfInfos> pronos, int raceSize){
+	   
+	   if(raceSize == 7) {
+		   pronos.forEach(ti-> {
+			   if(jockeys.size() >= 5) {
+			   if(!jockeys.subList(0, 5).contains(ti)) {
+				   ti.setJockeyPastille(true);
+			   }
+			   }
+			   if(chronos.size() >= 5) {
+			   if(!chronos.subList(0, 5).contains(ti)) {
+				   ti.setChronoPastille(true);
+			   }
+			   }
+		   });
+	   }
+	   
+	   if(raceSize == 8 || raceSize == 9) {
+		   pronos.forEach(ti-> {
+			   if(jockeys.size() >= 6) {
+			   if(!jockeys.subList(0, 5).contains(ti)) {
+				   ti.setJockeyPastille(true);
+			   }
+			   }
+			   if(chronos.size() >= 6) {
+			   if(!chronos.subList(0, 6).contains(ti)) {
+				   ti.setChronoPastille(true);
+			   }
+			   }
+		   });
+	   }
+	   
+	   if(raceSize == 10 || raceSize == 11) {
+		   pronos.forEach(ti-> {
+			   if(jockeys.size() >= 7) {
+			   if(!jockeys.subList(0, 7).contains(ti)) {
+				   ti.setJockeyPastille(true);
+			   }
+			   }
+			   if(chronos.size() >= 7) {
+			   if(!chronos.subList(0, 7).contains(ti)) {
+				   ti.setChronoPastille(true);
+			   }
+			   }
+		   });
+	   }
+	   
+	   if(raceSize == 12 || raceSize == 13) {
+		   pronos.forEach(ti-> {
+			   if(jockeys.size() >= 8) {
+			   if(!jockeys.subList(0, 8).contains(ti)) {
+				   ti.setJockeyPastille(true);
+			   }
+			   }
+			   if(chronos.size() >= 8) {
+			   if(!chronos.subList(0, 8).contains(ti)) {
+				   ti.setChronoPastille(true);
+			   }
+			   }
+		   });
+	   }
+	   
+	   if(raceSize > 14) {
+		   pronos.forEach(ti-> {
+			   if(jockeys.size() >= 9) {
+			   if(!jockeys.subList(0, 9).contains(ti)) {
+				   ti.setJockeyPastille(true);
+			   }
+			   }
+			   if(chronos.size() >= 9) {
+			   if(!chronos.subList(0, 9).contains(ti)) {
+				   ti.setChronoPastille(true);
+			   }
+			   }
+		   });
+	   }
+	   
+
+	   return pronos;
    }
    
    private void navbarInfos(Model model) {

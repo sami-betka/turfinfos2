@@ -224,6 +224,13 @@ public class TurfInfos {
 	private Integer draw;
 	
 	private String hour;
+	
+	private Boolean chronoPastille;
+
+	private Boolean jockeyPastille;
+	
+	private Integer numberOfNonRunners;
+
 
 
 
@@ -241,7 +248,7 @@ public class TurfInfos {
 			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo, Integer nbVictChevalHippo,
 			Integer ranking, Double liveOdd, Boolean isRunning, Integer numberOfInitialRunners, Boolean isTQQ, Boolean isPick5,
 			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes, Integer draw, Double liveOddPlace,
-			String hour) {
+			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners) {
 		
 		this.id = id;
 		this.R = R;
@@ -297,6 +304,9 @@ public class TurfInfos {
 		
 		this.isPremium = isPremium;
 		this.draw = draw;
+		this.numberOfNonRunners = numberOfNonRunners;
+		
+
 
 
 
@@ -314,6 +324,8 @@ public class TurfInfos {
 		this.clInt = clInt;
 		this.tableId = tableId;
 		this.hasBetTypes = hasBetTypes;
+		this.chronoPastille = chronoPastille;
+		this.jockeyPastille = jockeyPastille;
 
 	}
 
@@ -818,6 +830,30 @@ public class TurfInfos {
 
 	public void setHour(String hour) {
 		this.hour = hour;
+	}
+
+	public Boolean getChronoPastille() {
+		return chronoPastille;
+	}
+
+	public void setChronoPastille(Boolean chronoPastille) {
+		this.chronoPastille = chronoPastille;
+	}
+
+	public Boolean getJockeyPastille() {
+		return jockeyPastille;
+	}
+
+	public void setJockeyPastille(Boolean jockeyPastille) {
+		this.jockeyPastille = jockeyPastille;
+	}
+
+	public Integer getNumberOfNonRunners() {
+		return numberOfNonRunners;
+	}
+
+	public void setNumberOfNonRunners(Integer numberOfNonRunners) {
+		this.numberOfNonRunners = numberOfNonRunners;
 	}
 
 }

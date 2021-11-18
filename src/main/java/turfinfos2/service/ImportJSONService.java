@@ -160,6 +160,7 @@ public class ImportJSONService {
 		                turfInfo.setIsRunning(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("isRunning").booleanValue());
 		                turfInfo.setIsTQQ(node.get("pageProps").get("race").get("isTQQ").booleanValue());
 		                turfInfo.setNumberOfInitialRunners(numberofRunners);
+		                turfInfo.setNumberOfNonRunners(node.get("pageProps").get("race").get("numberOfNonRunners").intValue());
 	                	turfInfo.setDraw(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("draw").intValue());
 
 
@@ -254,6 +255,7 @@ public class ImportJSONService {
 		                turfInfo.setIsRunning(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("isRunning").booleanValue());
 		                turfInfo.setIsTQQ(node.get("pageProps").get("race").get("isTQQ").booleanValue());
 		                turfInfo.setNumberOfInitialRunners(numberofRunners);
+		                turfInfo.setNumberOfNonRunners(node.get("pageProps").get("race").get("numberOfNonRunners").intValue());
 	                	turfInfo.setDraw(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("draw").intValue());
 
 

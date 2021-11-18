@@ -150,6 +150,7 @@ public class TurfInfoService {
     	
     	infoToUpdate.setHasBetTypes(info.getHasBetTypes());
     	infoToUpdate.setDraw(info.getDraw());
+    	infoToUpdate.setNumberOfNonRunners(info.getNumberOfNonRunners());
 
 
 
