@@ -34,3 +34,15 @@ function spinnerFunction() {
     textToHide.style.display = 'none';
     textToShow.style.display = '';
   }
+
+   //4//
+   function spinnerFunction4() {
+    var spinner = document.getElementById("mySpinner4");
+    var textToHide = document.getElementById("myTextToHide4");
+    var textToShow = document.getElementById("myTextToShow4");
+
+    spinner.classList.add("spinner-border");
+    spinner.classList.add("spinner-border-sm");
+    textToHide.style.display = 'none';
+    textToShow.style.display = '';
+  }
