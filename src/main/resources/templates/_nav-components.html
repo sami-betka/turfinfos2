@@ -27,6 +27,40 @@
   <source src="vid/face-time.mp4" type="video/mp4">
 </video>
 
+	<div th:fragment="header" class="header" style="padding-bottom: 15px;">
+	    <div style="margin-right: 20px; padding-right: 20px" class="">
+      <h4 style="text-shadow: 3px 3px 4px #000000; text-align: left;">
+                 <img style="width: 75px; height: 80px; box-shadow: 4px 4px 8px #000000; border-style: solid; border-radius: 50%; border-color: gold;" th:src="@{/img/horsefire.jpg}" alt="logo" /> 
+      
+        <a href="/" class="" style="font-weight: bold; font-style:oblique; color: white; border: 3px solid gold; border-radius:50px; background-color: red; padding: 5px;">
+<!--            <img style="width: 75px; height: 80px; box-shadow: 4px 4px 8px #000000; border-style: solid; border-radius: 50%; border-color: gold;" th:src="@{/img/horsefire.jpg}" alt="logo" />  -->
+           <strong>Sam & Tay Infos</strong> 
+		</a>		
+       </h4>
+      </div>
+<!-- 		<h1 class="shadowtext text-danger"> -->
+<!-- 			Stock anti cor<img class="sizelittlelogo" -->
+<!-- 				th:src="@{/images/coro2.jpg}" alt="logo" />navirus -->
+<!-- 		</h1> -->
+
+            <a th:if="${user.lastName == 'Milou'}" sec:authorize="isAuthenticated()" class="text-dark welcomeright" 
+			style=" float: right; margin-left: 10px; " href="/users/userinfos">
+				<i data-feather="heart"></i>
+			</a>
+			
+			 <a th:if="${user.lastName != 'Milou'}" sec:authorize="isAuthenticated()" class="text-dark welcomeright" 
+			style=" float: right; margin-left: 10px; " href="/users/userinfos">
+				<i data-feather="user"></i>
+			</a>
+			
+		<p th:if="${user != null}"
+			sec:authorize="isAuthenticated()" class="welcomeright text-dark"
+			th:utext="'Bonjour ' + ${#strings.toUpperCase(user.firstName)}"></p>
+			
+				</div>
+
+
+
 	 <div th:fragment="footer" class="footer-basic">
         <footer>
             <div class="social"><a href="/doigt"><i class="icon ion-social-instagram"></i></a><a href="/doigt"><i class="icon ion-social-snapchat"></i></a><a href="/doigt"><i class="icon ion-social-twitter"></i></a><a href="/doigt"><i class="icon ion-social-facebook"></i></a></div>
@@ -42,27 +76,15 @@
     </div>
   
       
-     <nav style=" opacity: 1;" th:fragment="nav" class="fixed-top navbar navbar-expand-lg navbar-light bg-danger">
+     <nav style=" opacity: 1;" th:fragment="nav" class=" navbar navbar-expand-lg navbar-light bg-danger">
 
     <div style="margin-right: 20px; padding-right: 20px" class="">
       <h4 style="text-shadow: 3px 3px 4px #000000;">
         <a href="/" class="" style="text-align: center; font-weight: bold; font-style:oblique; color: white;">
            <img style="width: 55px; height: 60px; box-shadow: 4px 4px 8px #000000; border-style: solid; border-radius: 50%; border-color: gold;" th:src="@{/img/horsefire.jpg}" alt="logo" /> 
 
-<!--                     <span>D</span> -->
-<!--                     <span>j</span> -->
-<!--                     <span>e</span> -->
-<!--                     <span>T</span> -->
-<!--                     <span>a</span> -->
-<!--                     <span>y</span> -->
-<!--                     <span>'</span> -->
-<!--                     <span>I</span> -->
-<!--                     <span>n</span> -->
-<!--                     <span>f</span> -->
-<!--                     <span>o</span> -->
-<!--                     <span>s</span> -->
-          
-           DjeTay'Infos 
+
+           Sam & Tay Infos 
 <!--            &Agrave; la recherche du spécialiste  -->
                
 		</a>		
@@ -78,7 +100,9 @@
   
     <ul class="navbar-nav ml-auto">
     
-          <li class="nav-item active" style="border: solid gold; border-radius: 15px; margin-right: 20px">
+<!--           <li class="nav-item active" style="border: solid gold; border-radius: 15px; margin-right: 20px"> -->
+          <li class="nav-item active" style="border-left:1px solid gold; border-right:1px solid gold; padding-right: 10px; padding-left: 10px;">
+
            
         <a class="nav-link text-white" href="/upload" style="text-align: center; font-size: 1.23em; font-weight: bold; text-shadow: 3px 3px 4px #000000;" id="" role="" data-toggle="" aria-expanded="">
           Importer donn&eacute;es
@@ -86,14 +110,14 @@
     
       </li>
    
-           <li class="nav-item dropdown" style="border: solid gold; border-radius: 15px; margin-right: 20px">
+           <li class="nav-item dropdown" style="border-right:1px solid gold; padding-right: 10px; padding-left: 10px;">
            
         <a class="nav-link dropdown-toggle text-white" href="#" style="text-align: center; font-size: 1.23em; font-weight: bold; text-shadow: 3px 3px 4px #000000;" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
 <!--                  <a class="nav-link dropdown-toggle text-white" href="/doigt" style="text-align: center; font-size: 1.23em; font-weight: bold; text-shadow: 3px 3px 4px #000000;" id="navbarDropdownMenuLink" role="button" data-toggle="" aria-expanded="false"> -->
          
           Réunions du jour
         </a>
-        <div style="border: solid 3px gold; padding: 5px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div style="padding: 5px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
          
          <div th:each="r : ${reunionsofday}" style="text-align: center;">
         
@@ -120,7 +144,7 @@
         </div>
       </li>
       
-            <li class="nav-item dropdown" style="border: solid gold; border-radius: 15px; margin-right: 20px">
+            <li class="nav-item dropdown" style="border-right:1px solid gold; padding-right: 10px; padding-left: 10px;">
 <!--       <h4> -->
         <a class="nav-link dropdown-toggle text-white" href="#" style="text-align: center; font-size: 1.23em; font-weight: bold; text-shadow: 3px 3px 4px #000000;" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
 <!--                 <a class="nav-link dropdown-toggle text-white" href="/doigt" style="text-align: center; font-size: 1.23em; font-weight: bold; text-shadow: 3px 3px 4px #000000;" id="navbarDropdownMenuLink" role="button" data-toggle="" aria-expanded="false"> -->
@@ -128,29 +152,14 @@
           Dates
         </a>
 <!--         </h4> -->
-        <div style="border: solid 3px gold; padding: 5px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div style="padding: 5px;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         
         <div th:each="d : ${datesnav}" style="text-align: center;">
         
         <a class="text-dark btn btn-outline-info" style="font-weight: bold; margin-bottom: 3px;" th:text="${d}" th:href="@{/day-infos?jour={jour}(jour=${d})}"></a>
         
         </div>
-        
-<!--           <form style="margin-bottom: 5px;" method="POST" th:action="@{/day-infos}" enctype="multipart/form-data"> -->
-
-<!--                             <div class=""> -->
-<!-- 								<label class="text-dark" style="font-weight: bold;">Choisir une date:</label><br>  -->
-<!-- 								<select class="form-control form-control-user" name="jour" required="required"> -->
-<!-- 									<option value="">--Choisir--</option> -->
-
-<!-- 									<option th:each="d : ${datesnav}" th:value="${d}" -->
-<!-- 										th:text="${d}"></option> -->
-<!-- 								</select> -->
-<!-- 							</div> -->
-							
-<!-- 							    <button type="submit" class="btn btn-small btn-primary">Acc&eacute;der</button>					 -->
-<!--                    </form> -->
-        
+   
         
         </div>
       </li>
@@ -158,7 +167,7 @@
         
     </ul>
     
-    <ul style="padding-left: 20px; border: solid gold; border-radius: 30px; padding-right: 20px" class="navbar-nav ml-auto">
+    <ul style="border-left:1px solid gold; border-right:1px solid gold; padding-right: 10px; padding-left: 10px;" class="navbar-nav ml-auto">
     
           <li class="nav-item active">
           <h5>

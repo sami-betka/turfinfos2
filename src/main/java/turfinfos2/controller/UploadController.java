@@ -952,120 +952,120 @@ public class UploadController {
 	   return reverseList;
    }
    
-   private List<TurfInfos> createClassementList(List<TurfInfos> allraceInfos){
-
-	   LinkedList<TurfInfos> list = new LinkedList<>();
-	   
-
-	   for(TurfInfos t: allraceInfos) {
-//			System.out.println(t.getCl());
-		   
-			if(t.getRanking() == 1) {
-				t.setRanking(1);
-				list.add(t);
-			}
-			if(t.getRanking() == 2) {
-				t.setRanking(2);
-				list.add(t);
-
-			}
-			if(t.getRanking() == 3) {
-				t.setRanking(3);
-				list.add(t);
-
-			}
-			if(t.getRanking() == 4) {
-				t.setRanking(4);
-				list.add(t);
-
-			}
-			if(t.getRanking() == 5) {
-				t.setRanking(5);
-				list.add(t);
-
-			}
-			if(t.getRanking() == 6) {
-				t.setRanking(6);
-				list.add(t);
-
-			}
-			if(t.getRanking() == 7) {
-				t.setRanking(7);
-				list.add(t);
-
-			}
-			if(t.getRanking() == 8) {
-				t.setRanking(8);
-				list.add(t);
-
-			}
-			
-			if(t.getRanking() == 9) {
-				t.setRanking(9);
-				list.add(t);
-
-			}
-			if(t.getRanking() == 10) {
-				t.setRanking(10);
-				list.add(t);
-			}
-			if(t.getRanking() == 11) {
-				t.setRanking(11);
-				list.add(t);
-			}
-			if(t.getRanking() == 12) {
-				t.setRanking(12);
-				list.add(t);
-			}
-			if(t.getRanking() == 13) {
-				t.setRanking(13);
-				list.add(t);
-
-			}
-			if(t.getRanking() == 14) {
-				t.setRanking(14);
-				list.add(t);
-			}
-			if(t.getRanking() == 15) {
-				t.setRanking(15);
-				list.add(t);
-			}
-			if(t.getRanking() == 16) {
-				t.setRanking(16);
-				list.add(t);
-			}
-			if(t.getRanking() == 17) {
-				t.setRanking(17);
-				list.add(t);
-			}
-			if(t.getRanking() == 18) {
-				t.setRanking(18);
-				list.add(t);
-			}
-			if(t.getRanking() == 19) {
-				t.setRanking(19);
-				list.add(t);
-			}
-			if(t.getRanking() == 20) {
-				t.setRanking(20);
-				list.add(t);
-			}
-		}
-	   
-	   List<TurfInfos> listByCl =  list.stream()
-				.filter(ti -> ti.getClInt()!= null)
-				.sorted(Comparator.comparingInt(TurfInfos::getClInt))
-				.collect(Collectors.toList());
-	   
-	   for(TurfInfos t: listByCl) {
-		   System.out.println(t.getClInt());
-//		   System.out.println(t.getCl());
-
-	   }
-		System.out.println("Stop");
-	   
-	   return listByCl;
-   }
+//   private List<TurfInfos> createClassementList(List<TurfInfos> allraceInfos){
+//
+//	   LinkedList<TurfInfos> list = new LinkedList<>();
+//	   
+//
+//	   for(TurfInfos t: allraceInfos) {
+////			System.out.println(t.getCl());
+//		   
+//			if(t.getRanking() == 1) {
+//				t.setRanking(1);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 2) {
+//				t.setRanking(2);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 3) {
+//				t.setRanking(3);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 4) {
+//				t.setRanking(4);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 5) {
+//				t.setRanking(5);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 6) {
+//				t.setRanking(6);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 7) {
+//				t.setRanking(7);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 8) {
+//				t.setRanking(8);
+//				list.add(t);
+//
+//			}
+//			
+//			if(t.getRanking() == 9) {
+//				t.setRanking(9);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 10) {
+//				t.setRanking(10);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 11) {
+//				t.setRanking(11);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 12) {
+//				t.setRanking(12);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 13) {
+//				t.setRanking(13);
+//				list.add(t);
+//
+//			}
+//			if(t.getRanking() == 14) {
+//				t.setRanking(14);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 15) {
+//				t.setRanking(15);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 16) {
+//				t.setRanking(16);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 17) {
+//				t.setRanking(17);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 18) {
+//				t.setRanking(18);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 19) {
+//				t.setRanking(19);
+//				list.add(t);
+//			}
+//			if(t.getRanking() == 20) {
+//				t.setRanking(20);
+//				list.add(t);
+//			}
+//		}
+//	   
+//	   List<TurfInfos> listByCl =  list.stream()
+//				.filter(ti -> ti.getClInt()!= null)
+//				.sorted(Comparator.comparingInt(TurfInfos::getClInt))
+//				.collect(Collectors.toList());
+//	   
+//	   for(TurfInfos t: listByCl) {
+//		   System.out.println(t.getClInt());
+////		   System.out.println(t.getCl());
+//
+//	   }
+//		System.out.println("Stop");
+//	   
+//	   return listByCl;
+//   }
    
    private List<TurfInfos> setPastilles(List<TurfInfos> jockeys, List<TurfInfos> chronos, List<TurfInfos> pronos, int raceSize){
 	   
@@ -1087,7 +1087,7 @@ public class UploadController {
 	   if(raceSize == 8 || raceSize == 9) {
 		   pronos.forEach(ti-> {
 			   if(jockeys.size() >= 6) {
-			   if(!jockeys.subList(0, 5).contains(ti)) {
+			   if(!jockeys.subList(0, 6).contains(ti)) {
 				   ti.setJockeyPastille(true);
 			   }
 			   }
