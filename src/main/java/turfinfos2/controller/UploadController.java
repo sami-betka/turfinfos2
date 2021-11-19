@@ -1129,7 +1129,7 @@ public class UploadController {
 		   });
 	   }
 	   
-	   if(raceSize > 14) {
+	   if(raceSize >= 14) {
 		   pronos.forEach(ti-> {
 			   if(jockeys.size() >= 9) {
 			   if(!jockeys.subList(0, 9).contains(ti)) {
