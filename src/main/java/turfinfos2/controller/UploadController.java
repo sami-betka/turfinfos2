@@ -384,6 +384,12 @@ public class UploadController {
 						.filter(ti -> ti.getRanking()!= null && ti.getRanking()!= 0)
 						.sorted(Comparator.comparingInt(TurfInfos::getRanking))
 						.collect(Collectors.toList());
+				
+				//CORDES
+				List<TurfInfos> listByDraw = allraceInfos.stream()
+						.filter(ti -> ti.getDraw()!= null && ti.getDraw()!= 0)
+						.sorted(Comparator.comparingInt(TurfInfos::getDraw))
+						.collect(Collectors.toList());
 			
 			//Calcul de la note
 			List<TurfInfos> listByNoteProno = calculateFinalNoteProno(allraceInfos,
@@ -448,6 +454,8 @@ public class UploadController {
 
 			model.addAttribute(numToString(num) + "chronoslist", listByChronos);
 			model.addAttribute(numToString(num) + "taypronoslist", listByTayPronos);
+			model.addAttribute(numToString(num) + "drawlist", listByDraw);
+
 						
 			
 			if(!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0 && listByNoteProno.size() < 11) {
@@ -494,11 +502,11 @@ public class UploadController {
 
 			if(allraceInfos.get(0).getRaceSpecialty().equals("A") || allraceInfos.get(0).getRaceSpecialty().equals("M")) {
 				model.addAttribute("specialty", "trot");
-			} else {
+			} else if (allraceInfos.get(0).getRaceSpecialty().equals("P")){
 				model.addAttribute("specialty", "galop");
 			}
 			}else {
-				model.addAttribute("specialty", "");
+				model.addAttribute("specialty", "haies");
 			}
 						
 			model.addAttribute(numToString(num) + "exists", true);

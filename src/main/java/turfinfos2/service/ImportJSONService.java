@@ -424,24 +424,17 @@ public class ImportJSONService {
 						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(1)) {
 							ti.setLiveOddPlace(node.get(1).get("rapports").get(0).get("dividendePourUnEuro").doubleValue()/100);
 							turfInfosRepository.save(ti);
-//							System.out.println(ti.getLiveOddPlace());
 
-							
 						}
 						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(2)) {
 						    System.out.println(ti.getRanking() +"rrr" + ti.getR() + "C" + race);
 							ti.setLiveOddPlace(node.get(1).get("rapports").get(1).get("dividendePourUnEuro").doubleValue()/100);
 							turfInfosRepository.save(ti);
-//							System.out.println(ti.getLiveOddPlace());
-
 
 						}
 						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(3) && node.get(1).get("rapports").size()>2) {
 							ti.setLiveOddPlace(node.get(1).get("rapports").get(2).get("dividendePourUnEuro").doubleValue()/100);
 							turfInfosRepository.save(ti);
-//							System.out.println(ti.getLiveOddPlace());
-
-
 						}
 						
 					});

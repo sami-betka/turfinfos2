@@ -97,6 +97,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${onechronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
                    </tr>
+                   
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${onedrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
+                   </tr>
                                      
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -221,6 +226,11 @@
                     <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>                    
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${twochronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
+                   </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${twodrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
                    </tr>
           
                       <tr class="entcolor">
@@ -348,6 +358,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>                    
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${threechronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
                    </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${threedrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
+                   </tr>
                                 
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -471,6 +486,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${fourchronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
                    </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${fourdrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
+                   </tr>
                
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -593,6 +613,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${fivechronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
                    </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${fivedrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
+                   </tr>
               
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -711,6 +736,11 @@
                      <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${sixchronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
+                   </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${sixdrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
                    </tr>
                
                       <tr class="entcolor">
@@ -832,6 +862,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${sevenchronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
                    </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${sevendrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
+                   </tr>
               
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -950,6 +985,11 @@
                      <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${eightchronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
+                   </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${eightdrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
                    </tr>
               
                       <tr class="entcolor">
@@ -1072,6 +1112,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${ninechronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
                    </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${ninedrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
+                   </tr>
               
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -1191,6 +1236,11 @@
                      <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${tenchronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
+                   </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${tendrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
                    </tr>
                
                       <tr class="entcolor">
@@ -1313,6 +1363,11 @@
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${elevenchronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
                    </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${elevendrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
+                   </tr>
                
                       <tr class="entcolor">
                     <th scope="">V-E-H(%)</th>
@@ -1433,6 +1488,11 @@
                      <th th:if="${specialty == 'trot'}" scope="">Chronos</th>
                     <th th:if="${specialty == 'galop'}" scope="">Valeurs</th>
                     <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" style="font-weight: bold;" th:each="p, i : ${twelvechronoslist}"><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong> [[${p.numero}]] </strong></p></td>
+                   </tr>
+                     
+                      <tr th:if="${specialty == 'galop'}" class="chronoscolor">
+                    <th scope="">Corde</th>
+                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" class="borderbold" th:each="p, i : ${twelvedrawlist}" ><p th:inline="text"><strong>[[${p.numero}]] </strong>- ([[${p.draw}]]) </p></td>
                    </tr>
                
                       <tr class="entcolor">
