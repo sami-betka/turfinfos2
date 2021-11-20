@@ -56,7 +56,9 @@
 		<div class="col-md-4">
 		<div th:if="${#lists.size(cracklist) gt 0}" class="" style="width:100%; border: 3px solid blue; padding: 10px; margin-bottom: 5px; background-color: white;">
 <h5 style="border-bottom: 1px solid black; padding-bottom: 2px;">Cracks du jour R[[${reunionstring}]] (+30pts):</h5>
-  <p th:each="c : ${cracklist}"><strong th:if="${c.numero lt 10}" th:classapend="${c.noteProno gt 35 ? 'text-warning' : ''}">[[${c.C}]]0[[${c.numero}]] </strong><strong th:if="${c.numero gt 9}" th:classapend="${c.noteProno gt 35 ? 'text-warning' : ''}">[[${c.C}]][[${c.numero}]] </strong> ([[${c.noteProno}]] pts) <strong th:if="${c.ranking == 1}" class="text-danger">&nbsp; G ([[${c.liveOdd}]]/1) </strong><strong th:if="${c.liveOddPlace != null}" class="text-success">&nbsp; P  ([[${c.liveOddPlace}]]) </strong><strong class="text-danger" th:if="${c.isRunning eq false}">&nbsp; Non-partant </strong></p>
+  <p th:if="${c.noteProno gt 35}" style ="border: 2px solid gold; border-radius: 30px; display:inline-block; padding-left: 7px; padding-right: 7px;" class="" th:each="c : ${cracklist}"><strong th:if="${c.numero lt 10}"> [[${c.C}]]0[[${c.numero}]] </strong><strong th:if="${c.numero gt 9}">[[${c.C}]][[${c.numero}]] </strong> ([[${c.noteProno}]] pts) <strong th:if="${c.ranking == 1}" class="text-danger">&nbsp; G ([[${c.liveOdd}]]/1) </strong><strong th:if="${c.liveOddPlace != null}" class="text-success">&nbsp; P  ([[${c.liveOddPlace}]]) </strong><strong class="text-danger" th:if="${c.isRunning eq false}">&nbsp; Non-partant </strong></p>
+    <p th:if="${c.noteProno <= 35}" style ="padding-left: 9px; padding-right: 9px;" class="" th:each="c : ${cracklist}"><strong th:if="${c.numero lt 10}"> [[${c.C}]]0[[${c.numero}]] </strong><strong th:if="${c.numero gt 9}">[[${c.C}]][[${c.numero}]] </strong> ([[${c.noteProno}]] pts) <strong th:if="${c.ranking == 1}" class="text-danger">&nbsp; G ([[${c.liveOdd}]]/1) </strong><strong th:if="${c.liveOddPlace != null}" class="text-success">&nbsp; P  ([[${c.liveOddPlace}]]) </strong><strong class="text-danger" th:if="${c.isRunning eq false}">&nbsp; Non-partant </strong></p>
+  
 </div> 
 </div>
 		

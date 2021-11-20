@@ -536,6 +536,8 @@ public class UploadController {
 		Collections.reverse(crackList);
 
 		model.addAttribute("cracklist", crackList);
+		model.addAttribute("supercracknote", 35);
+
 		
 ////////////Placés du jour/////////////////
 	List<TurfInfos> placeList = allPremiumReunionInfos.stream()
