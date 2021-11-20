@@ -172,10 +172,10 @@ public class TurfInfoController {
 			@RequestParam(name = "three", required = false) String three,
 			@RequestParam(name = "four", required = false) String four,
 			@RequestParam(name = "five", required = false) String five,
-//	    		@RequestParam(name = "six", required = false) String six,
-//	    		@RequestParam(name = "seven", required = false) String seven,
-//	    		@RequestParam(name = "eight", required = false) String eight,
-//	    		@RequestParam(name = "nine", required = false) String nine,
+	    		@RequestParam(name = "six", required = false) String six,
+	    		@RequestParam(name = "seven", required = false) String seven,
+	    		@RequestParam(name = "eight", required = false) String eight,
+	    		@RequestParam(name = "nine", required = false) String nine,
 			@RequestParam(name = "jour", required = false) String jour,
 			@RequestParam(name = "reunion", required = false) String reunion,
 			@RequestParam(name = "numcourse", required = false) String numcourse) {
@@ -277,6 +277,72 @@ public class TurfInfoController {
 			});
 
 			tinf.setTayProno(5);
+			repo.save(tinf);
+
+		}
+		
+		
+		if (six == "") {
+			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 6);
+			list.stream().forEach(ti -> {
+				ti.setTayProno(null);
+				repo.save(ti);
+			});
+		}
+		else if (six != null && six != "") {
+			TurfInfos tinf = repo.findById(Long.valueOf(six)).get();
+
+			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 6);
+			list.stream().forEach(ti -> {
+				ti.setTayProno(null);
+				repo.save(ti);
+			});
+
+			tinf.setTayProno(6);
+			repo.save(tinf);
+
+		}
+		
+		
+		if (seven == "") {
+			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 7);
+			list.stream().forEach(ti -> {
+				ti.setTayProno(null);
+				repo.save(ti);
+			});
+		}
+		else if (seven != null && seven != "") {
+			TurfInfos tinf = repo.findById(Long.valueOf(seven)).get();
+
+			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 7);
+			list.stream().forEach(ti -> {
+				ti.setTayProno(null);
+				repo.save(ti);
+			});
+
+			tinf.setTayProno(7);
+			repo.save(tinf);
+
+		}
+		
+		
+		if (eight == "") {
+			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 8);
+			list.stream().forEach(ti -> {
+				ti.setTayProno(null);
+				repo.save(ti);
+			});
+		}
+		else if (eight != null && eight != "") {
+			TurfInfos tinf = repo.findById(Long.valueOf(eight)).get();
+
+			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 8);
+			list.stream().forEach(ti -> {
+				ti.setTayProno(null);
+				repo.save(ti);
+			});
+
+			tinf.setTayProno(8);
 			repo.save(tinf);
 
 		}
