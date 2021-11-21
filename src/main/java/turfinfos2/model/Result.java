@@ -17,6 +17,10 @@ public class Result {
 	private Long id;
 
 	private String jour;
+	
+	private String R;
+
+	private Integer C;
 
 	private Integer numcourse;
 
@@ -48,12 +52,14 @@ public class Result {
 
 	
 
-	public Result(Long id, String jour, Integer numcourse, Double coupleGagnant, Double coupleOrdre, Double trio,
+	public Result(Long id, String jour, String R, Integer C, Integer numcourse, Double coupleGagnant, Double coupleOrdre, Double trio,
 			Double trioOrdre, List<Double> multis, Double pick5, Double super4, Double tierceDesordre,
 			Double tierceOrdre, Double quarteDesordre, Double quarteOrdre, Double quinteDesordre, Double quinteOrdre) {
 		super();
 		this.id = id;
 		this.jour = jour;
+		this.R = R;
+		this.C = C;
 		this.numcourse = numcourse;
 		this.coupleGagnant = coupleGagnant;
 		this.coupleOrdre = coupleOrdre;
@@ -266,6 +272,30 @@ public class Result {
 
 	public void setQuinteOrdre(Double quinteOrdre) {
 		this.quinteOrdre = quinteOrdre;
+	}
+
+
+
+	public String getR() {
+		return R;
+	}
+
+
+
+	public void setR(String r) {
+		R = r;
+	}
+
+
+
+	public Integer getC() {
+		return C;
+	}
+
+
+
+	public void setC(Integer c) {
+		C = c;
 	}
 
 }

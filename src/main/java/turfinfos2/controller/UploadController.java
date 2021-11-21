@@ -525,6 +525,9 @@ public class UploadController {
 			
 			model.addAttribute(numToString(num) + "horses", listByNumCheval);
 			model.addAttribute(numToString(num) + "numcourse", allraceInfos.get(0).getNumcourse());
+			model.addAttribute("reunion", allPremiumReunionInfos.get(0).getR());
+			model.addAttribute(numToString(num) + "race", num);
+
 						
 		}
 		

@@ -201,6 +201,10 @@
 		        <div th:replace="_components :: taypronos-dropdownsone(${onehorses}, ${onenumcourse})">...</div>
 		</div>
 		
+		  <div>
+		  <a type="button" th:href="@{/current-odds?jour={jour}&reunion={reunion}&course={race}(jour=${journav}, reunion=${reunion}, race=${onerace})}">jjj</a>
+		</div>
+		
 		
 </div>		
             <!--//Collapse TAYPRONOS END -->
@@ -708,7 +712,7 @@
 <!--         </div> -->
         <div th:if="${fivetaypronos eq true}">
                 <div th:replace="_components :: taypronos-modiffive">...</div>
-		        <div th:replace="_components :: taypronos-dropdownsone(${fivehorses}, ${fivenumcourse})">...</div>
+		        <div th:replace="_components :: taypronos-dropdownsfive(${fivehorses}, ${fivenumcourse})">...</div>
 		</div>
 </div>
 
