@@ -69,24 +69,24 @@ public class Turfinfos2Application {
 		
 		
 		
-		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
-	
-        List<TurfInfos> all = turfInfosRepository.findAll();
-        
-        all.forEach(ti-> {
-        	
-        	if(ti.getRecence() == null) {
-        		ti.setRecence(0);
-        	}
-        	if(ti.getIsCross() == null) {
-        		ti.setIsCross(false);
-        	}
-       
-            	turfInfosRepository.save(ti);
-        
-        });
-        System.out.println("STOP");
-        System.out.println(all.size());
+//		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
+//	
+//        List<TurfInfos> all = turfInfosRepository.findAll();
+//        
+//        all.forEach(ti-> {
+//        	
+//        	if(ti.getRecence() == null) {
+//        		ti.setRecence(0);
+//        	}
+//        	if(ti.getIsCross() == null) {
+//        		ti.setIsCross(false);
+//        	}
+//       
+//            	turfInfosRepository.save(ti);
+//        
+//        });
+//        System.out.println("STOP");
+//        System.out.println(all.size());
 
 		
 		
