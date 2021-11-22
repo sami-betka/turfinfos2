@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -23,8 +24,22 @@ public class Result {
 	private Integer C;
 
 	private Integer numcourse;
+	
+	private Double simpleGagnant;
+
+	private Double simplePlace1;
+
+	private Double simplePlace2;
+	
+	private Double simplePlace3;
 
 	private Double coupleGagnant;
+	
+	private Double couplePlace1;
+
+	private Double couplePlace2;
+
+	private Double couplePlace3;
 
 	private Double coupleOrdre;
 
@@ -32,7 +47,8 @@ public class Result {
 
 	private Double trioOrdre;
 
-//	private List<Double> multis;
+	@OneToOne
+	private Multi multi;
 
 	private Double pick5;
 

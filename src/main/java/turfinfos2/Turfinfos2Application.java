@@ -1,14 +1,14 @@
 package turfinfos2;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import turfinfos2.model.CurrentOdds;
+import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.CurrentOddsRepository;
+import turfinfos2.repository.TurfInfosRepository;
 
 @SpringBootApplication
 public class Turfinfos2Application {
@@ -69,24 +69,25 @@ public class Turfinfos2Application {
 		
 		
 		
-//		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
-//
-//		
-//        List<TurfInfos> all = turfInfosRepository.findAll();
-//        
-//        all.forEach(ti-> {
-//        	
-//        	if(ti.getChronoPastille() == null) {
-//        		ti.setChronoPastille(false);
-//            	turfInfosRepository.save(ti);
-//        	}
-//        	if(ti.getJockeyPastille() == null) {
-//        		ti.setJockeyPastille(false);
-//            	turfInfosRepository.save(ti);
-//        	}
-//        
-//        });
-//        System.out.println("STOP");
+		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
+	
+        List<TurfInfos> all = turfInfosRepository.findAll();
+        
+        all.forEach(ti-> {
+        	
+        	if(ti.getRecence() == null) {
+        		ti.setRecence(0);
+        	}
+        	if(ti.getIsCross() == null) {
+        		ti.setIsCross(false);
+        	}
+       
+            	turfInfosRepository.save(ti);
+        
+        });
+        System.out.println("STOP");
+        System.out.println(all.size());
+
 		
 		
 		

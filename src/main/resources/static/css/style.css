@@ -54,6 +54,11 @@ body, html {
 	background-repeat: no-repeat;
 }
 
+.crossed
+{
+   background-image: linear-gradient(to bottom right,  transparent calc(50% - 1px), red, transparent calc(50% + 1px)); 
+}
+
 div{
 	
 }
@@ -165,7 +170,7 @@ background-color: #90EE90;
 /* } */
 
 
-/* Flèche vers haut de la page */
+/* Flï¿½che vers haut de la page */
 
 #myBtn {
   display: none;

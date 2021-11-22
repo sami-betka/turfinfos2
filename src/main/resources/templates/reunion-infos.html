@@ -152,7 +152,7 @@
                    
                     <tr class="chronoscolor">
                     <th scope="" class="">Le Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${onepronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and onechronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td class="" th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${onepronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and onechronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                     </tr>
                                     
                      <tr class="chronoscolor" th:if="${#lists.size(oneclassementlist) gt 0}">
@@ -177,9 +177,7 @@
         		<div th:replace="_components :: chronos-buttonone">...</div>
         		<div th:replace="_components :: chronos-dropdownsone(${onehorses})">...</div>
         </div>
-<!--          <div th:if="${onechronos eq true}"> -->
-<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
-<!--         </div> -->
+
         <div th:if="${onechronos eq true}">
                 <div th:replace="_components :: chronos-modifone">...</div>
 		        <div th:replace="_components :: chronos-dropdownsone(${onehorses})">...</div>
@@ -193,18 +191,15 @@
         		<div th:replace="_components :: taypronos-buttonone">...</div>
         		<div th:replace="_components :: taypronos-dropdownsone(${onehorses}, ${onenumcourse})">...</div>
         </div>
-<!--          <div th:if="${onechronos eq true}"> -->
-<!--         		<div th:replace="_components :: chronos-modif">...</div> -->
-<!--         </div> -->
+
         <div th:if="${onetaypronos eq true}">
                 <div th:replace="_components :: taypronos-modifone">...</div>
 		        <div th:replace="_components :: taypronos-dropdownsone(${onehorses}, ${onenumcourse})">...</div>
 		</div>
 		
-		  <div>
-		  <a type="button" th:href="@{/current-odds?jour={jour}&reunion={reunion}&course={race}(jour=${journav}, reunion=${reunion}, race=${onerace})}">jjj</a>
-		</div>
-		
+			<div th:replace="_cross-components :: prono-buttonone">...</div>
+        		<div th:replace="_cross-components :: prono-dropdownone(${onehorses})">...</div>
+
 		
 </div>		
             <!--//Collapse TAYPRONOS END -->
@@ -286,7 +281,7 @@
                   
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${twopronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and twochronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${twopronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and twochronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                                   
                      <tr class="chronoscolor" th:if="${#lists.size(twoclassementlist) gt 0}">
@@ -333,6 +328,9 @@
                 <div th:replace="_components :: taypronos-modiftwo">...</div>
 		        <div th:replace="_components :: taypronos-dropdownstwo(${twohorses}, ${twonumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttontwo">...</div>
+        		<div th:replace="_cross-components :: prono-dropdowntwo(${twohorses})">...</div>
   
   </div>          
 
@@ -417,7 +415,7 @@
                     
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${threepronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and threechronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${threepronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and threechronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                  
                      <tr class="chronoscolor" th:if="${#lists.size(threeclassementlist) gt 0}">
@@ -461,6 +459,9 @@
                 <div th:replace="_components :: taypronos-modifthree">...</div>
 		        <div th:replace="_components :: taypronos-dropdownsthree(${threehorses}, ${threenumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttonthree">...</div>
+        		<div th:replace="_cross-components :: prono-dropdownthree(${threehorses})">...</div>
 		
 </div>
  
@@ -545,7 +546,7 @@
                  
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${fourpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and fourchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${fourpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and fourchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                 
                      <tr class="chronoscolor" th:if="${#lists.size(fourclassementlist) gt 0}">
@@ -587,6 +588,9 @@
                 <div th:replace="_components :: taypronos-modiffour">...</div>
 		        <div th:replace="_components :: taypronos-dropdownsfour(${fourhorses}, ${fournumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttonfour">...</div>
+        		<div th:replace="_cross-components :: prono-dropdownfour(${fourhorses})">...</div>
 </div>
   
 		
@@ -672,7 +676,7 @@
                   
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${fivepronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and fivechronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${fivepronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and fivechronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                 
                      <tr class="chronoscolor" th:if="${#lists.size(fiveclassementlist) gt 0}">
@@ -714,6 +718,9 @@
                 <div th:replace="_components :: taypronos-modiffive">...</div>
 		        <div th:replace="_components :: taypronos-dropdownsfive(${fivehorses}, ${fivenumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttonfive">...</div>
+        		<div th:replace="_cross-components :: prono-dropdownfive(${fivehorses})">...</div>
 </div>
 
 		
@@ -796,7 +803,7 @@
                     
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${sixpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and sixchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${sixpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and sixchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                
                      <tr class="chronoscolor" th:if="${#lists.size(sixclassementlist) gt 0}">
@@ -839,6 +846,9 @@
                 <div th:replace="_components :: taypronos-modifsix">...</div>
 		        <div th:replace="_components :: taypronos-dropdownssix(${sixhorses}, ${sixnumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttonsix">...</div>
+        		<div th:replace="_cross-components :: prono-dropdownsix(${sixhorses})">...</div>
 </div>
   
 		
@@ -921,7 +931,7 @@
                     
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${sevenpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and sevenchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${sevenpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and sevenchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                 
                      <tr class="chronoscolor" th:if="${#lists.size(sevenclassementlist) gt 0}">
@@ -963,6 +973,9 @@
                 <div th:replace="_components :: taypronos-modifseven">...</div>
 		        <div th:replace="_components :: taypronos-dropdownsseven(${sevenhorses}, ${sevennumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttonseven">...</div>
+        		<div th:replace="_cross-components :: prono-dropdownseven(${sevenhorses})">...</div>
 </div>
  
 		
@@ -1045,7 +1058,7 @@
                   
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${eightpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and eightchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${eightpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and eightchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                 
                      <tr class="chronoscolor" th:if="${#lists.size(eightclassementlist) gt 0}">
@@ -1087,6 +1100,9 @@
                 <div th:replace="_components :: taypronos-modifeight">...</div>
 		        <div th:replace="_components :: taypronos-dropdownseight(${eighthorses}, ${eightnumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttoneight">...</div>
+        		<div th:replace="_cross-components :: prono-dropdowneight(${eighthorses})">...</div>
 </div>
 
 		
@@ -1171,7 +1187,7 @@
                     
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${ninepronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and ninechronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${ninepronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and ninechronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                
                      <tr class="chronoscolor" th:if="${#lists.size(nineclassementlist) gt 0}">
@@ -1213,6 +1229,9 @@
                 <div th:replace="_components :: taypronos-modifnine">...</div>
 		        <div th:replace="_components :: taypronos-dropdownsnine(${ninehorses}, ${ninenumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttonnine">...</div>
+        		<div th:replace="_cross-components :: prono-dropdownnine(${ninehorses})">...</div>
 </div>
 
 		
@@ -1296,7 +1315,7 @@
                     
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${tenpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and tenchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${tenpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and tenchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                   
                      <tr class="chronoscolor" th:if="${#lists.size(tenclassementlist) gt 0}">
@@ -1339,6 +1358,9 @@
                 <div th:replace="_components :: taypronos-modiften">...</div>
 		        <div th:replace="_components :: taypronos-dropdownsten(${tenhorses}, ${tennumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttonten">...</div>
+        		<div th:replace="_cross-components :: prono-dropdownten(${tenhorses})">...</div>
 </div>
  
 		
@@ -1422,7 +1444,7 @@
                     
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${elevenpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and elevenchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${elevenpronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and elevenchronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                  
                      <tr class="chronoscolor" th:if="${#lists.size(elevenclassementlist) gt 0}">
@@ -1465,6 +1487,9 @@
                 <div th:replace="_components :: taypronos-modifeleven">...</div>
 		        <div th:replace="_components :: taypronos-dropdownseleven(${elevenhorses}, ${elevennumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttoneleven">...</div>
+        		<div th:replace="_cross-components :: prono-dropdowneleven(${elevenhorses})">...</div>
 </div>
 
 		
@@ -1548,7 +1573,7 @@
                  
                     <tr class="chronoscolor">
                     <th scope="">Prono:</th>
-                    <td th:classappend="${p.recence gt recencemax ? 'recence text-danger' : ''}" th:each="p, i : ${twelvepronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and twelvechronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
+                    <td th:classappend="${(p.recence gt recencemax ? 'recence text-danger' : '') + (p.isCross eq true ? 'crossed' : '')}" th:each="p, i : ${twelvepronoslist}" ><span th:if="${p.jockeyPastille eq true}" style="border-radius: 100%; height: 10px; width: 10px; margin-right: 3px;" class="badge badge-warning text-white">.</span><span th:if="${p.chronoPastille eq true and twelvechronos eq true}" style="border-radius: 100%; height: 10px; width: 10px;" class="badge badge-danger text-white">.</span><div th:if="${p.noShoesFirstTime eq true}" style="border: 1px solid black; border-radius:50px; width: 18px; text-align: center; padding: 1px; font-weight: bold;"><img th:src="@{img/horseshoe.png}" style="height: 15px; width: 15px;" align="top"></div><div th:if="${p.blinkersFirstTime eq true}" style="border: 1px solid black; border-radius:30px; width: 30px; text-align: center; padding: 1px;"><img th:src="@{img/oeilleres.png}" style="height: 23px; width: 23px;" align="top"></div><p th:inline="text"><strong>[[${p.numero}]] </strong>([[${p.noteProno}]] p) </p></td>
                    </tr>
                  
                      <tr class="chronoscolor" th:if="${#lists.size(twelveclassementlist) gt 0}">
@@ -1591,6 +1616,9 @@
                 <div th:replace="_components :: taypronos-modiftwelve">...</div>
 		        <div th:replace="_components :: taypronos-dropdownstwelve(${twelvehorses}, ${twelvenumcourse})">...</div>
 		</div>
+		
+			<div th:replace="_cross-components :: prono-buttontwelve">...</div>
+        		<div th:replace="_cross-components :: prono-dropdowntwelve(${twelvehorses})">...</div>
 </div>
 
 		

@@ -438,6 +438,11 @@ public class ImportJSONService {
 						}
 						
 					});
+					
+					///////////////Create result objects////////////////////////
+					
+					
+					
 				}
 					
 				
@@ -608,7 +613,7 @@ public class ImportJSONService {
                 		turfInfoService.updateFromAspiJSON(turfInfo, infoToUpdate);
                     	}
                 
-                
+                System.out.println("STOP");
             	
             }
 			

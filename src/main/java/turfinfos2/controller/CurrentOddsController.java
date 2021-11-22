@@ -14,7 +14,7 @@ import turfinfos2.model.CurrentOdds;
 import turfinfos2.repository.CurrentOddsRepository;
 
 @Controller
-public class OddsController {
+public class CurrentOddsController {
 	
 	@Autowired
 	CurrentOddsRepository currentOddsRepository;
@@ -26,12 +26,16 @@ public class OddsController {
 			@RequestParam("course") Integer course,
 			Model model) {
 		
-//		List<CurrentOdds> raceOdds = currentOddsRepository.findAllByJourAndByReunionAndByCourse(jour, reunion, course);
-		List<CurrentOdds> raceOdds = currentOddsRepository.findAll()
+//		List<CurrentOdds> raceOdds = currentOddsRepository.findAll()
+
+		List<CurrentOdds> raceOdds = currentOddsRepository.findAllByJourAndByReunionAndByCourse(jour, reunion, course)
 				.stream()
 				.sorted(Comparator.comparing(CurrentOdds::getTime))
 				.collect(Collectors.toList());
-
+		
+		
+			
+		
 		model.addAttribute("raceodds", raceOdds);
 		
 		

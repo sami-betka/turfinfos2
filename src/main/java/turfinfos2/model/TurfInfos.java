@@ -230,6 +230,8 @@ public class TurfInfos {
 	private Boolean jockeyPastille;
 	
 	private Integer numberOfNonRunners;
+	
+	private Boolean isCross;
 
 
 
@@ -248,7 +250,7 @@ public class TurfInfos {
 			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo, Integer nbVictChevalHippo,
 			Integer ranking, Double liveOdd, Boolean isRunning, Integer numberOfInitialRunners, Boolean isTQQ, Boolean isPick5,
 			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes, Integer draw, Double liveOddPlace,
-			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners) {
+			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners, Boolean isCross) {
 		
 		this.id = id;
 		this.R = R;
@@ -326,6 +328,7 @@ public class TurfInfos {
 		this.hasBetTypes = hasBetTypes;
 		this.chronoPastille = chronoPastille;
 		this.jockeyPastille = jockeyPastille;
+		this.isCross = isCross;
 
 	}
 
@@ -854,6 +857,14 @@ public class TurfInfos {
 
 	public void setNumberOfNonRunners(Integer numberOfNonRunners) {
 		this.numberOfNonRunners = numberOfNonRunners;
+	}
+
+	public Boolean getIsCross() {
+		return isCross;
+	}
+
+	public void setIsCross(Boolean isCross) {
+		this.isCross = isCross;
 	}
 
 }

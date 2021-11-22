@@ -349,6 +349,82 @@ public class TurfInfoController {
 
 		return "redirect:/reunion-infos?jour=" + jour + "&reunion=" + reunion;
 	}
+	
+	@PostMapping("/cross-prono")
+	public String crossPronos(
+			@RequestParam(name = "one", required = false) String one,
+			@RequestParam(name = "two", required = false) String two,
+			@RequestParam(name = "three", required = false) String three,
+			@RequestParam(name = "four", required = false) String four,
+//			@RequestParam(name = "five", required = false) String five,
+//	    		@RequestParam(name = "six", required = false) String six,
+//	    		@RequestParam(name = "seven", required = false) String seven,
+//	    		@RequestParam(name = "eight", required = false) String eight,
+//	    		@RequestParam(name = "nine", required = false) String nine,
+			@RequestParam(name = "jour", required = false) String jour,
+			@RequestParam(name = "reunion", required = false) String reunion,
+			@RequestParam(name = "numcourse", required = false) String numcourse) {
+		System.out.println(one);
+		System.out.println(two);
+		System.out.println(three);
+		System.out.println(four);
+
+
+		 if (one != null && one != "") {
+			TurfInfos tinf1 = repo.findById(Long.valueOf(one)).get();
+			if(tinf1.getIsCross().equals(false)) {
+				tinf1.setIsCross(true);
+				repo.save(tinf1);
+			}
+			else if(tinf1.getIsCross().equals(true)) {
+				tinf1.setIsCross(false);
+				repo.save(tinf1);
+			}
+			System.out.println(one);
+		}
+		
+		 if (two != null && two != "") {
+				TurfInfos tinf1 = repo.findById(Long.valueOf(two)).get();
+				if(tinf1.getIsCross().equals(false)) {
+					tinf1.setIsCross(true);
+					repo.save(tinf1);
+				}
+				else if(tinf1.getIsCross().equals(true)) {
+					tinf1.setIsCross(false);
+					repo.save(tinf1);
+				}
+				System.out.println(two);
+			}
+		
+		 if (three != null && three != "") {
+				TurfInfos tinf1 = repo.findById(Long.valueOf(three)).get();
+				if(tinf1.getIsCross().equals(false)) {
+					tinf1.setIsCross(true);
+					repo.save(tinf1);
+				}
+				else if(tinf1.getIsCross().equals(true)) {
+					tinf1.setIsCross(false);
+					repo.save(tinf1);
+				}
+				System.out.println(three);
+			}
+		
+		 if (four != null && four != "") {
+				TurfInfos tinf1 = repo.findById(Long.valueOf(four)).get();
+				if(tinf1.getIsCross().equals(false)) {
+					tinf1.setIsCross(true);
+					repo.save(tinf1);
+				}
+				else if(tinf1.getIsCross().equals(true)) {
+					tinf1.setIsCross(false);
+					repo.save(tinf1);
+				}
+				System.out.println(four);
+			}
+		
+
+		return "redirect:/reunion-infos?jour=" + jour + "&reunion=" + reunion;
+	}
 
 	////////////////////////////////////////////////////////////////////////////////
 

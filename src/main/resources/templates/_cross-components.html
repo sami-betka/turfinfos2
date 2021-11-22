@@ -1,0 +1,778 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link th:href="@{css/style.css}" rel="stylesheet" />
+
+
+    <title></title>
+  </head>
+  <body>
+  
+  <!--             //First Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttonone" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample1" role="button" aria-expanded="false" aria-controls="pronocollapseExample1">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdownone(racehorses)" class="collapse dropdownborder" id="pronocollapseExample1">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono1 end/////////// -->
+
+  <!--             //second Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttontwo" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample2" role="button" aria-expanded="false" aria-controls="pronocollapseExample2">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdowntwo(racehorses)" class="collapse dropdownborder" id="pronocollapseExample2">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono2 end/////////// -->
+
+  <!--             //3 Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttonthree" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample3" role="button" aria-expanded="false" aria-controls="pronocollapseExample3">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdownthree(racehorses)" class="collapse dropdownborder" id="pronocollapseExample3">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono3 end/////////// -->
+
+  <!--             //First Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttonfour" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample4" role="button" aria-expanded="false" aria-controls="pronocollapseExample4">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdownfour(racehorses)" class="collapse dropdownborder" id="pronocollapseExample4">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono4 end/////////// -->
+
+  <!--             //First Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttonfive" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample5" role="button" aria-expanded="false" aria-controls="pronocollapseExample5">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdownfive(racehorses)" class="collapse dropdownborder" id="pronocollapseExample5">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono5 end/////////// -->
+
+  <!--             //First Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttonsix" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample6" role="button" aria-expanded="false" aria-controls="pronocollapseExample6">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdownsix(racehorses)" class="collapse dropdownborder" id="pronocollapseExample6">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono6 end/////////// -->
+
+  <!--             //First Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttonseven" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample7" role="button" aria-expanded="false" aria-controls="pronocollapseExample7">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdownseven(racehorses)" class="collapse dropdownborder" id="pronocollapseExample7">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono7 end/////////// -->
+
+  <!--             //First Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttoneight" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample8" role="button" aria-expanded="false" aria-controls="pronocollapseExample8">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdowneight(racehorses)" class="collapse dropdownborder" id="pronocollapseExample8">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono1 end/////////// -->
+
+  <!--             //First Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttonnine" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample9" role="button" aria-expanded="false" aria-controls="pronocollapseExample9">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdownnine(racehorses)" class="collapse dropdownborder" id="pronocollapseExample9">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono9 end/////////// -->
+
+  <!--             //ten Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttonten" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample10" role="button" aria-expanded="false" aria-controls="pronocollapseExample10">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdownten(racehorses)" class="collapse dropdownborder" id="pronocollapseExample10">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono10 end/////////// -->
+  <!--             //eleven Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttoneleven" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample11" role="button" aria-expanded="false" aria-controls="pronocollapseExample11">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdowneleven(racehorses)" class="collapse dropdownborder" id="pronocollapseExample11">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono11 end/////////// -->
+
+  <!--             //First Collapse prono BEGIN-->
+
+<!-- <p th:fragment="chronos-buttonone"> -->
+  <a th:fragment="prono-buttontwelve" class="btn btn-primary btn-sm" data-toggle="collapse" href="#pronocollapseExample12" role="button" aria-expanded="false" aria-controls="pronocollapseExample12">
+    Filtrer le prono
+  </a>
+<!-- </p> -->
+
+<div th:fragment="prono-dropdowntwelve(racehorses)" class="collapse dropdownborder" id="pronocollapseExample12">
+
+ <form th:action="@{cross-prono?jour={jour}&reunion={reunion}(jour=${jour}, reunion=${reunionstring})}" method="POST">
+ 
+ <h1 style="margin-bottom: 10px;">Barrer chevaux </h1>
+ 
+    <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="one">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+     <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="two">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="three">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+    
+       <div class="form-group col-md-4">
+      <label for=""></label>
+      <select  class="form-control" name="four">
+        <option value="">Choisir...</option>
+           <option class="text-dark" th:each="horse : ${racehorses}" th:value="${horse.id}"
+		      th:text="${horse.numero}">
+		   </option>      
+     </select>
+    </div>
+
+
+      <button type="submit" class="btn btn-primary text-dark">Envoyer</button>
+ </form>
+
+</div>
+
+<!-- ////////////:set prono1 end/////////// -->
+
+
+
+
+
+            <!--//First Collapse prono END -->
+	<script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    	<script type="text/javascript" th:src="@{/js/test.js}"></script>
+    
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    
+  </body>
+</html>
