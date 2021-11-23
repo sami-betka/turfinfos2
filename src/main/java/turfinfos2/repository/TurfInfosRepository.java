@@ -5,13 +5,15 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import turfinfos2.model.TurfInfos;
 
 
 public interface TurfInfosRepository extends JpaRepository<TurfInfos, Long> {
 
-//	List<TurfInfos> saveAll(List<TurfInfos> infos);
+	@Transactional
+	List<TurfInfos> deleteByJour(String jour);
 	
 	List<TurfInfos> findAllByOrderByPourcVictChevalHippoDesc();
 	

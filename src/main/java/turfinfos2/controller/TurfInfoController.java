@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,6 +24,15 @@ public class TurfInfoController {
 
 	@Autowired
 	TurfInfosRepository repo;
+	
+	@GetMapping("/delete-day")
+	public String deleteDay(@RequestParam("jour") String jour){
+		
+		List<TurfInfos> del = repo.deleteByJour(jour);
+		
+		return "redirect:/";
+	}
+
 
 	@PostMapping("/set-chronos")
 	public String enterChronos(@RequestParam(name = "one", required = false) String one,

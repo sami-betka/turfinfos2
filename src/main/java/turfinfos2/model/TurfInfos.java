@@ -229,9 +229,14 @@ public class TurfInfos {
 
 	private Boolean jockeyPastille;
 	
+	private Boolean couplePastille;
+	
 	private Integer numberOfNonRunners;
 	
 	private Boolean isCross;
+	
+	private Boolean isPlaceWonAndInProno;
+
 
 
 
@@ -250,7 +255,8 @@ public class TurfInfos {
 			Integer nbVictCouple, Integer coupleTwoOrThree,Integer chevalTwoOrThreeHippo, Integer nbVictChevalHippo,
 			Integer ranking, Double liveOdd, Boolean isRunning, Integer numberOfInitialRunners, Boolean isTQQ, Boolean isPick5,
 			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes, Integer draw, Double liveOddPlace,
-			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners, Boolean isCross) {
+			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners, Boolean isCross,
+			Boolean isPlaceWonAndInProno, Boolean couplePastille) {
 		
 		this.id = id;
 		this.R = R;
@@ -328,7 +334,10 @@ public class TurfInfos {
 		this.hasBetTypes = hasBetTypes;
 		this.chronoPastille = chronoPastille;
 		this.jockeyPastille = jockeyPastille;
+		this.couplePastille = couplePastille;
 		this.isCross = isCross;
+		this.isPlaceWonAndInProno = isPlaceWonAndInProno;
+
 
 	}
 
@@ -865,6 +874,22 @@ public class TurfInfos {
 
 	public void setIsCross(Boolean isCross) {
 		this.isCross = isCross;
+	}
+
+	public Boolean getIsPlaceWonAndInProno() {
+		return isPlaceWonAndInProno;
+	}
+
+	public void setIsPlaceWonAndInProno(Boolean isPlaceWonAndInProno) {
+		this.isPlaceWonAndInProno = isPlaceWonAndInProno;
+	}
+
+	public Boolean getCouplePastille() {
+		return couplePastille;
+	}
+
+	public void setCouplePastille(Boolean couplePastille) {
+		this.couplePastille = couplePastille;
 	}
 
 }
