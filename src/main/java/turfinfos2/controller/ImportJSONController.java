@@ -100,6 +100,22 @@ public class ImportJSONController {
 		
 	}
 	
+	@PostMapping("/upload-rapports-json-data-from-url-online")
+    public String uploadRapportsFileOnline(@RequestParam("jour") String jour, Model model, RedirectAttributes redirect) {
+
+		
+			try {
+				importJSONService.createRapportsInfosFromPMUJsonOnline(jour);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			return "redirect:/day-infos?jour=" + jour;
+		
+	}
+	
 	///////////////////////////////////////////////////////////
 	
 	private String setParisTurfId (String parisTurfId, Model model) {

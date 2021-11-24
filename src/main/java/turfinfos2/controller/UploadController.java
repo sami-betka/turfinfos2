@@ -423,18 +423,21 @@ public class UploadController {
 			////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////
 			
-			TurfInfos ti = listByNoteProno.get(0);
-			
-				if(ti.getNumberOfInitialRunners() != null && ti.getNumberOfInitialRunners() < 10 
-						&& ti.getLiveOddPlace() != null && ti.getLiveOddPlace()>0 
-//						&& ti.getRaceSpecialty()=="P"
-						) {
-					
-					ti.setIsPlaceWonAndInProno(true);
-					turfInfosRepository.save(ti);
-				}
-			
+//			TurfInfos ti = listByNoteProno.get(0);
+//			
+//				if(ti.getLiveOddPlaceOnline() != null && ti.getLiveOddPlaceOnline() > 0 
+//						
+////						&& ti.getRaceSpecialty()=="P"
+//						) {
+//					
+//					ti.setIsPlaceWonAndInProno(true);
+//				}else if(ti.getLiveOddPlaceOnline() != null && ti.getLiveOddPlaceOnline() == 0){
+//					ti.setIsPlaceWonAndInProno(false);
+//				}
+//				
+//				turfInfosRepository.save(ti);
 
+			
 			////////////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////	////////////////////////////////////////////////////////////////

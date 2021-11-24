@@ -94,7 +94,8 @@ public class ImportJSONService {
 
 	            	if(node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("pmuNumber").intValue() != 0) {
 	                	turfInfo.setR(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("pmuNumber").intValue()));	       
-	                	
+//		                turfInfo.setLibel_hippo(node.get("pageProps").get("description").get("meetingName").textValue());
+
 	                	turfInfo.setC(node.get("pageProps").get("initialState").get("currentPage").get("race").get("number").intValue());
 	                	turfInfo.setRaceSpecialty(node.get("pageProps").get("race").get("specialty").textValue());
 
@@ -196,7 +197,8 @@ public class ImportJSONService {
 	            	
 	            	}else {
 	                	turfInfo.setR(node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("name").textValue());
-	                	
+//		                turfInfo.setLibel_hippo(node.get("pageProps").get("description").get("meetingName").textValue());
+
 	                	turfInfo.setC(node.get("pageProps").get("initialState").get("currentPage").get("race").get("number").intValue());
 	                	turfInfo.setRaceSpecialty(node.get("pageProps").get("race").get("specialty").textValue());
 	                	turfInfo.setTableId(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("id").textValue());
@@ -312,6 +314,9 @@ public class ImportJSONService {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (NullPointerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		
@@ -320,7 +325,7 @@ public class ImportJSONService {
 
 	public void createAllDayInfosFromParisTurfJson(String jour, Boolean isUpdate) {
 		
-		String parisTurfId = "d7lsdp4kqsZsUGSJ5gBnM";
+		String parisTurfId = "C10MXbfZMZfPB2djLfYBM";
 		String extension = ".json";
 
 		///////////create all day url/////////
@@ -385,9 +390,12 @@ public class ImportJSONService {
 	    String finalDate = format2.format(date2).toString();
 		
 		String firstPartOfUrl = "https://offline.turfinfo.api.pmu.fr/rest/client/1/programme/";
+//		String firstPartOfUrl = "https://online.turfinfo.api.pmu.fr/rest/client/1/programme/";
 		String day = finalDate;
 		String RC;
 		String finalPartOfUrl = "rapports-definitifs";
+//		String finalPartOfUrl = "rapports-definitifs?specialisation=INTERNET";
+
 
 		
 
@@ -434,6 +442,99 @@ public class ImportJSONService {
 						}
 						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(3) && node.get(1).get("rapports").size()>2) {
 							ti.setLiveOddPlace(node.get(1).get("rapports").get(2).get("dividendePourUnEuro").doubleValue()/100);
+							turfInfosRepository.save(ti);
+						}
+						
+					});
+					
+					///////////////Create result objects////////////////////////
+					
+					
+					
+				}
+					
+				
+					
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+	    	}
+	    }
+	    
+
+	    
+		System.out.println("STOP");
+		
+	}
+	
+	
+	
+	public void createRapportsInfosFromPMUJsonOnline(String jour) throws ParseException {
+		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat("ddMMyyyy");
+		
+		Date date2 = format1.parse(jour);
+	    String finalDate = format2.format(date2).toString();
+		
+//		String firstPartOfUrl = "https://offline.turfinfo.api.pmu.fr/rest/client/1/programme/";
+		String firstPartOfUrl = "https://online.turfinfo.api.pmu.fr/rest/client/1/programme/";
+		String day = finalDate;
+		String RC;
+//		String finalPartOfUrl = "rapports-definitifs";
+		String finalPartOfUrl = "rapports-definitifs?specialisation=INTERNET";
+
+
+		
+
+		List<TurfInfos> allByJour = turfInfosRepository.findAllByJour(jour);
+		Map<String, Set<Integer>> reunionsAndRaces = new HashMap<>();
+		
+	    Set<String> distinctReunions = allByJour.stream()
+ 				.filter(ti-> ti.getJour().equals(jour) && ti.getIsPremium().equals(true) && ti.getR().length()<3)
+        			.map(TurfInfos :: getR)
+        			.collect(Collectors.toSet());
+	    
+	    distinctReunions.forEach(r-> {
+	    	reunionsAndRaces.put(r, turfInfosRepository.findAllByJourAndByReunion(jour, r).stream()
+// 				.filter(ti-> ti.getJour().equals(jour))
+        			.map(TurfInfos :: getC)
+        			.collect(Collectors.toSet()));
+	    });
+
+	    for(Entry<String, Set<Integer>> entry : reunionsAndRaces.entrySet()) {
+	    	
+	    	for(Integer race : (Set<Integer>) entry.getValue()) {
+	    		
+	    		String url = firstPartOfUrl + day + "/R" + entry.getKey() + "/C" + race + "/" +finalPartOfUrl;
+	    		System.out.println(url);
+				try {
+					JsonNode node;
+					node = new ObjectMapper().readTree(new URL(url));
+					
+					if(node.isMissingNode() == false) {
+						
+					System.out.println(node.isMissingNode());
+					
+					allByJour.forEach(ti-> {
+						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(1)) {
+							ti.setLiveOddPlaceOnline(node.get(1).get("rapports").get(0).get("dividendePourUnEuro").doubleValue()/100);
+							turfInfosRepository.save(ti);
+
+						}
+						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(2)) {
+						    System.out.println(ti.getRanking() +"rrr" + ti.getR() + "C" + race);
+							ti.setLiveOddPlaceOnline(node.get(1).get("rapports").get(1).get("dividendePourUnEuro").doubleValue()/100);
+							turfInfosRepository.save(ti);
+
+						}
+						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(3) && node.get(1).get("rapports").size()>2) {
+							ti.setLiveOddPlaceOnline(node.get(1).get("rapports").get(2).get("dividendePourUnEuro").doubleValue()/100);
 							turfInfosRepository.save(ti);
 						}
 						

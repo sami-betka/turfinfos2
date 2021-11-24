@@ -15,7 +15,30 @@
 <body>
         		<div th:replace="_nav-components :: nav">...</div>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Date</th>
+      <th scope="col">Cote</th>
+<!--       <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody th:each="p: ${placelist}" >
+    <tr th:if="${p.liveOddPlace gt 0}" style="background-color: green;" class="text-white">
+      <th  th:text="${pStat.index + 1}" scope="row"></th>
+              <td th:text="${p.jour + ' - R' + p.R + ' C' + p.C + ' - ' + p.numero}"></td>
+             <td th:text="${p.liveOddPlace}"></td>
 
+    </tr>
+      <tr th:if="${p.liveOddPlace eq null or p.liveOddPlace == 0}" style="background-color: red;" class="text-white">
+      <th  th:text="${pStat.index + 1}" scope="row"></th>
+              <td th:text="${p.jour + ' - R' + p.R + ' C' + p.C + ' - ' + p.numero}"></td>
+             <td th:text="${p.liveOddPlace}"></td>
+
+    </tr>
+  </tbody>
+</table>
 
 
 				<div th:replace="_nav-components :: footer">...</div>
