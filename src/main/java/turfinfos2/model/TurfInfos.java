@@ -372,7 +372,8 @@ public class TurfInfos {
 	public TurfInfos() {
 
 		this.noteProno = 0d;
-
+		this.isCross = false;
+		
 	}
 
 	public Long getId() {

@@ -69,24 +69,24 @@ public class Turfinfos2Application {
 		
 		
 		
-//		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
-////	
-//        List<TurfInfos> all = turfInfosRepository.findAll();
-//        
-//        all.forEach(ti-> {
-//        	
-//        	if(ti.getJour().contains("2021-04") == null) {
-//        		ti.setRecence(0);
+		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
+//	
+        List<TurfInfos> all = turfInfosRepository.findAll();
+        
+        all.forEach(ti-> {
+        	
+        	if(ti.getIsCross() == null) {
+        		ti.setIsCross(false);
+        	}
+//        	if(ti.getIsCross() == null) {
+//        		ti.setIsCross(false);
 //        	}
-////        	if(ti.getIsCross() == null) {
-////        		ti.setIsCross(false);
-////        	}
-//       
-//            	turfInfosRepository.delete(ti);
-//        
-//        });
-//        System.out.println("STOP");
-//        System.out.println(all.size());
+       
+            	turfInfosRepository.save(ti);
+        
+        });
+        System.out.println("STOP");
+        System.out.println(all.size());
 
 		
 		

@@ -60,7 +60,7 @@ public class ImportJSONController {
 	@GetMapping("/upload-json-data-from-url-date-range")
     public String uploadJSONFileDateRange( Model model, RedirectAttributes redirect) {
 		
-		final LocalDate start = LocalDate.parse("2021-04-23", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		final LocalDate start = LocalDate.parse("2021-04-24", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		  final LocalDate end = LocalDate.parse("2021-05-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
 		  final long days = start.until(end, ChronoUnit.DAYS);
