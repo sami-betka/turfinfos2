@@ -25,6 +25,8 @@ public interface TurfInfosRepository extends JpaRepository<TurfInfos, Long> {
 
 	List<TurfInfos> findAllByNumcourse(Integer numcourse);
 	
+	List<TurfInfos> findAllByTableId(String tableId);
+	
 	@Query("SELECT ti FROM TurfInfos ti "
 			+ "WHERE ti.jour = :jour"
 //			+ "AND ti.pourcVictChevalHippo != 0 "

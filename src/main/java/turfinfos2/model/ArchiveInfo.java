@@ -59,9 +59,23 @@ public class ArchiveInfo {
 	private Boolean isFavori;
 	
 	private Integer recence;
+	
+	
+	
+	
+	private Boolean chronoPastille;
 
+	private Boolean jockeyPastille;
+	
+	private Boolean couplePastille;
+	
+	private Boolean chevalPastille;
+		
+	private Boolean isCanceled;
+	
+	private String formFigs;
 
-
+	
 
 
 
@@ -70,7 +84,8 @@ public class ArchiveInfo {
 			Double noteProno, String numeroString, String reunionstring, Integer ranking, Double liveOdd,
 			Double liveOddPlace, Integer numberOfInitialRunners, Boolean isCross, Boolean isFirstInProno,
 			Double liveOddPlaceOnline, String raceSpecialty, Boolean hasBetTypes, Integer initialBankrollAmount,
-			Double ante, Boolean isFavori, Integer recence) {
+			Double ante, Boolean isFavori, Integer recence, Boolean isCanceled, Boolean chronoPastille, Boolean jockeyPastille,
+			Boolean couplePastille, Boolean chevalPastille, String formFigs) {
 		super();
 		this.id = id;
 		this.jour = jour;
@@ -95,6 +110,17 @@ public class ArchiveInfo {
 		this.ante = ante;
 		this.isFavori = isFavori;
 		this.recence = recence;
+		this.isCanceled = isCanceled;
+		this.chevalPastille = chevalPastille;
+		this.chronoPastille = chronoPastille;
+		this.couplePastille = couplePastille;
+		this.jockeyPastille = couplePastille;
+		this.formFigs = formFigs;
+
+
+
+		
+
 
 
 	}
@@ -332,6 +358,66 @@ public class ArchiveInfo {
 
 	public void setRecence(Integer recence) {
 		this.recence = recence;
+	}
+
+
+	public Boolean getChronoPastille() {
+		return chronoPastille;
+	}
+
+
+	public void setChronoPastille(Boolean chronoPastille) {
+		this.chronoPastille = chronoPastille;
+	}
+
+
+	public Boolean getJockeyPastille() {
+		return jockeyPastille;
+	}
+
+
+	public void setJockeyPastille(Boolean jockeyPastille) {
+		this.jockeyPastille = jockeyPastille;
+	}
+
+
+	public Boolean getCouplePastille() {
+		return couplePastille;
+	}
+
+
+	public void setCouplePastille(Boolean couplePastille) {
+		this.couplePastille = couplePastille;
+	}
+
+
+	public Boolean getChevalPastille() {
+		return chevalPastille;
+	}
+
+
+	public void setChevalPastille(Boolean chevalPastille) {
+		this.chevalPastille = chevalPastille;
+	}
+
+
+	public Boolean getIsCanceled() {
+		return isCanceled;
+	}
+
+
+	public void setIsCanceled(Boolean isCanceled) {
+		this.isCanceled = isCanceled;
+	}
+
+
+	public String getFormFigs() {
+		return formFigs;
+	}
+
+
+	public void setFormFigs(String formFigs) {
+		this.formFigs = formFigs;
 	}
 
 }

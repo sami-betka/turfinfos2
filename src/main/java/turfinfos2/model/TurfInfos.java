@@ -241,11 +241,15 @@ public class TurfInfos {
 	
 	private Double liveOddPlaceOnline;
 	
+	private Boolean nulStats;
+		
+	private String formFigs;
+	
+	
 	private Boolean isCanceled;
 	
 	private Boolean isFavori;
-	
-	private Boolean nulStats;
+
 
 
 
@@ -271,7 +275,7 @@ public class TurfInfos {
 			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes, Integer draw, Double liveOddPlace,
 			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners, Boolean isCross,
 			Boolean isFirstInProno, Boolean couplePastille, Boolean chevalPastille, Double liveOddPlaceOnline, Boolean isCanceled,
-			Boolean isFavori, Boolean nulStats) {
+			Boolean isFavori, Boolean nulStats, String formFigs) {
 		
 		this.id = id;
 		this.R = R;
@@ -324,10 +328,16 @@ public class TurfInfos {
 		
 		this.caraList1 = caraList1;
 		this.caraList2 = caraList2;
-		
+		this.liveOddPlaceOnline = liveOddPlaceOnline;
+		this.isCanceled = isCanceled;
+		this.isFavori = isFavori;
+		this.tableId = tableId;
+		this.hasBetTypes = hasBetTypes;		
 		this.isPremium = isPremium;
 		this.draw = draw;
 		this.numberOfNonRunners = numberOfNonRunners;
+		this.formFigs = formFigs;
+
 		
 
 
@@ -345,17 +355,12 @@ public class TurfInfos {
 		this.numeroString = numeroString;
 		this.notePercentageParameter = notePercentageParameter;
 		this.clInt = clInt;
-		this.tableId = tableId;
-		this.hasBetTypes = hasBetTypes;
 		this.chronoPastille = chronoPastille;
 		this.jockeyPastille = jockeyPastille;
 		this.couplePastille = couplePastille;
 		this.chevalPastille = chevalPastille;
 		this.isCross = isCross;
 		this.isFirstInProno = isFirstInProno;
-		this.liveOddPlaceOnline = liveOddPlaceOnline;
-		this.isCanceled = isCanceled;
-		this.isFavori = isFavori;
 		this.nulStats = nulStats;
 
 
@@ -937,6 +942,30 @@ public class TurfInfos {
 
 	public void setChevalPastille(Boolean chevalPastille) {
 		this.chevalPastille = chevalPastille;
+	}
+
+	public Boolean getIsCanceled() {
+		return isCanceled;
+	}
+
+	public void setIsCanceled(Boolean isCanceled) {
+		this.isCanceled = isCanceled;
+	}
+
+	public Boolean getIsFavori() {
+		return isFavori;
+	}
+
+	public void setIsFavori(Boolean isFavori) {
+		this.isFavori = isFavori;
+	}
+
+	public String getFormFigs() {
+		return formFigs;
+	}
+
+	public void setFormFigs(String formFigs) {
+		this.formFigs = formFigs;
 	}
 
 }

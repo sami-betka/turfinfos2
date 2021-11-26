@@ -40,20 +40,35 @@ public class ResultController {
 			@RequestParam(name = "diviseur", required = false, defaultValue = "20") Integer divider
 			) {
 		
-		Double total = 0d;
-		
-		List<ArchiveInfo> list = resultService.setAllPlaceFirstPronoList()
+		List<TurfInfos> all = turfInfosRepository.findAll()
 				.stream()
-				.filter(ai->
+				.filter(ti->
 				        
-				        ai.getNumberOfInitialRunners() > 1
-						&& ai.getHasBetTypes() == true 
-						&& ai.getLiveOdd() != null && ai.getLiveOdd() != 0 && ai.getLiveOdd()<4
-				        && ai.getRecence() != null && ai.getRecence()<60
-				        && ai.getRaceSpecialty().equals("P")
-//				        && ai.getJour().contains("2021-10")
+				        ti.getNumberOfInitialRunners() < 100
+						&& ti.getHasBetTypes() == true 
+						&& ti.getLiveOdd() != null && ti.getLiveOdd() != 0 && ti.getLiveOdd()<4
+				        && ti.getRecence() != null && ti.getRecence()<60
+				        && ti.getRaceSpecialty().equals("P")
+				        && ( ti.getJour().contains("2021-06") || ti.getJour().contains("2021-07") )
 
 				        )
+//				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
+				.collect(Collectors.toList());
+		
+		Double total = 0d;
+		
+		List<ArchiveInfo> list = resultService.setAllPlaceFirstPronoList(all)
+				.stream()
+//				.filter(ai->
+//				        
+//				        ai.getNumberOfInitialRunners() > 1
+//						&& ai.getHasBetTypes() == true 
+//						&& ai.getLiveOdd() != null && ai.getLiveOdd() != 0 && ai.getLiveOdd()<4
+//				        && ai.getRecence() != null && ai.getRecence()<60
+//				        && ai.getRaceSpecialty().equals("P")
+//				        && ai.getJour().contains("2021-09")
+//
+//				        )
 				.sorted(Comparator.comparing(ArchiveInfo::getJour).thenComparing(ArchiveInfo::getHour))
 				.collect(Collectors.toList());
 
@@ -94,6 +109,10 @@ public class ResultController {
 			list.get(i).setAnte(ante);
 			newBankrollAmount -= ante; 
 			newBankrollAmount += ante * list.get(i).getLiveOddPlace(); 
+//			if(list.get(i).getRanking().equals(1)) {
+//				newBankrollAmount += ante * list.get(i).getLiveOdd(); 
+//			}
+
 
 			if(newBankrollAmount > maximalBankrollAmount) {
 				maximalBankrollAmount = newBankrollAmount;

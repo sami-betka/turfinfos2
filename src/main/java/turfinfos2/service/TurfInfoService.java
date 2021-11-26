@@ -158,6 +158,14 @@ public class TurfInfoService {
     	infoToUpdate.setHasBetTypes(info.getHasBetTypes());
     	infoToUpdate.setDraw(info.getDraw());
     	infoToUpdate.setNumberOfNonRunners(info.getNumberOfNonRunners());
+    	infoToUpdate.setLiveOddPlaceOnline(info.getLiveOddPlaceOnline());
+    	infoToUpdate.setLiveOddPlace(info.getLiveOddPlace());
+    	infoToUpdate.setIsCanceled(info.getIsCanceled());
+//    	infoToUpdate.setIsFavori(info.getIsFavori());
+    	infoToUpdate.setFormFigs(info.getFormFigs());
+
+
+
 
 
         allToUpdate.add(infoToUpdate);

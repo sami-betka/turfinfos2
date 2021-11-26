@@ -1,17 +1,14 @@
 package turfinfos2;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.CurrentOddsRepository;
+import turfinfos2.repository.TurfInfosRepository;
 
 @SpringBootApplication
 public class Turfinfos2Application {
@@ -73,19 +70,19 @@ public class Turfinfos2Application {
 		
 		
 //		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
-//	
+////	
 //        List<TurfInfos> all = turfInfosRepository.findAll();
 //        
 //        all.forEach(ti-> {
 //        	
-//        	if(ti.getRecence() == null) {
+//        	if(ti.getJour().contains("2021-04") == null) {
 //        		ti.setRecence(0);
 //        	}
-//        	if(ti.getIsCross() == null) {
-//        		ti.setIsCross(false);
-//        	}
+////        	if(ti.getIsCross() == null) {
+////        		ti.setIsCross(false);
+////        	}
 //       
-//            	turfInfosRepository.save(ti);
+//            	turfInfosRepository.delete(ti);
 //        
 //        });
 //        System.out.println("STOP");

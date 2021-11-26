@@ -38,9 +38,9 @@ public class ResultService {
 	ArchiveInfoRepository archiveInfosRepository;
 
 
-	public List<ArchiveInfo> setAllPlaceFirstPronoList( ) {
+	public List<ArchiveInfo> setAllPlaceFirstPronoList(List<TurfInfos> all) {
 		
-		List<TurfInfos> all = turfInfosRepository.findAll();
+//		List<TurfInfos> all = turfInfosRepository.findAll();
 		
 		List<ArchiveInfo> finalList = new ArrayList<>();
 		
@@ -338,7 +338,7 @@ public class ResultService {
 			reunionCracks.addAll(listByNoteProno);
 			
 			/////////////AFFECTER PASTILLES///////////////
-			setPastilles(listBypvjh, listByChronos, listByNoteProno, allraceInfos.size());
+			setPastilles(listBypvjh, listByChronos, listBypvch, listByppch, listBytxv, listBytxp, listByNoteProno, allraceInfos.size());
 						
 			
 			
@@ -367,6 +367,13 @@ public class ResultService {
 			archive.setRaceSpecialty(ti.getRaceSpecialty());
 			archive.setHasBetTypes(ti.getHasBetTypes());
 			archive.setRecence(ti.getRecence());
+			archive.setJockeyPastille(ti.getJockeyPastille());
+			archive.setChronoPastille(ti.getChronoPastille());
+			archive.setCouplePastille(ti.getCouplePastille());
+			archive.setChevalPastille(ti.getChevalPastille());
+			archive.setFormFigs(ti.getFormFigs());
+
+
 
             finalList.add(archive);		
 	
@@ -920,18 +927,22 @@ public class ResultService {
 //	   return listByCl;
 //   }
    
-   private List<TurfInfos> setPastilles(List<TurfInfos> jockeys, List<TurfInfos> chronos, List<TurfInfos> pronos, int raceSize){
+   private List<TurfInfos> setPastilles(List<TurfInfos> jockeys, List<TurfInfos> chronos, List<TurfInfos> vchevalh, List<TurfInfos> pchevalh, List<TurfInfos> vcouple,  List<TurfInfos> pcouple, List<TurfInfos> pronos, int raceSize){
 	   
 	   if(raceSize == 7) {
 		   pronos.forEach(ti-> {
 			   if(jockeys.size() >= 5) {
 			   if(!jockeys.subList(0, 5).contains(ti)) {
 				   ti.setJockeyPastille(true);
+			   }else {
+				   ti.setJockeyPastille(false);
 			   }
 			   }
 			   if(chronos.size() >= 5) {
 			   if(!chronos.subList(0, 5).contains(ti)) {
 				   ti.setChronoPastille(true);
+			   }else {
+				   ti.setChronoPastille(false);
 			   }
 			   }
 		   });
@@ -942,11 +953,15 @@ public class ResultService {
 			   if(jockeys.size() >= 6) {
 			   if(!jockeys.subList(0, 6).contains(ti)) {
 				   ti.setJockeyPastille(true);
+			   }else {
+				   ti.setJockeyPastille(false);
 			   }
 			   }
 			   if(chronos.size() >= 6) {
 			   if(!chronos.subList(0, 6).contains(ti)) {
 				   ti.setChronoPastille(true);
+			   }else {
+				   ti.setChronoPastille(false);
 			   }
 			   }
 		   });
@@ -957,11 +972,15 @@ public class ResultService {
 			   if(jockeys.size() >= 7) {
 			   if(!jockeys.subList(0, 7).contains(ti)) {
 				   ti.setJockeyPastille(true);
+			   }else {
+				   ti.setJockeyPastille(false);
 			   }
 			   }
 			   if(chronos.size() >= 7) {
 			   if(!chronos.subList(0, 7).contains(ti)) {
 				   ti.setChronoPastille(true);
+			   }else {
+				   ti.setChronoPastille(false);
 			   }
 			   }
 		   });
@@ -972,11 +991,15 @@ public class ResultService {
 			   if(jockeys.size() >= 8) {
 			   if(!jockeys.subList(0, 8).contains(ti)) {
 				   ti.setJockeyPastille(true);
+			   }else {
+				   ti.setJockeyPastille(false);
 			   }
 			   }
 			   if(chronos.size() >= 8) {
 			   if(!chronos.subList(0, 8).contains(ti)) {
 				   ti.setChronoPastille(true);
+			   }else {
+				   ti.setChronoPastille(false);
 			   }
 			   }
 		   });
@@ -987,15 +1010,34 @@ public class ResultService {
 			   if(jockeys.size() >= 9) {
 			   if(!jockeys.subList(0, 9).contains(ti)) {
 				   ti.setJockeyPastille(true);
+			   }else {
+				   ti.setJockeyPastille(false);
 			   }
 			   }
 			   if(chronos.size() >= 9) {
 			   if(!chronos.subList(0, 9).contains(ti)) {
 				   ti.setChronoPastille(true);
+			   }else {
+				   ti.setChronoPastille(false);
 			   }
 			   }
 		   });
 	   }
+	   
+	   pronos.forEach(ti-> {
+		   if(!vchevalh.contains(ti) && !pchevalh.contains(ti)) {
+			   ti.setChevalPastille(true);
+		   }else {
+			   ti.setChevalPastille(false);
+		   }
+		   if(!vcouple.contains(ti) && !pcouple.contains(ti)) {
+			   ti.setCouplePastille(true);
+		   }else {
+			   ti.setCouplePastille(false);
+		   }
+		  	  
+	   });
+	   
 	   
 
 	   return pronos;
