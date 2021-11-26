@@ -14,8 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import turfinfos2.model.ArchiveInfo;
 import turfinfos2.model.TurfInfos;
+import turfinfos2.repository.ArchiveInfoRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.service.ResultService;
 
@@ -27,19 +30,97 @@ public class ResultController {
 	
 	@Autowired
 	ResultService resultService;
+	
+	@Autowired
+	ArchiveInfoRepository archiveInfosRepository;
 
 	@GetMapping("/archives-places")
-	public String placetable(Model model) {
+	public String placetable(Model model, 
+			@RequestParam(name = "bankroll", required = false, defaultValue = "500d") Double bankrollAmount, 
+			@RequestParam(name = "diviseur", required = false, defaultValue = "20") Integer divider
+			) {
 		
-		resultService.setAllPlaceFirstPronoList(model);
+		Double total = 0d;
 		
+		List<ArchiveInfo> list = resultService.setAllPlaceFirstPronoList()
+				.stream()
+				.filter(ai->
+				        
+				        ai.getNumberOfInitialRunners() > 1
+						&& ai.getHasBetTypes() == true 
+						&& ai.getLiveOdd() != null && ai.getLiveOdd() != 0 && ai.getLiveOdd()<4
+				        && ai.getRecence() != null && ai.getRecence()<60
+				        && ai.getRaceSpecialty().equals("P")
+//				        && ai.getJour().contains("2021-10")
+
+				        )
+				.sorted(Comparator.comparing(ArchiveInfo::getJour).thenComparing(ArchiveInfo::getHour))
+				.collect(Collectors.toList());
+
+		for(int i =0; i<list.size(); i++) {
+			total += list.get(i).getLiveOddPlace();
+		}
+				
 		navbarInfos(model);
-		model.addAttribute("placelist", turfInfosRepository.findByIsFirstInPronoTrue());
+		model.addAttribute("placelist", simulatedBankroll(list, model, bankrollAmount, divider));
+		model.addAttribute("numberofbets", list.size());
+		model.addAttribute("totalgains", total);
+		model.addAttribute("benef", total - list.size());
+
+
+		System.out.println("filterbig" + list.size());
 		
 		return "place-table";
 	}
 	
 	///////////////////////////////////////////////////////////////
+	
+	public List<ArchiveInfo> simulatedBankroll(List<ArchiveInfo> list, Model model, Double bankAmount, Integer divider){
+		
+//		List<ArchiveInfo> finalList = new ArrayList<>();
+		Double initialBankrollAmount = bankAmount;
+		Double minimumBankrollAmount = bankAmount;
+		Double precedentBankrollAmount = bankAmount;
+		Double newBankrollAmount = bankAmount;
+		Double maximalBankrollAmount = bankAmount;
+
+		
+		Double totalPlayed = 0d;
+		Double totalWon = 0d;
+
+		Double ante = initialBankrollAmount/divider;
+		
+		for(int i =0; i<list.size(); i++) {
+			list.get(i).setAnte(ante);
+			newBankrollAmount -= ante; 
+			newBankrollAmount += ante * list.get(i).getLiveOddPlace(); 
+
+			if(newBankrollAmount > maximalBankrollAmount) {
+				maximalBankrollAmount = newBankrollAmount;
+				ante = maximalBankrollAmount/divider;
+			}
+			if(newBankrollAmount < minimumBankrollAmount) {
+				minimumBankrollAmount = newBankrollAmount;
+			}
+		}
+		
+		model.addAttribute("newBankrollAmount", newBankrollAmount);
+		model.addAttribute("minimumBankrollAmount", minimumBankrollAmount);
+
+		model.addAttribute("initialBankrollAmount", initialBankrollAmount);
+		model.addAttribute("bankrollBenef", newBankrollAmount - initialBankrollAmount);
+		
+		model.addAttribute("cotecapital", ((newBankrollAmount * 100) /  initialBankrollAmount)/100);
+
+
+
+		
+		
+		
+		return list;
+	}
+	
+	
 	
 	   private void navbarInfos(Model model) {
 		   
@@ -48,9 +129,11 @@ public class ResultController {
 		   //DATES
 	  	 Set<String> dates = allInfos.stream()
 					.map(TurfInfos :: getJour)
+					.sorted()
 					.collect(Collectors.toSet());
-	       model.addAttribute("datesnav", dates);
-		   
+	  	List<String> datesSorted = dates.stream().collect(Collectors.toList());
+	  	Collections.sort(datesSorted, (o1, o2) -> o1.compareTo(o2));
+	        model.addAttribute("datesnav", datesSorted);		   
 	       //REUNIONS
 	       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	       String jour = LocalDateTime.now().format(formatter);

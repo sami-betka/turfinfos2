@@ -36,11 +36,14 @@ public class ImportJSONService {
 	@Autowired
 	TurfInfoService turfInfoService;
 
-	public List<TurfInfos> createAllRaceInfosFromParisTurfJson(String url) {
+	public List<TurfInfos> createAllRaceInfosFromParisTurfJson(String url, List<TurfInfos> all) {
 		
+		List<TurfInfos> allToSave = new ArrayList<>();
+		List<TurfInfos> allToUpdate = new ArrayList<>();
+
 
 		List<TurfInfos> fromRace = new ArrayList<>();
-	    List<Integer> allNumCourses = turfInfosRepository.findAll().stream()
+	    List<Integer> allNumCourses = all.stream()
 				.map(TurfInfos :: getNumcourse)
 				.collect(Collectors.toList());
 
@@ -69,7 +72,6 @@ public class ImportJSONService {
 				String numcourse = String.valueOf(node.get("pageProps").get("race").get("id").intValue());
 				String uuid = node.get("pageProps").get("race").get("uuid").textValue();
 
-				System.out.println(uuid + "     nnnnnnnnnnnnnnnn");
 				//Verifie si les stats sont à null
             	boolean nulStats = true;
 				
@@ -82,12 +84,14 @@ public class ImportJSONService {
     				numberofRunners = node.get("pageProps").get("race").get("numberOfRunners").intValue();
 //				numberofRunners = node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).size();
             	}
-            	
-            
-            		System.out.println(numberofRunners + "" + numcourse);
-                    
+            	                    
             		
 	            for(int i= 0; i<numberofRunners; i++) {
+	            	
+//	            	Boolean isPremium = node.get("pageProps").get("race").get("isPremium").booleanValue();
+//	            	
+//	            	if(isPremium.equals(true)) {
+	            	
 	            	TurfInfos turfInfo = new TurfInfos();
 	            	turfInfo.setJour(jour);
 	            	turfInfo.setHour(finalHour);
@@ -112,7 +116,8 @@ public class ImportJSONService {
 //	                	turfInfosMetting.setRecence(null);
 //	                    turfInfosMetting.setTypec(node.get("pageProps").get("race").get("discipline").textValue());
 	                   if(!node.get("pageProps").get("initialState").get("currentPage").get("stats").isEmpty()) {
-	                	   nulStats = false;
+	                	   turfInfo.setNulStats(false);
+	                	   
 		                turfInfo.setLibel_hippo(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfo.getTableId()).get("libel_hippo").textValue());
 
 	                	turfInfo.setCoursescheval(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfo.getTableId()).get("statsHorse").get("runs").intValue()));
@@ -213,8 +218,9 @@ public class ImportJSONService {
 //	                	turfInfosMetting.setRecence(null);
 //	                    turfInfosMetting.setTypec(node.get("pageProps").get("race").get("discipline").textValue());
 		               if(!node.get("pageProps").get("initialState").get("currentPage").get("stats").isEmpty()) {
-	                	   nulStats = false;
-			            turfInfo.setLibel_hippo(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfo.getTableId()).get("libel_hippo").textValue());
+	                	   turfInfo.setNulStats(false);
+
+	                	   turfInfo.setLibel_hippo(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfo.getTableId()).get("libel_hippo").textValue());
 
 	                	turfInfo.setCoursescheval(String.valueOf(node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfo.getTableId()).get("statsHorse").get("runs").intValue()));
 	                	turfInfo.setPourcPlaceCheval(100 * node.get("pageProps").get("initialState").get("currentPage").get("stats").get(turfInfo.getTableId()).get("statsHorse").get("inFirst3Rate").doubleValue());
@@ -295,18 +301,26 @@ public class ImportJSONService {
 
 	                
 	            	turfInfoService.setMadeUpParams(turfInfo);
-                	if(!allNumCourses.contains(turfInfo.getNumcourse())) {
-                	turfInfosRepository.save(turfInfo);
-                	}
+                	
                 	if(allNumCourses.contains(turfInfo.getNumcourse())) {
-                		turfInfoService.updateFromParisTurfJSON(turfInfo, nulStats);
-                    	}	           
+                		allToUpdate.add(turfInfo);
+//                		turfInfoService.updateFromParisTurfJSON(turfInfo, nulStats);
+                    	}	
+                	if(!allNumCourses.contains(turfInfo.getNumcourse())) {
+//                    	turfInfosRepository.save(turfInfo);
+                		allToSave.add(turfInfo);
+                    	}
                 	
                 	
-                	
+//	            	}
     	            //For LOOP END
 	            }
-	                               
+	            if(!allToUpdate.isEmpty()) {
+	        		turfInfoService.updateAllFromParisTurfJSON(allToUpdate);
+	            }
+
+				turfInfosRepository.saveAll(allToSave);
+
 
 			} catch (JsonProcessingException e) {
 				// TODO Auto-generated catch block
@@ -319,11 +333,13 @@ public class ImportJSONService {
 				e.printStackTrace();
 			}
 			
-		
+				
 		return fromRace;
 	}
 
 	public void createAllDayInfosFromParisTurfJson(String jour, Boolean isUpdate) {
+				
+		List<TurfInfos> all = turfInfosRepository.findAll();
 		
 		String parisTurfId = "C10MXbfZMZfPB2djLfYBM";
 		String extension = ".json";
@@ -359,13 +375,15 @@ public class ImportJSONService {
 				raceUuid = uuid;
 				String raceUrl = firstPartOfRaceUrl + parisTurfId + thirdPartOfRaceUrl + raceUuid + extension;
 				if(isUpdate.equals(false)) {
-					createAllRaceInfosFromParisTurfJson(raceUrl);
+					createAllRaceInfosFromParisTurfJson(raceUrl, all);
 				}
 				if(isUpdate.equals(true)) {
 					updateAllRaceInfosFromParisTurfJson(raceUrl);
 				}
 				iter+=1;
 				System.out.println(iter + " / " + uuids.size());
+				System.out.println(jour);
+
 			}
 
 			
@@ -382,6 +400,9 @@ public class ImportJSONService {
 	}
 	
 	public void createRapportsInfosFromPMUJson(String jour) throws ParseException {
+		
+		List<TurfInfos> allToSave = new ArrayList<>();
+
 		
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat format2 = new SimpleDateFormat("ddMMyyyy");
@@ -431,18 +452,21 @@ public class ImportJSONService {
 					allByJour.forEach(ti-> {
 						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(1)) {
 							ti.setLiveOddPlace(node.get(1).get("rapports").get(0).get("dividendePourUnEuro").doubleValue()/100);
-							turfInfosRepository.save(ti);
+							allToSave.add(ti);
+//							turfInfosRepository.save(ti);
 
 						}
 						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(2)) {
 						    System.out.println(ti.getRanking() +"rrr" + ti.getR() + "C" + race);
 							ti.setLiveOddPlace(node.get(1).get("rapports").get(1).get("dividendePourUnEuro").doubleValue()/100);
-							turfInfosRepository.save(ti);
+							allToSave.add(ti);
+//							turfInfosRepository.save(ti);
 
 						}
 						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(3) && node.get(1).get("rapports").size()>2) {
 							ti.setLiveOddPlace(node.get(1).get("rapports").get(2).get("dividendePourUnEuro").doubleValue()/100);
-							turfInfosRepository.save(ti);
+							allToSave.add(ti);
+//							turfInfosRepository.save(ti);
 						}
 						
 					});
@@ -466,8 +490,9 @@ public class ImportJSONService {
 	    	}
 	    }
 	    
-
+	    turfInfosRepository.saveAll(allToSave);
 	    
+
 		System.out.println("STOP");
 		
 	}
@@ -663,6 +688,8 @@ public class ImportJSONService {
 	
 	public void updateAllDayInfosFromAspiJson(String jour) {
 		
+		List<TurfInfos> alltoUpdate= new ArrayList<>();
+		
 		JsonNode node;
 		/////////Create URL///////////
 		String firstpartOfUrl = "https://aspiturf.com/api/api?uid=";
@@ -711,12 +738,16 @@ public class ImportJSONService {
 //                	}
                 	if(optInfoToUpdate.isPresent()) {
                 		TurfInfos infoToUpdate = optInfoToUpdate.get();
-                		turfInfoService.updateFromAspiJSON(turfInfo, infoToUpdate);
+                		infoToUpdate.setRecence(turfInfo.getRecence());
+                		alltoUpdate.add(infoToUpdate);
+//                		turfInfoService.updateAllFromAspiJSON(turfInfo, infoToUpdate);
                     	}
                 
-                System.out.println("STOP");
             	
             }
+            
+    		turfInfoService.updateAllFromAspiJSON(alltoUpdate);
+
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block

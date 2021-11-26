@@ -1,5 +1,6 @@
 package turfinfos2.service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,9 +76,15 @@ public class TurfInfoService {
     	
     }
     
-    public void updateFromParisTurfJSON(TurfInfos info, boolean nulStats) {
+    public void updateAllFromParisTurfJSON(List<TurfInfos> infos) {
     	
-    	TurfInfos infoToUpdate = turfInfosRepository.findByNumeroAndNumcourse(info.getNumero(), info.getNumcourse());
+    	List<TurfInfos> allToUpdate = new ArrayList<>();
+    	List<TurfInfos> allByNumcourse = turfInfosRepository.findAllByNumcourse(infos.get(0).getNumcourse());
+
+    	
+    	for(TurfInfos info : infos) {
+    	
+    	TurfInfos infoToUpdate = allByNumcourse.stream().filter(ti->ti.getNumero().equals(info.getNumero())).findFirst().get();
     	
     	infoToUpdate.setC(info.getC());
 //    	infoToUpdate.setCheval(info.getCheval());
@@ -93,7 +100,7 @@ public class TurfInfoService {
     	infoToUpdate.setReunionstring(info.getReunionstring());
     	
     	//STATS
-    	if(nulStats == false) {
+    	if(info.getNulStats().equals(false)) {
     	infoToUpdate.setPourcPlaceChevalHippo(info.getPourcPlaceChevalHippo());
     	infoToUpdate.setPourcPlaceEntHippo(info.getPourcPlaceEntHippo());
     	infoToUpdate.setPourcPlaceJockHippo(info.getPourcPlaceJockHippo());
@@ -153,28 +160,28 @@ public class TurfInfoService {
     	infoToUpdate.setNumberOfNonRunners(info.getNumberOfNonRunners());
 
 
+        allToUpdate.add(infoToUpdate);
 
 
 
 
 
 
-
-    	
+    	}
     	
 //    	infoToUpdate.setNoteProno(null);
 //    	infoToUpdate.setChrono(info.getChrono());
 //    	infoToUpdate.setNumeroString(info.getNumero().toString());
     	 
-    	turfInfosRepository.save(infoToUpdate);
+    	turfInfosRepository.saveAll(allToUpdate);
 
     }
     
-    public void updateFromAspiJSON(TurfInfos info, TurfInfos infoToUpdate) {
+    public void updateAllFromAspiJSON(List<TurfInfos> infosToUpdate) {
     	    	
-    	infoToUpdate.setRecence(info.getRecence());
+//    	infoToUpdate.setRecence(info.getRecence());
     
-    	turfInfosRepository.save(infoToUpdate);
+    	turfInfosRepository.saveAll(infosToUpdate);
     
     }
     

@@ -20,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import turfinfos2.model.ArchiveInfo;
 import turfinfos2.model.TurfInfos;
+import turfinfos2.repository.ArchiveInfoRepository;
 import turfinfos2.repository.TurfInfosRepository;
 
 @Service
@@ -31,12 +33,19 @@ public class ResultService {
 	
 	@Autowired
 	TurfInfoService turfInfoService;
+	
+	@Autowired
+	ArchiveInfoRepository archiveInfosRepository;
 
 
-	public void setAllPlaceFirstPronoList(Model model) {
+	public List<ArchiveInfo> setAllPlaceFirstPronoList( ) {
+		
+		List<TurfInfos> all = turfInfosRepository.findAll();
+		
+		List<ArchiveInfo> finalList = new ArrayList<>();
 		
 		//Jours
-				Set<String> distinctJours = turfInfosRepository.findAll().stream()
+				Set<String> distinctJours = all.stream()
 				.map(TurfInfos :: getJour)
 //				.sorted()
 				.collect(Collectors.toSet());
@@ -56,34 +65,38 @@ public class ResultService {
          				
 				     reunions.forEach(r->{
 				    	 
-				    	 setPlaceFirstPronoList(j, r, model);
+				    	 ;
+				    	 finalList.addAll(setPlaceFirstPronoList(j, r, all));
 				    	 
 				     });
 				});
-				
-				
+				System.out.println("big list = " + finalList.size());
+				return finalList;
 	}
     
-    public List<TurfInfos> setPlaceFirstPronoList(String jour,
-    		String reunionstring,
-    		Model model) {   
+    public List<ArchiveInfo> setPlaceFirstPronoList(String jour,
+    		String reunionstring, List<TurfInfos> all
+    		) {   
     	
 //    	if(principal == null) {
 //			return "redirect:/login";
 //    	}
     	
-    	model.addAttribute("date", jour);
-    	model.addAttribute("recencemax", 60);
+
     	
     	//RACESLIST
-    	List<TurfInfos> allPremiumReunionInfos = turfInfosRepository.findAllByJourAndByReunionstring(jour, reunionstring)
+    	List<TurfInfos> allPremiumReunionInfos = all
+//    			turfInfosRepository.findAllByJourAndByReunionstring(jour, reunionstring)
     			.stream()
-    			.filter(ti-> ti.getIsRunning() != null && ti.getIsRunning() == true && ti.getIsPremium() != null && ti.getIsPremium().equals(true))
+    			.filter(ti-> ti.getJour().equals(jour) && ti.getReunionstring().equals(reunionstring) 
+    				&& ti.getIsRunning() != null && ti.getIsRunning().equals(true) && ti.getIsPremium() != null && ti.getIsPremium().equals(true))
 				.collect(Collectors.toList());
     	
-    	allPremiumReunionInfos.forEach(ti->{
-    		ti.setIsFirstInProno(false);
-    	});
+//    	allPremiumReunionInfos.forEach(ti->{
+//    		ti.setIsFirstInProno(false);
+//    	});
+    	List<ArchiveInfo> finalList = new ArrayList<>();
+
     			
     	List<TurfInfos> reunionCracks = new ArrayList<>();
     	Map<String, String> tayPronos = new HashMap<>();
@@ -108,7 +121,6 @@ public class ResultService {
 		
 //		System.out.println(distinctNumraces.size());
 		
-		model.addAttribute("distinctnumraces", distinctNumraces);
 		
 		List<TurfInfos> allraceInfos = new ArrayList<>();
 		for(Integer num : distinctNumraces) {
@@ -120,19 +132,12 @@ public class ResultService {
 					.filter(ti -> ti.getC().equals(num))
 					.collect(Collectors.toList());
 			
-			model.addAttribute("racesize", allraceInfos.size());
-			
-			model.addAttribute(numToString(num) + "ispick5", allraceInfos.get(0).getIsPick5());
-			model.addAttribute(numToString(num) + "istqq", allraceInfos.get(0).getIsTQQ());
-			model.addAttribute(numToString(num) + "runners", allraceInfos.get(0).getNumberOfInitialRunners());
-			
+		
 			String nonPartants = "";
 			if(allraceInfos.get(0).getNumberOfNonRunners() != null && allraceInfos.get(0).getNumberOfNonRunners() > 0) {
 				 nonPartants = "(" + allraceInfos.get(0).getNumberOfNonRunners() + " NP)";
 			}
-			model.addAttribute(numToString(num) + "caralist", allraceInfos.get(0).getHour() + " - " + allraceInfos.get(0).getCaraList1() + " - " + allraceInfos.get(0).getCaraList2() + " - " + allraceInfos.get(0).getNumberOfInitialRunners() + " partants " + nonPartants);
-			model.addAttribute(numToString(num) + "hasbettypes", allraceInfos.get(0).getHasBetTypes());
-
+		
 
 //			});
 			
@@ -305,8 +310,8 @@ public class ResultService {
 				    listBytxph,
 				   
 				    listByppc,
-				    listByChronos,
-				    model)
+				    listByChronos
+		)
 					
 					.stream()
 					.filter(ti -> ti.getNoteProno() != null && ti.getNoteProno()>0)
@@ -337,98 +342,34 @@ public class ResultService {
 						
 			
 			
-			Optional<TurfInfos> optTinf = allraceInfos.stream().findFirst();
-			if(optTinf.isPresent()) {
-				TurfInfos tinf = optTinf.get();
-			model.addAttribute(numToString(num) + "title","R" + tinf.getR() + "-C" + num );
-			
-			model.addAttribute(numToString(num) + "pvch", listBypvch);
-			model.addAttribute(numToString(num) + "pvjh", listBypvjh);
-			model.addAttribute(numToString(num) + "pveh", calculateEntraineur(listBypveh));
-			
-			model.addAttribute(numToString(num) + "ppch", listByppch);
-			model.addAttribute(numToString(num) + "ppc", listByppc);
-
-//			model.addAttribute(numToString(num) + "ppjh", listByppjh);
-//			model.addAttribute(numToString(num) + "ppeh", calculateEntraineur(listByppeh));
-			
-			
-			model.addAttribute(numToString(num) + "txv", listBytxv);
-			model.addAttribute(numToString(num) + "txp", listBytxp);
-			model.addAttribute(numToString(num) + "txvh", listBytxvh);
-			model.addAttribute(numToString(num) + "txph", listBytxph);
-			
-			
-			if(listByChronoParisTurf.size() < 9) {
-				model.addAttribute(numToString(num) + "paristurfchronoslist", listByChronoParisTurf);
-			}
-			if(listByChronoParisTurf.size() >= 9){
-				model.addAttribute(numToString(num) + "paristurfchronoslist", listByChronoParisTurf.subList(0, 9));
-			}
-
-			model.addAttribute(numToString(num) + "chronoslist", listByChronos);
-			model.addAttribute(numToString(num) + "taypronoslist", listByTayPronos);
-			model.addAttribute(numToString(num) + "drawlist", listByDraw);
-
-						
-			
-			if(!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0 && listByNoteProno.size() < 11) {
-				model.addAttribute(numToString(num) + "pronoslist", listByNoteProno);
-			}
-			if(!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0 &&  listByNoteProno.size() >= 11){
-				model.addAttribute(numToString(num) + "pronoslist", listByNoteProno.subList(0, 11));
-			}
-			if(listByNoteProno.isEmpty()) {
-				model.addAttribute(numToString(num) + "pronoslist", new ArrayList<>());
-			}
+			if(listByNoteProno.size()>0) {
+								
+		
 			TurfInfos ti = listByNoteProno.get(0);
-			ti.setIsFirstInProno(true);
-				turfInfosRepository.save(ti);
+			ArchiveInfo archive = new ArchiveInfo();
 			
-			
-			
-			if(listByRanking.size() < 5) {
-				model.addAttribute(numToString(num) + "classementlist", listByRanking);
+			archive.setIsFirstInProno(ti.getIsFirstInProno());
+			archive.setC(ti.getC());
+			archive.setHour(ti.getHour());
+			archive.setIsFirstInProno(true);
+			archive.setJour(ti.getJour());
+			archive.setLiveOdd(ti.getLiveOdd());
+			archive.setLiveOddPlace(ti.getLiveOddPlace());
+			if(ti.getLiveOddPlace() == null) {
+				archive.setLiveOddPlace(0d);
 			}
-			if(listByRanking.size() >= 5){
-				model.addAttribute(numToString(num) + "classementlist", listByRanking.subList(0, 5));
-			}
-						
-						
-			
-//			model.addAttribute(numToString(num) + "pronoslist", listByPronos);
-			
-			if(!listByChronos.isEmpty() || listByChronos.size()>0) {
-				model.addAttribute(numToString(num) + "chronos", true); 
-			}
-			if(listByChronos.isEmpty() || listByChronos.size()==0) {
-				model.addAttribute(numToString(num) + "chronos", false); 
-			}
-			
-			if(!listByTayPronos.isEmpty() || listByTayPronos.size()>0) {
-				model.addAttribute(numToString(num) + "taypronos", true); 
-			}
-			if(listByTayPronos.isEmpty() || listByTayPronos.size()==0) {
-				model.addAttribute(numToString(num) + "taypronos", false); 
-			}
-			
-			
-			System.out.println(allraceInfos.get(0).getRaceSpecialty());
-			
-			if(allraceInfos.get(0).getRaceSpecialty() != null) {
+			archive.setLiveOddPlaceOnline(ti.getLiveOddPlaceOnline());
+			archive.setNumberOfInitialRunners(ti.getNumberOfInitialRunners());
+			archive.setNumero(ti.getNumero());
+			archive.setR(ti.getR());
+			archive.setRanking(ti.getRanking());
+			archive.setReunionstring(ti.getReunionstring());
+			archive.setRaceSpecialty(ti.getRaceSpecialty());
+			archive.setHasBetTypes(ti.getHasBetTypes());
+			archive.setRecence(ti.getRecence());
 
-			if(allraceInfos.get(0).getRaceSpecialty().equals("A") || allraceInfos.get(0).getRaceSpecialty().equals("M")) {
-				model.addAttribute("specialty", "trot");
-			} else if (allraceInfos.get(0).getRaceSpecialty().equals("P")){
-				model.addAttribute("specialty", "galop");
-			}
-			}else {
-				model.addAttribute("specialty", "galop");
-			}
-						
-			model.addAttribute(numToString(num) + "exists", true);
-						
-
+            finalList.add(archive);		
+	
 			}	
 
 			
@@ -440,10 +381,6 @@ public class ResultService {
 //					Collections.reverse(listNums);
 //					distinctNumsCheval = new LinkedHashSet<>(listNums);
 			
-			model.addAttribute(numToString(num) + "horses", listByNumCheval);
-			model.addAttribute(numToString(num) + "numcourse", allraceInfos.get(0).getNumcourse());
-			model.addAttribute("reunion", allPremiumReunionInfos.get(0).getR());
-			model.addAttribute(numToString(num) + "race", num);
 
 						
 		}
@@ -455,9 +392,7 @@ public class ResultService {
 		.collect(Collectors.toList());
 		Collections.reverse(crackList);
 
-		model.addAttribute("cracklist", crackList);
-		model.addAttribute("supercracknote", 35);
-
+	
 		
 ////////////Placés du jour/////////////////
 	List<TurfInfos> placeList = allPremiumReunionInfos.stream()
@@ -466,7 +401,6 @@ public class ResultService {
 	.collect(Collectors.toList());
 //	Collections.reverse(placeList);
 
-	model.addAttribute("placelist", placeList);
 		
 		//////////COUPLES DU JOUR//////////////
 		Set<String> cples = new HashSet<>();
@@ -495,36 +429,25 @@ public class ResultService {
 		List<String> couples = cples.stream()
 				.sorted()
 				.collect(Collectors.toList());
-//  		model.addAttribute("couples", new ArrayList<>());
-		model.addAttribute("couples", couples);
-		
-		model.addAttribute("taypronos", tayPronos);
-		
+
 		
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				/////////////reusOfDay
-		 Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
-	 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
-	        			.map(TurfInfos :: getReunionstring)
-	        			.collect(Collectors.toSet());
-	        			List<String> list2 = new ArrayList<String>(reunions);
-	        			Collections.sort(list2);        			
-	        			reunions = new LinkedHashSet<>(list2);
-	        	         model.addAttribute("reunionsofday", reunions);
-		 
-		 
-	         model.addAttribute("reusofday", reunions);
-	         model.addAttribute("reunionstring", reunionstring);
-	         model.addAttribute("jour", jour);
+//		 Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
+//	 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+//	        			.map(TurfInfos :: getReunionstring)
+//	        			.collect(Collectors.toSet());
+//	        			List<String> list2 = new ArrayList<String>(reunions);
+//	        			Collections.sort(list2);        			
+//	        			reunions = new LinkedHashSet<>(list2);
+//	        	
 
-
-	         List<TurfInfos> finalList = new ArrayList<>();
 
 	         
-		navbarInfos(model);
-    	
-    	return finalList;
+	    				System.out.println("list = " + finalList.size());
+
+	        			return finalList;
     }
     
     ///////////////////////////////////////////////////////////////
@@ -662,8 +585,8 @@ public class ResultService {
 		   List<TurfInfos> listByppc,
 
 		   
-		   List<TurfInfos> listByChronos,
-		   Model model) {	 
+		   List<TurfInfos> listByChronos
+		   ) {	 
 	   
 	   calculateNoteProno(allraceInfos, listBypvch, 1d);
 	   calculateNoteProno(allraceInfos, listBypvjh, 2d);

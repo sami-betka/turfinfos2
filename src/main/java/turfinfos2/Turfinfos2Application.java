@@ -1,14 +1,17 @@
 package turfinfos2;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.CurrentOddsRepository;
-import turfinfos2.repository.TurfInfosRepository;
 
 @SpringBootApplication
 public class Turfinfos2Application {
@@ -166,6 +169,15 @@ public class Turfinfos2Application {
 //		currentOddsRepository.save(odd3);
 //		
 
+//		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//	       String jour = LocalDateTime.now().format(formatter);
+//	       
+//	       LocalDateTime.
+//	       
+//	       System.out.println();
+		
+			
+		
 		
 	}
 	

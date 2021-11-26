@@ -443,9 +443,13 @@ public class TurfInfoController {
 		List<TurfInfos> allInfos = repo.findAll();
 
 		// DATES
-		Set<String> dates = allInfos.stream().map(TurfInfos::getJour).collect(Collectors.toSet());
-		model.addAttribute("datesnav", dates);
-
+		Set<String> dates = allInfos.stream()
+				.map(TurfInfos::getJour)
+ 				.sorted()
+				.collect(Collectors.toSet());
+		List<String> datesSorted = dates.stream().collect(Collectors.toList());
+	  	Collections.sort(datesSorted, (o1, o2) -> o1.compareTo(o2));
+	        model.addAttribute("datesnav", datesSorted);
 		// REUNIONS
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String jour = LocalDateTime.now().format(formatter);

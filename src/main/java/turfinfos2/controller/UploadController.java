@@ -447,7 +447,7 @@ public class UploadController {
 			reunionCracks.addAll(listByNoteProno);
 			
 			/////////////AFFECTER PASTILLES///////////////
-			setPastilles(listBypvjh, listByChronos, listByNoteProno, allraceInfos.size());
+			setPastilles(listBypvjh, listByChronos, listBypvch, listByppch, listBytxv, listBytxp, listByNoteProno, allraceInfos.size());
 						
 			
 			
@@ -1108,18 +1108,22 @@ public class UploadController {
 //	   return listByCl;
 //   }
    
-   private List<TurfInfos> setPastilles(List<TurfInfos> jockeys, List<TurfInfos> chronos, List<TurfInfos> pronos, int raceSize){
+   private List<TurfInfos> setPastilles(List<TurfInfos> jockeys, List<TurfInfos> chronos, List<TurfInfos> vchevalh, List<TurfInfos> pchevalh, List<TurfInfos> vcouple,  List<TurfInfos> pcouple, List<TurfInfos> pronos, int raceSize){
 	   
 	   if(raceSize == 7) {
 		   pronos.forEach(ti-> {
 			   if(jockeys.size() >= 5) {
 			   if(!jockeys.subList(0, 5).contains(ti)) {
 				   ti.setJockeyPastille(true);
+			   }else {
+				   ti.setJockeyPastille(false);
 			   }
 			   }
 			   if(chronos.size() >= 5) {
 			   if(!chronos.subList(0, 5).contains(ti)) {
 				   ti.setChronoPastille(true);
+			   }else {
+				   ti.setChronoPastille(false);
 			   }
 			   }
 		   });
@@ -1130,11 +1134,15 @@ public class UploadController {
 			   if(jockeys.size() >= 6) {
 			   if(!jockeys.subList(0, 6).contains(ti)) {
 				   ti.setJockeyPastille(true);
+			   }else {
+				   ti.setJockeyPastille(false);
 			   }
 			   }
 			   if(chronos.size() >= 6) {
 			   if(!chronos.subList(0, 6).contains(ti)) {
 				   ti.setChronoPastille(true);
+			   }else {
+				   ti.setChronoPastille(false);
 			   }
 			   }
 		   });
@@ -1145,11 +1153,15 @@ public class UploadController {
 			   if(jockeys.size() >= 7) {
 			   if(!jockeys.subList(0, 7).contains(ti)) {
 				   ti.setJockeyPastille(true);
+			   }else {
+				   ti.setJockeyPastille(false);
 			   }
 			   }
 			   if(chronos.size() >= 7) {
 			   if(!chronos.subList(0, 7).contains(ti)) {
 				   ti.setChronoPastille(true);
+			   }else {
+				   ti.setChronoPastille(false);
 			   }
 			   }
 		   });
@@ -1160,11 +1172,15 @@ public class UploadController {
 			   if(jockeys.size() >= 8) {
 			   if(!jockeys.subList(0, 8).contains(ti)) {
 				   ti.setJockeyPastille(true);
+			   }else {
+				   ti.setJockeyPastille(false);
 			   }
 			   }
 			   if(chronos.size() >= 8) {
 			   if(!chronos.subList(0, 8).contains(ti)) {
 				   ti.setChronoPastille(true);
+			   }else {
+				   ti.setChronoPastille(false);
 			   }
 			   }
 		   });
@@ -1175,15 +1191,34 @@ public class UploadController {
 			   if(jockeys.size() >= 9) {
 			   if(!jockeys.subList(0, 9).contains(ti)) {
 				   ti.setJockeyPastille(true);
+			   }else {
+				   ti.setJockeyPastille(false);
 			   }
 			   }
 			   if(chronos.size() >= 9) {
 			   if(!chronos.subList(0, 9).contains(ti)) {
 				   ti.setChronoPastille(true);
+			   }else {
+				   ti.setChronoPastille(false);
 			   }
 			   }
 		   });
 	   }
+	   
+	   pronos.forEach(ti-> {
+		   if(!vchevalh.contains(ti) && !pchevalh.contains(ti)) {
+			   ti.setChevalPastille(true);
+		   }else {
+			   ti.setChevalPastille(false);
+		   }
+		   if(!vcouple.contains(ti) && !pcouple.contains(ti)) {
+			   ti.setCouplePastille(true);
+		   }else {
+			   ti.setCouplePastille(false);
+		   }
+		  	  
+	   });
+	   
 	   
 
 	   return pronos;
@@ -1196,9 +1231,11 @@ public class UploadController {
 	   //DATES
   	 Set<String> dates = allInfos.stream()
 				.map(TurfInfos :: getJour)
+ 				.sorted()
 				.collect(Collectors.toSet());
-       model.addAttribute("datesnav", dates);
-	   
+  	List<String> datesSorted = dates.stream().collect(Collectors.toList());
+  	Collections.sort(datesSorted, (o1, o2) -> o1.compareTo(o2));
+        model.addAttribute("datesnav", datesSorted);	   
        //REUNIONS
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
        String jour = LocalDateTime.now().format(formatter);

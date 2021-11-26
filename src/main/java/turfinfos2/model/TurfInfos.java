@@ -231,6 +231,8 @@ public class TurfInfos {
 	
 	private Boolean couplePastille;
 	
+	private Boolean chevalPastille;
+	
 	private Integer numberOfNonRunners;
 	
 	private Boolean isCross;
@@ -238,6 +240,15 @@ public class TurfInfos {
 	private Boolean isFirstInProno;
 	
 	private Double liveOddPlaceOnline;
+	
+	private Boolean isCanceled;
+	
+	private Boolean isFavori;
+	
+	private Boolean nulStats;
+
+
+
 
 
 
@@ -259,7 +270,8 @@ public class TurfInfos {
 			Integer ranking, Double liveOdd, Boolean isRunning, Integer numberOfInitialRunners, Boolean isTQQ, Boolean isPick5,
 			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes, Integer draw, Double liveOddPlace,
 			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners, Boolean isCross,
-			Boolean isFirstInProno, Boolean couplePastille, Double liveOddPlaceOnline) {
+			Boolean isFirstInProno, Boolean couplePastille, Boolean chevalPastille, Double liveOddPlaceOnline, Boolean isCanceled,
+			Boolean isFavori, Boolean nulStats) {
 		
 		this.id = id;
 		this.R = R;
@@ -338,9 +350,15 @@ public class TurfInfos {
 		this.chronoPastille = chronoPastille;
 		this.jockeyPastille = jockeyPastille;
 		this.couplePastille = couplePastille;
+		this.chevalPastille = chevalPastille;
 		this.isCross = isCross;
 		this.isFirstInProno = isFirstInProno;
 		this.liveOddPlaceOnline = liveOddPlaceOnline;
+		this.isCanceled = isCanceled;
+		this.isFavori = isFavori;
+		this.nulStats = nulStats;
+
+
 
 
 
@@ -903,6 +921,22 @@ public class TurfInfos {
 
 	public void setLiveOddPlaceOnline(Double liveOddPlaceOnline) {
 		this.liveOddPlaceOnline = liveOddPlaceOnline;
+	}
+
+	public Boolean getNulStats() {
+		return nulStats;
+	}
+
+	public void setNulStats(Boolean nulStats) {
+		this.nulStats = nulStats;
+	}
+
+	public Boolean getChevalPastille() {
+		return chevalPastille;
+	}
+
+	public void setChevalPastille(Boolean chevalPastille) {
+		this.chevalPastille = chevalPastille;
 	}
 
 }
