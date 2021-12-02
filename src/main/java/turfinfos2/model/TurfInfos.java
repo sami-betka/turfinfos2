@@ -243,12 +243,15 @@ public class TurfInfos {
 	
 	private Boolean nulStats;
 		
+	@Column(length = 6000)
 	private String formFigs;
 	
 	
 	private Boolean isCanceled;
 	
 	private Boolean isFavori;
+	
+	private Double ante;
 
 
 
@@ -275,7 +278,7 @@ public class TurfInfos {
 			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes, Integer draw, Double liveOddPlace,
 			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners, Boolean isCross,
 			Boolean isFirstInProno, Boolean couplePastille, Boolean chevalPastille, Double liveOddPlaceOnline, Boolean isCanceled,
-			Boolean isFavori, Boolean nulStats, String formFigs) {
+			Boolean isFavori, Boolean nulStats, String formFigs, Double ante) {
 		
 		this.id = id;
 		this.R = R;
@@ -362,6 +365,8 @@ public class TurfInfos {
 		this.isCross = isCross;
 		this.isFirstInProno = isFirstInProno;
 		this.nulStats = nulStats;
+		this.ante = ante;
+
 
 
 
@@ -967,6 +972,14 @@ public class TurfInfos {
 
 	public void setFormFigs(String formFigs) {
 		this.formFigs = formFigs;
+	}
+
+	public Double getAnte() {
+		return ante;
+	}
+
+	public void setAnte(Double ante) {
+		this.ante = ante;
 	}
 
 }

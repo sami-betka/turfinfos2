@@ -60,8 +60,8 @@ public class ImportJSONController {
 	@GetMapping("/upload-json-data-from-url-date-range")
     public String uploadJSONFileDateRange( Model model, RedirectAttributes redirect) {
 		
-		final LocalDate start = LocalDate.parse("2021-04-24", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		  final LocalDate end = LocalDate.parse("2021-05-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		final LocalDate start = LocalDate.parse("2021-03-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		  final LocalDate end = LocalDate.parse("2021-03-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
 		  final long days = start.until(end, ChronoUnit.DAYS);
 	
@@ -82,8 +82,8 @@ public class ImportJSONController {
 	@GetMapping("/upload-rapports-json-data-from-url-date-range")
     public String uploadRapportsFileDateRange(RedirectAttributes redirect) {
 
-		final LocalDate start = LocalDate.parse("2021-04-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		  final LocalDate end = LocalDate.parse("2021-05-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		final LocalDate start = LocalDate.parse("2021-03-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		  final LocalDate end = LocalDate.parse("2021-03-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
 		  final long days = start.until(end, ChronoUnit.DAYS);
 	

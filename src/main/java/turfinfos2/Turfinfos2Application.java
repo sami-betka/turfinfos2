@@ -1,5 +1,6 @@
 package turfinfos2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
@@ -69,24 +70,34 @@ public class Turfinfos2Application {
 		
 		
 		
-		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
-//	
-        List<TurfInfos> all = turfInfosRepository.findAll();
-        
-        all.forEach(ti-> {
-        	
-        	if(ti.getIsCross() == null) {
-        		ti.setIsCross(false);
-        	}
-//        	if(ti.getIsCross() == null) {
-//        		ti.setIsCross(false);
+//		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
+////	
+//        List<TurfInfos> all = turfInfosRepository.findAll();
+//        List<TurfInfos> toSave = new ArrayList<>();
+//
+//        
+//        all.forEach(ti-> {
+//        	
+//        	if(ti.getChevalPastille() == null) {
+//        		ti.setChevalPastille(false);
 //        	}
-       
-            	turfInfosRepository.save(ti);
-        
-        });
-        System.out.println("STOP");
-        System.out.println(all.size());
+//        	if(ti.getChronoPastille() == null) {
+//        		ti.setChronoPastille(false);
+//        	}
+//        	if(ti.getCouplePastille() == null) {
+//        		ti.setCouplePastille(false);
+//        	}
+//        	if(ti.getJockeyPastille() == null) {
+//        		ti.setJockeyPastille(false);
+//        	}
+//       
+//        	toSave.add(ti);
+//        
+//        });
+//      turfInfosRepository.saveAll(toSave);
+//
+//        System.out.println("STOP");
+//        System.out.println(toSave.size());
 
 		
 		

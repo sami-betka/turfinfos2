@@ -12,7 +12,6 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,11 +37,11 @@ public class ResultService {
 	ArchiveInfoRepository archiveInfosRepository;
 
 
-	public List<ArchiveInfo> setAllPlaceFirstPronoList(List<TurfInfos> all) {
+	public List<TurfInfos> setAllPlaceFirstPronoList(List<TurfInfos> all) {
 		
 //		List<TurfInfos> all = turfInfosRepository.findAll();
 		
-		List<ArchiveInfo> finalList = new ArrayList<>();
+		List<TurfInfos> finalList = new ArrayList<>();
 		
 		//Jours
 				Set<String> distinctJours = all.stream()
@@ -55,8 +54,8 @@ public class ResultService {
 				
 				distinctJours.forEach(j->{
 					
-					  Set<String> reunions = turfInfosRepository.findAllByJour(j).stream()
-//				 				.filter(ti->ti.getReunionstring() != null &&  ti.getJour().equals(jour) && ti.getR().length()<3)
+					  Set<String> reunions = all.stream()
+				 				.filter(ti -> ti.getJour().equals(j))
 				        			.map(TurfInfos :: getReunionstring)
 				        			.collect(Collectors.toSet());
 				        			List<String> reunionsList = new ArrayList<String>(reunions);
@@ -74,7 +73,7 @@ public class ResultService {
 				return finalList;
 	}
     
-    public List<ArchiveInfo> setPlaceFirstPronoList(String jour,
+    public List<TurfInfos> setPlaceFirstPronoList(String jour,
     		String reunionstring, List<TurfInfos> all
     		) {   
     	
@@ -95,7 +94,7 @@ public class ResultService {
 //    	allPremiumReunionInfos.forEach(ti->{
 //    		ti.setIsFirstInProno(false);
 //    	});
-    	List<ArchiveInfo> finalList = new ArrayList<>();
+    	List<TurfInfos> finalList = new ArrayList<>();
 
     			
     	List<TurfInfos> reunionCracks = new ArrayList<>();
@@ -343,39 +342,54 @@ public class ResultService {
 			
 			
 			if(listByNoteProno.size()>0) {
-								
+//			if(listByppc.size()>0) {		
 		
-			TurfInfos ti = listByNoteProno.get(0);
-			ArchiveInfo archive = new ArchiveInfo();
-			
-			archive.setIsFirstInProno(ti.getIsFirstInProno());
-			archive.setC(ti.getC());
-			archive.setHour(ti.getHour());
-			archive.setIsFirstInProno(true);
-			archive.setJour(ti.getJour());
-			archive.setLiveOdd(ti.getLiveOdd());
-			archive.setLiveOddPlace(ti.getLiveOddPlace());
-			if(ti.getLiveOddPlace() == null) {
-				archive.setLiveOddPlace(0d);
+			TurfInfos info = setPastilles(listBypvjh, listByChronos, listBypvch, listByppch, listBytxv, listBytxp, listByNoteProno, allraceInfos.size()).get(0);
+//			TurfInfos info = listByppc.get(0);
+			if(info.getLiveOddPlace() == null) {
+				info.setLiveOddPlace(0d);
 			}
-			archive.setLiveOddPlaceOnline(ti.getLiveOddPlaceOnline());
-			archive.setNumberOfInitialRunners(ti.getNumberOfInitialRunners());
-			archive.setNumero(ti.getNumero());
-			archive.setR(ti.getR());
-			archive.setRanking(ti.getRanking());
-			archive.setReunionstring(ti.getReunionstring());
-			archive.setRaceSpecialty(ti.getRaceSpecialty());
-			archive.setHasBetTypes(ti.getHasBetTypes());
-			archive.setRecence(ti.getRecence());
-			archive.setJockeyPastille(ti.getJockeyPastille());
-			archive.setChronoPastille(ti.getChronoPastille());
-			archive.setCouplePastille(ti.getCouplePastille());
-			archive.setChevalPastille(ti.getChevalPastille());
-			archive.setFormFigs(ti.getFormFigs());
+			
+			List<TurfInfos> listByLiveOdd = allraceInfos.stream()
+					.filter(ti -> ti.getLiveOdd()!= null && ti.getLiveOdd()!= 0)
+					.sorted(Comparator.comparingDouble(TurfInfos::getLiveOdd))
+					.collect(Collectors.toList());
+			if(listByLiveOdd.size()>0 &&  info.getTableId().equals(listByLiveOdd.get(0).getTableId())) {
+				info.setIsFavori(true);
+			}
+			
+			
+
+//			ArchiveInfo archive = new ArchiveInfo();
+//			
+//			archive.setIsFirstInProno(ti.getIsFirstInProno());
+//			archive.setC(ti.getC());
+//			archive.setHour(ti.getHour());
+//			archive.setIsFirstInProno(true);
+//			archive.setJour(ti.getJour());
+//			archive.setLiveOdd(ti.getLiveOdd());
+//			archive.setLiveOddPlace(ti.getLiveOddPlace());
+//			if(ti.getLiveOddPlace() == null) {
+//				archive.setLiveOddPlace(0d);
+//			}
+//			archive.setLiveOddPlaceOnline(ti.getLiveOddPlaceOnline());
+//			archive.setNumberOfInitialRunners(ti.getNumberOfInitialRunners());
+//			archive.setNumero(ti.getNumero());
+//			archive.setR(ti.getR());
+//			archive.setRanking(ti.getRanking());
+//			archive.setReunionstring(ti.getReunionstring());
+//			archive.setRaceSpecialty(ti.getRaceSpecialty());
+//			archive.setHasBetTypes(ti.getHasBetTypes());
+//			archive.setRecence(ti.getRecence());
+//			archive.setJockeyPastille(ti.getJockeyPastille());
+//			archive.setChronoPastille(ti.getChronoPastille());
+//			archive.setCouplePastille(ti.getCouplePastille());
+//			archive.setChevalPastille(ti.getChevalPastille());
+//			archive.setFormFigs(ti.getFormFigs());
 
 
 
-            finalList.add(archive);		
+            finalList.add(info);		
 	
 			}	
 

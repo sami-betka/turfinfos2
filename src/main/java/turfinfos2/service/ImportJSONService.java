@@ -44,13 +44,14 @@ public class ImportJSONService {
 
 		List<TurfInfos> fromRace = new ArrayList<>();
 		
-	    List<Integer> allNumCourses = all.stream()
-				.map(TurfInfos :: getNumcourse)
-				.collect(Collectors.toList());
+//	    List<Integer> allNumCourses = all.stream()
+//				.map(TurfInfos :: getNumcourse)
+//				.collect(Collectors.toList());
 	    
-	    List<String> allTableIds = all.stream()
+	    List<String> allTableIds = new ArrayList<>();
+	    allTableIds.addAll( all.stream()
 				.map(TurfInfos :: getTableId)
-				.collect(Collectors.toList());
+				.collect(Collectors.toList())  );
 
 //		File file = new File("src/main/resources/static/uploadedfiles/one.json");
 
@@ -326,9 +327,11 @@ public class ImportJSONService {
 //	            	}
     	            //For LOOP END
 	            }
+	            System.out.println(allToUpdate.size() + " - update size");
 	            if(allToUpdate.size() > 0) {
 	        		turfInfoService.updateAllFromParisTurfJSON(allToUpdate);
 	            }
+	            System.out.println(allToSave.size() + " - save size");
 	            if(allToSave.size() > 0) {
 				turfInfosRepository.saveAll(allToSave);
 	            }
@@ -462,6 +465,9 @@ public class ImportJSONService {
 					System.out.println(node.isMissingNode());
 					
 					allByJour.forEach(ti-> {
+						
+						if(node.get(1) != null) {
+						
 						if(ti.getR().equals(entry.getKey()) && ti.getC().equals(race) && ti.getRanking().equals(1)) {
 							ti.setLiveOddPlace(node.get(1).get("rapports").get(0).get("dividendePourUnEuro").doubleValue()/100);
 							allToSave.add(ti);
@@ -479,6 +485,7 @@ public class ImportJSONService {
 							ti.setLiveOddPlace(node.get(1).get("rapports").get(2).get("dividendePourUnEuro").doubleValue()/100);
 							allToSave.add(ti);
 //							turfInfosRepository.save(ti);
+						}
 						}
 						
 					});

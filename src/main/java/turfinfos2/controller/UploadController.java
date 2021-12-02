@@ -101,14 +101,17 @@ public class UploadController {
                 for(TurfInfos info : infos) {
 	            	turfInfoService.setMadeUpParams(info);
 
-//                	if(!numcourses.contains(info.getNumcourse())) {
-//                	turfInfosRepository.save(info);
-//                	}
+                	if(!numcourses.contains(info.getNumcourse())) {
+                	turfInfosRepository.save(info);
+                	}
+                	
                 	if(numcourses.contains(info.getNumcourse())) {
                 		  TurfInfos infoToUpdate = all.stream()
                      				.filter(ti-> ti.getNumero().equals(info.getNumero()) && ti.getNumcourse().equals(info.getNumcourse()))
                      				.findFirst().get(); 
-                		turfInfoService.patchCSVFromAspi(info, infoToUpdate);
+//                		turfInfoService.patchCSVFromAspi(info, infoToUpdate);
+                  		turfInfoService.update(info, infoToUpdate);
+
                     	}
                 }
 
