@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.TurfInfosRepository;
+import turfinfos2.service.ArchiveService;
 import turfinfos2.service.ResultService;
 
 @Controller
@@ -22,12 +23,15 @@ public class GraphController {
 	
 	@Autowired
 	ResultService resultService;
+	
+	@Autowired
+	ArchiveService archiveService;
 
 	@GetMapping("/bar-chart")
 	public String barChart(Model model){
 		
 
-		List<TurfInfos> all = resultService.setAllPlaceFirstPronoList(turfInfosRepository.findAll())
+		List<TurfInfos> all = archiveService.setAllPlaceFirstPronoList(turfInfosRepository.findAll())
 				.stream()
 				.filter(ti->
 				        
@@ -55,6 +59,9 @@ public class GraphController {
 		labels.add("PC");
 		labels.add("VCPLE");
 		labels.add("PCPLE");
+		labels.add("RappMAX");
+		labels.add("RappMIN");
+
 
 		
 		List<TurfInfos> won = all
@@ -70,6 +77,8 @@ public class GraphController {
 		Double pcTotalWon = 0d;
 		Double vcoupleTotalWon = 0d;
 		Double pcoupleTotalWon = 0d;
+		Double rappMaxTotalWon = 0d;
+		Double rappMinTotalWon = 0d;
 		
 		Double vehMoyenneWon = 0d;
 		Double vjhMoyenneWon = 0d;
@@ -78,6 +87,8 @@ public class GraphController {
 		Double pcMoyenneWon = 0d;
 		Double vcoupleMoyenneWon = 0d;
 		Double pcoupleMoyenneWon = 0d;
+		Double rappMaxMoyenneWon = 0d;
+		Double rappMinMoyenneWon = 0d;
 
 		for(TurfInfos info: won) {
 			if(info.getPourcVictEntHippo() != null) {
@@ -101,8 +112,14 @@ public class GraphController {
 			if(info.getTxPlaceCouple() != null) {
 				pcoupleTotalWon += info.getTxPlaceCouple();
 				}
+			if(info.getMaxRapportProbable() != null) {
+				rappMaxTotalWon += info.getMaxRapportProbable();
+				}
+			if(info.getMinRapportProbable() != null) {
+				rappMinTotalWon += info.getMinRapportProbable();
+				}
 			
-			////Taille = 7
+			////Taille = 9
 		}
 		vehMoyenneWon = vehTotalWon/won.size();
 		vjhMoyenneWon = vjhTotalWon/won.size();
@@ -111,6 +128,8 @@ public class GraphController {
 		pcMoyenneWon = pcTotalWon/won.size();
 		vcoupleMoyenneWon = vcoupleTotalWon/won.size();
 		pcoupleMoyenneWon = pcoupleTotalWon/won.size();
+		rappMaxMoyenneWon = rappMaxTotalWon/won.size();
+		rappMinMoyenneWon = rappMinTotalWon/won.size();
 		
 		wonMoyennes.add(vehMoyenneWon);
 		wonMoyennes.add(vjhMoyenneWon);
@@ -119,6 +138,8 @@ public class GraphController {
 		wonMoyennes.add(pcMoyenneWon);
 		wonMoyennes.add(vcoupleMoyenneWon);
 		wonMoyennes.add(pcoupleMoyenneWon);
+		wonMoyennes.add(rappMaxMoyenneWon);
+		wonMoyennes.add(rappMinMoyenneWon);
 
 
 
@@ -136,6 +157,8 @@ public class GraphController {
 		Double pcTotalLost = 0d;
 		Double vcoupleTotalLost = 0d;
 		Double pcoupleTotalLost = 0d;	
+		Double rappMaxTotalLost = 0d;
+		Double rappMinTotalLost = 0d;
 		
 		Double vehMoyenneLost = 0d;
 		Double vjhMoyenneLost = 0d;
@@ -144,6 +167,8 @@ public class GraphController {
 		Double pcMoyenneLost = 0d;
 		Double vcoupleMoyenneLost = 0d;
 		Double pcoupleMoyenneLost = 0d;
+		Double rappMaxMoyenneLost = 0d;
+		Double rappMinMoyenneLost = 0d;
 		
 		for(TurfInfos info: lost) {
 			if(info.getPourcVictEntHippo() != null) {
@@ -167,7 +192,13 @@ public class GraphController {
 				if(info.getTxPlaceCouple() != null) {
 					pcoupleTotalLost += info.getTxPlaceCouple();
 					}
-			////Taille = 7
+				if(info.getMaxRapportProbable() != null) {
+					rappMaxTotalLost += info.getMaxRapportProbable();
+					}
+				if(info.getMinRapportProbable() != null) {
+					rappMinTotalLost += info.getMinRapportProbable();
+					}
+			////Taille = 9
 		}
 		
 		vehMoyenneLost = vehTotalLost/lost.size();
@@ -177,6 +208,8 @@ public class GraphController {
 		pcMoyenneLost = pcTotalLost/lost.size();
 		vcoupleMoyenneLost = vcoupleTotalLost/lost.size();
 		pcoupleMoyenneLost = pcoupleTotalLost/lost.size();
+		rappMaxMoyenneLost = rappMaxTotalLost/lost.size();
+		rappMinMoyenneLost = rappMinTotalLost/lost.size();
 		
 		lostMoyennes.add(vehMoyenneLost);
 		lostMoyennes.add(vjhMoyenneLost);
@@ -185,6 +218,8 @@ public class GraphController {
 		lostMoyennes.add(pcMoyenneLost);
 		lostMoyennes.add(vcoupleMoyenneLost);
 		lostMoyennes.add(pcoupleMoyenneLost);
+		lostMoyennes.add(rappMaxMoyenneLost);
+		lostMoyennes.add(rappMinMoyenneLost);
 
 
 		model.addAttribute("categorie", labels);

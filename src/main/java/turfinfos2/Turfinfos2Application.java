@@ -1,15 +1,11 @@
 package turfinfos2;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import turfinfos2.model.TurfInfos;
-import turfinfos2.repository.CurrentOddsRepository;
-import turfinfos2.repository.TurfInfosRepository;
+import turfinfos2.model.Resultat;
+import turfinfos2.repository.ResultRepository;
 
 @SpringBootApplication
 public class Turfinfos2Application {
@@ -72,29 +68,21 @@ public class Turfinfos2Application {
 		
 //		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
 ////	
-//        List<TurfInfos> all = turfInfosRepository.findAll();
+//        List<TurfInfos> all = new ArrayList<>();
+//        all.addAll(turfInfosRepository.findAll());
+//        		
 //        List<TurfInfos> toSave = new ArrayList<>();
+//        List<TurfInfos> toDelete = new ArrayList<>();
+//
 //
 //        
 //        all.forEach(ti-> {
 //        	
-//        	if(ti.getChevalPastille() == null) {
-//        		ti.setChevalPastille(false);
+//        	if() {
+//        		
 //        	}
-//        	if(ti.getChronoPastille() == null) {
-//        		ti.setChronoPastille(false);
-//        	}
-//        	if(ti.getCouplePastille() == null) {
-//        		ti.setCouplePastille(false);
-//        	}
-//        	if(ti.getJockeyPastille() == null) {
-//        		ti.setJockeyPastille(false);
-//        	}
-//       
-//        	toSave.add(ti);
 //        
 //        });
-//      turfInfosRepository.saveAll(toSave);
 //
 //        System.out.println("STOP");
 //        System.out.println(toSave.size());
@@ -138,7 +126,7 @@ public class Turfinfos2Application {
 //		String time = LocalDateTime.now().format(formatter);
 //        System.out.println(time);
 
-		CurrentOddsRepository currentOddsRepository = ctx.getBean(CurrentOddsRepository.class);
+//		CurrentOddsRepository currentOddsRepository = ctx.getBean(CurrentOddsRepository.class);
 //		
 //		CurrentOdds odd = new CurrentOdds();
 //		odd.setC(1);
@@ -184,8 +172,14 @@ public class Turfinfos2Application {
 //	       
 //	       System.out.println();
 		
-			
-		
+//		ResultRepository resultRepository = ctx.getBean(ResultRepository.class);
+
+//		Resultat resultat = resultRepository.findById(1l).get();
+//		System.out.println(resultat.getJour());
+//		System.out.println(resultat.getR());
+//		System.out.println(resultat.getC());
+//		System.out.println(resultat.getSimpleGagnant().get("Simple gagnant"));
+//		System.out.println(resultat.getCoupleGagnant().get("Couplé gagnant"));
 		
 	}
 	

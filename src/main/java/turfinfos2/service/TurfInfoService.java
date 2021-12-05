@@ -76,13 +76,23 @@ public class TurfInfoService {
     	
     }
     
-    public void updateAllFromParisTurfJSON(List<TurfInfos> infos) {
+    public List<TurfInfos> updateAllFromParisTurfJSON(List<TurfInfos> infos, List<TurfInfos> all) {
     	
     	List<TurfInfos> allToUpdate = new ArrayList<>();
-    	List<TurfInfos> allByNumcourse = turfInfosRepository.findAllByNumcourse(infos.get(0).getNumcourse());
+//    	List<TurfInfos> allByNumcourse = turfInfosRepository.findAllByNumcourse(infos.get(0).getNumcourse());
+    	List<TurfInfos> allByNumcourse = all
+    			.stream()
+    			.filter(ti->ti.getNumcourse().equals(infos.get(0).getNumcourse()))
+    			.collect(Collectors.toList());
+
 
     	
     	for(TurfInfos info : infos) {
+    		System.out.println(all.size());
+    		System.out.println(allByNumcourse.size() + " numcourse size");
+    		System.out.println(info.getNumcourse() + " numcourse");
+
+    		System.out.println(info.getNumero() + " numero");
     	
     	TurfInfos infoToUpdate = allByNumcourse.stream().filter(ti->ti.getNumero().equals(info.getNumero())).findFirst().get();
     	
@@ -128,7 +138,6 @@ public class TurfInfoService {
     	
     	infoToUpdate.setChevalTwoOrThreeHippo(info.getChevalTwoOrThreeHippo());
     	infoToUpdate.setNbVictChevalHippo(info.getNbVictChevalHippo());
-//    	infoToUpdate.setNbCourseCoupleHippo(info.getNbCourseCoupleHippo());
     	
     	
     	} //////////STATS END
@@ -161,8 +170,16 @@ public class TurfInfoService {
     	infoToUpdate.setLiveOddPlaceOnline(info.getLiveOddPlaceOnline());
     	infoToUpdate.setLiveOddPlace(info.getLiveOddPlace());
     	infoToUpdate.setIsCanceled(info.getIsCanceled());
-//    	infoToUpdate.setIsFavori(info.getIsFavori());
+    	infoToUpdate.setIsFavori(info.getIsFavori());
     	infoToUpdate.setFormFigs(info.getFormFigs());
+    	infoToUpdate.setIsSupplemented(info.getIsSupplemented());
+    	infoToUpdate.setPicto(info.getPicto());
+
+//    	infoToUpdate.setNbCourseCoupleHippo(info.getNbCourseCoupleHippo());
+//    	infoToUpdate.setTxVictCoupleHippo(info.getTxVictCoupleHippo());
+//    	infoToUpdate.setTxPlaceCoupleHippo(info.getTxPlaceCoupleHippo());
+
+
 
 
 
@@ -181,7 +198,7 @@ public class TurfInfoService {
 //    	infoToUpdate.setChrono(info.getChrono());
 //    	infoToUpdate.setNumeroString(info.getNumero().toString());
     	 
-    	turfInfosRepository.saveAll(allToUpdate);
+    	return allToUpdate;
 
     }
     

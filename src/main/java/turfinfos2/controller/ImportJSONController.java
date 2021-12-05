@@ -28,8 +28,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import turfinfos2.model.ParisTurfInfosConfig;
+import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.ParisTurfInfoConfigRepository;
+import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.service.ImportJSONService;
 
@@ -41,6 +43,9 @@ public class ImportJSONController {
 	
 	@Autowired
 	TurfInfosRepository turfInfosRepository;
+	
+	@Autowired
+	ResultRepository resultRepository;
 	
 	@Autowired
 	ParisTurfInfoConfigRepository parisTurfInfoConfigRepository;
@@ -60,8 +65,8 @@ public class ImportJSONController {
 	@GetMapping("/upload-json-data-from-url-date-range")
     public String uploadJSONFileDateRange( Model model, RedirectAttributes redirect) {
 		
-		final LocalDate start = LocalDate.parse("2021-03-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		  final LocalDate end = LocalDate.parse("2021-03-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		final LocalDate start = LocalDate.parse("2021-10-16", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		  final LocalDate end = LocalDate.parse("2021-11-30", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
 		  final long days = start.until(end, ChronoUnit.DAYS);
 	
@@ -81,9 +86,15 @@ public class ImportJSONController {
 	
 	@GetMapping("/upload-rapports-json-data-from-url-date-range")
     public String uploadRapportsFileDateRange(RedirectAttributes redirect) {
+		
+		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
+		List<Resultat> allResultToSave = new ArrayList<>();
 
-		final LocalDate start = LocalDate.parse("2021-03-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		  final LocalDate end = LocalDate.parse("2021-03-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		List<TurfInfos> all = turfInfosRepository.findAll();
+
+
+		final LocalDate start = LocalDate.parse("2021-10-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		  final LocalDate end = LocalDate.parse("2021-11-30", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
 		  final long days = start.until(end, ChronoUnit.DAYS);
 	
@@ -95,13 +106,21 @@ public class ImportJSONController {
 		  dates.forEach(ld->{
 			 
 				try {
-					importJSONService.createRapportsInfosFromPMUJson(ld.toString());
+					allTurfInfosToSave.addAll((List< TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("turfinfos"));
+				
+					allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("results"));
+
+					//					importJSONService.createRapportsInfosFromPMUJson(ld.toString());
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				});
-		
+		  
+		  
+		    turfInfosRepository.saveAll(allTurfInfosToSave);
+		    resultRepository.saveAll(allResultToSave);
+		  
 			System.out.println("STOP RAPPORTS");
 			return "redirect:/";
 	}
@@ -135,9 +154,12 @@ public class ImportJSONController {
 	@PostMapping("/upload-rapports-json-data-from-url")
     public String uploadRapportsFile(@RequestParam("jour") String jour, Model model, RedirectAttributes redirect) {
 
+		List<TurfInfos> all = turfInfosRepository.findAll();
 		
 			try {
-				importJSONService.createRapportsInfosFromPMUJson(jour);
+				turfInfosRepository.saveAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(jour, all).get("turfinfos"));
+				resultRepository.saveAll((List<Resultat>) importJSONService.createRapportsInfosFromPMUJson(jour, all).get("results"));
+
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

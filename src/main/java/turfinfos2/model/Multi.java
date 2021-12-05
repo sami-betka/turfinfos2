@@ -32,12 +32,12 @@ public class Multi {
 	private Double multi7;
 
 	@OneToOne
-	private Result result;
+	private Resultat resultat;
 
 	
 
 	public Multi(Long id, String jour, String r, Integer c, Integer numcourse, Double multi4, Double multi5,
-			Double multi6, Double multi7, Result result) {
+			Double multi6, Double multi7, Resultat resultat) {
 		super();
 		this.id = id;
 		this.jour = jour;
@@ -48,7 +48,7 @@ public class Multi {
 		this.multi5 = multi5;
 		this.multi6 = multi6;
 		this.multi7 = multi7;
-		this.result = result;
+		this.resultat = resultat;
 	}
 
 	public Multi() {
@@ -95,12 +95,12 @@ public class Multi {
 		this.multi7 = multi7;
 	}
 
-	public Result getResult() {
-		return result;
+	public Resultat getResult() {
+		return resultat;
 	}
 
-	public void setResult(Result result) {
-		this.result = result;
+	public void setResult(Resultat resultat) {
+		this.resultat = resultat;
 	}
 
 	public String getJour() {

@@ -45,7 +45,7 @@ public class Schedule {
 //	@Scheduled(fixedDelay = 10000)
 	public void scheduleFixedDelayTask() throws ParseException {
 		
-//		Result result = new Result();
+//		Resultat result = new Resultat();
 //		result.setCoupleGagnant(444d);
 //		resultRepository.save(result);
 		

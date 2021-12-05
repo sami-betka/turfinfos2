@@ -139,7 +139,7 @@ public class TurfInfos {
 //@Column(name = "")
 	@CsvBindByName
 //@CsvNumber("###.##")
-	private String nbCourseCoupleHippo;
+	private Integer nbCourseCoupleHippo;
 
 //@Column(name = "")
 	@CsvBindByName
@@ -249,9 +249,20 @@ public class TurfInfos {
 	
 	private Boolean isCanceled;
 	
-	private Boolean isFavori;
 	
 	private Double ante;
+	
+	
+	
+	
+	private Boolean isFavori;
+	private Boolean isSupplemented;
+	private String picto;
+	
+	private Double minRapportProbable;
+	private Double maxRapportProbable;
+
+
 
 
 
@@ -269,7 +280,7 @@ public class TurfInfos {
 			Double pourcPlaceChevalHippo, Double pourcPlaceJockHippo, Double pourcPlaceEntHippo, Double TxVictCouple,
 			Double TxPlaceCouple, Double TxVictCoupleHippo, Double TxPlaceCoupleHippo, Integer chrono,
 			Double noteProno, Integer recence, String numeroString, String coursescheval, String coursesjockey,
-			String coursesentraineur, Integer nbCourseCouple, String nbrCourseChevalHippo, String nbrCourseJockHippo,
+			String coursesentraineur, Integer nbCourseCouple, Integer nbCourseCoupleHippo, String nbrCourseChevalHippo, String nbrCourseJockHippo,
 			String nbrCourseEntHippo, Integer tayProno, String typec, String entraineur, Double notePercentageParameter,
 			String cl, Integer clInt, Double cotedirect, String tableId, boolean blinkersFirstTime, boolean noShoesFirstTime,
 			boolean protectionFirstTime, String raceSpecialty, String distanceAndSpecialtyChrono, String reunionstring, String libel_hippo,
@@ -278,7 +289,8 @@ public class TurfInfos {
 			String caraList1, String caraList2, Boolean isPremium, Boolean hasBetTypes, Integer draw, Double liveOddPlace,
 			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners, Boolean isCross,
 			Boolean isFirstInProno, Boolean couplePastille, Boolean chevalPastille, Double liveOddPlaceOnline, Boolean isCanceled,
-			Boolean isFavori, Boolean nulStats, String formFigs, Double ante) {
+			Boolean isFavori, Boolean nulStats, String formFigs, Double ante, Boolean isSupplemented, String picto,
+			Double minRapportProbable, Double maxRapportProbable) {
 		
 		this.id = id;
 		this.R = R;
@@ -302,6 +314,8 @@ public class TurfInfos {
 //    this.coursesjockey = coursesjockey;
 //    this.coursesentraineur = coursesentraineur;
 		this.nbCourseCouple = nbCourseCouple;
+		this.nbCourseCoupleHippo = nbCourseCoupleHippo;
+
 		this.nbrCourseChevalHippo = nbrCourseChevalHippo;
 		this.nbrCourseJockHippo = nbrCourseJockHippo;
 		this.nbrCourseEntHippo = nbrCourseEntHippo;
@@ -340,6 +354,12 @@ public class TurfInfos {
 		this.draw = draw;
 		this.numberOfNonRunners = numberOfNonRunners;
 		this.formFigs = formFigs;
+		this.isSupplemented = isSupplemented;
+		this.picto = picto;
+		this.minRapportProbable = minRapportProbable;
+		this.maxRapportProbable = maxRapportProbable;
+
+
 
 		
 
@@ -598,11 +618,11 @@ public class TurfInfos {
 		this.nbrCourseEntHippo = nbrCourseEntHippo;
 	}
 
-	public String getNbCourseCoupleHippo() {
+	public Integer getNbCourseCoupleHippo() {
 		return nbCourseCoupleHippo;
 	}
 
-	public void setNbCourseCoupleHippo(String nbCourseCoupleHippo) {
+	public void setNbCourseCoupleHippo(Integer nbCourseCoupleHippo) {
 		this.nbCourseCoupleHippo = nbCourseCoupleHippo;
 	}
 
@@ -980,6 +1000,38 @@ public class TurfInfos {
 
 	public void setAnte(Double ante) {
 		this.ante = ante;
+	}
+
+	public Boolean getIsSupplemented() {
+		return isSupplemented;
+	}
+
+	public void setIsSupplemented(Boolean isSupplemented) {
+		this.isSupplemented = isSupplemented;
+	}
+
+	public String getPicto() {
+		return picto;
+	}
+
+	public void setPicto(String picto) {
+		this.picto = picto;
+	}
+
+	public Double getMaxRapportProbable() {
+		return maxRapportProbable;
+	}
+
+	public void setMaxRapportProbable(Double maxRapportProbable) {
+		this.maxRapportProbable = maxRapportProbable;
+	}
+
+	public Double getMinRapportProbable() {
+		return minRapportProbable;
+	}
+
+	public void setMinRapportProbable(Double minRapportProbable) {
+		this.minRapportProbable = minRapportProbable;
 	}
 
 }

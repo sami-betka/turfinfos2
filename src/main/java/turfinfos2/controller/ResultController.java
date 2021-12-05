@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.ArchiveInfoRepository;
 import turfinfos2.repository.TurfInfosRepository;
+import turfinfos2.service.ArchiveService;
 import turfinfos2.service.BankrollService;
 import turfinfos2.service.ResultService;
 
@@ -30,7 +31,7 @@ public class ResultController {
 	TurfInfosRepository turfInfosRepository;
 	
 	@Autowired
-	ResultService resultService;
+	ArchiveService archiveService;
 	
 	@Autowired
 	BankrollService bankrollService;
@@ -48,10 +49,12 @@ public class ResultController {
 				.stream()
 				.filter(ti->
 				        
-				        ti.getNumberOfInitialRunners() > 1
+				        ti.getNumberOfInitialRunners() != null && ti.getNumberOfInitialRunners() > 1
 						&& ti.getHasBetTypes() == true 
 						&& ti.getLiveOdd() != null && ti.getLiveOdd() != 0 && ti.getLiveOdd()<4
 				        && ti.getRecence() != null && ti.getRecence()<60
+					    && ti.getMinRapportProbable() != null && ti.getMinRapportProbable() != 0 && ti.getMinRapportProbable()>1.5
+
 //				        && ti.getRaceSpecialty().equals("P")
 //				        && ti.getLiveOddPlace(). != 0
 
@@ -73,14 +76,15 @@ public class ResultController {
 		
 		Double total = 0d;
 		
-		List<TurfInfos> list = resultService.setAllPlaceFirstPronoList(all)
+		List<TurfInfos> list = archiveService.setAllPlaceFirstPronoList(all)
 				.stream()
 				
-				.filter(ti -> ti.getChronoPastille() == false
-				        && ti.getJockeyPastille() == false
-				        && ti.getChevalPastille() == false
-				        && ti.getCouplePastille() == false
-                        )
+//				.filter(ti -> 
+//				        ti.getChronoPastille() == false
+////				         ti.getJockeyPastille() == false
+//				        && ti.getChevalPastille() == false
+//				        && ti.getCouplePastille() == false
+//                        )
 				
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
 				.collect(Collectors.toList());
@@ -111,7 +115,7 @@ public class ResultController {
 		labels.add("PCPLE");
 
 		
-		List<TurfInfos> won = all
+		List<TurfInfos> won = list
 				.stream()
 				.filter(ti-> ti.getLiveOddPlace() != null && ti.getLiveOddPlace() > 0)
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
@@ -176,7 +180,7 @@ public class ResultController {
 
 
 
-		List<TurfInfos> lost = all
+		List<TurfInfos> lost = list
 				.stream()
 				.filter(ti-> ti.getLiveOddPlace() == null || ti.getLiveOddPlace() == 0)
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
@@ -244,6 +248,9 @@ public class ResultController {
 		model.addAttribute("categorie", labels);
 		model.addAttribute("series1", wonMoyennes);
 		model.addAttribute("series2", lostMoyennes);
+		model.addAttribute("wonnumber", won.size());
+		model.addAttribute("lostnumber", lost.size());
+
 
 
 		System.out.println("filterbig" + list.size());
