@@ -65,8 +65,8 @@ public class ImportJSONController {
 	@GetMapping("/upload-json-data-from-url-date-range")
     public String uploadJSONFileDateRange( Model model, RedirectAttributes redirect) {
 		
-		final LocalDate start = LocalDate.parse("2021-10-16", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		  final LocalDate end = LocalDate.parse("2021-11-30", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		final LocalDate start = LocalDate.parse("2021-04-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		  final LocalDate end = LocalDate.parse("2021-09-30", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
 		  final long days = start.until(end, ChronoUnit.DAYS);
 	
@@ -93,8 +93,8 @@ public class ImportJSONController {
 		List<TurfInfos> all = turfInfosRepository.findAll();
 
 
-		final LocalDate start = LocalDate.parse("2021-10-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		  final LocalDate end = LocalDate.parse("2021-11-30", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		final LocalDate start = LocalDate.parse("2021-09-28", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		  final LocalDate end = LocalDate.parse("2021-11-02", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
 		  final long days = start.until(end, ChronoUnit.DAYS);
 	
@@ -115,7 +115,8 @@ public class ImportJSONController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				});
+			
+		  });
 		  
 		  
 		    turfInfosRepository.saveAll(allTurfInfosToSave);

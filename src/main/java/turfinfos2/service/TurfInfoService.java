@@ -206,7 +206,12 @@ public class TurfInfoService {
     	    	
 //    	infoToUpdate.setRecence(info.getRecence());
     
-    	turfInfosRepository.saveAll(infosToUpdate);
+    	try {
+			turfInfosRepository.saveAll(infosToUpdate);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     
     }
     

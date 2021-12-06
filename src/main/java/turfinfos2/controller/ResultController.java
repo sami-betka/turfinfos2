@@ -3,6 +3,7 @@ package turfinfos2.controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
@@ -51,14 +52,17 @@ public class ResultController {
 				        
 				        ti.getNumberOfInitialRunners() != null && ti.getNumberOfInitialRunners() > 1
 						&& ti.getHasBetTypes() == true 
-						&& ti.getLiveOdd() != null && ti.getLiveOdd() != 0 && ti.getLiveOdd()<4
-				        && ti.getRecence() != null && ti.getRecence()<60
-					    && ti.getMinRapportProbable() != null && ti.getMinRapportProbable() != 0 && ti.getMinRapportProbable()>1.5
+						&& ti.getLiveOdd() != null && ti.getLiveOdd() != 0 && ti.getLiveOdd() < 2.5
+				        && ti.getRecence() != null && ti.getRecence() < 60
+					    && ti.getMinRapportProbable() != null && ti.getMinRapportProbable() != 0 && ti.getMinRapportProbable() > 1.3d
+//					    && ti.getLiveOddPlace() != null && (ti.getLiveOddPlace() == 0 || ti.getLiveOddPlace() < 3)
+
+//						&& ti.getIsFavori().equals(true)
 
 //				        && ti.getRaceSpecialty().equals("P")
 //				        && ti.getLiveOddPlace(). != 0
 
-//				        && (  ti.getRaceSpecialty().equals("M") || ti.getRaceSpecialty().equals("M")  )
+//				        && (  ti.getRaceSpecialty().equals("A") || ti.getRaceSpecialty().equals("M")  )
 //				        && ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval() >= 53.6
 //						&& ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() >= 39.2
 
@@ -100,12 +104,25 @@ public class ResultController {
 		model.addAttribute("numberofbets", list.size());
 		model.addAttribute("totalgains", total);
 		model.addAttribute("benef", total - list.size());
+		model.addAttribute("multiplication", total / list.size());
+		model.addAttribute("firstday", list.get(0).getJour());
+		model.addAttribute("lastday", list.get(list.size() - 1).getJour());
+		model.addAttribute("wonnumber", list.stream()
+				.filter(ti->ti.getLiveOddPlace() != null && ti.getLiveOddPlace() != 0)
+				.collect(Collectors.toList())
+				.size());
+		
+		model.addAttribute("lostnumber", list.stream()
+				.filter(ti->ti.getLiveOddPlace() != null && ti.getLiveOddPlace() == 0)
+				.collect(Collectors.toList())
+				.size());
 		
 		/////////////////BAR CHART/////////////////////////////////////
 		
 		LinkedList<Double> wonMoyennes = new LinkedList<>();
 		LinkedList<Double> lostMoyennes = new LinkedList<>();
 		LinkedList<String> labels = new LinkedList<>();
+		labels.add("COTE");
 		labels.add("VEH");
 		labels.add("VJH");
 		labels.add("VCH");
@@ -113,14 +130,17 @@ public class ResultController {
 		labels.add("PC");
 		labels.add("VCPLE");
 		labels.add("PCPLE");
+		labels.add("RappMAX");
+		labels.add("RappMIN");
+
 
 		
-		List<TurfInfos> won = list
+		List<TurfInfos> won = all
 				.stream()
 				.filter(ti-> ti.getLiveOddPlace() != null && ti.getLiveOddPlace() > 0)
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
 				.collect(Collectors.toList());
-		
+		Double coteTotalWon = 0d;
 		Double vehTotalWon = 0d;
 		Double vjhTotalWon = 0d;
 		Double vchTotalWon = 0d;
@@ -128,7 +148,10 @@ public class ResultController {
 		Double pcTotalWon = 0d;
 		Double vcoupleTotalWon = 0d;
 		Double pcoupleTotalWon = 0d;
+		Double rappMaxTotalWon = 0d;
+		Double rappMinTotalWon = 0d;
 		
+		Double coteMoyenneWon = 0d;
 		Double vehMoyenneWon = 0d;
 		Double vjhMoyenneWon = 0d;
 		Double vchMoyenneWon = 0d;
@@ -136,8 +159,14 @@ public class ResultController {
 		Double pcMoyenneWon = 0d;
 		Double vcoupleMoyenneWon = 0d;
 		Double pcoupleMoyenneWon = 0d;
+		Double rappMaxMoyenneWon = 0d;
+		Double rappMinMoyenneWon = 0d;
 
 		for(TurfInfos info: won) {
+			
+			if(info.getLiveOdd() != null) {
+				coteTotalWon += info.getLiveOdd();
+				}
 			if(info.getPourcVictEntHippo() != null) {
 			vehTotalWon += info.getPourcVictEntHippo();
 			}
@@ -159,9 +188,16 @@ public class ResultController {
 			if(info.getTxPlaceCouple() != null) {
 				pcoupleTotalWon += info.getTxPlaceCouple();
 				}
+			if(info.getMaxRapportProbable() != null) {
+				rappMaxTotalWon += info.getMaxRapportProbable();
+				}
+			if(info.getMinRapportProbable() != null) {
+				rappMinTotalWon += info.getMinRapportProbable();
+				}
 			
-			////Taille = 7
+			////Taille = 10
 		}
+		coteMoyenneWon = coteTotalWon/won.size();
 		vehMoyenneWon = vehTotalWon/won.size();
 		vjhMoyenneWon = vjhTotalWon/won.size();
 		vchMoyenneWon = vchTotalWon/won.size();
@@ -169,7 +205,10 @@ public class ResultController {
 		pcMoyenneWon = pcTotalWon/won.size();
 		vcoupleMoyenneWon = vcoupleTotalWon/won.size();
 		pcoupleMoyenneWon = pcoupleTotalWon/won.size();
+		rappMaxMoyenneWon = rappMaxTotalWon/won.size();
+		rappMinMoyenneWon = rappMinTotalWon/won.size();
 		
+		wonMoyennes.add(coteMoyenneWon);
 		wonMoyennes.add(vehMoyenneWon);
 		wonMoyennes.add(vjhMoyenneWon);
 		wonMoyennes.add(vchMoyenneWon);
@@ -177,16 +216,18 @@ public class ResultController {
 		wonMoyennes.add(pcMoyenneWon);
 		wonMoyennes.add(vcoupleMoyenneWon);
 		wonMoyennes.add(pcoupleMoyenneWon);
+		wonMoyennes.add(rappMaxMoyenneWon);
+		wonMoyennes.add(rappMinMoyenneWon);
 
 
 
-		List<TurfInfos> lost = list
+		List<TurfInfos> lost = all
 				.stream()
 				.filter(ti-> ti.getLiveOddPlace() == null || ti.getLiveOddPlace() == 0)
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
 				.collect(Collectors.toList());
 
-		
+		Double coteTotalLost = 0d;
 		Double vehTotalLost = 0d;
 		Double vjhTotalLost = 0d;
 		Double vchTotalLost = 0d;
@@ -194,7 +235,10 @@ public class ResultController {
 		Double pcTotalLost = 0d;
 		Double vcoupleTotalLost = 0d;
 		Double pcoupleTotalLost = 0d;	
+		Double rappMaxTotalLost = 0d;
+		Double rappMinTotalLost = 0d;
 		
+		Double coteMoyenneLost = 0d;
 		Double vehMoyenneLost = 0d;
 		Double vjhMoyenneLost = 0d;
 		Double vchMoyenneLost = 0d;
@@ -202,8 +246,13 @@ public class ResultController {
 		Double pcMoyenneLost = 0d;
 		Double vcoupleMoyenneLost = 0d;
 		Double pcoupleMoyenneLost = 0d;
+		Double rappMaxMoyenneLost = 0d;
+		Double rappMinMoyenneLost = 0d;
 		
 		for(TurfInfos info: lost) {
+			if(info.getLiveOdd() != null) {
+				coteTotalLost += info.getLiveOdd();
+				}
 			if(info.getPourcVictEntHippo() != null) {
 				vehTotalLost += info.getPourcVictEntHippo();
 				}
@@ -225,9 +274,15 @@ public class ResultController {
 				if(info.getTxPlaceCouple() != null) {
 					pcoupleTotalLost += info.getTxPlaceCouple();
 					}
-			////Taille = 7
+				if(info.getMaxRapportProbable() != null) {
+					rappMaxTotalLost += info.getMaxRapportProbable();
+					}
+				if(info.getMinRapportProbable() != null) {
+					rappMinTotalLost += info.getMinRapportProbable();
+					}
+			////Taille = 10
 		}
-		
+		coteMoyenneLost = coteTotalLost/lost.size();
 		vehMoyenneLost = vehTotalLost/lost.size();
 		vjhMoyenneLost = vjhTotalLost/lost.size();
 		vchMoyenneLost = vchTotalLost/lost.size();
@@ -235,7 +290,10 @@ public class ResultController {
 		pcMoyenneLost = pcTotalLost/lost.size();
 		vcoupleMoyenneLost = vcoupleTotalLost/lost.size();
 		pcoupleMoyenneLost = pcoupleTotalLost/lost.size();
+		rappMaxMoyenneLost = rappMaxTotalLost/lost.size();
+		rappMinMoyenneLost = rappMinTotalLost/lost.size();
 		
+		lostMoyennes.add(coteMoyenneLost);
 		lostMoyennes.add(vehMoyenneLost);
 		lostMoyennes.add(vjhMoyenneLost);
 		lostMoyennes.add(vchMoyenneLost);
@@ -243,13 +301,16 @@ public class ResultController {
 		lostMoyennes.add(pcMoyenneLost);
 		lostMoyennes.add(vcoupleMoyenneLost);
 		lostMoyennes.add(pcoupleMoyenneLost);
+		lostMoyennes.add(rappMaxMoyenneLost);
+		lostMoyennes.add(rappMinMoyenneLost);
+
 
 
 		model.addAttribute("categorie", labels);
 		model.addAttribute("series1", wonMoyennes);
 		model.addAttribute("series2", lostMoyennes);
-		model.addAttribute("wonnumber", won.size());
-		model.addAttribute("lostnumber", lost.size());
+//		model.addAttribute("wonnumber", won.size());
+//		model.addAttribute("lostnumber", lost.size());
 
 
 
