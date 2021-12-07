@@ -62,11 +62,13 @@ public class ImportJSONController {
 					return "redirect:/day-infos?jour=" + jour;
 	}
 	
-	@GetMapping("/upload-json-data-from-url-date-range")
-    public String uploadJSONFileDateRange( Model model, RedirectAttributes redirect) {
+	@GetMapping("/upload-data-date-range")
+    public String uploadJSONFileDateRange( Model model, RedirectAttributes redirect,
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-04-01") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-09-30") String datefin) {
 		
-		final LocalDate start = LocalDate.parse("2021-04-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		  final LocalDate end = LocalDate.parse("2021-09-30", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		final LocalDate start = LocalDate.parse(datedebut, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		  final LocalDate end = LocalDate.parse(datefin, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
 		  final long days = start.until(end, ChronoUnit.DAYS);
 	
@@ -84,8 +86,10 @@ public class ImportJSONController {
 					return "redirect:/";
 	}
 	
-	@GetMapping("/upload-rapports-json-data-from-url-date-range")
-    public String uploadRapportsFileDateRange(RedirectAttributes redirect) {
+	@GetMapping("/upload-rapports-date-range")
+    public String uploadRapportsFileDateRange(RedirectAttributes redirect,
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-09-28") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-11-02") String datefin) {
 		
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
 		List<Resultat> allResultToSave = new ArrayList<>();
@@ -93,8 +97,8 @@ public class ImportJSONController {
 		List<TurfInfos> all = turfInfosRepository.findAll();
 
 
-		final LocalDate start = LocalDate.parse("2021-09-28", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		  final LocalDate end = LocalDate.parse("2021-11-02", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		final LocalDate start = LocalDate.parse(datedebut, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		  final LocalDate end = LocalDate.parse(datefin, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
 		  final long days = start.until(end, ChronoUnit.DAYS);
 	

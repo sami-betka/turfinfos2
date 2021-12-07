@@ -55,6 +55,8 @@ public class ResultController {
 						&& ti.getLiveOdd() != null && ti.getLiveOdd() != 0 && ti.getLiveOdd() < 2.5
 				        && ti.getRecence() != null && ti.getRecence() < 60
 					    && ti.getMinRapportProbable() != null && ti.getMinRapportProbable() != 0 && ti.getMinRapportProbable() > 1.3d
+//					    && ti.getMaxRapportProbable() != null && ti.getMaxRapportProbable() != 0 && ti.getMaxRapportProbable() < 1.7d
+
 //					    && ti.getLiveOddPlace() != null && (ti.getLiveOddPlace() == 0 || ti.getLiveOddPlace() < 3)
 
 //						&& ti.getIsFavori().equals(true)
@@ -63,7 +65,7 @@ public class ResultController {
 //				        && ti.getLiveOddPlace(). != 0
 
 //				        && (  ti.getRaceSpecialty().equals("A") || ti.getRaceSpecialty().equals("M")  )
-//				        && ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval() >= 53.6
+//				        && ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval() >= 25
 //						&& ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() >= 39.2
 
 //				        && ti.getChronoPastille() == false
@@ -71,7 +73,7 @@ public class ResultController {
 //				        && ti.getChevalPastille() == false
 //				        && ti.getCouplePastille() == false
 
-//				        && ti.getFormFigs() != null && ti.getFormFigs().length()>= 2 && ti.getFormFigs().charAt(0)=='1' && ti.getFormFigs().charAt(1)=='p'
+//				        && ti.getFormFigs() != null && ti.getFormFigs().length()>= 2 && (ti.getFormFigs().charAt(0)=='1' || ti.getFormFigs().charAt(0)=='2' || ti.getFormFigs().charAt(0)=='3') && (ti.getFormFigs().charAt(1)=='p' || ti.getFormFigs().charAt(1)=='a' || ti.getFormFigs().charAt(1)=='m')
 				        && !ti.getJour().contains("2021-03")
 
 				        )

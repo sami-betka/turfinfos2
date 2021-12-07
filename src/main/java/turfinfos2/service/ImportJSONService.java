@@ -649,11 +649,9 @@ public class ImportJSONService {
 											.get("minRapportProbable").doubleValue());
 									ti.setMaxRapportProbable(node3.get("rapportsParticipant").get(i)
 											.get("maxRapportProbable").doubleValue());
-									Boolean favoris = node3.get("rapportsParticipant").get(i).get("favoris")
-											.booleanValue();
-									if (favoris.equals(true)) {
-										ti.setIsFavori(true);
-									}
+									Boolean favoris = node3.get("rapportsParticipant").get(i).get("favoris").booleanValue();
+										ti.setIsFavori(favoris);
+									
 								}
 							}
 							allTurfInfosToSave.add(ti);
