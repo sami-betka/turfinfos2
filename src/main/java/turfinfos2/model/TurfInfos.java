@@ -252,6 +252,11 @@ public class TurfInfos {
 	
 	private Double ante;
 	
+	private Boolean threeEtoile;
+
+	private Boolean fiveEtoile;
+
+	
 	
 	
 	
@@ -290,7 +295,7 @@ public class TurfInfos {
 			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners, Boolean isCross,
 			Boolean isFirstInProno, Boolean couplePastille, Boolean chevalPastille, Double liveOddPlaceOnline, Boolean isCanceled,
 			Boolean isFavori, Boolean nulStats, String formFigs, Double ante, Boolean isSupplemented, String picto,
-			Double minRapportProbable, Double maxRapportProbable) {
+			Double minRapportProbable, Double maxRapportProbable, Boolean threeEtoile, Boolean fiveEtoile) {
 		
 		this.id = id;
 		this.R = R;
@@ -386,12 +391,32 @@ public class TurfInfos {
 		this.isFirstInProno = isFirstInProno;
 		this.nulStats = nulStats;
 		this.ante = ante;
+		this.fiveEtoile = fiveEtoile;
+		this.threeEtoile = threeEtoile;
 
 
 
 
 
 
+
+
+	}
+
+	public Boolean getThreeEtoile() {
+		return threeEtoile;
+	}
+
+	public void setThreeEtoile(Boolean threeEtoile) {
+		this.threeEtoile = threeEtoile;
+	}
+
+	public Boolean getFiveEtoile() {
+		return fiveEtoile;
+	}
+
+	public void setFiveEtoile(Boolean fiveEtoile) {
+		this.fiveEtoile = fiveEtoile;
 	}
 
 	public TurfInfos() {
