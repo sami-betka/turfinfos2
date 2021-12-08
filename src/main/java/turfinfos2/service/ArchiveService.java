@@ -34,11 +34,28 @@ public class ArchiveService {
 	
 	@Autowired
 	ArchiveInfoRepository archiveInfosRepository;
-
-
-	public List<TurfInfos> setAllPlaceFirstPronoList(List<TurfInfos> all) {
+	
+	public List<TurfInfos> filterAll(List<TurfInfos> all) {
 		
-//		List<TurfInfos> all = turfInfosRepository.findAll();
+		List<TurfInfos> allFiltered = all
+				.stream()
+				.filter(ti->
+		        
+		        ti.getNumberOfInitialRunners() != null && ti.getNumberOfInitialRunners() > 1
+				&& ti.getHasBetTypes() == true 
+//				&& ti.getLiveOdd() != null && ti.getLiveOdd() != 0 && ti.getLiveOdd() < 2.5
+		        && ti.getRecence() != null && ti.getRecence() < 60
+//			    && ti.getMinRapportProbable() != null && ti.getMinRapportProbable() != 0 && ti.getMinRapportProbable() > 1.3d
+		        )
+				.collect(Collectors.toList());
+				
+		return allFiltered;
+	}
+
+
+	public List<TurfInfos> setAllPlaceFirstPronoList(List<TurfInfos> allList) {
+		
+		final List<TurfInfos> all = filterAll(allList);
 		
 		List<TurfInfos> finalList = new ArrayList<>();
 		

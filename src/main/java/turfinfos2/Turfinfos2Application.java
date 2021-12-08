@@ -1,11 +1,14 @@
 package turfinfos2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import turfinfos2.model.Resultat;
-import turfinfos2.repository.ResultRepository;
+import turfinfos2.model.TurfInfos;
+import turfinfos2.repository.TurfInfosRepository;
 
 @SpringBootApplication
 public class Turfinfos2Application {
@@ -78,14 +81,15 @@ public class Turfinfos2Application {
 //        
 //        all.forEach(ti-> {
 //        	
-//        	if() {
-//        		
+//        	if(ti.getJour().contains("2020") || ti.getJour().contains("2021-02") || ti.getJour().contains("2021-01") || ti.getJour().contains("2021-03")) {
+//        		toDelete.add(ti);
 //        	}
 //        
 //        });
+////        turfInfosRepository.deleteAll(toDelete);
 //
 //        System.out.println("STOP");
-//        System.out.println(toSave.size());
+////        System.out.println(toSave.size());
 
 		
 		

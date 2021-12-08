@@ -55,17 +55,20 @@ public class ImportJSONController {
     public String uploadJSONFileByDay(@RequestParam("jour") String jour, Model model, RedirectAttributes redirect) {
 		
 
-				importJSONService.createAllDayInfosFromParisTurfJson(jour, false);
+		turfInfosRepository.saveAll(importJSONService.createAllDayInfosFromParisTurfJson(jour, false));
 
-					importJSONService.updateAllDayInfosFromAspiJson(jour);				
+		turfInfosRepository.saveAll(importJSONService.updateAllDayInfosFromAspiJson(jour));				
 
 					return "redirect:/day-infos?jour=" + jour;
 	}
 	
 	@GetMapping("/upload-data-date-range")
     public String uploadJSONFileDateRange( Model model, RedirectAttributes redirect,
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-04-01") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2021-09-30") String datefin) {
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2020-10-25") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-03-31") String datefin) {
+		
+		List<TurfInfos> allTurfToSave = new ArrayList<>();
+		List<TurfInfos> allAspiToSave = new ArrayList<>();
 		
 		final LocalDate start = LocalDate.parse(datedebut, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		  final LocalDate end = LocalDate.parse(datefin, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -78,9 +81,18 @@ public class ImportJSONController {
 		  
 		  
 		  dates.forEach(ld->{
-			  importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false);
-				importJSONService.updateAllDayInfosFromAspiJson(ld.toString());		  
+			  allTurfToSave.addAll( importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false));
+//				importJSONService.updateAllDayInfosFromAspiJson(ld.toString());		  
 				});
+		  turfInfosRepository.saveAll(allTurfToSave);
+	
+		  dates.forEach(ld->{
+//			  importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false);
+				allAspiToSave.addAll( importJSONService.updateAllDayInfosFromAspiJson(ld.toString()));	
+				System.out.println(ld.toString());
+				});
+		  turfInfosRepository.saveAll(allAspiToSave);
+
 
             System.out.println("STOOOP");
 					return "redirect:/";
@@ -88,8 +100,8 @@ public class ImportJSONController {
 	
 	@GetMapping("/upload-rapports-date-range")
     public String uploadRapportsFileDateRange(RedirectAttributes redirect,
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-09-28") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2021-11-02") String datefin) {
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-01-01") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-03-31") String datefin) {
 		
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
 		List<Resultat> allResultToSave = new ArrayList<>();

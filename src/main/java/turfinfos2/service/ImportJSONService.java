@@ -473,12 +473,12 @@ public class ImportJSONService {
 		return allToSave;
 	}
 
-	public void createAllDayInfosFromParisTurfJson(String jour, Boolean isUpdate) {
+	public List<TurfInfos> createAllDayInfosFromParisTurfJson(String jour, Boolean isUpdate) {
 
 		List<TurfInfos> allToSave = new ArrayList<>();
 		List<TurfInfos> all = turfInfosRepository.findAll();
 
-		String parisTurfId = "C10MXbfZMZfPB2djLfYBM";
+		String parisTurfId = "BWVS8_9yzz44OfB_zkScF";
 		String extension = ".json";
 
 		/////////// create all day url/////////
@@ -536,8 +536,9 @@ public class ImportJSONService {
 			e.printStackTrace();
 		}
 
-		turfInfosRepository.saveAll(allToSave);
+//		turfInfosRepository.saveAll(allToSave);
 		System.out.println("STOP");
+		return allToSave;
 
 	}
 
@@ -864,7 +865,7 @@ public class ImportJSONService {
 
 	}
 
-	public void updateAllDayInfosFromAspiJson(String jour) {
+	public List<TurfInfos> updateAllDayInfosFromAspiJson(String jour) {
 
 		List<TurfInfos> alltoUpdate = new ArrayList<>();
 
@@ -922,7 +923,7 @@ public class ImportJSONService {
 
 			}
 
-			turfInfoService.updateAllFromAspiJSON(alltoUpdate);
+//			turfInfoService.updateAllFromAspiJSON(alltoUpdate);
 			System.out.println("Stop Aspi");
 
 		} catch (MalformedURLException e) {
@@ -938,6 +939,10 @@ public class ImportJSONService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+//		return turfInfoService.updateAllFromAspiJSON(alltoUpdate);
+		return alltoUpdate;
+
 
 	}
 

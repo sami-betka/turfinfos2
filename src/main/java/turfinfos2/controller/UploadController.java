@@ -47,16 +47,19 @@ public class UploadController {
 	@GetMapping("/upload")
 	public String index(Model model) {
 
-		Set<String> dates = turfInfosRepository.findAll().stream().map(TurfInfos::getJour).collect(Collectors.toSet());
+//		Set<String> dates = turfInfosRepository.findAll().stream().map(TurfInfos::getJour).collect(Collectors.toSet());
 
 		navbarInfos(model);
 		return "upload";
 	}
 
 	@PostMapping("/upload-csv-file")
-	public String uploadCSVFileByRace(@RequestParam("file") MultipartFile file, Model model,
+	public String uploadCSVFileByDay(@RequestParam("file") MultipartFile file, Model model,
 			RedirectAttributes redirect) {
 
+		List<TurfInfos> allToSave = new ArrayList<>();
+		List<TurfInfos> allToUpdate = new ArrayList<>();
+		
 		List<TurfInfos> infos = new ArrayList<>();
 
 		// validate file
@@ -96,27 +99,21 @@ public class UploadController {
 					turfInfoService.setMadeUpParams(info);
 
 					if (!numcourses.contains(info.getNumcourse())) {
-						turfInfosRepository.save(info);
+						allToSave.add(info);
 					}
 
 					if (numcourses.contains(info.getNumcourse())) {
 						TurfInfos infoToUpdate = all.stream().filter(ti -> ti.getNumero().equals(info.getNumero())
 								&& ti.getNumcourse().equals(info.getNumcourse())).findFirst().get();
 //                		turfInfoService.patchCSVFromAspi(info, infoToUpdate);
-						turfInfoService.update(info, infoToUpdate);
+						allToUpdate.add(turfInfoService.update(info, infoToUpdate));
 
 					}
 				}
 
-				// Envoyer les dates au model
-//                Set<String> dates = turfInfosRepository.findAll().stream()
-//        				.map(TurfInfos :: getJour)
-//        				.collect(Collectors.toSet());
-//                model.addAttribute("dates", dates);
+
 				navbarInfos(model);
 
-//                model.addAttribute("infos", infos);
-//                model.addAttribute("pvch", turfInfosRepository.findAllByOrderByPourcVictChevalHippoDesc());
 
 				model.addAttribute("status", true);
 				redirect.addFlashAttribute("messagesuccess",
@@ -128,18 +125,18 @@ public class UploadController {
 
 //                model.addAttribute("messageerror", "Une erreur est apparue durant l'import du fichier.");
 				model.addAttribute("status", false);
-				// Envoyer les dates au model
-//                Set<String> dates = turfInfosRepository.findAll().stream()
-//        				.map(TurfInfos :: getJour)
-//        				.collect(Collectors.toSet());
-//                model.addAttribute("dates", dates);
+
 				navbarInfos(model);
 
 			}
 		}
 
 		navbarInfos(model);
-//        return "upload";
+
+		allToSave.addAll(allToUpdate);
+		turfInfosRepository.saveAll(allToSave);
+		System.out.println("StopCSV");
+		
 		return "redirect:/upload";
 //        return "races-page";
 

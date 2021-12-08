@@ -46,43 +46,42 @@ public class ResultController {
 			@RequestParam(name = "diviseur", required = false, defaultValue = "20") Integer divider
 			) {
 		
-		List<TurfInfos> all = turfInfosRepository.findAll()
-				.stream()
-				.filter(ti->
-				        
-				        ti.getNumberOfInitialRunners() != null && ti.getNumberOfInitialRunners() > 1
-						&& ti.getHasBetTypes() == true 
-						&& ti.getLiveOdd() != null && ti.getLiveOdd() != 0 && ti.getLiveOdd() < 2.5
-				        && ti.getRecence() != null && ti.getRecence() < 60
-					    && ti.getMinRapportProbable() != null && ti.getMinRapportProbable() != 0 && ti.getMinRapportProbable() > 1.3d
-//					    && ti.getMaxRapportProbable() != null && ti.getMaxRapportProbable() != 0 && ti.getMaxRapportProbable() < 1.7d
-
-//					    && ti.getLiveOddPlace() != null && (ti.getLiveOddPlace() == 0 || ti.getLiveOddPlace() < 3)
-
-//						&& ti.getIsFavori().equals(true)
-
-//				        && ti.getRaceSpecialty().equals("P")
-//				        && ti.getLiveOddPlace(). != 0
-
-//				        && (  ti.getRaceSpecialty().equals("A") || ti.getRaceSpecialty().equals("M")  )
-//				        && ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval() >= 25
-//						&& ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() >= 39.2
-
-//				        && ti.getChronoPastille() == false
-//				        && ti.getJockeyPastille() == false
-//				        && ti.getChevalPastille() == false
-//				        && ti.getCouplePastille() == false
-
-//				        && ti.getFormFigs() != null && ti.getFormFigs().length()>= 2 && (ti.getFormFigs().charAt(0)=='1' || ti.getFormFigs().charAt(0)=='2' || ti.getFormFigs().charAt(0)=='3') && (ti.getFormFigs().charAt(1)=='p' || ti.getFormFigs().charAt(1)=='a' || ti.getFormFigs().charAt(1)=='m')
-				        && !ti.getJour().contains("2021-03")
-
-				        )
-				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
-				.collect(Collectors.toList());
+//		List<TurfInfos> all = turfInfosRepository.findAll()
+//				.stream()
+//				.filter(ti->
+//				        
+//				        ti.getNumberOfInitialRunners() != null && ti.getNumberOfInitialRunners() > 1
+//						&& ti.getHasBetTypes() == true 
+//						&& ti.getLiveOdd() != null && ti.getLiveOdd() != 0 && ti.getLiveOdd() < 2.5
+//				        && ti.getRecence() != null && ti.getRecence() < 60
+//					    && ti.getMinRapportProbable() != null && ti.getMinRapportProbable() != 0 && ti.getMinRapportProbable() > 1.3d
+////				        && ti.getJour().contains("2021-11")
+////				        && ti.getMaxRapportProbable() != null && ti.getMaxRapportProbable() != 0 && ti.getMaxRapportProbable() < 1.7d
+////						&& ti.getIsFavori().equals(true)
+////						&& ti.getRaceSpecialty().equals("P")
+//				        
+//				        
+////					    && ti.getLiveOddPlace() != null && (ti.getLiveOddPlace() == 0 || ti.getLiveOddPlace() < 3)
+////						&& ti.getIsFavori().equals(true)
+////				        && ti.getRaceSpecialty().equals("P")
+////				        && ti.getLiveOddPlace(). != 0
+////				        && (  ti.getRaceSpecialty().equals("A") || ti.getRaceSpecialty().equals("M")  )
+////				        && ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval() >= 25
+////						&& ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() >= 39.2
+////				        && ti.getChronoPastille() == false
+////				        && ti.getJockeyPastille() == false
+////				        && ti.getChevalPastille() == false
+////				        && ti.getCouplePastille() == false
+//
+////				        && ti.getFormFigs() != null && ti.getFormFigs().length()>= 2 && (ti.getFormFigs().charAt(0)=='1' || ti.getFormFigs().charAt(0)=='2' || ti.getFormFigs().charAt(0)=='3') && (ti.getFormFigs().charAt(1)=='p' || ti.getFormFigs().charAt(1)=='a' || ti.getFormFigs().charAt(1)=='m')
+//
+//				        )
+//				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
+//				.collect(Collectors.toList());
 		
 		Double total = 0d;
 		
-		List<TurfInfos> list = archiveService.setAllPlaceFirstPronoList(all)
+		List<TurfInfos> list = archiveService.setAllPlaceFirstPronoList(turfInfosRepository.findAll())
 				.stream()
 				
 //				.filter(ti -> 
@@ -137,7 +136,7 @@ public class ResultController {
 
 
 		
-		List<TurfInfos> won = all
+		List<TurfInfos> won = turfInfosRepository.findAll()
 				.stream()
 				.filter(ti-> ti.getLiveOddPlace() != null && ti.getLiveOddPlace() > 0)
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
@@ -223,7 +222,7 @@ public class ResultController {
 
 
 
-		List<TurfInfos> lost = all
+		List<TurfInfos> lost = turfInfosRepository.findAll()
 				.stream()
 				.filter(ti-> ti.getLiveOddPlace() == null || ti.getLiveOddPlace() == 0)
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
@@ -322,8 +321,6 @@ public class ResultController {
 	}
 	
 	///////////////////////////////////////////////////////////////
-	
-
 	
 	
 	

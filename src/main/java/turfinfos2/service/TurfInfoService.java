@@ -17,7 +17,7 @@ public class TurfInfoService {
 	@Autowired
 	TurfInfosRepository turfInfosRepository;
 	
-    public void update(TurfInfos info, TurfInfos infoToUpdate) {
+    public TurfInfos update(TurfInfos info, TurfInfos infoToUpdate) {
     	
 //    	TurfInfos infoToUpdate = turfInfosRepository.findByNumeroAndNumcourse(info.getNumero(), info.getNumcourse());
     	
@@ -72,7 +72,7 @@ public class TurfInfoService {
 
     	
     	
-    	turfInfosRepository.save(infoToUpdate);
+    	return infoToUpdate;
     	
     }
     
@@ -206,12 +206,9 @@ public class TurfInfoService {
     	    	
 //    	infoToUpdate.setRecence(info.getRecence());
     
-    	try {
+    	
 			turfInfosRepository.saveAll(infosToUpdate);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
     
     }
     
