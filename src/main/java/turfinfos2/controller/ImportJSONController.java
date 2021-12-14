@@ -28,10 +28,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import turfinfos2.model.ParisTurfInfosConfig;
-import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.ParisTurfInfoConfigRepository;
-import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.service.ImportJSONService;
 
@@ -44,8 +42,8 @@ public class ImportJSONController {
 	@Autowired
 	TurfInfosRepository turfInfosRepository;
 	
-	@Autowired
-	ResultRepository resultRepository;
+//	@Autowired
+//	ResultRepository resultRepository;
 	
 	@Autowired
 	ParisTurfInfoConfigRepository parisTurfInfoConfigRepository;
@@ -104,7 +102,7 @@ public class ImportJSONController {
 			@RequestParam(name = "datefin", required = false, defaultValue = "2021-03-31") String datefin) {
 		
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
-		List<Resultat> allResultToSave = new ArrayList<>();
+//		List<Resultat> allResultToSave = new ArrayList<>();
 
 		List<TurfInfos> all = turfInfosRepository.findAll();
 
@@ -124,7 +122,7 @@ public class ImportJSONController {
 				try {
 					allTurfInfosToSave.addAll((List< TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("turfinfos"));
 				
-					allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("results"));
+//					allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("results"));
 
 					//					importJSONService.createRapportsInfosFromPMUJson(ld.toString());
 				} catch (ParseException e) {
@@ -136,7 +134,7 @@ public class ImportJSONController {
 		  
 		  
 		    turfInfosRepository.saveAll(allTurfInfosToSave);
-		    resultRepository.saveAll(allResultToSave);
+//		    resultRepository.saveAll(allResultToSave);
 		  
 			System.out.println("STOP RAPPORTS");
 			return "redirect:/";
@@ -175,7 +173,7 @@ public class ImportJSONController {
 		
 			try {
 				turfInfosRepository.saveAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(jour, all).get("turfinfos"));
-				resultRepository.saveAll((List<Resultat>) importJSONService.createRapportsInfosFromPMUJson(jour, all).get("results"));
+//				resultRepository.saveAll((List<Resultat>) importJSONService.createRapportsInfosFromPMUJson(jour, all).get("results"));
 
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block

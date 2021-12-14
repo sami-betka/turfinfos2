@@ -24,9 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
-import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 
 @Service
@@ -38,11 +36,11 @@ public class ImportJSONService {
 	@Autowired
 	TurfInfoService turfInfoService;
 
-	@Autowired
-	ResultService resultService;
+//	@Autowired
+//	ResultService resultService;
 
-	@Autowired
-	ResultRepository resultRepository;
+//	@Autowired
+//	ResultRepository resultRepository;
 
 	public List<TurfInfos> createAllRaceInfosFromParisTurfJson(String url, List<TurfInfos> all) {
 
@@ -545,7 +543,7 @@ public class ImportJSONService {
 	public Map<String, Object> createRapportsInfosFromPMUJson(String jour, List<TurfInfos> all) throws ParseException {
 
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
-		List<Resultat> allResultToSave = new ArrayList<>();
+//		List<Resultat> allResultToSave = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
 
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -602,8 +600,8 @@ public class ImportJSONService {
 						System.out.println(node.isMissingNode());
 						System.out.println(node2.get("rapportsParticipant").size());
 
-						Resultat resultat = resultService.createResult(jour, entry.getKey(), race, node, url);
-						allResultToSave.add(resultat);
+//						Resultat resultat = resultService.createResult(jour, entry.getKey(), race, node, url);
+//						allResultToSave.add(resultat);
 
 						allByJour.forEach(ti -> {
 
@@ -681,7 +679,7 @@ public class ImportJSONService {
 		System.out.println("STOP");
 
 		map.put("turfinfos", allTurfInfosToSave);
-		map.put("results", allResultToSave);
+//		map.put("results", allResultToSave);
 
 		return map;
 

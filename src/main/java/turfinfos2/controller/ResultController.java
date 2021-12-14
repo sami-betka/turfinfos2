@@ -23,7 +23,6 @@ import turfinfos2.repository.ArchiveInfoRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.service.ArchiveService;
 import turfinfos2.service.BankrollService;
-import turfinfos2.service.ResultService;
 
 @Controller
 public class ResultController {
