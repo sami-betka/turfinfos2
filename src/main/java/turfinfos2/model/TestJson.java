@@ -6,7 +6,7 @@ public class TestJson {
 	    private String id;
 	    private String name;
 	    private String time;
-//	    private String raceId;
+	    private String raceId;
 
 	    
 	    
@@ -15,7 +15,7 @@ public TestJson(String id, String name, String time, String raceId) {
 			this.id = id;
 			this.name = name;
 			this.time = time;
-//			this.raceId = raceId;
+			this.raceId = raceId;
 
 		}
 	    
