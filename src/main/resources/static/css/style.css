@@ -59,6 +59,14 @@ body, html {
    background-image: linear-gradient(to bottom right,  transparent calc(50% - 1px), red, transparent calc(50% + 1px)); 
 }
 
+.crossOut .child{
+    position:absolute; 
+    display:block;
+    height:1px; 
+    background:black;
+}
+
+
 div{
 	
 }

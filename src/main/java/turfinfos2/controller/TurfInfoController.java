@@ -16,19 +16,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
+import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 
 @Controller
 public class TurfInfoController {
 
 	@Autowired
-	TurfInfosRepository repo;
+	TurfInfosRepository turfInforepository;
+	
+	@Autowired
+	ResultRepository resultRepository;
 	
 	@GetMapping("/delete-day")
 	public String deleteDay(@RequestParam("jour") String jour){
 		
-		List<TurfInfos> del = repo.deleteByJour(jour);
+		List<TurfInfos> del = turfInforepository.deleteByJour(jour);
+		List<Resultat> delResult = resultRepository.deleteByJour(jour);
+
 		
 		return "redirect:/";
 	}
@@ -48,129 +55,129 @@ public class TurfInfoController {
 			@RequestParam(name = "reunion", required = false) String reunion) {
 
 		if (one != null && one != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(one)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(one)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndChrono(tinf.getNumcourse(), 1);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndChrono(tinf.getNumcourse(), 1);
 			list.stream().forEach(ti -> {
 				ti.setChrono(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setChrono(1);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 //		   else {
-//				  Optional<TurfInfos> OptInf = repo.findByChrono(1);
+//				  Optional<TurfInfos> OptInf = turfInforepository.findByChrono(1);
 //				  if(OptInf.isPresent()) {
 //					  TurfInfos tinf = OptInf.get();
 //					  tinf.setChrono(null);
-//					  repo.save(tinf);
+//					  turfInforepository.save(tinf);
 //				  }
 //		   }
 
 		if (two != null && two != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(two)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(two)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndChrono(tinf.getNumcourse(), 2);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndChrono(tinf.getNumcourse(), 2);
 			list.stream().forEach(ti -> {
 				ti.setChrono(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setChrono(2);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		if (three != null && three != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(three)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(three)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndChrono(tinf.getNumcourse(), 3);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndChrono(tinf.getNumcourse(), 3);
 			list.stream().forEach(ti -> {
 				ti.setChrono(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setChrono(3);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		if (four != null && four != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(four)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(four)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndChrono(tinf.getNumcourse(), 4);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndChrono(tinf.getNumcourse(), 4);
 			list.stream().forEach(ti -> {
 				ti.setChrono(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setChrono(4);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		if (five != null && five != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(five)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(five)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndChrono(tinf.getNumcourse(), 5);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndChrono(tinf.getNumcourse(), 5);
 			list.stream().forEach(ti -> {
 				ti.setChrono(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setChrono(5);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		if (six != null && six != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(six)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(six)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndChrono(tinf.getNumcourse(), 6);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndChrono(tinf.getNumcourse(), 6);
 			list.stream().forEach(ti -> {
 				ti.setChrono(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setChrono(6);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		if (seven != null && seven != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(seven)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(seven)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndChrono(tinf.getNumcourse(), 7);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndChrono(tinf.getNumcourse(), 7);
 			list.stream().forEach(ti -> {
 				ti.setChrono(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setChrono(7);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		if (eight != null && eight != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(eight)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(eight)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndChrono(tinf.getNumcourse(), 8);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndChrono(tinf.getNumcourse(), 8);
 			list.stream().forEach(ti -> {
 				ti.setChrono(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setChrono(8);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 		}
 
 		if (nine != null && nine != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(nine)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(nine)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndChrono(tinf.getNumcourse(), 9);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndChrono(tinf.getNumcourse(), 9);
 			list.stream().forEach(ti -> {
 				ti.setChrono(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setChrono(9);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 		}
 
 		return "redirect:/reunion-infos?jour=" + jour + "&reunion=" + reunion;
@@ -191,169 +198,169 @@ public class TurfInfoController {
 			@RequestParam(name = "numcourse", required = false) String numcourse) {
 
 		if (one == "") {
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 1);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 1);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 		}
 		else if (one != null && one != "") {
-			TurfInfos tinf1 = repo.findById(Long.valueOf(one)).get();
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 1);
+			TurfInfos tinf1 = turfInforepository.findById(Long.valueOf(one)).get();
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 1);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 			tinf1.setTayProno(1);
-			repo.save(tinf1);
+			turfInforepository.save(tinf1);
 		}
 		
 		if (two == "") {
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 2);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 2);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 		}
 		else if (two != null && two != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(two)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(two)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 2);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 2);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setTayProno(2);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 		}
 		
 		if (three == "") {
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 3);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 3);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 		}
 		else if (three != null && three != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(three)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(three)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 3);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 3);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setTayProno(3);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		
 		if (four == "") {
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 4);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 4);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 		}
 		else if (four != null && four != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(four)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(four)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 4);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 4);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setTayProno(4);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		
 		if (five == "") {
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 5);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 5);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 		}
 		else if (five != null && five != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(five)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(five)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 5);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 5);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setTayProno(5);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		
 		
 		if (six == "") {
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 6);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 6);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 		}
 		else if (six != null && six != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(six)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(six)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 6);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 6);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setTayProno(6);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		
 		
 		if (seven == "") {
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 7);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 7);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 		}
 		else if (seven != null && seven != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(seven)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(seven)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 7);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 7);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setTayProno(7);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 		
 		
 		if (eight == "") {
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 8);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(Integer.valueOf(numcourse), 8);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 		}
 		else if (eight != null && eight != "") {
-			TurfInfos tinf = repo.findById(Long.valueOf(eight)).get();
+			TurfInfos tinf = turfInforepository.findById(Long.valueOf(eight)).get();
 
-			List<TurfInfos> list = repo.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 8);
+			List<TurfInfos> list = turfInforepository.findAllByNumcourseAndTayProno(tinf.getNumcourse(), 8);
 			list.stream().forEach(ti -> {
 				ti.setTayProno(null);
-				repo.save(ti);
+				turfInforepository.save(ti);
 			});
 
 			tinf.setTayProno(8);
-			repo.save(tinf);
+			turfInforepository.save(tinf);
 
 		}
 
@@ -381,53 +388,53 @@ public class TurfInfoController {
 
 
 		 if (one != null && one != "") {
-			TurfInfos tinf1 = repo.findById(Long.valueOf(one)).get();
+			TurfInfos tinf1 = turfInforepository.findById(Long.valueOf(one)).get();
 			if(tinf1.getIsCross().equals(false)) {
 				tinf1.setIsCross(true);
-				repo.save(tinf1);
+				turfInforepository.save(tinf1);
 			}
 			else if(tinf1.getIsCross().equals(true)) {
 				tinf1.setIsCross(false);
-				repo.save(tinf1);
+				turfInforepository.save(tinf1);
 			}
 			System.out.println(one);
 		}
 		
 		 if (two != null && two != "") {
-				TurfInfos tinf1 = repo.findById(Long.valueOf(two)).get();
+				TurfInfos tinf1 = turfInforepository.findById(Long.valueOf(two)).get();
 				if(tinf1.getIsCross().equals(false)) {
 					tinf1.setIsCross(true);
-					repo.save(tinf1);
+					turfInforepository.save(tinf1);
 				}
 				else if(tinf1.getIsCross().equals(true)) {
 					tinf1.setIsCross(false);
-					repo.save(tinf1);
+					turfInforepository.save(tinf1);
 				}
 				System.out.println(two);
 			}
 		
 		 if (three != null && three != "") {
-				TurfInfos tinf1 = repo.findById(Long.valueOf(three)).get();
+				TurfInfos tinf1 = turfInforepository.findById(Long.valueOf(three)).get();
 				if(tinf1.getIsCross().equals(false)) {
 					tinf1.setIsCross(true);
-					repo.save(tinf1);
+					turfInforepository.save(tinf1);
 				}
 				else if(tinf1.getIsCross().equals(true)) {
 					tinf1.setIsCross(false);
-					repo.save(tinf1);
+					turfInforepository.save(tinf1);
 				}
 				System.out.println(three);
 			}
 		
 		 if (four != null && four != "") {
-				TurfInfos tinf1 = repo.findById(Long.valueOf(four)).get();
+				TurfInfos tinf1 = turfInforepository.findById(Long.valueOf(four)).get();
 				if(tinf1.getIsCross().equals(false)) {
 					tinf1.setIsCross(true);
-					repo.save(tinf1);
+					turfInforepository.save(tinf1);
 				}
 				else if(tinf1.getIsCross().equals(true)) {
 					tinf1.setIsCross(false);
-					repo.save(tinf1);
+					turfInforepository.save(tinf1);
 				}
 				System.out.println(four);
 			}
@@ -440,7 +447,7 @@ public class TurfInfoController {
 
 	private void navbarInfos(Model model) {
 
-		List<TurfInfos> allInfos = repo.findAll();
+		List<TurfInfos> allInfos = turfInforepository.findAll();
 
 		// DATES
 		Set<String> dates = allInfos.stream()

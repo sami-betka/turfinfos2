@@ -409,6 +409,7 @@ public class UploadController {
 			setEtoiles(listByChronos,listBypveh, listBypvjh, listBypvch, listByppch, listByppc, listBytxv, listBytxp, listBytxvh, listBytxph,
 					listByNoteProno,
 					allraceInfos.size());
+			crossProno(listByNoteProno);
 
 			Optional<TurfInfos> optTinf = allraceInfos.stream().findFirst();
 			if (optTinf.isPresent()) {
@@ -1031,6 +1032,12 @@ public class UploadController {
 	private List<TurfInfos> setPastilles(List<TurfInfos> jockeys, List<TurfInfos> chronos, List<TurfInfos> vchevalh,
 			List<TurfInfos> pchevalh, List<TurfInfos> vcouple, List<TurfInfos> pcouple, List<TurfInfos> pronos,
 			int raceSize) {
+		
+		if(chronos.size() < 5) {
+			pronos.forEach(ti->{
+				ti.setChronoPastille(false);
+			});
+		}
 
 		if (raceSize == 7) {
 			pronos.forEach(ti -> {
@@ -1141,6 +1148,105 @@ public class UploadController {
 
 		});
 
+		return pronos;
+	}
+	
+	private List<TurfInfos> crossProno(List<TurfInfos> pronos){
+		
+		if(pronos.get(0).getNumberOfInitialRunners() < 14) {
+            Integer pastillesnumber = 0;
+            if(pronos.get(pronos.size()-1).getChevalPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-1).getChronoPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-1).getJockeyPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-1).getCouplePastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pastillesnumber >= 3) {
+            pronos.get(pronos.size()-1).setIsCross(true);
+            }
+            pastillesnumber = 0;
+            
+            if(pronos.get(pronos.size()-2).getChevalPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-2).getChronoPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-2).getJockeyPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-2).getCouplePastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pastillesnumber >= 3) {
+            	pronos.get(pronos.size()-2).setIsCross(true);
+                System.out.println(pastillesnumber);
+
+            }
+		}
+		
+        if(pronos.get(0).getNumberOfInitialRunners() > 13) {
+            Integer pastillesnumber = 0;
+            if(pronos.get(pronos.size()-1).getChevalPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-1).getChronoPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-1).getJockeyPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-1).getCouplePastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pastillesnumber >= 3) {
+            pronos.get(pronos.size()-1).setIsCross(true);
+
+            }
+            pastillesnumber = 0;
+            
+            if(pronos.get(pronos.size()-2).getChevalPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-2).getChronoPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-2).getJockeyPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-2).getCouplePastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pastillesnumber >= 3) {
+            	pronos.get(pronos.size()-2).setIsCross(true);
+
+            }
+                pastillesnumber = 0;
+            
+            if(pronos.get(pronos.size()-3).getChevalPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-3).getChronoPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-3).getJockeyPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-3).getCouplePastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pastillesnumber >= 3) {
+            	pronos.get(pronos.size()-3).setIsCross(true);
+                System.out.println(pastillesnumber);
+
+            }
+		}
 		return pronos;
 	}
 

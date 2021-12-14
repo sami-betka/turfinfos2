@@ -14,7 +14,9 @@ public enum ResultType {
 	QUARTE_PLUS("QUARTE_PLUS"),
 	QUINTE_PLUS("QUINTE_PLUS"),
 	MULTI("MULTI"),
-	PICK5("PICK5");
+	PICK5("PICK5"),
+	MINI_MULTI("MINI_MULTI");
+
 
 	
 	

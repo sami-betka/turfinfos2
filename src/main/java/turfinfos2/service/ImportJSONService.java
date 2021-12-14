@@ -453,11 +453,11 @@ public class ImportJSONService {
 //	            	}
 				// For LOOP END
 			}
-			System.out.println(allToUpdate.size() + " - update size");
+//			System.out.println(allToUpdate.size() + " - update size");
 			if (allToUpdate.size() > 0) {
 				allToSave.addAll(turfInfoService.updateAllFromParisTurfJSON(allToUpdate, all));
 			}
-			System.out.println(allToSave.size() + " - save size");
+//			System.out.println(allToSave.size() + " - save size");
 
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
@@ -523,10 +523,9 @@ public class ImportJSONService {
 					updateAllRaceInfosFromParisTurfJson(raceUrl);
 				}
 				iter += 1;
-				System.out.println(iter + " / " + uuids.size());
-				System.out.println(jour);
-
+				System.out.println(iter + " / " + uuids.size() + " " + jour);
 			}
+
 
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -599,9 +598,6 @@ public class ImportJSONService {
 
 					if (node.isMissingNode() == false) {
 
-						System.out.println(node.isMissingNode());
-						System.out.println(node2.get("rapportsParticipant").size());
-
 						Resultat resultat = resultService.createResult(jour, entry.getKey(), race, node, url);
 						allResultToSave.add(resultat);
 
@@ -639,6 +635,15 @@ public class ImportJSONService {
 //							allTurfInfosToSave.add(ti);
 //							turfInfosRepository.save(ti);
 								}
+								
+								//////SET 2sur4//////////
+//								if (ti.getR().equals(entry.getKey()) && ti.getC().equals(race)
+//										&& ti.getRanking().equals(3) ) {
+//									ti.setLiveOddPlace(
+//											node.get(1).get("rapports").get(2).get("dividendePourUnEuro").doubleValue()
+//													/ 100);
+//
+//								}
 
 
 							}
@@ -794,7 +799,6 @@ public class ImportJSONService {
 			String numcourse = String.valueOf(node.get("pageProps").get("race").get("id").intValue());
 			String uuid = node.get("pageProps").get("race").get("uuid").textValue();
 
-			System.out.println(uuid + "     nnnnnnnnnnnnnnnn");
 			// Verifie si les stats sont à null
 			boolean nulStats = true;
 
@@ -809,7 +813,6 @@ public class ImportJSONService {
 //				numberofRunners = node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).size();
 			}
 
-			System.out.println(numberofRunners + "" + numcourse);
 
 			///////////// Début///////////////
 
