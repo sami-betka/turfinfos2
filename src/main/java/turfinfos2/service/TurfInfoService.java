@@ -88,8 +88,11 @@ public class TurfInfoService {
 
     	
     	for(TurfInfos info : infos) {
+    		System.out.println(all.size());
+    		System.out.println(allByNumcourse.size() + " numcourse size");
+    		System.out.println(info.getNumcourse() + " numcourse");
 
-    		System.out.println(info.getJour());
+    		System.out.println(info.getNumero() + " numero");
     	
     	TurfInfos infoToUpdate = allByNumcourse.stream().filter(ti->ti.getNumero().equals(info.getNumero())).findFirst().get();
     	

@@ -64,8 +64,8 @@ public class ImportJSONController {
 	
 	@GetMapping("/upload-data-date-range")
     public String uploadJSONFileDateRange( Model model, RedirectAttributes redirect,
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-04-01") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2021-04-30") String datefin) {
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2020-10-25") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-03-31") String datefin) {
 		
 		List<TurfInfos> allTurfToSave = new ArrayList<>();
 		List<TurfInfos> allAspiToSave = new ArrayList<>();
@@ -100,8 +100,8 @@ public class ImportJSONController {
 	
 	@GetMapping("/upload-rapports-date-range")
     public String uploadRapportsFileDateRange(RedirectAttributes redirect,
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-04-01") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2021-04-30") String datefin) {
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-01-01") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-03-31") String datefin) {
 		
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
 		List<Resultat> allResultToSave = new ArrayList<>();
