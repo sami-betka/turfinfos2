@@ -59,6 +59,7 @@ public class TurfInfos {
 //  @CsvNumber("###.##")
 	private Double pourcVictChevalHippo;
 	
+	@CsvBindByName
 	private Double pourcPlaceCheval;
 
 //  @Column(name = "")

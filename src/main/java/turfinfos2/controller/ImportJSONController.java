@@ -28,10 +28,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import turfinfos2.model.ParisTurfInfosConfig;
-import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.ParisTurfInfoConfigRepository;
-import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.service.ImportJSONService;
 
@@ -44,8 +42,8 @@ public class ImportJSONController {
 	@Autowired
 	TurfInfosRepository turfInfosRepository;
 	
-	@Autowired
-	ResultRepository resultRepository;
+//	@Autowired
+//	ResultRepository resultRepository;
 	
 	@Autowired
 	ParisTurfInfoConfigRepository parisTurfInfoConfigRepository;
@@ -54,7 +52,6 @@ public class ImportJSONController {
 	@PostMapping("/upload-json-data-from-url")
     public String uploadJSONFileByDay(@RequestParam("jour") String jour, Model model, RedirectAttributes redirect) {
 		
-
 		turfInfosRepository.saveAll(importJSONService.createAllDayInfosFromParisTurfJson(jour, false));
 
 		turfInfosRepository.saveAll(importJSONService.updateAllDayInfosFromAspiJson(jour));				
@@ -64,8 +61,8 @@ public class ImportJSONController {
 	
 	@GetMapping("/upload-data-date-range")
     public String uploadJSONFileDateRange( Model model, RedirectAttributes redirect,
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2020-10-25") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2021-03-31") String datefin) {
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-05-01") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-08-31") String datefin) {
 		
 		List<TurfInfos> allTurfToSave = new ArrayList<>();
 		List<TurfInfos> allAspiToSave = new ArrayList<>();
@@ -100,11 +97,11 @@ public class ImportJSONController {
 	
 	@GetMapping("/upload-rapports-date-range")
     public String uploadRapportsFileDateRange(RedirectAttributes redirect,
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-01-01") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2021-03-31") String datefin) {
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-05-01") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-08-31") String datefin) {
 		
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
-		List<Resultat> allResultToSave = new ArrayList<>();
+//		List<Resultat> allResultToSave = new ArrayList<>();
 
 		List<TurfInfos> all = turfInfosRepository.findAll();
 
@@ -124,7 +121,7 @@ public class ImportJSONController {
 				try {
 					allTurfInfosToSave.addAll((List< TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("turfinfos"));
 				
-					allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("results"));
+//					allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("results"));
 
 					//					importJSONService.createRapportsInfosFromPMUJson(ld.toString());
 				} catch (ParseException e) {
@@ -136,7 +133,7 @@ public class ImportJSONController {
 		  
 		  
 		    turfInfosRepository.saveAll(allTurfInfosToSave);
-		    resultRepository.saveAll(allResultToSave);
+//		    resultRepository.saveAll(allResultToSave);
 		  
 			System.out.println("STOP RAPPORTS");
 			return "redirect:/";
@@ -175,7 +172,7 @@ public class ImportJSONController {
 		
 			try {
 				turfInfosRepository.saveAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(jour, all).get("turfinfos"));
-				resultRepository.saveAll((List<Resultat>) importJSONService.createRapportsInfosFromPMUJson(jour, all).get("results"));
+//				resultRepository.saveAll((List<Resultat>) importJSONService.createRapportsInfosFromPMUJson(jour, all).get("results"));
 
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block

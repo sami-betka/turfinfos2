@@ -27,6 +27,8 @@ public class TurfInfoService {
     	infoToUpdate.setNumcourse(info.getNumcourse());
     	infoToUpdate.setNumero(info.getNumero());
     	infoToUpdate.setPourcPlaceChevalHippo(info.getPourcPlaceChevalHippo());
+    	infoToUpdate.setPourcPlaceCheval(info.getPourcPlaceCheval());
+
     	infoToUpdate.setPourcPlaceEntHippo(info.getPourcPlaceEntHippo());
     	infoToUpdate.setPourcPlaceJockHippo(info.getPourcPlaceJockHippo());
     	infoToUpdate.setPourcVictChevalHippo(info.getPourcVictChevalHippo());

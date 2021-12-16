@@ -405,6 +405,7 @@ public class UploadController {
 			///////////// AFFECTER PASTILLES///////////////
 			setPastilles(listBypvjh, listByChronos, listBypvch, listByppch, listBytxv, listBytxp, listByNoteProno,
 					allraceInfos.size());
+
             ///////////// AFFECTER ETOILES///////////////
 			setEtoiles(listByChronos,listBypveh, listBypvjh, listBypvch, listByppch, listByppc, listBytxv, listBytxp, listBytxvh, listBytxph,
 					listByNoteProno,
@@ -443,11 +444,11 @@ public class UploadController {
 
 				if (!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0
 						&& listByNoteProno.size() < 11) {
-					model.addAttribute(numToString(num) + "pronoslist", listByNoteProno);
+					model.addAttribute(numToString(num) + "pronoslist", crossProno(listByNoteProno, allraceInfos.size()));
 				}
 				if (!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0
 						&& listByNoteProno.size() >= 11) {
-					model.addAttribute(numToString(num) + "pronoslist", listByNoteProno.subList(0, 11));
+					model.addAttribute(numToString(num) + "pronoslist", crossProno(listByNoteProno.subList(0, 11), allraceInfos.size()));
 				}
 				if (listByNoteProno.isEmpty()) {
 					model.addAttribute(numToString(num) + "pronoslist", new ArrayList<>());
@@ -1032,7 +1033,16 @@ public class UploadController {
 			List<TurfInfos> pchevalh, List<TurfInfos> vcouple, List<TurfInfos> pcouple, List<TurfInfos> pronos,
 			int raceSize) {
 
-		if (raceSize == 7) {
+		
+			pronos.forEach(ti->{
+				ti.setChronoPastille(false);
+				ti.setChevalPastille(false);
+				ti.setJockeyPastille(false);
+				ti.setCouplePastille(false);
+			});
+		
+
+		if (raceSize <= 7) {
 			pronos.forEach(ti -> {
 				if (jockeys.size() >= 5) {
 					if (!jockeys.subList(0, 5).contains(ti)) {
@@ -1140,7 +1150,112 @@ public class UploadController {
 			}
 
 		});
+		
 
+
+		return pronos;
+	}
+	
+	private List<TurfInfos> crossProno(List<TurfInfos> pronos, int raceSize){
+		
+		
+		
+		
+
+		if(raceSize < 14) {
+            Integer pastillesnumber = 0;
+            TurfInfos info = pronos.get(pronos.size()-1);
+            if(pronos.get(pronos.size()-1).getChevalPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-1).getChronoPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-1).getJockeyPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-1).getCouplePastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pastillesnumber >= 3) {
+            info.setIsCross(true);
+            pronos.set(pronos.size()-1, info);
+            }
+            pastillesnumber = 0;
+
+            if(pronos.get(pronos.size()-2).getChevalPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-2).getChronoPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-2).getJockeyPastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pronos.get(pronos.size()-2).getCouplePastille().equals(true)) {
+            	pastillesnumber += 1;
+            }
+            if(pastillesnumber >= 3) {
+            	pronos.get(pronos.size()-2).setIsCross(true);
+            }
+            System.out.println(pastillesnumber + " pas");
+            System.out.println(pronos.get(pronos.size()-2).getIsCross());
+		}
+
+        if(raceSize > 13) {
+        	   Integer pastillesnumber = 0;
+               if(pronos.get(pronos.size()-1).getChevalPastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pronos.get(pronos.size()-1).getChronoPastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pronos.get(pronos.size()-1).getJockeyPastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pronos.get(pronos.size()-1).getCouplePastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pastillesnumber >= 3) {
+               pronos.get(pronos.size()-1).setIsCross(true);
+               }
+               pastillesnumber = 0;
+
+               if(pronos.get(pronos.size()-2).getChevalPastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pronos.get(pronos.size()-2).getChronoPastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pronos.get(pronos.size()-2).getJockeyPastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pronos.get(pronos.size()-2).getCouplePastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pastillesnumber >= 3) {
+               	pronos.get(pronos.size()-2).setIsCross(true);
+               }
+               pastillesnumber = 0;
+
+               if(pronos.get(pronos.size()-3).getChevalPastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pronos.get(pronos.size()-3).getChronoPastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pronos.get(pronos.size()-3).getJockeyPastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pronos.get(pronos.size()-3).getCouplePastille().equals(true)) {
+               	pastillesnumber += 1;
+               }
+               if(pastillesnumber >= 3) {
+               	pronos.get(pronos.size()-3).setIsCross(true);
+               }
+               System.out.println(pastillesnumber + " pas");
+               System.out.println(pronos.get(pronos.size()-3).getIsCross());
+		}
 		return pronos;
 	}
 

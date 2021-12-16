@@ -24,9 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
-import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 
 @Service
@@ -38,11 +36,11 @@ public class ImportJSONService {
 	@Autowired
 	TurfInfoService turfInfoService;
 
-	@Autowired
-	ResultService resultService;
+//	@Autowired
+//	ResultService resultService;
 
-	@Autowired
-	ResultRepository resultRepository;
+//	@Autowired
+//	ResultRepository resultRepository;
 
 	public List<TurfInfos> createAllRaceInfosFromParisTurfJson(String url, List<TurfInfos> all) {
 
@@ -111,12 +109,15 @@ public class ImportJSONService {
 						.intValue() != 0) {
 					turfInfo.setR(String.valueOf(node.get("pageProps").get("initialState").get("currentPage")
 							.get("meeting").get("pmuNumber").intValue()));
+				
+
 					turfInfo.setIsCanceled(node.get("pageProps").get("race").get("isCanceled").booleanValue());
 //		                turfInfo.setIsFavori(node.get("pageProps"));
 
 					turfInfo.setC(node.get("pageProps").get("initialState").get("currentPage").get("race").get("number")
 							.intValue());
 					turfInfo.setRaceSpecialty(node.get("pageProps").get("race").get("specialty").textValue());
+					System.out.println(turfInfo.getRaceSpecialty());
 
 					turfInfo.setTableId(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("id").textValue());
@@ -269,8 +270,9 @@ public class ImportJSONService {
 					turfInfo.setIsPremium(node.get("pageProps").get("race").get("isPremium").booleanValue());
 
 //		                turfInfo.setIsFavori(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("operatorOdds").get("PMU").get("favorite").booleanValue());
-					turfInfo.setPicto(node.get("pageProps").get("initialState").get("racecards").get("runners")
-							.get(numcourse).get(i).get("operatorOdds").get("PMU").get("picto").textValue());
+
+					//					turfInfo.setPicto(node.get("pageProps").get("initialState").get("racecards").get("runners")
+//							.get(numcourse).get(i).get("operatorOdds").get("PMU").get("picto").textValue());
 					turfInfo.setIsSupplemented(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("isSupplemented").booleanValue());
 
@@ -279,10 +281,13 @@ public class ImportJSONService {
 							.get("name").textValue());
 					turfInfo.setIsCanceled(node.get("pageProps").get("race").get("isCanceled").booleanValue());
 //		                turfInfo.setIsFavori(null);
+					
 
 					turfInfo.setC(node.get("pageProps").get("initialState").get("currentPage").get("race").get("number")
 							.intValue());
 					turfInfo.setRaceSpecialty(node.get("pageProps").get("race").get("specialty").textValue());
+					System.out.println(turfInfo.getRaceSpecialty());
+
 					turfInfo.setTableId(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("id").textValue());
 					turfInfo.setEntraineur(node.get("pageProps").get("initialState").get("racecards").get("runners")
@@ -429,12 +434,15 @@ public class ImportJSONService {
 					turfInfo.setIsPremium(node.get("pageProps").get("race").get("isPremium").booleanValue());
 
 //		                turfInfo.setIsFavori(node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).get(i).get("operatorOdds").get("PMU").get("favorite").booleanValue());
-					turfInfo.setPicto(node.get("pageProps").get("initialState").get("racecards").get("runners")
-							.get(numcourse).get(i).get("operatorOdds").get("PMU").get("picto").textValue());
+
+					//					turfInfo.setPicto(node.get("pageProps").get("initialState").get("racecards").get("runners")
+//							.get(numcourse).get(i).get("operatorOdds").get("PMU").get("picto").textValue());
 					turfInfo.setIsSupplemented(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("isSupplemented").booleanValue());
 
 				}
+				System.out.println(turfInfo.getTableId() + " - table id");
+
 
 //	                System.out.println(iter);
 //	                System.out.println("R" + turfInfo.getR() + "C" + turfInfo.getC() );
@@ -469,6 +477,11 @@ public class ImportJSONService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(allToUpdate.size() + " - update size");
+
+		System.out.println(allToSave.size() + " - save size");
+		System.out.println(allTableIds.size() + " - alltids");
+
 
 		return allToSave;
 	}
@@ -478,7 +491,7 @@ public class ImportJSONService {
 		List<TurfInfos> allToSave = new ArrayList<>();
 		List<TurfInfos> all = turfInfosRepository.findAll();
 
-		String parisTurfId = "BWVS8_9yzz44OfB_zkScF";
+		String parisTurfId = "1DG4CKtHgZwNd5fgdrSQl";
 		String extension = ".json";
 
 		/////////// create all day url/////////
@@ -545,7 +558,7 @@ public class ImportJSONService {
 	public Map<String, Object> createRapportsInfosFromPMUJson(String jour, List<TurfInfos> all) throws ParseException {
 
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
-		List<Resultat> allResultToSave = new ArrayList<>();
+//		List<Resultat> allResultToSave = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
 
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -599,11 +612,9 @@ public class ImportJSONService {
 
 					if (node.isMissingNode() == false) {
 
-						System.out.println(node.isMissingNode());
-						System.out.println(node2.get("rapportsParticipant").size());
-
-						Resultat resultat = resultService.createResult(jour, entry.getKey(), race, node, url);
-						allResultToSave.add(resultat);
+			
+//						Resultat resultat = resultService.createResult(jour, entry.getKey(), race, node, url);
+//						allResultToSave.add(resultat);
 
 						allByJour.forEach(ti -> {
 
@@ -623,7 +634,6 @@ public class ImportJSONService {
 								}
 								if (ti.getR().equals(entry.getKey()) && ti.getC().equals(race)
 										&& ti.getRanking().equals(2)) {
-									System.out.println(ti.getRanking() + "rrr" + ti.getR() + "C" + race);
 									ti.setLiveOddPlace(
 											node.get(1).get("rapports").get(1).get("dividendePourUnEuro").doubleValue()
 													/ 100);
@@ -681,7 +691,7 @@ public class ImportJSONService {
 		System.out.println("STOP");
 
 		map.put("turfinfos", allTurfInfosToSave);
-		map.put("results", allResultToSave);
+//		map.put("results", allResultToSave);
 
 		return map;
 
@@ -727,8 +737,6 @@ public class ImportJSONService {
 
 					if (node.isMissingNode() == false) {
 
-						System.out.println(node.isMissingNode());
-
 						allByJour.forEach(ti -> {
 							if (ti.getR().equals(entry.getKey()) && ti.getC().equals(race)
 									&& ti.getRanking().equals(1)) {
@@ -740,7 +748,6 @@ public class ImportJSONService {
 							}
 							if (ti.getR().equals(entry.getKey()) && ti.getC().equals(race)
 									&& ti.getRanking().equals(2)) {
-								System.out.println(ti.getRanking() + "rrr" + ti.getR() + "C" + race);
 								ti.setLiveOddPlaceOnline(
 										node.get(1).get("rapports").get(1).get("dividendePourUnEuro").doubleValue()
 												/ 100);
@@ -794,7 +801,6 @@ public class ImportJSONService {
 			String numcourse = String.valueOf(node.get("pageProps").get("race").get("id").intValue());
 			String uuid = node.get("pageProps").get("race").get("uuid").textValue();
 
-			System.out.println(uuid + "     nnnnnnnnnnnnnnnn");
 			// Verifie si les stats sont à null
 			boolean nulStats = true;
 
@@ -808,8 +814,6 @@ public class ImportJSONService {
 				numberofRunners = node.get("pageProps").get("race").get("numberOfRunners").intValue();
 //				numberofRunners = node.get("pageProps").get("initialState").get("racecards").get("runners").get(numcourse).size();
 			}
-
-			System.out.println(numberofRunners + "" + numcourse);
 
 			///////////// Début///////////////
 
@@ -887,17 +891,13 @@ public class ImportJSONService {
 
 			Integer numberofRunners = node.size();
 
-			System.out.println(" nnn" + numberofRunners);
-
 			List<TurfInfos> toRace = new ArrayList<>();
 
 			for (int i = 0; i < numberofRunners; i++) {
 				TurfInfos turfInfo = new TurfInfos();
 
 				turfInfo.setNumcourse(node.get(i).get("numcourse").get("id").intValue());
-				System.out.println(" numcccc" + turfInfo.getNumcourse());
 				turfInfo.setNumero(node.get(i).get("numero").intValue());
-				System.out.println(" numerrrr" + turfInfo.getNumero());
 
 				turfInfo.setRecence(node.get(i).get("recence").intValue());
 				System.out.println(i);

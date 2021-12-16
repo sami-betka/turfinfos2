@@ -26,15 +26,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import turfinfos2.model.CurrentOdds;
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.CurrentOddsRepository;
-import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 
 @Configuration
 //@EnableScheduling
 public class Schedule {
 	
-	@Autowired
-	ResultRepository resultRepository;
+//	@Autowired
+//	ResultRepository resultRepository;
 	
 	@Autowired
 	TurfInfosRepository turfInfosRepository;

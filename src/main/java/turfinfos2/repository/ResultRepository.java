@@ -10,3 +10,4 @@ public interface ResultRepository extends JpaRepository<Resultat, Long>{
 	
 
 }
+
