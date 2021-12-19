@@ -60,12 +60,16 @@ public class ImportJSONController {
 	}
 	
 	@GetMapping("/upload-data-date-range")
-    public String uploadJSONFileDateRange( Model model, RedirectAttributes redirect,
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-05-01") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2021-08-31") String datefin) {
+    public String uploadJSONFileDateRange(
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-08-01") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-11-30") String datefin) {
 		
 		List<TurfInfos> allTurfToSave = new ArrayList<>();
 		List<TurfInfos> allAspiToSave = new ArrayList<>();
+		List<TurfInfos> allRapportsToSave = new ArrayList<>();
+		
+		List<TurfInfos> all = turfInfosRepository.findAll();
+
 		
 		final LocalDate start = LocalDate.parse(datedebut, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		  final LocalDate end = LocalDate.parse(datefin, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -78,17 +82,35 @@ public class ImportJSONController {
 		  
 		  
 		  dates.forEach(ld->{
-			  allTurfToSave.addAll( importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false));
+			  allTurfToSave.addAll(importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false));
 //				importJSONService.updateAllDayInfosFromAspiJson(ld.toString());		  
 				});
 		  turfInfosRepository.saveAll(allTurfToSave);
 	
 		  dates.forEach(ld->{
 //			  importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false);
-				allAspiToSave.addAll( importJSONService.updateAllDayInfosFromAspiJson(ld.toString()));	
+				allAspiToSave.addAll(importJSONService.updateAllDayInfosFromAspiJson(ld.toString()));	
 				System.out.println(ld.toString());
 				});
 		  turfInfosRepository.saveAll(allAspiToSave);
+		  
+//		  dates.forEach(ld->{
+//	 
+//		try {
+//			allTurfInfosToSave.addAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("turfinfos"));
+//		
+////			allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("results"));
+//
+//			//					importJSONService.createRapportsInfosFromPMUJson(ld.toString());
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	
+//          });
+//
+//          turfInfosRepository.saveAll(allRapportsToSave);
+
 
 
             System.out.println("STOOOP");
@@ -96,9 +118,9 @@ public class ImportJSONController {
 	}
 	
 	@GetMapping("/upload-rapports-date-range")
-    public String uploadRapportsFileDateRange(RedirectAttributes redirect,
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-05-01") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2021-08-31") String datefin) {
+    public String uploadRapportsFileDateRange(
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-08-01") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-11-30") String datefin) {
 		
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
 //		List<Resultat> allResultToSave = new ArrayList<>();
@@ -119,21 +141,26 @@ public class ImportJSONController {
 		  dates.forEach(ld->{
 			 
 				try {
-					allTurfInfosToSave.addAll((List< TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("turfinfos"));
+					allTurfInfosToSave.addAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("turfinfos"));
 				
 //					allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("results"));
 
 					//					importJSONService.createRapportsInfosFromPMUJson(ld.toString());
-				} catch (ParseException e) {
+				} 
+				catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				
+				
 			
 		  });
 		  
-		  
-		    turfInfosRepository.saveAll(allTurfInfosToSave);
-//		    resultRepository.saveAll(allResultToSave);
+			System.out.println(allTurfInfosToSave.size());
+
+            turfInfosRepository.saveAll(allTurfInfosToSave);
+			//		    resultRepository.saveAll(allResultToSave);
 		  
 			System.out.println("STOP RAPPORTS");
 			return "redirect:/";

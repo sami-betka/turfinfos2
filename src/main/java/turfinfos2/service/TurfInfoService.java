@@ -105,6 +105,8 @@ public class TurfInfoService {
     	infoToUpdate.setNumcourse(info.getNumcourse());
     	infoToUpdate.setNumero(info.getNumero());
     	infoToUpdate.setR(info.getR());
+    	infoToUpdate.setCountry(info.getCountry());
+
 //    	infoToUpdate.setRecence(info.getRecence());
     	infoToUpdate.setEntraineur(info.getEntraineur());
     	infoToUpdate.setCl(info.getCl());

@@ -110,14 +110,13 @@ public class ImportJSONService {
 					turfInfo.setR(String.valueOf(node.get("pageProps").get("initialState").get("currentPage")
 							.get("meeting").get("pmuNumber").intValue()));
 				
-
+                    turfInfo.setCountry(node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("country").textValue());
 					turfInfo.setIsCanceled(node.get("pageProps").get("race").get("isCanceled").booleanValue());
 //		                turfInfo.setIsFavori(node.get("pageProps"));
 
 					turfInfo.setC(node.get("pageProps").get("initialState").get("currentPage").get("race").get("number")
 							.intValue());
 					turfInfo.setRaceSpecialty(node.get("pageProps").get("race").get("specialty").textValue());
-					System.out.println(turfInfo.getRaceSpecialty());
 
 					turfInfo.setTableId(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("id").textValue());
@@ -281,12 +280,13 @@ public class ImportJSONService {
 							.get("name").textValue());
 					turfInfo.setIsCanceled(node.get("pageProps").get("race").get("isCanceled").booleanValue());
 //		                turfInfo.setIsFavori(null);
+                    turfInfo.setCountry(node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("country").textValue());
+
 					
 
 					turfInfo.setC(node.get("pageProps").get("initialState").get("currentPage").get("race").get("number")
 							.intValue());
 					turfInfo.setRaceSpecialty(node.get("pageProps").get("race").get("specialty").textValue());
-					System.out.println(turfInfo.getRaceSpecialty());
 
 					turfInfo.setTableId(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("id").textValue());
@@ -441,8 +441,6 @@ public class ImportJSONService {
 							.get(numcourse).get(i).get("isSupplemented").booleanValue());
 
 				}
-				System.out.println(turfInfo.getTableId() + " - table id");
-
 
 //	                System.out.println(iter);
 //	                System.out.println("R" + turfInfo.getR() + "C" + turfInfo.getC() );
@@ -477,11 +475,6 @@ public class ImportJSONService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(allToUpdate.size() + " - update size");
-
-		System.out.println(allToSave.size() + " - save size");
-		System.out.println(allTableIds.size() + " - alltids");
-
 
 		return allToSave;
 	}
@@ -541,10 +534,12 @@ public class ImportJSONService {
 
 			}
 
-		} catch (MalformedURLException e) {
+		} 
+		catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -642,7 +637,7 @@ public class ImportJSONService {
 
 								}
 								if (ti.getR().equals(entry.getKey()) && ti.getC().equals(race)
-										&& ti.getRanking().equals(3) && node.get(1).get("rapports").size() > 2) {
+										&& ti.getRanking().equals(3) && ti.getNumberOfInitialRunners() != null && ti.getNumberOfInitialRunners() > 7) {
 									ti.setLiveOddPlace(
 											node.get(1).get("rapports").get(2).get("dividendePourUnEuro").doubleValue()
 													/ 100);
@@ -666,6 +661,7 @@ public class ImportJSONService {
 								}
 							}
 							allTurfInfosToSave.add(ti);
+//							turfInfosRepository.save(ti);
 
 						});
 
@@ -687,7 +683,7 @@ public class ImportJSONService {
 			}
 		}
 
-//	    resultRepository.saveAll(allResultToSave);
+		System.out.println(allTurfInfosToSave.size());
 		System.out.println("STOP");
 
 		map.put("turfinfos", allTurfInfosToSave);

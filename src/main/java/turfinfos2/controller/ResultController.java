@@ -3,7 +3,6 @@ package turfinfos2.controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
@@ -23,7 +22,6 @@ import turfinfos2.repository.ArchiveInfoRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.service.ArchiveService;
 import turfinfos2.service.BankrollService;
-import turfinfos2.service.ResultService;
 
 @Controller
 public class ResultController {
@@ -136,7 +134,7 @@ public class ResultController {
 
 
 		
-		List<TurfInfos> won = turfInfosRepository.findAll()
+		List<TurfInfos> won = list
 				.stream()
 				.filter(ti-> ti.getLiveOddPlace() != null && ti.getLiveOddPlace() > 0)
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
@@ -222,7 +220,7 @@ public class ResultController {
 
 
 
-		List<TurfInfos> lost = turfInfosRepository.findAll()
+		List<TurfInfos> lost = list
 				.stream()
 				.filter(ti-> ti.getLiveOddPlace() == null || ti.getLiveOddPlace() == 0)
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
@@ -310,8 +308,10 @@ public class ResultController {
 		model.addAttribute("categorie", labels);
 		model.addAttribute("series1", wonMoyennes);
 		model.addAttribute("series2", lostMoyennes);
-//		model.addAttribute("wonnumber", won.size());
-//		model.addAttribute("lostnumber", lost.size());
+		model.addAttribute("wonnumber", won.size());
+		model.addAttribute("lostnumber", lost.size());
+		model.addAttribute("totalnumber", list.size());
+
 
 
 

@@ -226,6 +226,8 @@ public class TurfInfos {
 	
 	private String hour;
 	
+	private String country;
+	
 	private Boolean chronoPastille;
 
 	private Boolean jockeyPastille;
@@ -296,7 +298,7 @@ public class TurfInfos {
 			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners, Boolean isCross,
 			Boolean isFirstInProno, Boolean couplePastille, Boolean chevalPastille, Double liveOddPlaceOnline, Boolean isCanceled,
 			Boolean isFavori, Boolean nulStats, String formFigs, Double ante, Boolean isSupplemented, String picto,
-			Double minRapportProbable, Double maxRapportProbable, Boolean threeEtoile, Boolean fiveEtoile) {
+			Double minRapportProbable, Double maxRapportProbable, Boolean threeEtoile, Boolean fiveEtoile, String country) {
 		
 		this.id = id;
 		this.R = R;
@@ -364,6 +366,8 @@ public class TurfInfos {
 		this.picto = picto;
 		this.minRapportProbable = minRapportProbable;
 		this.maxRapportProbable = maxRapportProbable;
+		this.country = country;
+
 
 
 
@@ -1058,6 +1062,14 @@ public class TurfInfos {
 
 	public void setMinRapportProbable(Double minRapportProbable) {
 		this.minRapportProbable = minRapportProbable;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 }

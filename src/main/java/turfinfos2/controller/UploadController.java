@@ -110,6 +110,15 @@ public class UploadController {
 
 					}
 				}
+				
+				infos.forEach(ti-> {
+					System.out.println(ti.getIsRunning() + " isrunning");
+					System.out.println(ti.getIsPremium() + " premium");
+					System.out.println(ti.getNumcourse() + " numcourse");
+					System.out.println(ti.getCoursescheval() + " coursescheval");
+					System.out.println(ti.getRaceSpecialty() + " specialty");
+
+				});
 
 
 				navbarInfos(model);
@@ -173,8 +182,9 @@ public class UploadController {
 
 		// RACESLIST
 		List<TurfInfos> allPremiumReunionInfos = turfInfosRepository
-				.findAllByJourAndByReunionstring(jour, reunionstring).stream().filter(ti -> ti.getIsRunning() != null
-						&& ti.getIsRunning() == true && ti.getIsPremium() != null && ti.getIsPremium().equals(true))
+				.findAllByJourAndByReunionstring(jour, reunionstring).stream()
+//				.filter(ti -> ti.getIsRunning() != null
+//						&& ti.getIsRunning() == true && ti.getIsPremium() != null && ti.getIsPremium().equals(true))
 				.collect(Collectors.toList());
 
 		List<TurfInfos> reunionCracks = new ArrayList<>();
@@ -571,6 +581,15 @@ public class UploadController {
 //	         allraceInfos.forEach(null)
 
 		navbarInfos(model);
+		
+//		allraceInfos.forEach(ti-> {
+//			System.out.println(ti.getIsRunning() + " isrunning");
+//			System.out.println(ti.getIsPremium() + " premium");
+//			System.out.println(ti.getNumcourse() + " numcourse");
+//			System.out.println(ti.getCoursescheval() + " coursescheval");
+//			System.out.println(ti.getRaceSpecialty() + " specialty");
+//
+//		});
 
 		return "reunion-infos";
 	}
@@ -1159,7 +1178,7 @@ public class UploadController {
 	private List<TurfInfos> crossProno(List<TurfInfos> pronos, int raceSize){
 		
 		
-		
+		if(pronos.size() > 3) {
 		
 
 		if(raceSize < 14) {
@@ -1255,6 +1274,8 @@ public class UploadController {
                }
                System.out.println(pastillesnumber + " pas");
                System.out.println(pronos.get(pronos.size()-3).getIsCross());
+		}
+        
 		}
 		return pronos;
 	}
