@@ -48,14 +48,18 @@ public class UploadController {
 	public String index(Model model) {
 
 //		Set<String> dates = turfInfosRepository.findAll().stream().map(TurfInfos::getJour).collect(Collectors.toSet());
+		List<TurfInfos> allInfos = turfInfosRepository.findAll();
 
-		navbarInfos(model);
+		navbarInfos(model, allInfos);
 		return "upload";
 	}
 
 	@PostMapping("/upload-csv-file")
 	public String uploadCSVFileByDay(@RequestParam("file") MultipartFile file, Model model,
 			RedirectAttributes redirect) {
+		
+		List<TurfInfos> allInfos = turfInfosRepository.findAll();
+
 
 		List<TurfInfos> allToSave = new ArrayList<>();
 		List<TurfInfos> allToUpdate = new ArrayList<>();
@@ -74,7 +78,7 @@ public class UploadController {
 //    				.map(TurfInfos :: getJour)
 //    				.collect(Collectors.toSet());
 //            model.addAttribute("dates", dates);
-			navbarInfos(model);
+			navbarInfos(model, allInfos);
 
 		} else {
 
@@ -121,7 +125,7 @@ public class UploadController {
 				});
 
 
-				navbarInfos(model);
+				navbarInfos(model, allInfos);
 
 
 				model.addAttribute("status", true);
@@ -135,12 +139,12 @@ public class UploadController {
 //                model.addAttribute("messageerror", "Une erreur est apparue durant l'import du fichier.");
 				model.addAttribute("status", false);
 
-				navbarInfos(model);
+				navbarInfos(model, allInfos);
 
 			}
 		}
 
-		navbarInfos(model);
+		navbarInfos(model, allInfos);
 
 		allToSave.addAll(allToUpdate);
 		turfInfosRepository.saveAll(allToSave);
@@ -153,6 +157,8 @@ public class UploadController {
 
 	@GetMapping("/day-infos")
 	public String getDayInfos(@RequestParam("jour") String jour, Model model) {
+		
+		List<TurfInfos> allInfos = turfInfosRepository.findAll();
 
 		// Récuperer chaque reunion (1, 2, 3, 4...)
 		Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
@@ -165,7 +171,7 @@ public class UploadController {
 		model.addAttribute("reunions", reunions);
 		model.addAttribute("jour", jour);
 
-		navbarInfos(model);
+		navbarInfos(model, allInfos);
 		return "day-infos";
 	}
 
@@ -176,6 +182,9 @@ public class UploadController {
 //    	if(principal == null) {
 //			return "redirect:/login";
 //    	}
+		
+		List<TurfInfos> allInfos = turfInfosRepository.findAll();
+
 
 		model.addAttribute("date", jour);
 		model.addAttribute("recencemax", 60);
@@ -183,8 +192,8 @@ public class UploadController {
 		// RACESLIST
 		List<TurfInfos> allPremiumReunionInfos = turfInfosRepository
 				.findAllByJourAndByReunionstring(jour, reunionstring).stream()
-//				.filter(ti -> ti.getIsRunning() != null
-//						&& ti.getIsRunning() == true && ti.getIsPremium() != null && ti.getIsPremium().equals(true))
+				.filter(ti -> ti.getIsRunning() != null
+						&& ti.getIsRunning() == true && ti.getIsPremium() != null && ti.getIsPremium().equals(true))
 				.collect(Collectors.toList());
 
 		List<TurfInfos> reunionCracks = new ArrayList<>();
@@ -580,7 +589,7 @@ public class UploadController {
 
 //	         allraceInfos.forEach(null)
 
-		navbarInfos(model);
+		navbarInfos(model, allInfos);
 		
 //		allraceInfos.forEach(ti-> {
 //			System.out.println(ti.getIsRunning() + " isrunning");
@@ -1300,6 +1309,8 @@ public class UploadController {
 			   
 			   Integer threeEtoilesNumber = 0;
 			   Integer fiveEtoilesNumber = 0;
+			   Integer blueEtoilesNumber = 0;
+
 
 
 			   
@@ -1411,6 +1422,27 @@ public class UploadController {
 					   break;
 				   }
 			   }
+               
+               //// Blue Etoile
+           if(entraineurs.get(0).getRaceSpecialty().equals("P")) {
+               for(int i = 0; i < entraineurs.size(); i++) {
+				   if(entraineurs.get(i).getId().equals(ti.getId())) {
+					   blueEtoilesNumber += 1;
+				   }
+				   if(i == 2) {
+					   break;
+				   }
+			   }
+			   for(int i = 0; i < jockeys.size(); i++) {
+				   if(jockeys.get(i).getId().equals(ti.getId())) {
+					   blueEtoilesNumber += 1;
+				   }
+				   if(i == 2) {
+					   break;
+				   }
+			   }
+		   }
+               
 			   
 			 
                if(threeEtoilesNumber >= 3) {
@@ -1425,6 +1457,14 @@ public class UploadController {
 				   ti.setFiveEtoile(false);
 			   }
 			   
+			   
+			   if(blueEtoilesNumber >= 2) {
+				   ti.setBlueEtoile(true);
+			   } else {
+				   ti.setBlueEtoile(false);
+			   }
+			
+			   
 			 
 		   });
 	   ////////////////////////////////////
@@ -1434,9 +1474,7 @@ public class UploadController {
 	   return pronos;
    }
 
-	private void navbarInfos(Model model) {
-
-		List<TurfInfos> allInfos = turfInfosRepository.findAll();
+	private void navbarInfos(Model model, List<TurfInfos> allInfos) {
 
 		// DATES
 		Set<String> dates = allInfos.stream().map(TurfInfos::getJour).sorted().collect(Collectors.toSet());

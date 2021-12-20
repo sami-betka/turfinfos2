@@ -116,6 +116,7 @@ public class ImportJSONService {
 
 					turfInfo.setC(node.get("pageProps").get("initialState").get("currentPage").get("race").get("number")
 							.intValue());
+					turfInfo.setAutostart(node.get("pageProps").get("initialState").get("currentPage").get("race").get("autostart").booleanValue());
 					turfInfo.setRaceSpecialty(node.get("pageProps").get("race").get("specialty").textValue());
 
 					turfInfo.setTableId(node.get("pageProps").get("initialState").get("racecards").get("runners")
@@ -286,6 +287,8 @@ public class ImportJSONService {
 
 					turfInfo.setC(node.get("pageProps").get("initialState").get("currentPage").get("race").get("number")
 							.intValue());
+					turfInfo.setAutostart(node.get("pageProps").get("initialState").get("currentPage").get("race").get("autostart").booleanValue());
+
 					turfInfo.setRaceSpecialty(node.get("pageProps").get("race").get("specialty").textValue());
 
 					turfInfo.setTableId(node.get("pageProps").get("initialState").get("racecards").get("runners")
@@ -578,14 +581,29 @@ public class ImportJSONService {
 
 		Map<String, Set<Integer>> reunionsAndRaces = new HashMap<>();
 
-		Set<String> distinctReunions = all.stream()
-				.filter(ti -> ti.getJour().equals(jour) && ti.getIsPremium().equals(true) && ti.getR().length() < 3)
-				.map(TurfInfos::getR).collect(Collectors.toSet());
+		Set<String> distinctReunions = null;
+		try {
+			distinctReunions = all.stream()
+					.filter(ti -> ti.getJour().equals(jour) && ti.getIsPremium() == true && ti.getR().length() < 3)
+					.map(TurfInfos::getR).collect(Collectors.toSet());
+			
+			distinctReunions.forEach(r -> {
+				reunionsAndRaces.put(r, all.stream().filter(ti -> ti.getJour().equals(jour) && ti.getR().equals(r))
+						.map(TurfInfos::getC).collect(Collectors.toSet()));
+			});
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
-		distinctReunions.forEach(r -> {
-			reunionsAndRaces.put(r, all.stream().filter(ti -> ti.getJour().equals(jour) && ti.getR().equals(r))
-					.map(TurfInfos::getC).collect(Collectors.toSet()));
-		});
+
+//		distinctReunions.forEach(r -> {
+//			reunionsAndRaces.put(r, all.stream().filter(ti -> ti.getJour().equals(jour) && ti.getR().equals(r))
+//					.map(TurfInfos::getC).collect(Collectors.toSet()));
+//		});
+		
+		
 
 		for (Entry<String, Set<Integer>> entry : reunionsAndRaces.entrySet()) {
 

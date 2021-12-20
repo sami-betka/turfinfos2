@@ -39,22 +39,19 @@ public class ArchiveService {
 		if(
 		        info.getNumberOfInitialRunners() != null && info.getNumberOfInitialRunners() > 1
 				&& info.getHasBetTypes() == true 
+				&& info.getIsPremium() == true
 			    && (!info.getJour().contains("2021-04-") && !info.getJour().contains("2021-12-"))
 //		        && (info.getFiveEtoile() == true || info.getThreeEtoile() == true)
 //			    && info.getRaceSpecialty().equals("P")
-			    && info.getCountry() != null && info.getCountry().equals("FR")
+//			    && info.getCountry() != null && info.getCountry().equals("FR")
 
-				&& info.getLiveOdd() != null && info.getLiveOdd() != 0 && info.getLiveOdd() < 3
-				&& info.getNoteProno() > 20d
+				&& info.getLiveOdd() != null && info.getLiveOdd() != 0 && info.getLiveOdd() < 2.5
+//				&& Integer.valueOf(info.getCoursescheval()) > 5
 				
 //				&& (pronoList.get(0).getId().equals(info.getId()) || pronoList.get(1).getId().equals(info.getId())
 //						|| pronoList.get(2).getId().equals(info.getId()) || pronoList.get(3).getId().equals(info.getId())
-//						|| pronoList.get(4).getId().equals(info.getId()))
-				
-//				&& info.getPourcPlaceEntHippo() != null && info.getPourcPlaceEntHippo() != 0 && info.getPourcPlaceEntHippo() > 50
-//				&& info.getNbCourseCouple() > 5
-//				&& info.getTxPlaceCouple() != null && info.getTxPlaceCouple() != 0 && info.getTxPlaceCouple() > 14
-//				&& info.getTxVictCouple() != null && info.getTxVictCouple() != 0 && info.getTxVictCouple() > 6
+//						|| pronoList.get(4).getId().equals(info.getId())
+//				)
 
 		        && info.getRecence() != null && info.getRecence() < 60
 			    && info.getMinRapportProbable() != null && info.getMinRapportProbable() != 0 && info.getMinRapportProbable() > 1.3d
@@ -373,14 +370,16 @@ public class ArchiveService {
 			setEtoiles(listByChronos, listBypveh, listBypvjh, listBypvch, listByppch, listByppc, listBytxv, listBytxp, listBytxvh, listBytxph, listByNoteProno, allraceInfos.size());
 			
 
-			listByNoteProno.forEach(ti->{
+			for(TurfInfos ti : listByNoteProno) {
+				
 				if(verifyConditions(ti, listByNoteProno).equals(true)) {
 					if(ti.getLiveOddPlace() == null) {
 						ti.setLiveOddPlace(0d);
 					}
 		            finalList.add(ti);	
+		            break;
 				}
-			});
+			};
 
 			
 			List<TurfInfos> listByNumCheval = allraceInfos.stream()

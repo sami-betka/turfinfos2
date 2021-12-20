@@ -43,52 +43,11 @@ public class ResultController {
 			@RequestParam(name = "bankroll", required = false, defaultValue = "500d") Double bankrollAmount, 
 			@RequestParam(name = "diviseur", required = false, defaultValue = "20") Integer divider
 			) {
-		
-//		List<TurfInfos> all = turfInfosRepository.findAll()
-//				.stream()
-//				.filter(ti->
-//				        
-//				        ti.getNumberOfInitialRunners() != null && ti.getNumberOfInitialRunners() > 1
-//						&& ti.getHasBetTypes() == true 
-//						&& ti.getLiveOdd() != null && ti.getLiveOdd() != 0 && ti.getLiveOdd() < 2.5
-//				        && ti.getRecence() != null && ti.getRecence() < 60
-//					    && ti.getMinRapportProbable() != null && ti.getMinRapportProbable() != 0 && ti.getMinRapportProbable() > 1.3d
-////				        && ti.getJour().contains("2021-11")
-////				        && ti.getMaxRapportProbable() != null && ti.getMaxRapportProbable() != 0 && ti.getMaxRapportProbable() < 1.7d
-////						&& ti.getIsFavori().equals(true)
-////						&& ti.getRaceSpecialty().equals("P")
-//				        
-//				        
-////					    && ti.getLiveOddPlace() != null && (ti.getLiveOddPlace() == 0 || ti.getLiveOddPlace() < 3)
-////						&& ti.getIsFavori().equals(true)
-////				        && ti.getRaceSpecialty().equals("P")
-////				        && ti.getLiveOddPlace(). != 0
-////				        && (  ti.getRaceSpecialty().equals("A") || ti.getRaceSpecialty().equals("M")  )
-////				        && ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval() >= 25
-////						&& ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() >= 39.2
-////				        && ti.getChronoPastille() == false
-////				        && ti.getJockeyPastille() == false
-////				        && ti.getChevalPastille() == false
-////				        && ti.getCouplePastille() == false
-//
-////				        && ti.getFormFigs() != null && ti.getFormFigs().length()>= 2 && (ti.getFormFigs().charAt(0)=='1' || ti.getFormFigs().charAt(0)=='2' || ti.getFormFigs().charAt(0)=='3') && (ti.getFormFigs().charAt(1)=='p' || ti.getFormFigs().charAt(1)=='a' || ti.getFormFigs().charAt(1)=='m')
-//
-//				        )
-//				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
-//				.collect(Collectors.toList());
-		
+
 		Double total = 0d;
 		
 		List<TurfInfos> list = archiveService.setAllPlaceFirstPronoList(turfInfosRepository.findAll())
-				.stream()
-				
-//				.filter(ti -> 
-//				        ti.getChronoPastille() == false
-////				         ti.getJockeyPastille() == false
-//				        && ti.getChevalPastille() == false
-//				        && ti.getCouplePastille() == false
-//                        )
-				
+				.stream()				
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
 				.collect(Collectors.toList());
 
@@ -131,6 +90,8 @@ public class ResultController {
 		labels.add("PCPLE");
 		labels.add("RappMAX");
 		labels.add("RappMIN");
+		labels.add("NOTE");
+
 
 
 		
@@ -149,6 +110,8 @@ public class ResultController {
 		Double pcoupleTotalWon = 0d;
 		Double rappMaxTotalWon = 0d;
 		Double rappMinTotalWon = 0d;
+		Double noteTotalWon = 0d;
+
 		
 		Double coteMoyenneWon = 0d;
 		Double vehMoyenneWon = 0d;
@@ -160,6 +123,8 @@ public class ResultController {
 		Double pcoupleMoyenneWon = 0d;
 		Double rappMaxMoyenneWon = 0d;
 		Double rappMinMoyenneWon = 0d;
+		Double noteMoyenneWon = 0d;
+
 
 		for(TurfInfos info: won) {
 			
@@ -193,8 +158,11 @@ public class ResultController {
 			if(info.getMinRapportProbable() != null) {
 				rappMinTotalWon += info.getMinRapportProbable();
 				}
+			if(info.getNoteProno() != null) {
+				noteTotalWon += info.getNoteProno();
+				}
 			
-			////Taille = 10
+			////Taille = 11
 		}
 		coteMoyenneWon = coteTotalWon/won.size();
 		vehMoyenneWon = vehTotalWon/won.size();
@@ -206,6 +174,8 @@ public class ResultController {
 		pcoupleMoyenneWon = pcoupleTotalWon/won.size();
 		rappMaxMoyenneWon = rappMaxTotalWon/won.size();
 		rappMinMoyenneWon = rappMinTotalWon/won.size();
+		noteMoyenneWon = noteTotalWon/won.size();
+
 		
 		wonMoyennes.add(coteMoyenneWon);
 		wonMoyennes.add(vehMoyenneWon);
@@ -217,6 +187,8 @@ public class ResultController {
 		wonMoyennes.add(pcoupleMoyenneWon);
 		wonMoyennes.add(rappMaxMoyenneWon);
 		wonMoyennes.add(rappMinMoyenneWon);
+		wonMoyennes.add(noteMoyenneWon);
+
 
 
 
@@ -236,6 +208,8 @@ public class ResultController {
 		Double pcoupleTotalLost = 0d;	
 		Double rappMaxTotalLost = 0d;
 		Double rappMinTotalLost = 0d;
+		Double noteTotalLost = 0d;
+
 		
 		Double coteMoyenneLost = 0d;
 		Double vehMoyenneLost = 0d;
@@ -247,6 +221,8 @@ public class ResultController {
 		Double pcoupleMoyenneLost = 0d;
 		Double rappMaxMoyenneLost = 0d;
 		Double rappMinMoyenneLost = 0d;
+		Double noteMoyenneLost = 0d;
+
 		
 		for(TurfInfos info: lost) {
 			if(info.getLiveOdd() != null) {
@@ -279,7 +255,10 @@ public class ResultController {
 				if(info.getMinRapportProbable() != null) {
 					rappMinTotalLost += info.getMinRapportProbable();
 					}
-			////Taille = 10
+				if(info.getNoteProno() != null) {
+					noteTotalLost += info.getNoteProno();
+					}
+			////Taille = 11
 		}
 		coteMoyenneLost = coteTotalLost/lost.size();
 		vehMoyenneLost = vehTotalLost/lost.size();
@@ -291,6 +270,8 @@ public class ResultController {
 		pcoupleMoyenneLost = pcoupleTotalLost/lost.size();
 		rappMaxMoyenneLost = rappMaxTotalLost/lost.size();
 		rappMinMoyenneLost = rappMinTotalLost/lost.size();
+		noteMoyenneLost = noteTotalLost/lost.size();
+
 		
 		lostMoyennes.add(coteMoyenneLost);
 		lostMoyennes.add(vehMoyenneLost);
@@ -302,6 +283,8 @@ public class ResultController {
 		lostMoyennes.add(pcoupleMoyenneLost);
 		lostMoyennes.add(rappMaxMoyenneLost);
 		lostMoyennes.add(rappMinMoyenneLost);
+		lostMoyennes.add(noteMoyenneLost);
+
 
 
 

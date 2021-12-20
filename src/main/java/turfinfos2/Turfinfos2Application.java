@@ -70,31 +70,25 @@ public class Turfinfos2Application {
 		
 		
 //		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
-////	
+//
 //        List<TurfInfos> all = new ArrayList<>();
 //        all.addAll(turfInfosRepository.findAll());
 //        		
 //        List<TurfInfos> toSave = new ArrayList<>();
 //        List<TurfInfos> toDelete = new ArrayList<>();
 //
-//
-//        
 //        all.forEach(ti-> {
 //        	
-//        	if(ti.getJour().contains("2020") || ti.getJour().contains("2021-02") || ti.getJour().contains("2021-01") || ti.getJour().contains("2021-03")) {
+//        	if(ti.getJour().contains("2021-04")) {
 //        		toDelete.add(ti);
 //        	}
 //        
 //        });
-////        turfInfosRepository.deleteAll(toDelete);
+//        turfInfosRepository.deleteAll(toDelete);
 //
 //        System.out.println("STOP");
-////        System.out.println(toSave.size());
+//        System.out.println(toDelete.size());
 
-		
-		
-		
-		
 		
 		
 //		ImportJSONService service = ctx.getBean(ImportJSONService.class);

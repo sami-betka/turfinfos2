@@ -252,13 +252,16 @@ public class TurfInfos {
 	
 	private Boolean isCanceled;
 	
+	private Boolean autostart;
+	
 	
 	private Double ante;
 	
 	private Boolean threeEtoile;
 
 	private Boolean fiveEtoile;
-
+	
+	private Boolean blueEtoile;
 	
 	
 	
@@ -298,7 +301,8 @@ public class TurfInfos {
 			String hour, Boolean chronoPastille, Boolean jockeyPastille, Integer numberOfNonRunners, Boolean isCross,
 			Boolean isFirstInProno, Boolean couplePastille, Boolean chevalPastille, Double liveOddPlaceOnline, Boolean isCanceled,
 			Boolean isFavori, Boolean nulStats, String formFigs, Double ante, Boolean isSupplemented, String picto,
-			Double minRapportProbable, Double maxRapportProbable, Boolean threeEtoile, Boolean fiveEtoile, String country) {
+			Double minRapportProbable, Double maxRapportProbable, Boolean threeEtoile, Boolean fiveEtoile, String country,
+			Boolean autostart, Boolean blueEtoile) {
 		
 		this.id = id;
 		this.R = R;
@@ -367,6 +371,8 @@ public class TurfInfos {
 		this.minRapportProbable = minRapportProbable;
 		this.maxRapportProbable = maxRapportProbable;
 		this.country = country;
+		this.autostart = autostart;
+
 
 
 
@@ -398,9 +404,7 @@ public class TurfInfos {
 		this.ante = ante;
 		this.fiveEtoile = fiveEtoile;
 		this.threeEtoile = threeEtoile;
-
-
-
+		this.blueEtoile = blueEtoile;
 
 
 
@@ -1070,6 +1074,22 @@ public class TurfInfos {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public Boolean getAutostart() {
+		return autostart;
+	}
+
+	public void setAutostart(Boolean autostart) {
+		this.autostart = autostart;
+	}
+
+	public Boolean getBlueEtoile() {
+		return blueEtoile;
+	}
+
+	public void setBlueEtoile(Boolean blueEtoile) {
+		this.blueEtoile = blueEtoile;
 	}
 
 }
