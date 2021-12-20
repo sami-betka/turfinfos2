@@ -263,6 +263,9 @@ public class TurfInfos {
 	
 	private Boolean blueEtoile;
 	
+	private Integer calculateEntraineurNumber;
+
+	
 	
 	
 	
@@ -302,7 +305,7 @@ public class TurfInfos {
 			Boolean isFirstInProno, Boolean couplePastille, Boolean chevalPastille, Double liveOddPlaceOnline, Boolean isCanceled,
 			Boolean isFavori, Boolean nulStats, String formFigs, Double ante, Boolean isSupplemented, String picto,
 			Double minRapportProbable, Double maxRapportProbable, Boolean threeEtoile, Boolean fiveEtoile, String country,
-			Boolean autostart, Boolean blueEtoile) {
+			Boolean autostart, Boolean blueEtoile, Integer calculateEntraineurNumber) {
 		
 		this.id = id;
 		this.R = R;
@@ -405,6 +408,8 @@ public class TurfInfos {
 		this.fiveEtoile = fiveEtoile;
 		this.threeEtoile = threeEtoile;
 		this.blueEtoile = blueEtoile;
+		this.calculateEntraineurNumber = calculateEntraineurNumber;
+
 
 
 
@@ -1090,6 +1095,14 @@ public class TurfInfos {
 
 	public void setBlueEtoile(Boolean blueEtoile) {
 		this.blueEtoile = blueEtoile;
+	}
+
+	public Integer getCalculateEntraineurNumber() {
+		return calculateEntraineurNumber;
+	}
+
+	public void setCalculateEntraineurNumber(Integer calculateEntraineurNumber) {
+		this.calculateEntraineurNumber = calculateEntraineurNumber;
 	}
 
 }
