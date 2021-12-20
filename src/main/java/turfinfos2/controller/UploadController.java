@@ -426,7 +426,7 @@ public class UploadController {
 					allraceInfos.size());
 
             ///////////// AFFECTER ETOILES///////////////
-			setEtoiles(listByChronos,calculateEntraineur(listBypveh), listBypvjh, listBypvch, listByppch, listByppc, listBytxv, listBytxp, listBytxvh, listBytxph,
+			setEtoiles(listByChronos, listBypveh, listBypvjh, listBypvch, listByppch, listByppc, listBytxv, listBytxp, listBytxvh, listBytxph,
 					listByNoteProno,
 					allraceInfos.size());
 
@@ -934,6 +934,12 @@ public class UploadController {
 					tinf.setCalculateEntraineurNumber(tinf.getCalculateEntraineurNumber() + 1);
 				}
 				tinf.setNumeroString(tinf.getNumeroString() + "]");
+				
+//				for(TurfInfos info : AllRaceinfos) {
+//					if(info.getEntraineur().equals(entraineur)) {
+//						info.setCalculateEntraineurNumber(tinf.getCalculateEntraineurNumber());
+//					}
+//				};
 
 				newList.add(tinf);
 			}
@@ -1328,16 +1334,33 @@ public class UploadController {
 			   
 			   Integer endIterAt = 3;
 			   for(int i = 0; i < entraineurs.size(); i++) {
+				   
 				   if(entraineurs.get(i).getId().equals(ti.getId())) {
 					   threeEtoilesNumber += 1;
 				   }
-				   if(entraineurs.get(i).getCalculateEntraineurNumber() > 1) {
-					   endIterAt += (entraineurs.get(i).getCalculateEntraineurNumber() - 1);
-				   }
+				   
+//				   if(entraineurs.get(i).getNumeroString().equals(ti.getNumeroString())) {
+//					   threeEtoilesNumber += 1;
+//				   }
+//				
+//				   String someString = entraineurs.get(i).getNumeroString();
+//				   char someChar = ',';
+//				   int count = 1;
+//				    
+//				   for (int j = 0; j < someString.length(); j++) {
+//				       if (someString.charAt(i) == someChar) {
+//				           count++;
+//				       }
+//				   }
+//				   
+//				   if(count > 1) {
+//					   endIterAt += (count - 1);
+//				   }
 				   if(i == endIterAt) {
 					   break;
 				   }
 			   }
+			   
 			   for(int i = 0; i < jockeys.size(); i++) {
 				   if(jockeys.get(i).getId().equals(ti.getId())) {
 					   threeEtoilesNumber += 1;
@@ -1360,12 +1383,28 @@ public class UploadController {
 			   }
                endIterAt = 4;
                for(int i = 0; i < entraineurs.size(); i++) {
-				   if(entraineurs.get(i).getId().equals(ti.getId())) {
+            	   
+            	   if(entraineurs.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
 				   }
-				   if(entraineurs.get(i).getCalculateEntraineurNumber() > 1) {
-					   endIterAt += (entraineurs.get(i).getCalculateEntraineurNumber() - 1);
-				   }
+            	   
+//				   if(entraineurs.get(i).getNumeroString().equals(ti.getNumeroString())) {
+//					   fiveEtoilesNumber += 1;
+//				   }
+//
+//				   String someString = entraineurs.get(i).getNumeroString();
+//				   char someChar = ',';
+//				   int count = 1;
+//				    
+//				   for (int j = 0; j < someString.length(); j++) {
+//				       if (someString.charAt(i) == someChar) {
+//				           count++;
+//				       }
+//				   }
+//				   
+//				   if(count > 1) {
+//					   endIterAt += (count - 1);
+//				   }
 				   if(i == endIterAt) {
 					   break;
 				   }
@@ -1437,18 +1476,35 @@ public class UploadController {
                
                //// Blue Etoile
                endIterAt = 2;
-           if(entraineurs.get(0).getRaceSpecialty().equals("P")) {
+           if(pronos.get(0).getRaceSpecialty().equals("P")) {
                for(int i = 0; i < entraineurs.size(); i++) {
-				   if(entraineurs.get(i).getId().equals(ti.getId())) {
+            	   
+            	   if(entraineurs.get(i).getId().equals(ti.getId())) {
 					   blueEtoilesNumber += 1;
 				   }
-				   if(entraineurs.get(i).getCalculateEntraineurNumber() > 1) {
-					   endIterAt += (entraineurs.get(i).getCalculateEntraineurNumber() - 1);
-				   }
+            	   
+//				   if(entraineurs.get(i).getNumeroString().equals(ti.getNumeroString())) {
+//					   blueEtoilesNumber += 1;
+//				   }
+//
+//				   String someString = entraineurs.get(i).getNumeroString();
+//				   char someChar = ',';
+//				   int count = 1;
+//				    
+//				   for (int j = 0; j < someString.length(); j++) {
+//				       if (someString.charAt(i) == someChar) {
+//				           count++;
+//				       }
+//				   }
+//				   
+//				   if(count > 1) {
+//					   endIterAt += (count - 1);
+//				   }
 				   if(i == endIterAt) {
 					   break;
 				   }
 			   }
+               
 			   for(int i = 0; i < jockeys.size(); i++) {
 				   if(jockeys.get(i).getId().equals(ti.getId())) {
 					   blueEtoilesNumber += 1;
@@ -1479,11 +1535,17 @@ public class UploadController {
 			   } else {
 				   ti.setBlueEtoile(false);
 			   }
-			
-			   
+			      
 			 
 		   });
 	   ////////////////////////////////////
+//		   for(TurfInfos entr : entraineurs) {
+//			   for(TurfInfos inf : pronos) {
+//				   if(inf.getNumeroString().equals(entr.getNumeroString())) {
+//					   
+//				   }
+//			   }
+//		   }
 
 		   
 
