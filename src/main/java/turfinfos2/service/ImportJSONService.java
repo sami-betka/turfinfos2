@@ -123,6 +123,8 @@ public class ImportJSONService {
 							.get(numcourse).get(i).get("id").textValue());
 					turfInfo.setEntraineur(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("trainerName").textValue());
+					turfInfo.setJockey(node.get("pageProps").get("initialState").get("racecards").get("runners")
+							.get(numcourse).get(i).get("jockeyName").textValue());
 					turfInfo.setNumcourse(Integer.valueOf(numcourse));
 					turfInfo.setNumero(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("saddle").intValue());
@@ -135,6 +137,8 @@ public class ImportJSONService {
 							.get("runners").get(numcourse).get(i).get("protectionFirstTime").booleanValue());
 					turfInfo.setFormFigs(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("formFigs").textValue());
+					turfInfo.setAge(node.get("pageProps").get("initialState").get("racecards").get("runners")
+							.get(numcourse).get(i).get("age").intValue());
 
 					turfInfo.setCl("");
 //	                	turfInfosMetting.setRecence(null);
@@ -295,6 +299,8 @@ public class ImportJSONService {
 							.get(numcourse).get(i).get("id").textValue());
 					turfInfo.setEntraineur(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("trainerName").textValue());
+					turfInfo.setJockey(node.get("pageProps").get("initialState").get("racecards").get("runners")
+							.get(numcourse).get(i).get("jockeyName").textValue());
 					turfInfo.setNumcourse(Integer.valueOf(numcourse));
 					turfInfo.setNumero(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("saddle").intValue());
@@ -307,6 +313,8 @@ public class ImportJSONService {
 							.get("runners").get(numcourse).get(i).get("protectionFirstTime").booleanValue());
 					turfInfo.setFormFigs(node.get("pageProps").get("initialState").get("racecards").get("runners")
 							.get(numcourse).get(i).get("formFigs").textValue());
+					turfInfo.setAge(node.get("pageProps").get("initialState").get("racecards").get("runners")
+							.get(numcourse).get(i).get("age").intValue());
 //	                	turfInfosMetting.setRecence(null);
 //	                    turfInfosMetting.setTypec(node.get("pageProps").get("race").get("discipline").textValue());
 					if (!node.get("pageProps").get("initialState").get("currentPage").get("stats").isEmpty()) {

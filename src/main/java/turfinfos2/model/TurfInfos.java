@@ -254,6 +254,12 @@ public class TurfInfos {
 	
 	private Boolean autostart;
 	
+	private String jockey;
+	
+	private Integer age;
+
+
+	
 	
 	private Double ante;
 	
@@ -278,6 +284,12 @@ public class TurfInfos {
 
 
 
+	///////////
+//	prono Classe A
+//	prono chances regulieres
+//	age
+//	jockey
+//	psf
 
 
 
@@ -305,7 +317,7 @@ public class TurfInfos {
 			Boolean isFirstInProno, Boolean couplePastille, Boolean chevalPastille, Double liveOddPlaceOnline, Boolean isCanceled,
 			Boolean isFavori, Boolean nulStats, String formFigs, Double ante, Boolean isSupplemented, String picto,
 			Double minRapportProbable, Double maxRapportProbable, Boolean threeEtoile, Boolean fiveEtoile, String country,
-			Boolean autostart, Boolean blueEtoile, Integer calculateEntraineurNumber) {
+			Boolean autostart, Boolean blueEtoile, Integer calculateEntraineurNumber, String jockey, Integer age) {
 		
 		this.id = id;
 		this.R = R;
@@ -375,13 +387,8 @@ public class TurfInfos {
 		this.maxRapportProbable = maxRapportProbable;
 		this.country = country;
 		this.autostart = autostart;
-
-
-
-
-
-		
-
+		this.jockey = jockey;
+		this.age = age;
 
 
 
@@ -409,7 +416,6 @@ public class TurfInfos {
 		this.threeEtoile = threeEtoile;
 		this.blueEtoile = blueEtoile;
 		this.calculateEntraineurNumber = calculateEntraineurNumber;
-
 
 
 
@@ -1105,4 +1111,22 @@ public class TurfInfos {
 		this.calculateEntraineurNumber = calculateEntraineurNumber;
 	}
 
+	public String getJockey() {
+		return jockey;
+	}
+
+	public void setJockey(String jockey) {
+		this.jockey = jockey;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	
+	
 }

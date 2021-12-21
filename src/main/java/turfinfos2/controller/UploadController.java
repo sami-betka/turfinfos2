@@ -917,6 +917,7 @@ public class UploadController {
 			if (listByEnt.size() > 1) {
 
 				TurfInfos tinf = new TurfInfos();
+				tinf.setNbrCourseEntHippo(listByEnt.get(0).getNbrCourseEntHippo());
 
 				tinf.setNumeroString("[" + listByEnt.get(0).getNumero().toString());
 				tinf.setCalculateEntraineurNumber(1);
@@ -1333,29 +1334,18 @@ public class UploadController {
 			   }
 			   
 			   Integer endIterAt = 3;
+			   Double pourcRef = entraineurs.get(0).getPourcVictEntHippo();
 			   for(int i = 0; i < entraineurs.size(); i++) {
 				   
 				   if(entraineurs.get(i).getId().equals(ti.getId())) {
 					   threeEtoilesNumber += 1;
 				   }
-				   
-//				   if(entraineurs.get(i).getNumeroString().equals(ti.getNumeroString())) {
-//					   threeEtoilesNumber += 1;
-//				   }
-//				
-//				   String someString = entraineurs.get(i).getNumeroString();
-//				   char someChar = ',';
-//				   int count = 1;
-//				    
-//				   for (int j = 0; j < someString.length(); j++) {
-//				       if (someString.charAt(i) == someChar) {
-//				           count++;
-//				       }
-//				   }
-//				   
-//				   if(count > 1) {
-//					   endIterAt += (count - 1);
-//				   }
+				   if(i > 0 && entraineurs.get(i).getPourcVictEntHippo().equals(pourcRef)) {
+					   endIterAt += 1;
+				   } else {
+					   pourcRef = entraineurs.get(i).getPourcVictEntHippo();
+				   }
+
 				   if(i == endIterAt) {
 					   break;
 				   }
@@ -1382,29 +1372,19 @@ public class UploadController {
 				   }
 			   }
                endIterAt = 4;
+			   pourcRef = entraineurs.get(0).getPourcVictEntHippo();
                for(int i = 0; i < entraineurs.size(); i++) {
             	   
             	   if(entraineurs.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
 				   }
             	   
-//				   if(entraineurs.get(i).getNumeroString().equals(ti.getNumeroString())) {
-//					   fiveEtoilesNumber += 1;
-//				   }
-//
-//				   String someString = entraineurs.get(i).getNumeroString();
-//				   char someChar = ',';
-//				   int count = 1;
-//				    
-//				   for (int j = 0; j < someString.length(); j++) {
-//				       if (someString.charAt(i) == someChar) {
-//				           count++;
-//				       }
-//				   }
-//				   
-//				   if(count > 1) {
-//					   endIterAt += (count - 1);
-//				   }
+            	   if(i > 0 && entraineurs.get(i).getPourcVictEntHippo().equals(pourcRef)) {
+					   endIterAt += 1;
+				   } else {
+					   pourcRef = entraineurs.get(i).getPourcVictEntHippo();
+				   }
+
 				   if(i == endIterAt) {
 					   break;
 				   }
@@ -1476,6 +1456,7 @@ public class UploadController {
                
                //// Blue Etoile
                endIterAt = 2;
+			   pourcRef = entraineurs.get(0).getPourcVictEntHippo();
            if(pronos.get(0).getRaceSpecialty().equals("P")) {
                for(int i = 0; i < entraineurs.size(); i++) {
             	   
@@ -1483,23 +1464,12 @@ public class UploadController {
 					   blueEtoilesNumber += 1;
 				   }
             	   
-//				   if(entraineurs.get(i).getNumeroString().equals(ti.getNumeroString())) {
-//					   blueEtoilesNumber += 1;
-//				   }
-//
-//				   String someString = entraineurs.get(i).getNumeroString();
-//				   char someChar = ',';
-//				   int count = 1;
-//				    
-//				   for (int j = 0; j < someString.length(); j++) {
-//				       if (someString.charAt(i) == someChar) {
-//				           count++;
-//				       }
-//				   }
-//				   
-//				   if(count > 1) {
-//					   endIterAt += (count - 1);
-//				   }
+            	   if(i > 0 && entraineurs.get(i).getPourcVictEntHippo().equals(pourcRef)) {
+					   endIterAt += 1;
+				   } else {
+					   pourcRef = entraineurs.get(i).getPourcVictEntHippo();
+				   }
+        
 				   if(i == endIterAt) {
 					   break;
 				   }

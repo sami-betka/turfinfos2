@@ -27,6 +27,8 @@
             <div style="border: 1px solid black;" th:text="${'Joués: ' + numberofbets + '  -  Gains: ' + totalgains + '  -  Benef: ' + benef + ' - Multiplication : ' + multiplication}">...</div>
             <div style="border: 1px solid black;" th:text="${'Bankroll initiale: ' + initialBankrollAmount + '  -  Bankroll actuelle: ' + newBankrollAmount + '  -  Benef: ' + bankrollBenef + ' - Multiplication capital: X' + cotecapital + ' - Minimum: ' + minimumBankrollAmount}">...</div>
             <div style="border: 1px solid black;" th:text="${'Gagnés: ' + wonnumber + '  -  Perdus: ' + lostnumber}">...</div>
+            <div style="border: 1px solid black;" th:text="${'Pourcentage gagnants: ' + wonpercentage + ' %'}">...</div>
+            
       
         		
 
@@ -66,6 +68,8 @@
   <p class="highcharts-description">Nombre total de paris : [[${totalnumber}]]</p>
     <p class="highcharts-description text-success">Nombre de paris gagnants : [[${wonnumber}]]</p>
     <p class="highcharts-description text-danger">Nombre de paris perdants : [[${lostnumber}]]</p>
+        <p class="highcharts-description text-danger">Pourcentage de paris gagnants : [[${wonpercentage}]]</p>
+    
   
 </figure>
 	</div>

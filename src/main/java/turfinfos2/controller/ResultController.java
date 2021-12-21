@@ -65,15 +65,7 @@ public class ResultController {
 		model.addAttribute("multiplication", total / list.size());
 		model.addAttribute("firstday", list.get(0).getJour());
 		model.addAttribute("lastday", list.get(list.size() - 1).getJour());
-		model.addAttribute("wonnumber", list.stream()
-				.filter(ti->ti.getLiveOddPlace() != null && ti.getLiveOddPlace() != 0)
-				.collect(Collectors.toList())
-				.size());
-		
-		model.addAttribute("lostnumber", list.stream()
-				.filter(ti->ti.getLiveOddPlace() != null && ti.getLiveOddPlace() == 0)
-				.collect(Collectors.toList())
-				.size());
+
 		
 		/////////////////BAR CHART/////////////////////////////////////
 		
@@ -294,6 +286,7 @@ public class ResultController {
 		model.addAttribute("wonnumber", won.size());
 		model.addAttribute("lostnumber", lost.size());
 		model.addAttribute("totalnumber", list.size());
+		model.addAttribute("wonpercentage", (float) (1.0*(100 * won.size()) / list.size()));
 
 
 
