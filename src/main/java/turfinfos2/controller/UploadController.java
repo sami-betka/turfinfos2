@@ -192,8 +192,8 @@ public class UploadController {
 		// RACESLIST
 		List<TurfInfos> allPremiumReunionInfos = turfInfosRepository
 				.findAllByJourAndByReunionstring(jour, reunionstring).stream()
-				.filter(ti -> ti.getIsRunning() != null
-						&& ti.getIsRunning() == true && ti.getIsPremium() != null && ti.getIsPremium().equals(true))
+//				.filter(ti -> ti.getIsRunning() != null
+//						&& ti.getIsRunning() == true && ti.getIsPremium() != null && ti.getIsPremium().equals(true))
 				.collect(Collectors.toList());
 
 		List<TurfInfos> reunionCracks = new ArrayList<>();
@@ -427,7 +427,7 @@ public class UploadController {
 
             ///////////// AFFECTER ETOILES///////////////
 			setEtoiles(listByChronos, listBypveh, listBypvjh, listBypvch, listByppch, listByppc, listBytxv, listBytxp, listBytxvh, listBytxph,
-					listByNoteProno,
+					allraceInfos,
 					allraceInfos.size());
 
 			Optional<TurfInfos> optTinf = allraceInfos.stream().findFirst();
@@ -917,6 +917,7 @@ public class UploadController {
 			if (listByEnt.size() > 1) {
 
 				TurfInfos tinf = new TurfInfos();
+				tinf.setBlueEtoile(listByEnt.get(0).getBlueEtoile());
 				tinf.setNbrCourseEntHippo(listByEnt.get(0).getNbrCourseEntHippo());
 
 				tinf.setNumeroString("[" + listByEnt.get(0).getNumero().toString());
@@ -1311,11 +1312,11 @@ public class UploadController {
 		  List<TurfInfos> vcoupleh,
 		  List<TurfInfos> pcoupleh,
 		  
-		  List<TurfInfos> pronos, int raceSize){
+		  List<TurfInfos> allRace, int raceSize){
 	  
 	  ///// Three Etoiles////////////
 	   
-		   pronos.forEach(ti-> {
+		allRace.forEach(ti-> {
 			   
 			   Integer threeEtoilesNumber = 0;
 			   Integer fiveEtoilesNumber = 0;
@@ -1334,7 +1335,10 @@ public class UploadController {
 			   }
 			   
 			   Integer endIterAt = 3;
-			   Double pourcRef = entraineurs.get(0).getPourcVictEntHippo();
+			   Double pourcRef = 0d;
+			   if(entraineurs.size() > 0) {
+				   pourcRef = entraineurs.get(0).getPourcVictEntHippo();
+			   } 
 			   for(int i = 0; i < entraineurs.size(); i++) {
 				   
 				   if(entraineurs.get(i).getId().equals(ti.getId())) {
@@ -1372,7 +1376,9 @@ public class UploadController {
 				   }
 			   }
                endIterAt = 4;
-			   pourcRef = entraineurs.get(0).getPourcVictEntHippo();
+               if(entraineurs.size() > 0) {
+				   pourcRef = entraineurs.get(0).getPourcVictEntHippo();
+			   }                
                for(int i = 0; i < entraineurs.size(); i++) {
             	   
             	   if(entraineurs.get(i).getId().equals(ti.getId())) {
@@ -1456,8 +1462,11 @@ public class UploadController {
                
                //// Blue Etoile
                endIterAt = 2;
-			   pourcRef = entraineurs.get(0).getPourcVictEntHippo();
-           if(pronos.get(0).getRaceSpecialty().equals("P")) {
+               if(entraineurs.size() > 0) {
+				   pourcRef = entraineurs.get(0).getPourcVictEntHippo();
+			   } 
+               
+               if(allRace.get(0).getRaceSpecialty().equals("P")) {
                for(int i = 0; i < entraineurs.size(); i++) {
             	   
             	   if(entraineurs.get(i).getId().equals(ti.getId())) {
@@ -1519,7 +1528,7 @@ public class UploadController {
 
 		   
 
-	   return pronos;
+	   return allRace;
    }
 
 	private void navbarInfos(Model model, List<TurfInfos> allInfos) {

@@ -98,6 +98,7 @@ public class TurfInfoService {
     	
     	TurfInfos infoToUpdate = allByNumcourse.stream().filter(ti->ti.getNumero().equals(info.getNumero())).findFirst().get();
     	
+    	infoToUpdate.setHorseId(info.getHorseId());
     	infoToUpdate.setC(info.getC());
 //    	infoToUpdate.setCheval(info.getCheval());
     	infoToUpdate.setJour(info.getJour());
@@ -185,9 +186,14 @@ public class TurfInfoService {
     	infoToUpdate.setIsSupplemented(info.getIsSupplemented());
     	infoToUpdate.setPicto(info.getPicto());
 
-    	infoToUpdate.setNbCourseCoupleHippo(info.getNbCourseCoupleHippo());
-    	infoToUpdate.setTxVictCoupleHippo(info.getTxVictCoupleHippo());
-    	infoToUpdate.setTxPlaceCoupleHippo(info.getTxPlaceCoupleHippo());
+//    	infoToUpdate.setNbCourseCoupleHippo(info.getNbCourseCoupleHippo());
+//    	infoToUpdate.setTxVictCoupleHippo(info.getTxVictCoupleHippo());
+//    	infoToUpdate.setTxPlaceCoupleHippo(info.getTxPlaceCoupleHippo());
+    	infoToUpdate.setPronoFavoris(info.getPronoFavoris());
+    	infoToUpdate.setPronoChancesRegulieres(info.getPronoChancesRegulieres());
+
+
+    	
 
 
 

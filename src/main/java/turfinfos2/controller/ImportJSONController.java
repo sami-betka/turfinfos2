@@ -61,8 +61,8 @@ public class ImportJSONController {
 	
 	@GetMapping("/upload-data-date-range")
     public String uploadJSONFileDateRange(
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-04-02") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2021-12-19") String datefin) {
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2021-05-01") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2021-11-30") String datefin) {
 		
 		List<TurfInfos> allTurfToSave = new ArrayList<>();
 		List<TurfInfos> allAspiToSave = new ArrayList<>();
@@ -81,11 +81,11 @@ public class ImportJSONController {
 		      .collect(Collectors.toList());
 		  
 		  
-		  dates.forEach(ld->{
-			  allTurfToSave.addAll(importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false));
-//				importJSONService.updateAllDayInfosFromAspiJson(ld.toString());		  
-				});
-		  turfInfosRepository.saveAll(allTurfToSave);
+//		  dates.forEach(ld->{
+//			  allTurfToSave.addAll(importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false));
+////				importJSONService.updateAllDayInfosFromAspiJson(ld.toString());		  
+//				});
+//		  turfInfosRepository.saveAll(allTurfToSave);
 	
 		  dates.forEach(ld->{
 //			  importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false);

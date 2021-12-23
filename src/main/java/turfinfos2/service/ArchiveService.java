@@ -47,6 +47,10 @@ public class ArchiveService {
 
 				&& info.getLiveOdd() != null && info.getLiveOdd() != 0 && info.getLiveOdd() < 2.5
 //				&& Integer.valueOf(info.getCoursescheval()) > 5
+//				&& info.getAutostart() == true
+//			    && info.getNumero() < 7 && info.getNumero() > 2
+
+
 				
 //				&& (pronoList.get(0).getId().equals(info.getId()) || pronoList.get(1).getId().equals(info.getId())
 //						|| pronoList.get(2).getId().equals(info.getId()) || pronoList.get(3).getId().equals(info.getId())

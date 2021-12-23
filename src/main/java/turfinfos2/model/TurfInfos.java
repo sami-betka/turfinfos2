@@ -29,6 +29,8 @@ public class TurfInfos {
 	@Column(name = "id")
 	@CsvBindByName
 	private Long id;
+	
+	private Integer horseId;
 
 //  @Column(name = "")
 	@CsvBindByName
@@ -281,15 +283,17 @@ public class TurfInfos {
 	
 	private Double minRapportProbable;
 	private Double maxRapportProbable;
+	
+	private String pronoFavoris;
+	private String pronoChancesRegulieres;
+
 
 
 
 	///////////
-//	prono Classe A
-//	prono chances regulieres
-//	age
-//	jockey
-//	psf
+
+	
+//	SURFACE
 
 
 
@@ -301,7 +305,7 @@ public class TurfInfos {
 
 
 
-	public TurfInfos(Long id, String jour, String R, Integer C, Integer numcourse, Integer numero, String cheval,
+	public TurfInfos(Long id, Integer horseId, String jour, String R, Integer C, Integer numcourse, Integer numero, String cheval,
 			Double pourcVictChevalHippo, Double pourcPlaceCheval, Double pourcVictJockHippo, Double pourcVictEntHippo,
 			Double pourcPlaceChevalHippo, Double pourcPlaceJockHippo, Double pourcPlaceEntHippo, Double TxVictCouple,
 			Double TxPlaceCouple, Double TxVictCoupleHippo, Double TxPlaceCoupleHippo, Integer chrono,
@@ -317,9 +321,11 @@ public class TurfInfos {
 			Boolean isFirstInProno, Boolean couplePastille, Boolean chevalPastille, Double liveOddPlaceOnline, Boolean isCanceled,
 			Boolean isFavori, Boolean nulStats, String formFigs, Double ante, Boolean isSupplemented, String picto,
 			Double minRapportProbable, Double maxRapportProbable, Boolean threeEtoile, Boolean fiveEtoile, String country,
-			Boolean autostart, Boolean blueEtoile, Integer calculateEntraineurNumber, String jockey, Integer age) {
+			Boolean autostart, Boolean blueEtoile, Integer calculateEntraineurNumber, String jockey, Integer age,
+			String pronoFavoris, String pronoChancesRegulieres) {
 		
 		this.id = id;
+		this.horseId = horseId;
 		this.R = R;
 		this.C = C;
 		this.pourcVictChevalHippo = pourcVictChevalHippo;
@@ -389,6 +395,10 @@ public class TurfInfos {
 		this.autostart = autostart;
 		this.jockey = jockey;
 		this.age = age;
+		this.pronoFavoris = pronoFavoris;
+		this.pronoChancesRegulieres = pronoChancesRegulieres;
+
+
 
 
 
@@ -1125,6 +1135,30 @@ public class TurfInfos {
 
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+
+	public String getPronoFavoris() {
+		return pronoFavoris;
+	}
+
+	public void setPronoFavoris(String pronoFavoris) {
+		this.pronoFavoris = pronoFavoris;
+	}
+
+	public String getPronoChancesRegulieres() {
+		return pronoChancesRegulieres;
+	}
+
+	public void setPronoChancesRegulieres(String pronoChancesRegulieres) {
+		this.pronoChancesRegulieres = pronoChancesRegulieres;
+	}
+
+	public Integer getHorseId() {
+		return horseId;
+	}
+
+	public void setHorseId(Integer horseId) {
+		this.horseId = horseId;
 	}
 
 	
