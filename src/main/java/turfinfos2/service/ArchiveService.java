@@ -3,6 +3,7 @@ package turfinfos2.service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import turfinfos2.model.ArchiveDeuxSurQuatre;
+import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.ArchiveInfoRepository;
 import turfinfos2.repository.TurfInfosRepository;
@@ -46,12 +50,10 @@ public class ArchiveService {
 //			    && info.getCountry() != null && info.getCountry().equals("FR")
 
 				&& info.getLiveOdd() != null && info.getLiveOdd() != 0 && info.getLiveOdd() < 2.5
-//				&& Integer.valueOf(info.getCoursescheval()) > 5
-//				&& info.getAutostart() == true
+//				&& Integer.valueOf(info.getCoursescheval()) > 15
+//				&& info.getAutostart() == false
 //			    && info.getNumero() < 7 && info.getNumero() > 2
 
-
-				
 //				&& (pronoList.get(0).getId().equals(info.getId()) || pronoList.get(1).getId().equals(info.getId())
 //						|| pronoList.get(2).getId().equals(info.getId()) || pronoList.get(3).getId().equals(info.getId())
 //						|| pronoList.get(4).getId().equals(info.getId())
@@ -59,7 +61,48 @@ public class ArchiveService {
 
 		        && info.getRecence() != null && info.getRecence() < 60
 			    && info.getMinRapportProbable() != null && info.getMinRapportProbable() != 0 && info.getMinRapportProbable() > 1.3d
-//			        && ti.getJour().contains("2021-11")
+//			        && info.getJour().contains("2021-11")
+//			        && info.getMaxRapportProbable() != null && info.getMaxRapportProbable() != 0 && info.getMaxRapportProbable() < 5d
+//			        && ti.getFormFigs() != null && ti.getFormFigs().length()>= 2 && (ti.getFormFigs().charAt(0)=='1' || ti.getFormFigs().charAt(0)=='2' || ti.getFormFigs().charAt(0)=='3') && (ti.getFormFigs().charAt(1)=='p' || ti.getFormFigs().charAt(1)=='a' || ti.getFormFigs().charAt(1)=='m')
+
+				) {
+			return true;
+
+		}else {
+
+			return false;
+
+		}
+
+	}
+	
+	public Boolean verifyConditionsDeuxSurQuatre(TurfInfos info, List<TurfInfos> pronoList) {
+
+		if(
+		        info.getNumberOfInitialRunners() != null && info.getNumberOfInitialRunners() > 15
+				&& info.getHasBetTypes() == true 
+				&& info.getIsPremium() == true
+			    && (!info.getJour().contains("2021-04-") && !info.getJour().contains("2021-12-"))
+		        && (info.getFiveEtoile() == true || info.getThreeEtoile() == true)
+//			    && info.getRaceSpecialty().equals("P")
+//			    && info.getCountry() != null && info.getCountry().equals("FR")
+
+//				&& info.getLiveOdd() != null && info.getLiveOdd() != 0 && info.getLiveOdd() < 5
+				
+//				&& Integer.valueOf(info.getCoursescheval()) > 15
+//				&& info.getAutostart() == false
+//			    && info.getNumero() < 7 && info.getNumero() > 2
+
+				&& (pronoList.get(0).getId().equals(info.getId()) 
+						|| pronoList.get(1).getId().equals(info.getId())
+						|| pronoList.get(2).getId().equals(info.getId()) 
+						|| pronoList.get(3).getId().equals(info.getId())
+						|| pronoList.get(4).getId().equals(info.getId())
+				)
+
+		        && info.getRecence() != null && info.getRecence() < 60
+//			    && info.getMinRapportProbable() != null && info.getMinRapportProbable() != 0 && info.getMinRapportProbable() > 1.3d
+//			        && info.getJour().contains("2021-11")
 //			        && info.getMaxRapportProbable() != null && info.getMaxRapportProbable() != 0 && info.getMaxRapportProbable() < 5d
 //			        && ti.getFormFigs() != null && ti.getFormFigs().length()>= 2 && (ti.getFormFigs().charAt(0)=='1' || ti.getFormFigs().charAt(0)=='2' || ti.getFormFigs().charAt(0)=='3') && (ti.getFormFigs().charAt(1)=='p' || ti.getFormFigs().charAt(1)=='a' || ti.getFormFigs().charAt(1)=='m')
 
@@ -75,11 +118,15 @@ public class ArchiveService {
 	}
 
 
-	public List<TurfInfos> setAllPlaceFirstPronoList(List<TurfInfos> allList) {
+	public Map<String, Object> setAllPlaceFirstPronoList(List<TurfInfos> allList, List<Resultat> allResults) {
 		
 		final List<TurfInfos> all = allList;
 		
 		List<TurfInfos> finalList = new ArrayList<>();
+		List<ArchiveDeuxSurQuatre> deuxSurQuatres = new ArrayList<>();
+
+		Map<String, Object> map = new HashMap();
+
 		
 		//Jours
 				Set<String> distinctJours = all.stream()
@@ -103,17 +150,26 @@ public class ArchiveService {
 				     reunions.forEach(r->{
 				    	 
 				    	 ;
-				    	 finalList.addAll(setPlaceFirstPronoList(j, r, all));
+				    	 finalList.addAll((List<TurfInfos>) setPlaceFirstPronoList(j, r, all, allResults).get("turfinfos"));
+				    	 deuxSurQuatres.addAll((List<ArchiveDeuxSurQuatre>) setPlaceFirstPronoList(j, r, all, allResults).get("deuxsurquatres"));
+
 				    	 
 				     });
 				});
 				System.out.println("big list = " + finalList.size());
-				return finalList;
+				
+				map.put("turfinfos", finalList);
+				map.put("deuxsurquatres", deuxSurQuatres);
+
+				
+				return map;
 	}
     
-    public List<TurfInfos> setPlaceFirstPronoList(String jour,
-    		String reunionstring, List<TurfInfos> all
+    public Map<String, Object> setPlaceFirstPronoList(String jour,
+    		String reunionstring, List<TurfInfos> all, List<Resultat> allResults
     		) {   
+    	
+    	Map<String, Object> map = new HashMap();
 
     	
     	//RACESLIST
@@ -128,6 +184,8 @@ public class ArchiveService {
 //    		ti.setIsFirstInProno(false);
 //    	});
     	List<TurfInfos> finalList = new ArrayList<>();
+    	List<ArchiveDeuxSurQuatre> deuxSurQuatreList = new ArrayList<>();
+
 
     			
     	List<TurfInfos> reunionCracks = new ArrayList<>();
@@ -384,8 +442,68 @@ public class ArchiveService {
 		            break;
 				}
 			};
-
 			
+			//Create deux sur quatres
+	
+		
+		   TurfInfos tinf = allraceInfos.get(0);
+		   Optional<Resultat> optResultat = allResults.stream()
+					.filter(r->r.getJour().equals(jour)
+							&& r.getR().equals(tinf.getR())
+							&& r.getC().equals(tinf.getC()))
+					.findFirst();
+		   
+		   if(optResultat.isPresent()) {
+			   Resultat resultat = optResultat.get();
+			   
+			   if(resultat.getDeuxSurQuatreRapport() != null) {
+			   
+			   ArchiveDeuxSurQuatre deuxSurQuatre = new ArchiveDeuxSurQuatre();
+			   Integer iter = 0;
+			   
+	           for(TurfInfos ti : listByNoteProno) {
+					
+					if(verifyConditionsDeuxSurQuatre(ti, listByNoteProno).equals(true)) {
+						
+						
+						if(iter == 0) {
+							deuxSurQuatre.setFirst(ti.getNumero());
+							deuxSurQuatre.setJour(ti.getJour());
+							deuxSurQuatre.setHour(ti.getHour());
+							deuxSurQuatre.setR(ti.getR());
+							deuxSurQuatre.setC(ti.getC());
+						}
+						
+						if(iter == 1) {
+							deuxSurQuatre.setSecond(ti.getNumero());
+							
+							
+						    String[] deuxSur4Array = resultat.getDeuxSurQuatre().split("-");
+						    List<String> deuxSur4List = new ArrayList<String>(Arrays.asList(deuxSur4Array));
+
+
+							if(deuxSur4List.contains(String.valueOf(deuxSurQuatre.getFirst())) && deuxSur4List.contains(String.valueOf(deuxSurQuatre.getSecond()))){
+								deuxSurQuatre.setIsWon(true);
+								deuxSurQuatre.setRapport(resultat.getDeuxSurQuatreRapport());
+							} else {
+								deuxSurQuatre.setIsWon(false);
+								deuxSurQuatre.setRapport(0d);
+							}
+//							deuxSurQuatre.setRapport(resultat.getDeuxSurQuatreRapport());
+				            deuxSurQuatreList.add(deuxSurQuatre);
+				            iter = 0;
+				            break;
+						}
+						iter += 1;
+
+									
+					}
+				};
+		     }
+		   }
+		 
+
+
 			List<TurfInfos> listByNumCheval = allraceInfos.stream()
 //					.map(TurfInfos :: getNumero)
 					.sorted(Comparator.comparingInt(TurfInfos::getNumero))
@@ -458,9 +576,13 @@ public class ArchiveService {
 
 
 	         
-	    				System.out.println("list = " + finalList.size());
+//	    				System.out.println("list = " + finalList.size());
+	    				
+	    				map.put("turfinfos", finalList);
+	    				map.put("deuxsurquatres", deuxSurQuatreList);
 
-	        			return finalList;
+
+	        			return map;
     }
     
     ///////////////////////////////////////////////////////////////

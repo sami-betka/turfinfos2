@@ -271,6 +271,8 @@ public class TurfInfos {
 	
 	private Boolean blueEtoile;
 	
+	private Boolean purpleEtoile;
+	
 	private Integer calculateEntraineurNumber;
 
 	
@@ -322,7 +324,7 @@ public class TurfInfos {
 			Boolean isFavori, Boolean nulStats, String formFigs, Double ante, Boolean isSupplemented, String picto,
 			Double minRapportProbable, Double maxRapportProbable, Boolean threeEtoile, Boolean fiveEtoile, String country,
 			Boolean autostart, Boolean blueEtoile, Integer calculateEntraineurNumber, String jockey, Integer age,
-			String pronoFavoris, String pronoChancesRegulieres) {
+			String pronoFavoris, String pronoChancesRegulieres, Boolean purpleEtoile) {
 		
 		this.id = id;
 		this.horseId = horseId;
@@ -425,6 +427,7 @@ public class TurfInfos {
 		this.fiveEtoile = fiveEtoile;
 		this.threeEtoile = threeEtoile;
 		this.blueEtoile = blueEtoile;
+		this.purpleEtoile = purpleEtoile;
 		this.calculateEntraineurNumber = calculateEntraineurNumber;
 
 
@@ -1159,6 +1162,14 @@ public class TurfInfos {
 
 	public void setHorseId(Integer horseId) {
 		this.horseId = horseId;
+	}
+
+	public Boolean getPurpleEtoile() {
+		return purpleEtoile;
+	}
+
+	public void setPurpleEtoile(Boolean purpleEtoile) {
+		this.purpleEtoile = purpleEtoile;
 	}
 
 	

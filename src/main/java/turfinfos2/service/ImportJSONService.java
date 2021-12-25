@@ -24,7 +24,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
+import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 
 @Service
@@ -36,11 +38,11 @@ public class ImportJSONService {
 	@Autowired
 	TurfInfoService turfInfoService;
 
-//	@Autowired
-//	ResultService resultService;
+	@Autowired
+	ResultService resultService;
 
-//	@Autowired
-//	ResultRepository resultRepository;
+	@Autowired
+	ResultRepository resultRepository;
 
 	public List<TurfInfos> createAllRaceInfosFromParisTurfJson(String url, List<TurfInfos> all) {
 
@@ -570,10 +572,10 @@ public class ImportJSONService {
 
 	}
 
-	public Map<String, Object> createRapportsInfosFromPMUJson(String jour, List<TurfInfos> all) throws ParseException {
+	public Map<String, Object> createRapportsInfosFromPMUJson(String jour, List<TurfInfos> all, List<Resultat> allResults) throws ParseException {
 
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
-//		List<Resultat> allResultToSave = new ArrayList<>();
+		List<Resultat> allResultToSave = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
 
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -613,13 +615,7 @@ public class ImportJSONService {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
-
-//		distinctReunions.forEach(r -> {
-//			reunionsAndRaces.put(r, all.stream().filter(ti -> ti.getJour().equals(jour) && ti.getR().equals(r))
-//					.map(TurfInfos::getC).collect(Collectors.toSet()));
-//		});
-		
+	
 		
 
 		for (Entry<String, Set<Integer>> entry : reunionsAndRaces.entrySet()) {
@@ -643,8 +639,8 @@ public class ImportJSONService {
 					if (node.isMissingNode() == false) {
 
 			
-//						Resultat resultat = resultService.createResult(jour, entry.getKey(), race, node, url);
-//						allResultToSave.add(resultat);
+//						Resultat resultat = resultService.createResult(jour, entry.getKey(), race, node, url, allResults);
+						allResultToSave.add(resultService.createResult(jour, entry.getKey(), race, node, url, allResults));
 
 						allByJour.forEach(ti -> {
 
@@ -722,7 +718,7 @@ public class ImportJSONService {
 		System.out.println("STOP");
 
 		map.put("turfinfos", allTurfInfosToSave);
-//		map.put("results", allResultToSave);
+		map.put("results", allResultToSave);
 
 		return map;
 
@@ -930,27 +926,27 @@ public class ImportJSONService {
 				turfInfo.setNumcourse(node.get(i).get("numcourse").get("id").intValue());
 				turfInfo.setNumero(node.get(i).get("numero").intValue());
 				turfInfo.setRecence(node.get(i).get("recence").intValue());
-				/////////////////////////////////////////////////////////////////////////////
-				//////////////////////////////////////////////////////////////////////////////
-				turfInfo.setNbCourseCoupleHippo(node.get(i).get("nbCourseCoupleHippo").intValue());
-				turfInfo.setTxVictCoupleHippo(node.get(i).get("TxVictCoupleHippo").doubleValue());
-				turfInfo.setTxPlaceCoupleHippo(node.get(i).get("TxPlaceCoupleHippo").doubleValue());
-				turfInfo.setNbrCourseChevalHippo(String.valueOf(node.get(i).get("nbrCourseChevalHippo").intValue()));
-				turfInfo.setCoursescheval(String.valueOf(node.get(i).get("coursescheval").intValue()));
-				turfInfo.setNbrCourseEntHippo(String.valueOf(node.get(i).get("nbrCourseEntHippo").intValue()));
-				turfInfo.setNbrCourseJockHippo(String.valueOf(node.get(i).get("nbrCourseJockHippo").intValue()));
-				turfInfo.setNbCourseCouple(node.get(i).get("nbCourseCouple").intValue());
-				turfInfo.setNbCourseCoupleHippo(node.get(i).get("nbCourseCoupleHippo").intValue());
-
-				turfInfo.setPourcVictEntHippo(node.get(i).get("pourcVictEntHippo").doubleValue());
-				turfInfo.setPourcVictJockHippo(node.get(i).get("pourcVictJockHippo").doubleValue());
-				turfInfo.setPourcVictChevalHippo(node.get(i).get("pourcVictChevalHippo").doubleValue());
-				turfInfo.setPourcPlaceChevalHippo(node.get(i).get("pourcPlaceChevalHippo").doubleValue());
-//				infoToUpdate.setPourcPlaceCheval(node.get(i).get("pourcVictChevalHippo").doubleValue());
-				turfInfo.setTxVictCouple(node.get(i).get("TxVictCouple").doubleValue());
-				turfInfo.setTxPlaceCouple(node.get(i).get("TxPlaceCouple").doubleValue());
-				//////////////////////////////////////////////////////////////////////////////
-				/////////////////////////////////////////////////////////////////////////////
+//				/////////////////////////////////////////////////////////////////////////////
+//				//////////////////////////////////////////////////////////////////////////////
+//				turfInfo.setNbCourseCoupleHippo(node.get(i).get("nbCourseCoupleHippo").intValue());
+//				turfInfo.setTxVictCoupleHippo(node.get(i).get("TxVictCoupleHippo").doubleValue());
+//				turfInfo.setTxPlaceCoupleHippo(node.get(i).get("TxPlaceCoupleHippo").doubleValue());
+//				turfInfo.setNbrCourseChevalHippo(String.valueOf(node.get(i).get("nbrCourseChevalHippo").intValue()));
+//				turfInfo.setCoursescheval(String.valueOf(node.get(i).get("coursescheval").intValue()));
+//				turfInfo.setNbrCourseEntHippo(String.valueOf(node.get(i).get("nbrCourseEntHippo").intValue()));
+//				turfInfo.setNbrCourseJockHippo(String.valueOf(node.get(i).get("nbrCourseJockHippo").intValue()));
+//				turfInfo.setNbCourseCouple(node.get(i).get("nbCourseCouple").intValue());
+//				turfInfo.setNbCourseCoupleHippo(node.get(i).get("nbCourseCoupleHippo").intValue());
+//
+//				turfInfo.setPourcVictEntHippo(node.get(i).get("pourcVictEntHippo").doubleValue());
+//				turfInfo.setPourcVictJockHippo(node.get(i).get("pourcVictJockHippo").doubleValue());
+//				turfInfo.setPourcVictChevalHippo(node.get(i).get("pourcVictChevalHippo").doubleValue());
+//				turfInfo.setPourcPlaceChevalHippo(node.get(i).get("pourcPlaceChevalHippo").doubleValue());
+////				infoToUpdate.setPourcPlaceCheval(node.get(i).get("pourcVictChevalHippo").doubleValue());
+//				turfInfo.setTxVictCouple(node.get(i).get("TxVictCouple").doubleValue());
+//				turfInfo.setTxPlaceCouple(node.get(i).get("TxPlaceCouple").doubleValue());
+//				//////////////////////////////////////////////////////////////////////////////
+//				/////////////////////////////////////////////////////////////////////////////
 				System.out.println(i);
 
 				Optional<TurfInfos> optInfoToUpdate = all.stream()
@@ -969,24 +965,24 @@ public class ImportJSONService {
 					infoToUpdate.setTxPlaceCoupleHippo(node.get(i).get("TxPlaceCoupleHippo").doubleValue());
 
 					
-					/////////////////////////////////////////////////////////////////////////////
-					//////////////////////////////////////////////////////////////////////////////
-					infoToUpdate.setNbrCourseChevalHippo(String.valueOf(node.get(i).get("nbrCourseChevalHippo").intValue()));
-					infoToUpdate.setCoursescheval(String.valueOf(node.get(i).get("coursescheval").intValue()));
-					infoToUpdate.setNbrCourseEntHippo(String.valueOf(node.get(i).get("nbrCourseEntHippo").intValue()));
-					infoToUpdate.setNbrCourseJockHippo(String.valueOf(node.get(i).get("nbrCourseJockHippo").intValue()));
-					infoToUpdate.setNbCourseCouple(node.get(i).get("nbCourseCouple").intValue());
-					infoToUpdate.setNbCourseCoupleHippo(node.get(i).get("nbCourseCoupleHippo").intValue());
-
-					infoToUpdate.setPourcVictEntHippo(node.get(i).get("pourcVictEntHippo").doubleValue());
-					infoToUpdate.setPourcVictJockHippo(node.get(i).get("pourcVictJockHippo").doubleValue());
-					infoToUpdate.setPourcVictChevalHippo(node.get(i).get("pourcVictChevalHippo").doubleValue());
-					infoToUpdate.setPourcPlaceChevalHippo(node.get(i).get("pourcPlaceChevalHippo").doubleValue());
-//					infoToUpdate.setPourcPlaceCheval(node.get(i).get("pourcVictChevalHippo").doubleValue());
-					infoToUpdate.setTxVictCouple(node.get(i).get("TxVictCouple").doubleValue());
-					infoToUpdate.setTxPlaceCouple(node.get(i).get("TxPlaceCouple").doubleValue());
-					//////////////////////////////////////////////////////////////////////////////
-					/////////////////////////////////////////////////////////////////////////////
+//					/////////////////////////////////////////////////////////////////////////////
+//					//////////////////////////////////////////////////////////////////////////////
+//					infoToUpdate.setNbrCourseChevalHippo(String.valueOf(node.get(i).get("nbrCourseChevalHippo").intValue()));
+//					infoToUpdate.setCoursescheval(String.valueOf(node.get(i).get("coursescheval").intValue()));
+//					infoToUpdate.setNbrCourseEntHippo(String.valueOf(node.get(i).get("nbrCourseEntHippo").intValue()));
+//					infoToUpdate.setNbrCourseJockHippo(String.valueOf(node.get(i).get("nbrCourseJockHippo").intValue()));
+//					infoToUpdate.setNbCourseCouple(node.get(i).get("nbCourseCouple").intValue());
+//					infoToUpdate.setNbCourseCoupleHippo(node.get(i).get("nbCourseCoupleHippo").intValue());
+//
+//					infoToUpdate.setPourcVictEntHippo(node.get(i).get("pourcVictEntHippo").doubleValue());
+//					infoToUpdate.setPourcVictJockHippo(node.get(i).get("pourcVictJockHippo").doubleValue());
+//					infoToUpdate.setPourcVictChevalHippo(node.get(i).get("pourcVictChevalHippo").doubleValue());
+//					infoToUpdate.setPourcPlaceChevalHippo(node.get(i).get("pourcPlaceChevalHippo").doubleValue());
+////					infoToUpdate.setPourcPlaceCheval(node.get(i).get("pourcVictChevalHippo").doubleValue());
+//					infoToUpdate.setTxVictCouple(node.get(i).get("TxVictCouple").doubleValue());
+//					infoToUpdate.setTxPlaceCouple(node.get(i).get("TxPlaceCouple").doubleValue());
+//					//////////////////////////////////////////////////////////////////////////////
+//					/////////////////////////////////////////////////////////////////////////////
 					
 					
 					

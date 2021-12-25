@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.ArchiveInfoRepository;
+import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.service.ArchiveService;
 import turfinfos2.service.BankrollService;
@@ -28,6 +29,9 @@ public class ResultController {
 	
 	@Autowired
 	TurfInfosRepository turfInfosRepository;
+	
+	@Autowired
+	ResultRepository resultRepository;
 	
 	@Autowired
 	ArchiveService archiveService;
@@ -46,7 +50,7 @@ public class ResultController {
 
 		Double total = 0d;
 		
-		List<TurfInfos> list = archiveService.setAllPlaceFirstPronoList(turfInfosRepository.findAll())
+		List<TurfInfos> list = ((List<TurfInfos>) archiveService.setAllPlaceFirstPronoList(turfInfosRepository.findAll(), resultRepository.findAll()).get("turfinfos"))
 				.stream()				
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
 				.collect(Collectors.toList());

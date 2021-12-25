@@ -28,8 +28,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import turfinfos2.model.ParisTurfInfosConfig;
+import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.ParisTurfInfoConfigRepository;
+import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.service.ImportJSONService;
 
@@ -42,8 +44,8 @@ public class ImportJSONController {
 	@Autowired
 	TurfInfosRepository turfInfosRepository;
 	
-//	@Autowired
-//	ResultRepository resultRepository;
+	@Autowired
+	ResultRepository resultRepository;
 	
 	@Autowired
 	ParisTurfInfoConfigRepository parisTurfInfoConfigRepository;
@@ -81,11 +83,11 @@ public class ImportJSONController {
 		      .collect(Collectors.toList());
 		  
 		  
-//		  dates.forEach(ld->{
-//			  allTurfToSave.addAll(importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false));
-////				importJSONService.updateAllDayInfosFromAspiJson(ld.toString());		  
-//				});
-//		  turfInfosRepository.saveAll(allTurfToSave);
+		  dates.forEach(ld->{
+			  allTurfToSave.addAll(importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false));
+//				importJSONService.updateAllDayInfosFromAspiJson(ld.toString());		  
+				});
+		  turfInfosRepository.saveAll(allTurfToSave);
 	
 		  dates.forEach(ld->{
 //			  importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false);
@@ -123,9 +125,11 @@ public class ImportJSONController {
 			@RequestParam(name = "datefin", required = false, defaultValue = "2021-11-30") String datefin) {
 		
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
-//		List<Resultat> allResultToSave = new ArrayList<>();
+		List<Resultat> allResultToSave = new ArrayList<>();
 
 		List<TurfInfos> all = turfInfosRepository.findAll();
+		List<Resultat> allResults = resultRepository.findAll();
+
 
 
 		final LocalDate start = LocalDate.parse(datedebut, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -141,9 +145,9 @@ public class ImportJSONController {
 		  dates.forEach(ld->{
 			 
 				try {
-					allTurfInfosToSave.addAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("turfinfos"));
+					allTurfInfosToSave.addAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all, allResults).get("turfinfos"));
 				
-//					allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("results"));
+					allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all, allResults).get("results"));
 
 					//					importJSONService.createRapportsInfosFromPMUJson(ld.toString());
 				} 
@@ -160,7 +164,7 @@ public class ImportJSONController {
 			System.out.println(allTurfInfosToSave.size());
 
             turfInfosRepository.saveAll(allTurfInfosToSave);
-			//		    resultRepository.saveAll(allResultToSave);
+			resultRepository.saveAll(allResultToSave);
 		  
 			System.out.println("STOP RAPPORTS");
 			return "redirect:/";
@@ -196,10 +200,12 @@ public class ImportJSONController {
     public String uploadRapportsFile(@RequestParam("jour") String jour, Model model, RedirectAttributes redirect) {
 
 		List<TurfInfos> all = turfInfosRepository.findAll();
+		List<Resultat> allResults = resultRepository.findAll();
+
 		
 			try {
-				turfInfosRepository.saveAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(jour, all).get("turfinfos"));
-//				resultRepository.saveAll((List<Resultat>) importJSONService.createRapportsInfosFromPMUJson(jour, all).get("results"));
+				turfInfosRepository.saveAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(jour, all, allResults).get("turfinfos"));
+				resultRepository.saveAll((List<Resultat>) importJSONService.createRapportsInfosFromPMUJson(jour, all, allResults).get("results"));
 
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block

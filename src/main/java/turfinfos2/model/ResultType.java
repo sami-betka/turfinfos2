@@ -14,10 +14,10 @@ public enum ResultType {
 	QUARTE_PLUS("QUARTE_PLUS"),
 	QUINTE_PLUS("QUINTE_PLUS"),
 	MULTI("MULTI"),
-	PICK5("PICK5");
+	PICK5("PICK5"),
+	TRIO("TRIO"),
+	MINI_MULTI("MINI_MULTI");
 
-	
-	
 
 	
 	private String name;

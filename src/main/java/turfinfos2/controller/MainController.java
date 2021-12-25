@@ -15,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
+import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.repository.UserAccountRepository;
 import turfinfos2.repository.UserRoleRepository;
@@ -34,14 +36,22 @@ public class MainController {
 	TurfInfosRepository turfInfosRepository;
 	
 	@Autowired
+	ResultRepository resultRepository;
+	
+	@Autowired
 	TwilioService service;
 	
 	 @GetMapping("/")
 	    public String home(Model model) {
 	    	
-//	    	 Set<String> dates = turfInfosRepository.findAll().stream()
-//	 				.map(TurfInfos :: getJour)
-//	 				.collect(Collectors.toSet());
+             Resultat resultat =  resultRepository.findAll()
+             .stream()
+             .filter(ti->ti.getR().equals("1") && ti.getC().equals(3))
+             .findAny().get();
+             
+             System.out.println(resultat.toString());
+             
+             
 	    	 
 	         navbarInfos(model);
 	         

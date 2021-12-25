@@ -8,6 +8,6 @@ import turfinfos2.model.Resultat;
 @Repository
 public interface ResultRepository extends JpaRepository<Resultat, Long>{
 	
-
+	
 }
 

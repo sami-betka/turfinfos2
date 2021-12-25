@@ -192,8 +192,10 @@ public class UploadController {
 		// RACESLIST
 		List<TurfInfos> allPremiumReunionInfos = turfInfosRepository
 				.findAllByJourAndByReunionstring(jour, reunionstring).stream()
-//				.filter(ti -> ti.getIsRunning() != null
-//						&& ti.getIsRunning() == true && ti.getIsPremium() != null && ti.getIsPremium().equals(true))
+				.filter(ti -> 
+				ti.getIsRunning() != null && ti.getIsRunning() == true 
+				&& ti.getIsPremium() != null && ti.getIsPremium().equals(true)
+				)
 				.collect(Collectors.toList());
 
 		List<TurfInfos> reunionCracks = new ArrayList<>();
@@ -1314,17 +1316,17 @@ public class UploadController {
 		  
 		  List<TurfInfos> allRace, int raceSize){
 	  
-	  ///// Three Etoiles////////////
 	   
 		allRace.forEach(ti-> {
 			   
+			  ///// Three Etoiles////////////
+
 			   Integer threeEtoilesNumber = 0;
 			   Integer fiveEtoilesNumber = 0;
 			   Integer blueEtoilesNumber = 0;
+			   Integer purpleEtoilesNumber = 0;
 
 
-
-			   
 			   for(int i = 0; i < chronos.size(); i++) {
 				   if(chronos.get(i).getId().equals(ti.getId())) {
 					   threeEtoilesNumber += 1;
@@ -1364,7 +1366,7 @@ public class UploadController {
 				   }
 			   }
 			   
-				  ///// Five Etoiles////////////
+				  ///// Five and purple Etoiles////////////
 					   
 			  
                for(int i = 0; i < chronos.size(); i++) {
@@ -1383,6 +1385,9 @@ public class UploadController {
             	   
             	   if(entraineurs.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
 				   }
             	   
             	   if(i > 0 && entraineurs.get(i).getPourcVictEntHippo().equals(pourcRef)) {
@@ -1398,6 +1403,9 @@ public class UploadController {
                for(int i = 0; i < jockeys.size(); i++) {
 				   if(jockeys.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
 				   }
 				   if(i == 4) {
 					   break;
@@ -1406,6 +1414,9 @@ public class UploadController {
                for(int i = 0; i < vchevalh.size(); i++) {
 				   if(vchevalh.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
 				   }
 				   if(i == 4) {
 					   break;
@@ -1414,6 +1425,9 @@ public class UploadController {
                for(int i = 0; i < pchevalh.size(); i++) {
 				   if(pchevalh.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
 				   }
 				   if(i == 4) {
 					   break;
@@ -1422,6 +1436,9 @@ public class UploadController {
                for(int i = 0; i < pcheval.size(); i++) {
 				   if(pcheval.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
 				   }
 				   if(i == 4) {
 					   break;
@@ -1430,6 +1447,9 @@ public class UploadController {
                for(int i = 0; i < vcouple.size(); i++) {
 				   if(vcouple.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
 				   }
 				   if(i == 4) {
 					   break;
@@ -1438,6 +1458,9 @@ public class UploadController {
                for(int i = 0; i < pcouple.size(); i++) {
 				   if(pcouple.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
 				   }
 				   if(i == 4) {
 					   break;
@@ -1446,6 +1469,9 @@ public class UploadController {
                for(int i = 0; i < vcoupleh.size(); i++) {
 				   if(vcoupleh.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
 				   }
 				   if(i == 4) {
 					   break;
@@ -1454,6 +1480,9 @@ public class UploadController {
                for(int i = 0; i < pcoupleh.size(); i++) {
 				   if(pcoupleh.get(i).getId().equals(ti.getId())) {
 					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
 				   }
 				   if(i == 4) {
 					   break;
@@ -1502,6 +1531,7 @@ public class UploadController {
 				   ti.setThreeEtoile(false);
 			   }
 			   
+               
 			   if(fiveEtoilesNumber >= 6) {
 				   ti.setFiveEtoile(true);
 			   } else {
@@ -1514,18 +1544,15 @@ public class UploadController {
 			   } else {
 				   ti.setBlueEtoile(false);
 			   }
+			   
+			   if(purpleEtoilesNumber == 5) {
+				   ti.setPurpleEtoile(true);
+			   } else {
+				   ti.setPurpleEtoile(false);
+			   }
 			      
 			 
 		   });
-	   ////////////////////////////////////
-//		   for(TurfInfos entr : entraineurs) {
-//			   for(TurfInfos inf : pronos) {
-//				   if(inf.getNumeroString().equals(entr.getNumeroString())) {
-//					   
-//				   }
-//			   }
-//		   }
-
 		   
 
 	   return allRace;
