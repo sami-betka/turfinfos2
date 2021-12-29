@@ -38,18 +38,32 @@ public class ArchiveService {
 	@Autowired
 	ArchiveInfoRepository archiveInfosRepository;
 		
-	public Boolean verifyConditions(TurfInfos info, List<TurfInfos> pronoList) {
+	public Boolean verifyConditions(TurfInfos info, List<TurfInfos> pronoList, List<TurfInfos> allRaceInfos, List<Resultat> allResults) {
 
+		Integer iter = 0;
+        for(TurfInfos tinf : allRaceInfos) {
+        	if(tinf.getLiveOdd() < 5) {
+				iter += 1;
+			}
+        }
+    	      
+		
 		if(
 		        info.getNumberOfInitialRunners() != null && info.getNumberOfInitialRunners() > 1
+//		        && iter <= 2
 				&& info.getHasBetTypes() == true 
 				&& info.getIsPremium() == true
-			    && (!info.getJour().contains("2021-04-") && !info.getJour().contains("2021-12-"))
+			    && (   !info.getJour().contains("2020-08") && !info.getJour().contains("2020-09") && !info.getJour().contains("2020-10")   )
 //		        && (info.getFiveEtoile() == true || info.getThreeEtoile() == true)
 //			    && info.getRaceSpecialty().equals("P")
 //			    && info.getCountry() != null && info.getCountry().equals("FR")
 
 				&& info.getLiveOdd() != null && info.getLiveOdd() != 0 && info.getLiveOdd() < 2.5
+			    && info.getMinRapportProbable() != null && info.getMinRapportProbable() != 0 && info.getMinRapportProbable() > 1.3d
+			    
+		        && info.getRecence() != null && info.getRecence() < 60 && Integer.valueOf(info.getCoursescheval()) > 0
+
+		        
 //				&& Integer.valueOf(info.getCoursescheval()) > 15
 //				&& info.getAutostart() == false
 //			    && info.getNumero() < 7 && info.getNumero() > 2
@@ -59,12 +73,11 @@ public class ArchiveService {
 //						|| pronoList.get(4).getId().equals(info.getId())
 //				)
 
-		        && info.getRecence() != null && info.getRecence() < 60
-			    && info.getMinRapportProbable() != null && info.getMinRapportProbable() != 0 && info.getMinRapportProbable() > 1.3d
-//			        && info.getJour().contains("2021-11")
-//			        && info.getMaxRapportProbable() != null && info.getMaxRapportProbable() != 0 && info.getMaxRapportProbable() < 5d
+//			    && info.getMaxRapportProbable() != null && info.getMaxRapportProbable() != 0 && info.getMaxRapportProbable() < 1.7
 //			        && ti.getFormFigs() != null && ti.getFormFigs().length()>= 2 && (ti.getFormFigs().charAt(0)=='1' || ti.getFormFigs().charAt(0)=='2' || ti.getFormFigs().charAt(0)=='3') && (ti.getFormFigs().charAt(1)=='p' || ti.getFormFigs().charAt(1)=='a' || ti.getFormFigs().charAt(1)=='m')
 
+			    
+			    
 				) {
 			return true;
 
@@ -76,10 +89,18 @@ public class ArchiveService {
 
 	}
 	
-	public Boolean verifyConditionsDeuxSurQuatre(TurfInfos info, List<TurfInfos> pronoList) {
+	public Boolean verifyConditionsDeuxSurQuatre(TurfInfos info, List<TurfInfos> pronoList, List<TurfInfos> allRaceInfos) {
 
+		Integer iter = 0;
+        for(TurfInfos inf : allRaceInfos) {
+        	if(inf.getLiveOdd() < 5) {
+				iter += 1;
+			}
+        }
+        
 		if(
-		        info.getNumberOfInitialRunners() != null && info.getNumberOfInitialRunners() > 15
+		        info.getNumberOfInitialRunners() != null && info.getNumberOfInitialRunners() > 1
+		        && iter <= 2
 				&& info.getHasBetTypes() == true 
 				&& info.getIsPremium() == true
 			    && (!info.getJour().contains("2021-04-") && !info.getJour().contains("2021-12-"))
@@ -431,10 +452,32 @@ public class ArchiveService {
 			setPastilles(listBypvjh, listByChronos, listBypvch, listByppch, listBytxv, listBytxp, listByNoteProno, allraceInfos.size());
 			setEtoiles(listByChronos, listBypveh, listBypvjh, listBypvch, listByppch, listByppc, listBytxv, listBytxp, listBytxvh, listBytxph, listByNoteProno, allraceInfos.size());
 			
-
+			TurfInfos tinf = allraceInfos.get(0);
 			for(TurfInfos ti : listByNoteProno) {
+//				for(TurfInfos ti : listByppch) {
+
 				
-				if(verifyConditions(ti, listByNoteProno).equals(true)) {
+				if(verifyConditions(ti, listByNoteProno, allraceInfos, allResults).equals(true)) {
+					 Optional<Resultat> optResultat = allResults.stream()
+								.filter(r->r.getJour().equals(jour)
+										&& r.getR().equals(tinf.getR())
+										&& r.getC().equals(tinf.getC()))
+								.findFirst();
+
+					 if(optResultat.isPresent()) {
+						   Resultat result = optResultat.get();
+//						   System.out.println(result.toString());
+                     if(ti.getNumero().equals(Integer.valueOf(result.getSimplePlace1()))) {
+                    	 ti.setLiveOddPlace(result.getSimplePlaceRapport1());
+                     }
+                     if(ti.getNumero().equals(Integer.valueOf(result.getSimplePlace2()))) {
+                    	 ti.setLiveOddPlace(result.getSimplePlaceRapport2());
+                     }
+                     if(result.getSimplePlace3() != null && ti.getNumero().equals(Integer.valueOf(result.getSimplePlace3()))) {
+                    	 ti.setLiveOddPlace(result.getSimplePlaceRapport3());
+                     }
+                     
+				}
 					if(ti.getLiveOddPlace() == null) {
 						ti.setLiveOddPlace(0d);
 					}
@@ -446,7 +489,6 @@ public class ArchiveService {
 			//Create deux sur quatres
 	
 		
-		   TurfInfos tinf = allraceInfos.get(0);
 		   Optional<Resultat> optResultat = allResults.stream()
 					.filter(r->r.getJour().equals(jour)
 							&& r.getR().equals(tinf.getR())
@@ -463,7 +505,7 @@ public class ArchiveService {
 			   
 	           for(TurfInfos ti : listByNoteProno) {
 					
-					if(verifyConditionsDeuxSurQuatre(ti, listByNoteProno).equals(true)) {
+					if(verifyConditionsDeuxSurQuatre(ti, listByNoteProno, allraceInfos).equals(true)) {
 						
 						
 						if(iter == 0) {

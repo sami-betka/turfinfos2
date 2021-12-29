@@ -44,12 +44,12 @@ public class MainController {
 	 @GetMapping("/")
 	    public String home(Model model) {
 	    	
-             Resultat resultat =  resultRepository.findAll()
-             .stream()
-             .filter(ti->ti.getR().equals("1") && ti.getC().equals(3))
-             .findAny().get();
-             
-             System.out.println(resultat.toString());
+//             Resultat resultat =  resultRepository.findAll()
+//             .stream()
+//             .filter(ti->ti.getR().equals("1") && ti.getC().equals(3))
+//             .findAny().get();
+//             
+//             System.out.println(resultat.toString());
              
              
 	    	 

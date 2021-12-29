@@ -27,7 +27,19 @@ public class BankrollService {
 		Double ante = initialBankrollAmount/divider;
 		
 		for(int i =0; i<list.size(); i++) {
+			
 			list.get(i).setAnte(ante);
+			
+//			if(list.get(i).getMinRapportProbable() == 1.4d || list.get(i).getMinRapportProbable() == 1.5d) {
+//				list.get(i).setAnte(ante/1.2d);
+//			}
+//			if(list.get(i).getMinRapportProbable() == 1.6d || list.get(i).getMinRapportProbable() == 1.7d) {
+//				list.get(i).setAnte(ante/1.4d);
+//			}
+//			if(list.get(i).getMinRapportProbable() >= 1.8d) {
+//				list.get(i).setAnte(ante/1.6d);
+//			}
+			
 			newBankrollAmount -= ante; 
 			newBankrollAmount += ante * list.get(i).getLiveOddPlace(); 
 //			if(list.get(i).getRanking().equals(1)) {

@@ -1,11 +1,17 @@
 package turfinfos2;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.TurfInfosRepository;
@@ -79,12 +85,12 @@ public class Turfinfos2Application {
 //
 //        all.forEach(ti-> {
 //        	
-//        	if(ti.getJour().contains("2021-04")) {
+//        	if(ti.getJour().contains("2021-04-") || ti.getJour().contains("2021-01")) {
 //        		toDelete.add(ti);
 //        	}
 //        
 //        });
-//        turfInfosRepository.deleteAll(toDelete);
+////        turfInfosRepository.deleteAll(toDelete);
 //
 //        System.out.println("STOP");
 //        System.out.println(toDelete.size());
@@ -179,6 +185,55 @@ public class Turfinfos2Application {
 //		System.out.println(resultat.getSimpleGagnant().get("Simple gagnant"));
 //		System.out.println(resultat.getCoupleGagnant().get("Couplé gagnant"));
 		
+		
+//		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
+//      List<TurfInfos> toSave = new ArrayList<>();
+//
+//        for(TurfInfos ti: turfInfosRepository.findAll()) {
+//        	if(ti.getMinRapportProbable() == null) {
+//        		JsonNode node;
+//        		try {
+//					node = firstPartOfUrl + day + "/R" + entry.getKey() + "/C" + race + "/" + finalPartOfUrl;
+//			
+//					if (ti.getRanking().equals(1)) {
+//						ti.setLiveOdd(
+//								node.get(0).get("rapports").get(0).get("dividendePourUnEuro").doubleValue()
+//										/ 100);
+//						ti.setLiveOddPlace(
+//								node.get(1).get("rapports").get(0).get("dividendePourUnEuro").doubleValue()
+//										/ 100);
+////				allTurfInfosToSave.add(ti);
+////				turfInfosRepository.save(ti);
+//
+//					}
+//					if (ti.getRanking().equals(2)) {
+//						ti.setLiveOddPlace(
+//								node.get(1).get("rapports").get(1).get("dividendePourUnEuro").doubleValue()
+//										/ 100);
+////				allTurfInfosToSave.add(ti);
+////				turfInfosRepository.save(ti);
+//
+//					}
+//					if (ti.getRanking().equals(3) && ti.getNumberOfInitialRunners() != null && ti.getNumberOfInitialRunners() > 7) {
+//						ti.setLiveOddPlace(
+//								node.get(1).get("rapports").get(2).get("dividendePourUnEuro").doubleValue()
+//										/ 100);
+////				allTurfInfosToSave.add(ti);
+////				turfInfosRepository.save(ti);
+//					}
+//        		} catch (MalformedURLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//        	}
+//            toSave.add(ti);
+//        
+//        }
+
 	}
 	
 

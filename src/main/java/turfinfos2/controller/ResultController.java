@@ -97,6 +97,7 @@ public class ResultController {
 				.sorted(Comparator.comparing(TurfInfos::getJour).thenComparing(TurfInfos::getHour))
 				.collect(Collectors.toList());
 		Double coteTotalWon = 0d;
+		Double cotePlaceTotalWon = 0d;
 		Double vehTotalWon = 0d;
 		Double vjhTotalWon = 0d;
 		Double vchTotalWon = 0d;
@@ -110,6 +111,7 @@ public class ResultController {
 
 		
 		Double coteMoyenneWon = 0d;
+		Double cotePlaceMoyenneWon = 0d;
 		Double vehMoyenneWon = 0d;
 		Double vjhMoyenneWon = 0d;
 		Double vchMoyenneWon = 0d;
@@ -126,6 +128,9 @@ public class ResultController {
 			
 			if(info.getLiveOdd() != null) {
 				coteTotalWon += info.getLiveOdd();
+				}
+			if(info.getLiveOddPlace() != null) {
+				cotePlaceTotalWon += info.getLiveOddPlace();
 				}
 			if(info.getPourcVictEntHippo() != null) {
 			vehTotalWon += info.getPourcVictEntHippo();
@@ -161,6 +166,7 @@ public class ResultController {
 			////Taille = 11
 		}
 		coteMoyenneWon = coteTotalWon/won.size();
+		cotePlaceMoyenneWon = cotePlaceTotalWon/won.size();
 		vehMoyenneWon = vehTotalWon/won.size();
 		vjhMoyenneWon = vjhTotalWon/won.size();
 		vchMoyenneWon = vchTotalWon/won.size();
@@ -174,6 +180,7 @@ public class ResultController {
 
 		
 		wonMoyennes.add(coteMoyenneWon);
+		wonMoyennes.add(cotePlaceMoyenneWon);
 		wonMoyennes.add(vehMoyenneWon);
 		wonMoyennes.add(vjhMoyenneWon);
 		wonMoyennes.add(vchMoyenneWon);
@@ -195,6 +202,7 @@ public class ResultController {
 				.collect(Collectors.toList());
 
 		Double coteTotalLost = 0d;
+		Double cotePlaceTotalLost = 0d;
 		Double vehTotalLost = 0d;
 		Double vjhTotalLost = 0d;
 		Double vchTotalLost = 0d;
@@ -208,6 +216,7 @@ public class ResultController {
 
 		
 		Double coteMoyenneLost = 0d;
+		Double cotePlaceMoyenneLost = 0d;
 		Double vehMoyenneLost = 0d;
 		Double vjhMoyenneLost = 0d;
 		Double vchMoyenneLost = 0d;
@@ -223,6 +232,9 @@ public class ResultController {
 		for(TurfInfos info: lost) {
 			if(info.getLiveOdd() != null) {
 				coteTotalLost += info.getLiveOdd();
+				}
+			if(info.getLiveOddPlace() != null) {
+				cotePlaceTotalLost += info.getLiveOddPlace();
 				}
 			if(info.getPourcVictEntHippo() != null) {
 				vehTotalLost += info.getPourcVictEntHippo();
@@ -257,6 +269,7 @@ public class ResultController {
 			////Taille = 11
 		}
 		coteMoyenneLost = coteTotalLost/lost.size();
+		cotePlaceMoyenneLost = cotePlaceTotalLost/lost.size();
 		vehMoyenneLost = vehTotalLost/lost.size();
 		vjhMoyenneLost = vjhTotalLost/lost.size();
 		vchMoyenneLost = vchTotalLost/lost.size();
@@ -270,6 +283,7 @@ public class ResultController {
 
 		
 		lostMoyennes.add(coteMoyenneLost);
+		lostMoyennes.add(cotePlaceMoyenneLost);
 		lostMoyennes.add(vehMoyenneLost);
 		lostMoyennes.add(vjhMoyenneLost);
 		lostMoyennes.add(vchMoyenneLost);
@@ -290,6 +304,7 @@ public class ResultController {
 		model.addAttribute("wonnumber", won.size());
 		model.addAttribute("lostnumber", lost.size());
 		model.addAttribute("totalnumber", list.size());
+		model.addAttribute("cotemoyenne", cotePlaceMoyenneWon);
 		model.addAttribute("wonpercentage", (float) (1.0*(100 * won.size()) / list.size()));
 
 

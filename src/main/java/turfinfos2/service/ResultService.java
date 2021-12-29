@@ -41,12 +41,12 @@ public class ResultService {
 				
 		for (int i = 0; i < node.size(); i++) {
 
-			if (node.get(i).get("typePari").textValue().equals(ResultType.SIMPLE_GAGNANT.name())) {
+			if (node.get(i).get("typePari").textValue().equals(ResultType.SIMPLE_GAGNANT.name()) || node.get(i).get("typePari").textValue().equals(ResultType.SIMPLE_GAGNANT_INTERNATIONAL.name())) {
 				resultat.setSimpleGagnant(node.get(i).get("rapports").get(0).get("combinaison").textValue());
 				resultat.setSimpleGagnantRapport(node.get(i).get("rapports").get(0).get("dividendePourUnEuro").doubleValue() / 100);
 			}
 
-			if (node.get(i).get("typePari").textValue().equals(ResultType.SIMPLE_PLACE.name())) {
+			if (node.get(i).get("typePari").textValue().equals(ResultType.SIMPLE_PLACE.name()) || node.get(i).get("typePari").textValue().equals(ResultType.SIMPLE_PLACE_INTERNATIONAL.name())) {
 				for (int j = 0; j < node.get(i).get("rapports").size(); j++) {
 					if(j == 0) {
 						resultat.setSimplePlace1(node.get(i).get("rapports").get(j).get("combinaison").textValue());
@@ -64,12 +64,12 @@ public class ResultService {
 				}
 			}
 
-			if (node.get(i).get("typePari").textValue().equals(ResultType.COUPLE_GAGNANT.name())) {
+			if (node.get(i).get("typePari").textValue().equals(ResultType.COUPLE_GAGNANT.name()) || node.get(i).get("typePari").textValue().equals(ResultType.COUPLE_GAGNANT_INTERNATIONAL.name())) {
 				resultat.setCoupleGagnant(node.get(i).get("rapports").get(0).get("combinaison").textValue());
 				resultat.setCoupleGagnantRapport(node.get(i).get("rapports").get(0).get("dividendePourUnEuro").doubleValue() / 100);			
 				}
 			
-			if (node.get(i).get("typePari").textValue().equals(ResultType.COUPLE_PLACE.name())) {
+			if (node.get(i).get("typePari").textValue().equals(ResultType.COUPLE_PLACE.name()) || node.get(i).get("typePari").textValue().equals(ResultType.COUPLE_PLACE_INTERNATIONAL.name())) {
 				for (int j = 0; j < node.get(i).get("rapports").size(); j++) {
 					if(j == 0) {
 						resultat.setCouplePlace1(node.get(i).get("rapports").get(j).get("combinaison").textValue());
@@ -87,7 +87,7 @@ public class ResultService {
 				}
 			}
 			
-			if (node.get(i).get("typePari").textValue().equals(ResultType.COUPLE_ORDRE.name())) {
+			if (node.get(i).get("typePari").textValue().equals(ResultType.COUPLE_ORDRE.name()) || node.get(i).get("typePari").textValue().equals(ResultType.COUPLE_ORDRE_INTERNATIONAL.name())) {
 				resultat.setCoupleOrdre(node.get(i).get("rapports").get(0).get("combinaison").textValue());
 				resultat.setCoupleOrdreRapport(node.get(i).get("rapports").get(0).get("dividendePourUnEuro").doubleValue() / 100);			
 				}
@@ -173,11 +173,11 @@ public class ResultService {
 				}
 			}
 			
-			if (node.get(i).get("typePari").textValue().equals(ResultType.TRIO_ORDRE.name())) {
+			if (node.get(i).get("typePari").textValue().equals(ResultType.TRIO_ORDRE.name()) || node.get(i).get("typePari").textValue().equals(ResultType.TRIO_ORDRE_INTERNATIONAL.name())) {
 				resultat.setTrioOrdre(node.get(i).get("rapports").get(0).get("combinaison").textValue());
 				resultat.setTrioOrdreRapport(node.get(i).get("rapports").get(0).get("dividendePourUnEuro").doubleValue() / 100);
 				}
-			if (node.get(i).get("typePari").textValue().equals(ResultType.TRIO.name())) {
+			if (node.get(i).get("typePari").textValue().equals(ResultType.TRIO.name()) || node.get(i).get("typePari").textValue().equals(ResultType.TRIO_INTERNATIONAL.name())) {
 				resultat.setTrio(node.get(i).get("rapports").get(0).get("combinaison").textValue());
 				resultat.setTrioRapport(node.get(i).get("rapports").get(0).get("dividendePourUnEuro").doubleValue() / 100);
 				}
