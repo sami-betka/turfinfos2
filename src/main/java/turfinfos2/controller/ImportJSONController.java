@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
@@ -63,16 +64,15 @@ public class ImportJSONController {
 	
 	@GetMapping("/upload-data-date-range")
     public String uploadJSONFileDateRange(
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2020-04-01") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2020-05-31") String datefin) {
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2018-07-01") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2018-08-31") String datefin) {
 		
 		List<TurfInfos> allTurfToSave = new ArrayList<>();
 		List<TurfInfos> allAspiToSave = new ArrayList<>();
 		List<TurfInfos> allRapportsToSave = new ArrayList<>();
 		
-		List<TurfInfos> all = turfInfosRepository.findAll();
+//		List<TurfInfos> all = turfInfosRepository.findAll();
 
-		
 		final LocalDate start = LocalDate.parse(datedebut, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		  final LocalDate end = LocalDate.parse(datefin, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	
@@ -83,37 +83,32 @@ public class ImportJSONController {
 		      .collect(Collectors.toList());
 		  
 		  
-		  dates.forEach(ld->{
-			  allTurfToSave.addAll(importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false));
-//				importJSONService.updateAllDayInfosFromAspiJson(ld.toString());		  
-				});
-		  turfInfosRepository.saveAll(allTurfToSave);
+//		  dates.forEach(ld->{
+//			  allTurfToSave.addAll(importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false));
+////				importJSONService.updateAllDayInfosFromAspiJson(ld.toString());		  
+//				});
+//		  turfInfosRepository.saveAll(allTurfToSave);
 	
+//		  dates.forEach(ld->{
+////			  importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false);
+//				allAspiToSave.addAll(importJSONService.updateAllDayInfosFromAspiJson(ld.toString()));	
+//				System.out.println(ld.toString());
+//				});
+//		  turfInfosRepository.saveAll(allAspiToSave);
+		  
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		  
+
+		  dates.forEach(ld->{
+			  turfInfosRepository.saveAll(importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false));
+//			importJSONService.updateAllDayInfosFromAspiJson(ld.toString());		  
+			});
+		  
 		  dates.forEach(ld->{
 //			  importJSONService.createAllDayInfosFromParisTurfJson(ld.toString(), false);
-				allAspiToSave.addAll(importJSONService.updateAllDayInfosFromAspiJson(ld.toString()));	
+			  turfInfosRepository.saveAll(importJSONService.updateAllDayInfosFromAspiJson(ld.toString()));	
 				System.out.println(ld.toString());
-				});
-		  turfInfosRepository.saveAll(allAspiToSave);
+			});
 		  
-//		  dates.forEach(ld->{
-//	 
-//		try {
-//			allTurfInfosToSave.addAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("turfinfos"));
-//		
-////			allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all).get("results"));
-//
-//			//					importJSONService.createRapportsInfosFromPMUJson(ld.toString());
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	
-//          });
-//
-//          turfInfosRepository.saveAll(allRapportsToSave);
-
-
 
             System.out.println("STOOOP");
 					return "redirect:/";
@@ -121,8 +116,8 @@ public class ImportJSONController {
 	
 	@GetMapping("/upload-rapports-date-range")
     public String uploadRapportsFileDateRange(
-    		@RequestParam(name = "datedebut", required = false, defaultValue = "2020-04-01") String datedebut, 
-			@RequestParam(name = "datefin", required = false, defaultValue = "2020-05-31") String datefin) {
+    		@RequestParam(name = "datedebut", required = false, defaultValue = "2018-08-31") String datedebut, 
+			@RequestParam(name = "datefin", required = false, defaultValue = "2018-12-31") String datefin) {
 		
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
 		List<Resultat> allResultToSave = new ArrayList<>();
@@ -145,20 +140,26 @@ public class ImportJSONController {
 		  dates.forEach(ld->{
 			 
 				try {
-					allTurfInfosToSave.addAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all, allResults).get("turfinfos"));
-				
-					allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all, allResults).get("results"));
-
+					List<TurfInfos> all2 = all.stream()
+							.filter(ti->ti.getJour().equals(ld.toString()))
+							.collect(Collectors.toList());
+					List<Resultat> allResults2 = allResults.stream()
+							.filter(r->r.getJour().equals(ld.toString()))
+							.collect(Collectors.toList());
+					
+					Map<String, Object> map = importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all2, allResults2);
+					
+//					allTurfInfosToSave.addAll((List<TurfInfos>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all, allResults).get("turfinfos"));
+//					allResultToSave.addAll((List< Resultat>) importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all, allResults).get("results"));
+					allTurfInfosToSave.addAll((List<TurfInfos>) map.get("turfinfos"));
+					allResultToSave.addAll((List< Resultat>) map.get("results"));
 					//					importJSONService.createRapportsInfosFromPMUJson(ld.toString());
 				} 
 				catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
-				
-			
+		
 		  });
 		  
 			System.out.println(allTurfInfosToSave.size());
@@ -199,8 +200,10 @@ public class ImportJSONController {
 	@PostMapping("/upload-rapports-json-data-from-url")
     public String uploadRapportsFile(@RequestParam("jour") String jour, Model model, RedirectAttributes redirect) {
 
-		List<TurfInfos> all = turfInfosRepository.findAll();
-		List<Resultat> allResults = resultRepository.findAll();
+//		List<TurfInfos> all = turfInfosRepository.findAll();
+//		List<Resultat> allResults = resultRepository.findAll();
+		List<TurfInfos> all = turfInfosRepository.findAllByJour(jour);
+		List<Resultat> allResults = resultRepository.findAllByJour(jour);
 
 		
 			try {
@@ -227,10 +230,8 @@ public class ImportJSONController {
 				e.printStackTrace();
 			}
 			
-			
 			return "redirect:/day-infos?jour=" + jour;
-		
-	}
+     	}
 	
 	///////////////////////////////////////////////////////////
 	
@@ -248,13 +249,18 @@ public class ImportJSONController {
 	
 	   private void navbarInfos(Model model) {
 		   
-		   List<TurfInfos> allInfos = turfInfosRepository.findAll();
+//		   List<TurfInfos> allInfos = turfInfosRepository.findAll();
+
 		   
 		   //DATES
-	  	 Set<String> dates = allInfos.stream()
-					.map(TurfInfos :: getJour)
-					.sorted()
-					.collect(Collectors.toSet());
+			 Set<String> dates = turfInfosRepository.findAllJours()
+		  			 .stream()
+		  			 .collect(Collectors.toSet());
+//	  	 Set<String> dates = allInfos.stream()
+//					.map(TurfInfos :: getJour)
+//					.sorted()
+//					.collect(Collectors.toSet());
+	  	 
 	  	List<String> datesSorted = dates.stream().collect(Collectors.toList());
 	  	Collections.sort(datesSorted, (o1, o2) -> o1.compareTo(o2));
 	        model.addAttribute("datesnav", datesSorted);		   
@@ -273,9 +279,10 @@ public class ImportJSONController {
 ////	    	 reunions.sort( Comparator.comparing( String::toString));
 //	         model.addAttribute("reunionsofday", reunions);
 
-	   
-	         Set<String> reunions = allInfos.stream()
-	 				.filter(ti-> ti.getJour().equals(jour))
+		   List<TurfInfos> allByJour = turfInfosRepository.findAllByJour(jour);
+
+	         Set<String> reunions = allByJour.stream()
+//	 				.filter(ti-> ti.getJour().equals(jour))
 	        			.map(TurfInfos :: getReunionstring)
 	        			.collect(Collectors.toSet());
 	        			List<String> list = new ArrayList<String>(reunions);

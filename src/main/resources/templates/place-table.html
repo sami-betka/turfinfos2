@@ -65,14 +65,23 @@
 		<div class="col-md-6">
 		
 		<div class="container" style="margin-top: 120px;">
-		<figure class="highcharts-figure">
-  <div id="column-chart"></div>
-  <p class="highcharts-description">Nombre total de paris : [[${totalnumber}]]</p>
-    <p class="highcharts-description text-success">Nombre de paris gagnants : [[${wonnumber}]]</p>
-    <p class="highcharts-description text-danger">Nombre de paris perdants : [[${lostnumber}]]</p>
-        <p class="highcharts-description text-danger">Pourcentage de paris gagnants : [[${wonpercentage}]]</p>
+<!-- <figure class="highcharts-figure"> -->
+<!--   <div id="column-chart"></div> -->
+<!--   <p class="highcharts-description">Nombre total de paris : [[${totalnumber}]]</p> -->
+<!--     <p class="highcharts-description text-success">Nombre de paris gagnants : [[${wonnumber}]]</p> -->
+<!--     <p class="highcharts-description text-danger">Nombre de paris perdants : [[${lostnumber}]]</p> -->
+<!--         <p class="highcharts-description text-danger">Pourcentage de paris gagnants : [[${wonpercentage}]]</p> -->
     
   
+<!-- </figure> -->
+
+<figure class="highcharts-figure">
+  <div id="container"></div>
+  <p class="highcharts-description">
+    Using the Highcharts Boost module, it is possible to render large amounts
+    of data on the client side. This chart shows a line series with 500,000
+    data points. Click and drag in the chart to zoom in.
+  </p>
 </figure>
 	</div>
 	
@@ -90,12 +99,24 @@
 				<div th:replace="_nav-components :: footer">...</div>
 				
 					<script src="https://unpkg.com/feather-icons"></script>
+							<script type="text/javascript" th:src="@{/js/test.js}"></script>
+					
 				
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/boost.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+<!-- <script src="https://code.highcharts.com/modules/export-data.js"></script> -->
+<!-- <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
+
+<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+<!-- <script src="https://code.highcharts.com/modules/data.js"></script> -->
+<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+<!-- <script src="https://code.highcharts.com/modules/export-data.js"></script> -->
+<!-- <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
 
 	<script type="text/javascript" th:src="@{/js/test.js}"></script>
 		<script type="text/javascript" th:src="@{/js/style.js}"></script>
@@ -106,93 +127,122 @@
 
 	<script th:inline="javascript">
 	
-	Highcharts.chart('column-chart', {
-		  chart: {
-		    type: 'column'
-		  },
-		  title: {
-		    text: 'Analyse premiers du prono à la place'
-		  },
-		  subtitle: {
-		    text: 'Source: tayinfos.com'
-		  },
-		  xAxis: {
-			  categories: [[${categorie}]],
-		    crosshair: true
-		  },
-		  yAxis: {
-		    min: 0,
-		    title: {
-		      text: '%'
-		    }
-		  },
-		  tooltip: {
-		    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-		    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-		      '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-		    footerFormat: '</table>',
-		    shared: true,
-		    useHTML: true
-		  },
-		  plotOptions: {
-		    column: {
-		      pointPadding: 0.2,
-		      borderWidth: 0
-		    }
-		  },
-		  series: [{
-		    name: 'Gagnants',
-		    data: [[${series1}]]
+// 	Highcharts.chart('column-chart', {
+// 		  chart: {
+// 		    type: 'column'
+// 		  },
+// 		  title: {
+// 		    text: 'Analyse premiers du prono à la place'
+// 		  },
+// 		  subtitle: {
+// 		    text: 'Source: tayinfos.com'
+// 		  },
+// 		  xAxis: {
+// 			  categories: [[${categorie}]],
+// 		    crosshair: true
+// 		  },
+// 		  yAxis: {
+// 		    min: 0,
+// 		    title: {
+// 		      text: '%'
+// 		    }
+// 		  },
+// 		  tooltip: {
+// 		    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+// 		    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+// 		      '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+// 		    footerFormat: '</table>',
+// 		    shared: true,
+// 		    useHTML: true
+// 		  },
+// 		  plotOptions: {
+// 		    column: {
+// 		      pointPadding: 0.2,
+// 		      borderWidth: 0
+// 		    }
+// 		  },
+// 		  series: [{
+// 		    name: 'Gagnants',
+// 		    data: [[${series1}]]
 
-		  }, {
-		    name: 'Perdants',
-		    data: [[${series2}]]
+// 		  }, {
+// 		    name: 'Perdants',
+// 		    data: [[${series2}]]
 
-		  }]
-		});
+// 		  }]
+// 		});
 	
-//     $(function(){
-//     Highcharts.chart('bargraph', {
-//         chart: {
-//             type: 'column'
-//         },
-//         title: {
-//             text: 'Organization'
-//         },
-//         subtitle: {
-//             text: 'Details'
-//         },
-//         xAxis: {
-//             categories: [[${keySet}]],
-//             crosshair: true
-//         },
-//         yAxis: {
-//             min: 0,
-//             max:[[${size}]],
-//             title: {
-//                 text: 'Classement'
-//             }
-//         },
-//         tooltip: {
-//             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-//             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-//             '<td style="padding:0"><b>{point.y:.1f} K</b></td></tr>',
-//             footerFormat: '</table>',
-//             shared: true,
-//             useHTML: true
-//         },
-//         plotOptions: {
-//             column: {
-//                 pointPadding: 0.2,
-//                 borderWidth: 0
-//             }
-//         },
-//         series: [{
-//             name: 'Numéro',
-//             data: [[${values}]]
-//         }]
-//       });
-//     });
+///////////////////////////////////////////////
+
+function getData(n) {
+  var arr = [],
+    i,
+    x,
+    a,
+    b,
+    c,
+    spike;
+  for (
+    i = 0, x = Date.UTC(new Date().getUTCFullYear(), 0, 1) - n * 36e5;
+    i < n;
+    i = i + 1, x = x + 36e5
+  ) {
+    if (i % 100 === 0) {
+      a = 2 * Math.random();
+    }
+    if (i % 1000 === 0) {
+      b = 2 * Math.random();
+    }
+    if (i % 10000 === 0) {
+      c = 2 * Math.random();
+    }
+    if (i % 50000 === 0) {
+      spike = 10;
+    } else {
+      spike = 0;
+    }
+    arr.push([
+      x,
+      2 * Math.sin(i / 100) + a + b + c + spike + Math.random()
+    ]);
+  }
+  return arr;
+}
+var n = 500000,
+  data = getData(n);
+
+
+console.time('line');
+Highcharts.chart('container', {
+
+  chart: {
+    zoomType: 'x'
+  },
+
+  title: {
+    text: 'Highcharts drawing ' + n + ' points'
+  },
+
+  subtitle: {
+    text: 'Using the Boost module'
+  },
+
+  tooltip: {
+    valueDecimals: 2
+  },
+
+  xAxis: {
+    type: 'datetime'
+  },
+
+  series: [{
+    data: data,
+    lineWidth: 0.5,
+    name: 'Hourly data points'
+  }]
+
+});
+console.timeEnd('line');
 </script>
 
 </body>

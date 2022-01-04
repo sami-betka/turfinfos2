@@ -114,37 +114,38 @@ public class TurfInfoService {
     	infoToUpdate.setReunionstring(info.getReunionstring());
     	
     	//STATS
-    	if(info.getNulStats().equals(false)) {
-    	infoToUpdate.setPourcPlaceChevalHippo(info.getPourcPlaceChevalHippo());
-    	infoToUpdate.setPourcPlaceEntHippo(info.getPourcPlaceEntHippo());
-    	infoToUpdate.setPourcPlaceJockHippo(info.getPourcPlaceJockHippo());
-    	infoToUpdate.setPourcVictChevalHippo(info.getPourcVictChevalHippo());
-    	infoToUpdate.setPourcVictEntHippo(info.getPourcVictEntHippo());
-    	infoToUpdate.setPourcVictJockHippo(info.getPourcVictJockHippo());
-    	infoToUpdate.setTxVictCouple(info.getTxVictCouple());
-    	infoToUpdate.setTxPlaceCouple(info.getTxPlaceCouple());
-    	if(info.getTxPlaceCoupleHippo() != null) {
-    	infoToUpdate.setTxPlaceCoupleHippo(info.getTxPlaceCoupleHippo());
-    	}
-    	if(info.getTxVictCoupleHippo() != null) {
-    	infoToUpdate.setTxVictCoupleHippo(info.getTxVictCoupleHippo());
-    	}
-    	
-    	infoToUpdate.setPourcPlaceCheval(info.getPourcPlaceCheval());
-
-//    	infoToUpdate.setCoursesentraineur(info.getCoursesentraineur());
-//    	infoToUpdate.setCoursesjockey(info.getCoursesjockey());
-    	infoToUpdate.setNbCourseCouple(info.getNbCourseCouple());
-    	infoToUpdate.setNbVictCouple(info.getNbVictCouple());
-    	infoToUpdate.setNbrCourseChevalHippo(info.getNbrCourseChevalHippo());
-    	infoToUpdate.setNbrCourseJockHippo(info.getNbrCourseJockHippo());
-    	infoToUpdate.setNbrCourseEntHippo(info.getNbrCourseEntHippo());
-    	
-    	infoToUpdate.setChevalTwoOrThreeHippo(info.getChevalTwoOrThreeHippo());
-    	infoToUpdate.setNbVictChevalHippo(info.getNbVictChevalHippo());
-    	
-    	
-    	} //////////STATS END
+//    	if(info.getNulStats().equals(false)) {
+//    	infoToUpdate.setPourcPlaceChevalHippo(info.getPourcPlaceChevalHippo());
+//    	infoToUpdate.setPourcPlaceEntHippo(info.getPourcPlaceEntHippo());
+//    	infoToUpdate.setPourcPlaceJockHippo(info.getPourcPlaceJockHippo());
+//    	infoToUpdate.setPourcVictChevalHippo(info.getPourcVictChevalHippo());
+//    	infoToUpdate.setPourcVictEntHippo(info.getPourcVictEntHippo());
+//    	infoToUpdate.setPourcVictJockHippo(info.getPourcVictJockHippo());
+//    	infoToUpdate.setTxVictCouple(info.getTxVictCouple());
+//    	infoToUpdate.setTxPlaceCouple(info.getTxPlaceCouple());
+//    	if(info.getTxPlaceCoupleHippo() != null) {
+//    	infoToUpdate.setTxPlaceCoupleHippo(info.getTxPlaceCoupleHippo());
+//    	}
+//    	if(info.getTxVictCoupleHippo() != null) {
+//    	infoToUpdate.setTxVictCoupleHippo(info.getTxVictCoupleHippo());
+//    	}
+//    	
+//    	infoToUpdate.setPourcPlaceCheval(info.getPourcPlaceCheval());
+//
+////    	infoToUpdate.setCoursesentraineur(info.getCoursesentraineur());
+////    	infoToUpdate.setCoursesjockey(info.getCoursesjockey());
+//    	infoToUpdate.setNbCourseCouple(info.getNbCourseCouple());
+//    	infoToUpdate.setNbVictCouple(info.getNbVictCouple());
+//    	infoToUpdate.setNbrCourseChevalHippo(info.getNbrCourseChevalHippo());
+//    	infoToUpdate.setNbrCourseJockHippo(info.getNbrCourseJockHippo());
+//    	infoToUpdate.setNbrCourseEntHippo(info.getNbrCourseEntHippo());
+//    	
+//    	infoToUpdate.setChevalTwoOrThreeHippo(info.getChevalTwoOrThreeHippo());
+//    	infoToUpdate.setNbVictChevalHippo(info.getNbVictChevalHippo());
+//    	
+//    	
+//    	} 
+    	//////////STATS END
     	
     	
 //    	infoToUpdate.setTypec(info.getTypec());

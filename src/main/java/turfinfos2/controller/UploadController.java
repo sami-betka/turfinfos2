@@ -48,9 +48,9 @@ public class UploadController {
 	public String index(Model model) {
 
 //		Set<String> dates = turfInfosRepository.findAll().stream().map(TurfInfos::getJour).collect(Collectors.toSet());
-		List<TurfInfos> allInfos = turfInfosRepository.findAll();
+//		List<TurfInfos> allInfos = turfInfosRepository.findAll();
 
-		navbarInfos(model, allInfos);
+		navbarInfos(model);
 		return "upload";
 	}
 
@@ -78,7 +78,7 @@ public class UploadController {
 //    				.map(TurfInfos :: getJour)
 //    				.collect(Collectors.toSet());
 //            model.addAttribute("dates", dates);
-			navbarInfos(model, allInfos);
+			navbarInfos(model);
 
 		} else {
 
@@ -125,7 +125,7 @@ public class UploadController {
 				});
 
 
-				navbarInfos(model, allInfos);
+				navbarInfos(model);
 
 
 				model.addAttribute("status", true);
@@ -139,12 +139,12 @@ public class UploadController {
 //                model.addAttribute("messageerror", "Une erreur est apparue durant l'import du fichier.");
 				model.addAttribute("status", false);
 
-				navbarInfos(model, allInfos);
+				navbarInfos(model);
 
 			}
 		}
 
-		navbarInfos(model, allInfos);
+		navbarInfos(model);
 
 		allToSave.addAll(allToUpdate);
 		turfInfosRepository.saveAll(allToSave);
@@ -158,7 +158,7 @@ public class UploadController {
 	@GetMapping("/day-infos")
 	public String getDayInfos(@RequestParam("jour") String jour, Model model) {
 		
-		List<TurfInfos> allInfos = turfInfosRepository.findAll();
+//		List<TurfInfos> allInfos = turfInfosRepository.findAll();
 
 		// Récuperer chaque reunion (1, 2, 3, 4...)
 		Set<String> reunions = turfInfosRepository.findAllByJour(jour).stream()
@@ -171,7 +171,7 @@ public class UploadController {
 		model.addAttribute("reunions", reunions);
 		model.addAttribute("jour", jour);
 
-		navbarInfos(model, allInfos);
+		navbarInfos(model);
 		return "day-infos";
 	}
 
@@ -183,11 +183,11 @@ public class UploadController {
 //			return "redirect:/login";
 //    	}
 		
-		List<TurfInfos> allInfos = turfInfosRepository.findAll();
+//		List<TurfInfos> allInfos = turfInfosRepository.findAll();
 
 
 		model.addAttribute("date", jour);
-		model.addAttribute("recencemax", 60);
+		model.addAttribute("recencemax", 90);
 
 		// RACESLIST
 		List<TurfInfos> allPremiumReunionInfos = turfInfosRepository
@@ -265,12 +265,12 @@ public class UploadController {
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictEntHippo)).collect(Collectors.toList());
 			Collections.reverse(listBypveh);
 
-			allraceInfos.forEach(ti -> {
-				if (ti.getPourcVictChevalHippo() != null
-						&& ti.getPourcVictChevalHippo().equals(ti.getPourcPlaceChevalHippo())) {
-					ti.setPourcPlaceChevalHippo(0d);
-				}
-			});
+//			allraceInfos.forEach(ti -> {
+//				if (ti.getPourcVictChevalHippo() != null
+//						&& ti.getPourcVictChevalHippo().equals(ti.getPourcPlaceChevalHippo())) {
+//					ti.setPourcPlaceChevalHippo(0d);
+//				}
+//			});
 
 			List<TurfInfos> listByppch = allraceInfos.stream()
 					.filter(ti -> ti.getPourcPlaceChevalHippo() != null && ti.getPourcPlaceChevalHippo() != 0d)
@@ -299,23 +299,23 @@ public class UploadController {
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxVictCouple)).collect(Collectors.toList());
 			Collections.reverse(listBytxv);
 
-			allraceInfos.forEach(ti -> {
-//				System.out.println(ti.getR()+ti.getC());
-//				System.out.println("t-"+ti.getTxVictCouple());
-//				System.out.println("tttt-"+ti.getTxPlaceCouple());
-//				if(ti.getCoupleTwoOrThree() != null && !ti.getCoupleTwoOrThree().equals(0) && ti.getNbCourseCouple() != null && !ti.getNbCourseCouple().equals( 0)) {
-//				ti.setTxPlaceCouple(calculateNewPlacePercentage(ti.getCoupleTwoOrThree(), ti.getNbCourseCouple()-ti.getNbVictCouple()).doubleValue());
-//				}
-//				if(ti.getCoupleTwoOrThree() != null && ti.getCoupleTwoOrThree().equals(0)) {
+//			allraceInfos.forEach(ti -> {
+////				System.out.println(ti.getR()+ti.getC());
+////				System.out.println("t-"+ti.getTxVictCouple());
+////				System.out.println("tttt-"+ti.getTxPlaceCouple());
+////				if(ti.getCoupleTwoOrThree() != null && !ti.getCoupleTwoOrThree().equals(0) && ti.getNbCourseCouple() != null && !ti.getNbCourseCouple().equals( 0)) {
+////				ti.setTxPlaceCouple(calculateNewPlacePercentage(ti.getCoupleTwoOrThree(), ti.getNbCourseCouple()-ti.getNbVictCouple()).doubleValue());
+////				}
+////				if(ti.getCoupleTwoOrThree() != null && ti.getCoupleTwoOrThree().equals(0)) {
+////					ti.setTxPlaceCouple(0d);
+////					}
+////				System.out.println("tttt-"+ti.getTxPlaceCouple());
+////				System.out.println();
+////				
+//				if (ti.getTxVictCouple() != null && ti.getTxVictCouple().equals(ti.getTxPlaceCouple())) {
 //					ti.setTxPlaceCouple(0d);
-//					}
-//				System.out.println("tttt-"+ti.getTxPlaceCouple());
-//				System.out.println();
-//				
-				if (ti.getTxVictCouple() != null && ti.getTxVictCouple().equals(ti.getTxPlaceCouple())) {
-					ti.setTxPlaceCouple(0d);
-				}
-			});
+//				}
+//			});
 
 			List<TurfInfos> listBytxp = allraceInfos.stream()
 					.filter(ti -> ti.getTxPlaceCouple() != null && ti.getTxPlaceCouple() != 0d)
@@ -327,11 +327,11 @@ public class UploadController {
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxVictCoupleHippo)).collect(Collectors.toList());
 			Collections.reverse(listBytxvh);
 
-			allraceInfos.forEach(ti -> {
-				if (ti.getTxVictCoupleHippo() != null && ti.getTxVictCoupleHippo().equals(ti.getTxPlaceCoupleHippo())) {
-					ti.setTxPlaceCoupleHippo(0d);
-				}
-			});
+//			allraceInfos.forEach(ti -> {
+//				if (ti.getTxVictCoupleHippo() != null && ti.getTxVictCoupleHippo().equals(ti.getTxPlaceCoupleHippo())) {
+//					ti.setTxPlaceCoupleHippo(0d);
+//				}
+//			});
 
 			List<TurfInfos> listBytxph = allraceInfos.stream()
 					.filter(ti -> ti.getTxPlaceCoupleHippo() != null && ti.getTxPlaceCoupleHippo() != 0d)
@@ -591,7 +591,7 @@ public class UploadController {
 
 //	         allraceInfos.forEach(null)
 
-		navbarInfos(model, allInfos);
+		navbarInfos(model);
 		
 //		allraceInfos.forEach(ti-> {
 //			System.out.println(ti.getIsRunning() + " isrunning");
@@ -1558,34 +1558,49 @@ public class UploadController {
 	   return allRace;
    }
 
-	private void navbarInfos(Model model, List<TurfInfos> allInfos) {
+	   private void navbarInfos(Model model) {
+		   
+//		   List<TurfInfos> allInfos = turfInfosRepository.findAll();
 
-		// DATES
-		Set<String> dates = allInfos.stream().map(TurfInfos::getJour).sorted().collect(Collectors.toSet());
-		List<String> datesSorted = dates.stream().collect(Collectors.toList());
-		Collections.sort(datesSorted, (o1, o2) -> o1.compareTo(o2));
-		model.addAttribute("datesnav", datesSorted);
-		// REUNIONS
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String jour = LocalDateTime.now().format(formatter);
-		model.addAttribute("journav", jour);
+		   
+		   //DATES
+			 Set<String> dates = turfInfosRepository.findAllJours()
+		  			 .stream()
+		  			 .collect(Collectors.toSet());
+//	  	 Set<String> dates = allInfos.stream()
+//					.map(TurfInfos :: getJour)
+//					.sorted()
+//					.collect(Collectors.toSet());
+	  	 
+	  	List<String> datesSorted = dates.stream().collect(Collectors.toList());
+	  	Collections.sort(datesSorted, (o1, o2) -> o1.compareTo(o2));
+	        model.addAttribute("datesnav", datesSorted);		   
+	       //REUNIONS
+	       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	       String jour = LocalDateTime.now().format(formatter);
+	       model.addAttribute("journav", jour);
+	       System.out.println(jour);
+	       
+	       
+//	    	 Set<String> reunions = allInfos.stream()
+//					.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+//	  				.map(TurfInfos :: getReunionstring)
+////	  				.sorted()
+//	  				.collect(Collectors.toSet());
+////	    	 reunions.sort( Comparator.comparing( String::toString));
+//	         model.addAttribute("reunionsofday", reunions);
 
-//    	 Set<String> reunions = allInfos.stream()
-//				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
-//  				.map(TurfInfos :: getReunionstring)
-////  				.sorted()
-//  				.collect(Collectors.toSet());
-////    	 reunions.sort( Comparator.comparing( String::toString));
-//         model.addAttribute("reunionsofday", reunions);
+		   List<TurfInfos> allByJour = turfInfosRepository.findAllByJour(jour);
 
-		Set<String> reunions = allInfos.stream()
-				.filter(ti -> ti.getReunionstring() != null && ti.getJour().equals(jour) && ti.getR().length() < 3)
-				.map(TurfInfos::getReunionstring).collect(Collectors.toSet());
-		List<String> list = new ArrayList<String>(reunions);
-		Collections.sort(list);
-		reunions = new LinkedHashSet<>(list);
-		model.addAttribute("reunionsofday", reunions);
-	}
+	         Set<String> reunions = allByJour.stream()
+//	 				.filter(ti-> ti.getJour().equals(jour))
+	        			.map(TurfInfos :: getReunionstring)
+	        			.collect(Collectors.toSet());
+	        			List<String> list = new ArrayList<String>(reunions);
+	        			Collections.sort(list);        			
+	        			reunions = new LinkedHashSet<>(list);
+	        	         model.addAttribute("reunionsofday", reunions);
+	   }
 
 //   private Integer calculateNewPlacePercentage(Integer twoOrThreeRank, Integer nbCourses) {
 //	   

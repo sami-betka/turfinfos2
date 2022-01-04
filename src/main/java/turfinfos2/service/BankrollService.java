@@ -1,5 +1,6 @@
 package turfinfos2.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -30,16 +31,6 @@ public class BankrollService {
 			
 			list.get(i).setAnte(ante);
 			
-//			if(list.get(i).getMinRapportProbable() == 1.4d || list.get(i).getMinRapportProbable() == 1.5d) {
-//				list.get(i).setAnte(ante/1.2d);
-//			}
-//			if(list.get(i).getMinRapportProbable() == 1.6d || list.get(i).getMinRapportProbable() == 1.7d) {
-//				list.get(i).setAnte(ante/1.4d);
-//			}
-//			if(list.get(i).getMinRapportProbable() >= 1.8d) {
-//				list.get(i).setAnte(ante/1.6d);
-//			}
-			
 			newBankrollAmount -= ante; 
 			newBankrollAmount += ante * list.get(i).getLiveOddPlace(); 
 //			if(list.get(i).getRanking().equals(1)) {
@@ -51,9 +42,26 @@ public class BankrollService {
 				maximalBankrollAmount = newBankrollAmount;
 				ante = maximalBankrollAmount/divider;
 			}
+			////////CALCULATE KELLY ANTE
+			
+//			Double pourcentage = 0d;
+//			Double cote = list.get(i).getMinRapportProbable();
+//			Double proba = (10 - list.get(i).getLiveOdd()) / 10;
+//			pourcentage = (cote * proba - 1) / (cote - 1) * 100;
+//			System.out.println(pourcentage + " %");
+//			if(pourcentage < 20 ) {
+//				System.out.println(pourcentage + " %");
+//				ante = (pourcentage * maximalBankrollAmount) / 100;
+//			}
+			
+			/////////////////////////////
 			if(newBankrollAmount < minimumBankrollAmount) {
 				minimumBankrollAmount = newBankrollAmount;
 			}
+			
+//			LocalDate date = LocalDate.parse(list.get(i).getJour());
+//			date.getm
+
 		}
 		
 		model.addAttribute("newBankrollAmount", newBankrollAmount);

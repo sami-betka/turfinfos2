@@ -53,14 +53,18 @@ public class ArchiveService {
 //		        && iter <= 2
 				&& info.getHasBetTypes() == true 
 				&& info.getIsPremium() == true
-			    && (   !info.getJour().contains("2020-08") && !info.getJour().contains("2020-09") && !info.getJour().contains("2020-10")   )
+//			    && info.getJour().contains("2021-")
 //		        && (info.getFiveEtoile() == true || info.getThreeEtoile() == true)
 //			    && info.getRaceSpecialty().equals("P")
 //			    && info.getCountry() != null && info.getCountry().equals("FR")
+//			    && info.getNoteProno() != null && info.getNoteProno() >=40
+//			    && info.getMinRapportProbable() != null && info.getMinRapportProbable() != 0 && info.getLiveOdd() != null && info.getLiveOdd() != 0
 
-				&& info.getLiveOdd() != null && info.getLiveOdd() != 0 && info.getLiveOdd() < 2.5
-			    && info.getMinRapportProbable() != null && info.getMinRapportProbable() != 0 && info.getMinRapportProbable() > 1.3d
-			    
+//				&& info.getIsFavori() != null && info.getIsFavori() == true
+				&& info.getLiveOdd() != null && info.getLiveOdd() != 0 && info.getLiveOdd() <= 2.4
+			    && info.getMinRapportProbable() != null && info.getMinRapportProbable() != 0 && info.getMinRapportProbable() >= 1.4d
+//			    && info.getMaxRapportProbable() != null && info.getMaxRapportProbable() != 0 && info.getMaxRapportProbable() < 3
+
 		        && info.getRecence() != null && info.getRecence() < 60 && Integer.valueOf(info.getCoursescheval()) > 0
 
 		        
@@ -68,7 +72,8 @@ public class ArchiveService {
 //				&& info.getAutostart() == false
 //			    && info.getNumero() < 7 && info.getNumero() > 2
 
-//				&& (pronoList.get(0).getId().equals(info.getId()) || pronoList.get(1).getId().equals(info.getId())
+//				&& (pronoList.get(0).getId().equals(info.getId()) 
+//						|| pronoList.get(1).getId().equals(info.getId())
 //						|| pronoList.get(2).getId().equals(info.getId()) || pronoList.get(3).getId().equals(info.getId())
 //						|| pronoList.get(4).getId().equals(info.getId())
 //				)
@@ -139,9 +144,11 @@ public class ArchiveService {
 	}
 
 
-	public Map<String, Object> setAllPlaceFirstPronoList(List<TurfInfos> allList, List<Resultat> allResults) {
+	public Map<String, Object> setAllPlaceFirstPronoList(List<TurfInfos> all, List<Resultat> allResults) {
 		
-		final List<TurfInfos> all = allList;
+//		final List<TurfInfos> all = allList;
+//		List<TurfInfos> all = allList;
+
 		
 		List<TurfInfos> finalList = new ArrayList<>();
 		List<ArchiveDeuxSurQuatre> deuxSurQuatres = new ArrayList<>();
@@ -158,24 +165,77 @@ public class ArchiveService {
 				Collections.reverse(list);
 				distinctJours = new LinkedHashSet<>(list);
 				
-				distinctJours.forEach(j->{
+				distinctJours
+//				.stream()
+//				.filter(str-> !str.contains("2019-"))
+				.forEach(j->{
 					
-					  Set<String> reunions = all.stream()
-				 				.filter(ti -> ti.getJour().equals(j))
-				        			.map(TurfInfos :: getReunionstring)
-				        			.collect(Collectors.toSet());
-				        			List<String> reunionsList = new ArrayList<String>(reunions);
-//				        			Collections.sort(reunionsList);        			
-				        			reunions = new LinkedHashSet<>(reunionsList);
-         				
-				     reunions.forEach(r->{
-				    	 
-				    	 ;
-				    	 finalList.addAll((List<TurfInfos>) setPlaceFirstPronoList(j, r, all, allResults).get("turfinfos"));
-				    	 deuxSurQuatres.addAll((List<ArchiveDeuxSurQuatre>) setPlaceFirstPronoList(j, r, all, allResults).get("deuxsurquatres"));
+						  Set<String> reunions = all.stream()
+					 				.filter(ti -> ti.getJour().equals(j) && ti.getIsPremium().equals(true) && ti.getMinRapportProbable() != null)
+					        			.map(TurfInfos :: getReunionstring)
+					        			.collect(Collectors.toSet());
+					        			List<String> reunionsList = new ArrayList<String>(reunions);
+//					        			Collections.sort(reunionsList);        			
+					        			reunions = new LinkedHashSet<>(reunionsList);
+	         				
+					     reunions.forEach(r->{
+					    	 
+					    	 ;
+					    	 finalList.addAll((List<TurfInfos>) setPlaceFirstPronoList(j, r, all.stream()
+					    			 .filter(ti->ti.getJour().equals(j) && ti.getReunionstring().equals(r))
+					    			 .collect(Collectors.toList())
+					    			 
+					    			 , allResults.stream()
+					    			 .filter(res->res.getJour().equals(j))
+					    			 .collect(Collectors.toList())
+					    			 )
+					    			 .get("turfinfos"));
+					    	 
+					    	 deuxSurQuatres.addAll((List<ArchiveDeuxSurQuatre>) setPlaceFirstPronoList(j, r, 
+					    			 all.stream()
+					    			 .filter(ti->ti.getJour().equals(j) && ti.getReunionstring().equals(r))
+					    			 .collect(Collectors.toList()), 
+					    			 allResults.stream()
+					    			 .filter(res->res.getJour().equals(j))
+					    			 .collect(Collectors.toList()))
+					    			 .get("deuxsurquatres"));
 
-				    	 
-				     });
+					    	 
+					     });
+					
+					
+//					  Set<String> reunions = all.stream()
+//				 				.filter(ti -> ti.getJour().equals(j))
+//				        			.map(TurfInfos :: getReunionstring)
+//				        			.collect(Collectors.toSet());
+//				        			List<String> reunionsList = new ArrayList<String>(reunions);
+////				        			Collections.sort(reunionsList);        			
+//				        			reunions = new LinkedHashSet<>(reunionsList);
+//         				
+//				     reunions.forEach(r->{
+//				    	 
+//				    	 ;
+//				    	 finalList.addAll((List<TurfInfos>) setPlaceFirstPronoList(j, r, all.stream()
+//				    			 .filter(ti->ti.getJour().equals(j) && ti.getReunionstring().equals(r))
+//				    			 .collect(Collectors.toList())
+//				    			 
+//				    			 , allResults.stream()
+//				    			 .filter(res->res.getJour().equals(j))
+//				    			 .collect(Collectors.toList())
+//				    			 )
+//				    			 .get("turfinfos"));
+//				    	 
+//				    	 deuxSurQuatres.addAll((List<ArchiveDeuxSurQuatre>) setPlaceFirstPronoList(j, r, 
+//				    			 all.stream()
+//				    			 .filter(ti->ti.getJour().equals(j) && ti.getReunionstring().equals(r))
+//				    			 .collect(Collectors.toList()), 
+//				    			 allResults.stream()
+//				    			 .filter(res->res.getJour().equals(j))
+//				    			 .collect(Collectors.toList()))
+//				    			 .get("deuxsurquatres"));
+//
+//				    	 
+//				     });
 				});
 				System.out.println("big list = " + finalList.size());
 				
@@ -467,13 +527,13 @@ public class ArchiveService {
 					 if(optResultat.isPresent()) {
 						   Resultat result = optResultat.get();
 //						   System.out.println(result.toString());
-                     if(ti.getNumero().equals(Integer.valueOf(result.getSimplePlace1()))) {
+                     if(result.getSimplePlace1() != null && result.getSimplePlace1().length() < 3 && ti.getNumero().equals(Integer.valueOf(result.getSimplePlace1()))) {
                     	 ti.setLiveOddPlace(result.getSimplePlaceRapport1());
                      }
-                     if(ti.getNumero().equals(Integer.valueOf(result.getSimplePlace2()))) {
+                     if(result.getSimplePlace2() != null && result.getSimplePlace2().length() < 3 &&ti.getNumero().equals(Integer.valueOf(result.getSimplePlace2()))) {
                     	 ti.setLiveOddPlace(result.getSimplePlaceRapport2());
                      }
-                     if(result.getSimplePlace3() != null && ti.getNumero().equals(Integer.valueOf(result.getSimplePlace3()))) {
+                     if(result.getSimplePlace3() != null && result.getSimplePlace3().length() < 3 && ti.getNumero().equals(Integer.valueOf(result.getSimplePlace3()))) {
                     	 ti.setLiveOddPlace(result.getSimplePlaceRapport3());
                      }
                      

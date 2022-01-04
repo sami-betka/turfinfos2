@@ -97,44 +97,50 @@ public class MainController {
     
     ///////////////////////////////////////////////////////////////////////////////
     
-    private void navbarInfos(Model model) {
- 	   
- 	   List<TurfInfos> allInfos = turfInfosRepository.findAll();
- 	   System.out.println("gggg" +allInfos.size());
- 	   
- 	   //DATES
-   	 Set<String> dates = allInfos.stream()
- 				.map(TurfInfos :: getJour)
- 				.sorted()
- 				.collect(Collectors.toSet());
-   	 
- 	List<String> datesSorted = dates.stream().collect(Collectors.toList());
-  	Collections.sort(datesSorted, (o1, o2) -> o1.compareTo(o2));
-        model.addAttribute("datesnav", datesSorted);
- 	   
-        //REUNIONS
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String jour = LocalDateTime.now().format(formatter);
-        model.addAttribute("journav", jour);
-        System.out.println(jour);
-        
-        
-//     	 Set<String> reunions = allInfos.stream()
-// 				.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
-//   				.map(TurfInfos :: getReunionstring)
-////   				.sorted()
-//   				.collect(Collectors.toSet());
-//          model.addAttribute("reunionsofday", reunions);
+	   private void navbarInfos(Model model) {
+		   
+//		   List<TurfInfos> allInfos = turfInfosRepository.findAll();
 
-    
-          Set<String> reunions = allInfos.stream()
-  				.filter(ti-> ti.getReunionstring() != null && ti.getJour().equals(jour) && ti.getR().length()<3)
-         			.map(TurfInfos :: getReunionstring)
-         			.collect(Collectors.toSet());
-         			List<String> list = new ArrayList<String>(reunions);
-         			Collections.sort(list);        			
-         			reunions = new LinkedHashSet<>(list);
-         	         model.addAttribute("reunionsofday", reunions);
-    }
+		   
+		   //DATES
+			 Set<String> dates = turfInfosRepository.findAllJours()
+		  			 .stream()
+		  			 .collect(Collectors.toSet());
+//	  	 Set<String> dates = allInfos.stream()
+//					.map(TurfInfos :: getJour)
+//					.sorted()
+//					.collect(Collectors.toSet());
+	  	 
+	  	List<String> datesSorted = dates.stream().collect(Collectors.toList());
+	  	Collections.sort(datesSorted, (o1, o2) -> o1.compareTo(o2));
+	        model.addAttribute("datesnav", datesSorted);		   
+	       //REUNIONS
+	       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	       String jour = LocalDateTime.now().format(formatter);
+	       model.addAttribute("journav", jour);
+	       System.out.println(jour);
+	       
+	       
+//	    	 Set<String> reunions = allInfos.stream()
+//					.filter(ti-> ti.getJour().equals(jour) && ti.getR().length()<3)
+//	  				.map(TurfInfos :: getReunionstring)
+////	  				.sorted()
+//	  				.collect(Collectors.toSet());
+////	    	 reunions.sort( Comparator.comparing( String::toString));
+//	         model.addAttribute("reunionsofday", reunions);
+
+		   List<TurfInfos> allByJour = turfInfosRepository.findAllByJour(jour);
+
+	         Set<String> reunions = allByJour.stream()
+//	 				.filter(ti-> ti.getJour().equals(jour))
+	        			.map(TurfInfos :: getReunionstring)
+	        			.collect(Collectors.toSet());
+	         
+	        			List<String> list = new ArrayList<String>(reunions);
+	        			Collections.sort(list);        			
+	        			reunions = new LinkedHashSet<>(list);
+	        	         model.addAttribute("reunionsofday", reunions);
+	   }
+
         
 }

@@ -11,6 +11,9 @@ import turfinfos2.model.TurfInfos;
 
 
 public interface TurfInfosRepository extends JpaRepository<TurfInfos, Long> {
+	
+	@Query("SELECT jour FROM TurfInfos t")
+	List<String> findAllJours();
 
 	@Transactional
 	List<TurfInfos> deleteByJour(String jour);
