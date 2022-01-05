@@ -122,8 +122,8 @@ public class ImportJSONController {
 		List<TurfInfos> allTurfInfosToSave = new ArrayList<>();
 		List<Resultat> allResultToSave = new ArrayList<>();
 
-		List<TurfInfos> all = turfInfosRepository.findAll();
-		List<Resultat> allResults = resultRepository.findAll();
+//		List<TurfInfos> all = turfInfosRepository.findAll();
+//		List<Resultat> allResults = resultRepository.findAll();
 
 
 
@@ -140,11 +140,11 @@ public class ImportJSONController {
 		  dates.forEach(ld->{
 			 
 				try {
-					List<TurfInfos> all2 = all.stream()
-							.filter(ti->ti.getJour().equals(ld.toString()))
+					List<TurfInfos> all2 = turfInfosRepository.findAllByJour(ld.toString()).stream()
+//							.filter(ti->ti.getJour().equals(ld.toString()))
 							.collect(Collectors.toList());
-					List<Resultat> allResults2 = allResults.stream()
-							.filter(r->r.getJour().equals(ld.toString()))
+					List<Resultat> allResults2 = resultRepository.findAllByJour(ld.toString()).stream()
+//							.filter(r->r.getJour().equals(ld.toString()))
 							.collect(Collectors.toList());
 					
 					Map<String, Object> map = importJSONService.createRapportsInfosFromPMUJson(ld.toString(), all2, allResults2);
