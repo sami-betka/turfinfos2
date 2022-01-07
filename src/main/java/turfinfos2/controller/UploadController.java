@@ -250,9 +250,16 @@ public class UploadController {
 			// création des listes filtrées et triées par parametre voulu
 			
 			allraceInfos.forEach(ti -> {
-				ti.setPourcPlaceChevalHippo(ti.getPourcPlaceChevalHippo() - ti.getPourcVictChevalHippo());
-				ti.setTxPlaceCouple(ti.getTxPlaceCouple() - ti.getTxVictCouple());
-				ti.setTxPlaceCoupleHippo(ti.getTxPlaceCoupleHippo() - ti.getTxVictCoupleHippo());
+				if(ti.getPourcVictChevalHippo() != null && ti.getPourcPlaceChevalHippo() != null) {
+					ti.setPourcPlaceChevalHippo(ti.getPourcPlaceChevalHippo() - ti.getPourcVictChevalHippo());
+				}
+				if(ti.getTxVictCouple()!= null && ti.getTxPlaceCouple() != null) {
+					ti.setTxPlaceCouple(ti.getTxPlaceCouple() - ti.getTxVictCouple());
+				}
+				if(ti.getTxVictCoupleHippo() != null && ti.getTxPlaceCoupleHippo() != null) {
+					ti.setTxPlaceCoupleHippo(ti.getTxPlaceCoupleHippo() - ti.getTxVictCoupleHippo());
+				}
+
 		});
 
 			List<TurfInfos> listBypvch = allraceInfos.stream()
