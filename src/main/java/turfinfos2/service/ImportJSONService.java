@@ -969,9 +969,10 @@ public class ImportJSONService {
 //				}
 //				/////////////////////////////////////////////////////////////////////////////
 //				//////////////////////////////////////////////////////////////////////////////
-//				turfInfo.setNbCourseCoupleHippo(node.get(i).get("nbCourseCoupleHippo").intValue());
-//				turfInfo.setTxVictCoupleHippo(node.get(i).get("TxVictCoupleHippo").doubleValue());
-//				turfInfo.setTxPlaceCoupleHippo(node.get(i).get("TxPlaceCoupleHippo").doubleValue());
+				turfInfo.setNbCourseCoupleHippo(node.get(i).get("nbCourseCoupleHippo").intValue());
+				turfInfo.setTxVictCoupleHippo(node.get(i).get("TxVictCoupleHippo").doubleValue());
+				turfInfo.setTxPlaceCoupleHippo(node.get(i).get("TxPlaceCoupleHippo").doubleValue());
+				
 //				turfInfo.setNbrCourseChevalHippo(String.valueOf(node.get(i).get("nbrCourseChevalHippo").intValue()));
 //				turfInfo.setCoursescheval(String.valueOf(node.get(i).get("coursescheval").intValue()));
 //				
@@ -1044,9 +1045,10 @@ public class ImportJSONService {
 //					}
 					/////////////////////////////////////////////////////////////////////////////
 					//////////////////////////////////////////////////////////////////////////////
-//					turfInfo.setNbCourseCoupleHippo(node.get(i).get("nbCourseCoupleHippo").intValue());
-//					turfInfo.setTxVictCoupleHippo(node.get(i).get("TxVictCoupleHippo").doubleValue());
-//					turfInfo.setTxPlaceCoupleHippo(node.get(i).get("TxPlaceCoupleHippo").doubleValue());
+					turfInfo.setNbCourseCoupleHippo(node.get(i).get("nbCourseCoupleHippo").intValue());
+					turfInfo.setTxVictCoupleHippo(node.get(i).get("TxVictCoupleHippo").doubleValue());
+					turfInfo.setTxPlaceCoupleHippo(node.get(i).get("TxPlaceCoupleHippo").doubleValue());
+					
 //					turfInfo.setNbrCourseChevalHippo(String.valueOf(node.get(i).get("nbrCourseChevalHippo").intValue()));
 //					turfInfo.setCoursescheval(String.valueOf(node.get(i).get("coursescheval").intValue()));
 //					

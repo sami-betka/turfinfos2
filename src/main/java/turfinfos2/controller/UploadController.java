@@ -516,7 +516,7 @@ public class UploadController {
 						model.addAttribute("specialty", "galop");
 					}
 				} else {
-					model.addAttribute("specialty", "galop");
+					model.addAttribute("specialty", "none");
 				}
 
 				model.addAttribute(numToString(num) + "exists", true);
