@@ -350,22 +350,22 @@ public class UploadController {
 			List<TurfInfos> listBypvcs = allraceInfos.stream()
 					.filter(ti -> ti.getPourcVictChevalSurface() != null && ti.getPourcVictChevalSurface() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictChevalSurface)).collect(Collectors.toList());
-//			Collections.reverse(listBytxvh);
+			Collections.reverse(listBypvcs);
 			
 			List<TurfInfos> listByppcs = allraceInfos.stream()
 					.filter(ti -> ti.getPourcPlaceChevalSurface() != null && ti.getPourcPlaceChevalSurface() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceChevalSurface)).collect(Collectors.toList());
-//			Collections.reverse(listBytxvh);
+			Collections.reverse(listByppcs);
 			
 			List<TurfInfos> listBypvcsh = allraceInfos.stream()
 					.filter(ti -> ti.getPourcVictChevalSurfaceHippo() != null && ti.getPourcVictChevalSurfaceHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictChevalSurfaceHippo)).collect(Collectors.toList());
-//			Collections.reverse(listBytxvh);
+			Collections.reverse(listBypvcsh);
 			
 			List<TurfInfos> listByppcsh = allraceInfos.stream()
 					.filter(ti -> ti.getPourcPlaceChevalSurfaceHippo() != null && ti.getPourcPlaceChevalSurfaceHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceChevalSurfaceHippo)).collect(Collectors.toList());
-//			Collections.reverse(listBytxvh);
+			Collections.reverse(listByppcsh);
 
 			// CHRONOS
 			List<TurfInfos> listByChronos = allraceInfos.stream().filter(ti -> ti.getChrono() != null)
