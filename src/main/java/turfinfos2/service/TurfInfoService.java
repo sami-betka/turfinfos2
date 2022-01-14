@@ -143,6 +143,23 @@ public class TurfInfoService {
     	infoToUpdate.setChevalTwoOrThreeHippo(info.getChevalTwoOrThreeHippo());
     	infoToUpdate.setNbVictChevalHippo(info.getNbVictChevalHippo());
     	
+    	infoToUpdate.setSurface(info.getSurface());
+
+		   if(infoToUpdate.getRaceSpecialty().equals("P") && infoToUpdate.getSurface().equals("PSF")) {
+			   
+				infoToUpdate.setNbCourseSurface(info.getNbCourseSurface());
+		    	infoToUpdate.setNbCourseSurfaceHippo(info.getNbCourseSurfaceHippo());
+		    	infoToUpdate.setPourcVictChevalSurface(info.getPourcVictChevalSurface());
+		    	infoToUpdate.setPourcPlaceChevalSurface(info.getPourcPlaceChevalSurface());
+		    	infoToUpdate.setPourcVictChevalSurfaceHippo(info.getPourcVictChevalSurfaceHippo());
+		    	infoToUpdate.setPourcPlaceChevalSurfaceHippo(info.getPourcPlaceChevalSurfaceHippo());   
+		   }
+
+    
+
+
+
+
     	
     	} 
     	//////////STATS END

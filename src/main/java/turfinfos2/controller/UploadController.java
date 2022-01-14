@@ -195,6 +195,7 @@ public class UploadController {
 				.filter(ti -> 
 				ti.getIsRunning() != null && ti.getIsRunning() == true 
 				&& ti.getIsPremium() != null && ti.getIsPremium().equals(true)
+				&& ti.getRecence() != null && ti.getRecence() < 90
 				)
 				.collect(Collectors.toList());
 
@@ -344,6 +345,27 @@ public class UploadController {
 					.filter(ti -> ti.getTxPlaceCoupleHippo() != null && ti.getTxPlaceCoupleHippo() != 0d)
 					.sorted(Comparator.comparingDouble(TurfInfos::getTxPlaceCoupleHippo)).collect(Collectors.toList());
 			Collections.reverse(listBytxph);
+			
+			//Surface
+			List<TurfInfos> listBypvcs = allraceInfos.stream()
+					.filter(ti -> ti.getPourcVictChevalSurface() != null && ti.getPourcVictChevalSurface() != 0d)
+					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictChevalSurface)).collect(Collectors.toList());
+			Collections.reverse(listBytxvh);
+			
+			List<TurfInfos> listByppcs = allraceInfos.stream()
+					.filter(ti -> ti.getPourcPlaceChevalSurface() != null && ti.getPourcPlaceChevalSurface() != 0d)
+					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceChevalSurface)).collect(Collectors.toList());
+			Collections.reverse(listBytxvh);
+			
+			List<TurfInfos> listBypvcsh = allraceInfos.stream()
+					.filter(ti -> ti.getPourcVictChevalSurfaceHippo() != null && ti.getPourcVictChevalSurfaceHippo() != 0d)
+					.sorted(Comparator.comparingDouble(TurfInfos::getPourcVictChevalSurfaceHippo)).collect(Collectors.toList());
+			Collections.reverse(listBytxvh);
+			
+			List<TurfInfos> listByppcsh = allraceInfos.stream()
+					.filter(ti -> ti.getPourcPlaceChevalSurfaceHippo() != null && ti.getPourcPlaceChevalSurfaceHippo() != 0d)
+					.sorted(Comparator.comparingDouble(TurfInfos::getPourcPlaceChevalSurfaceHippo)).collect(Collectors.toList());
+			Collections.reverse(listBytxvh);
 
 			// CHRONOS
 			List<TurfInfos> listByChronos = allraceInfos.stream().filter(ti -> ti.getChrono() != null)
@@ -375,9 +397,7 @@ public class UploadController {
 					.filter(ti -> ti.getDistanceAndSpecialtyChrono() != null).sorted(Comparator
 							.comparing(TurfInfos::getDistanceAndSpecialtyChrono).thenComparing(TurfInfos::getNumero))
 					.collect(Collectors.toList());
-//		        			for(TurfInfos info: listByChronoParisTurf) {
-//		        				System.out.println(info.getDistanceAndSpecialtyChrono());
-//		        			}
+
 
 			// CLASSEMENT A L'ARRIVEE
 			List<TurfInfos> listByRanking = allraceInfos.stream()
@@ -395,7 +415,7 @@ public class UploadController {
 
 					listBytxv, listBytxp, listBytxvh, listBytxph,
 
-					listByppc, listByChronos, model)
+					listByppc, listByChronos, listBypvcs, listByppcs, listBypvcsh, listByppcsh, model)
 
 							.stream().filter(ti -> ti.getNoteProno() != null && ti.getNoteProno() > 0)
 							.sorted(Comparator.comparingDouble(TurfInfos::getNoteProno)).collect(Collectors.toList());
@@ -458,6 +478,14 @@ public class UploadController {
 				model.addAttribute(numToString(num) + "txp", listBytxp);
 				model.addAttribute(numToString(num) + "txvh", listBytxvh);
 				model.addAttribute(numToString(num) + "txph", listBytxph);
+				
+				model.addAttribute(numToString(num) + "surface", allraceInfos.get(0).getSurface());
+				model.addAttribute(numToString(num) + "pvcs", listBypvcs);
+				model.addAttribute(numToString(num) + "ppcs", listByppcs);
+				model.addAttribute(numToString(num) + "pvcsh", listBypvcsh);
+				model.addAttribute(numToString(num) + "ppcsh", listByppcsh);
+
+
 
 				if (listByChronoParisTurf.size() < 9) {
 					model.addAttribute(numToString(num) + "paristurfchronoslist", listByChronoParisTurf);
@@ -475,8 +503,8 @@ public class UploadController {
 					model.addAttribute(numToString(num) + "pronoslist", crossProno(listByNoteProno, allraceInfos.size()));
 				}
 				if (!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0
-						&& listByNoteProno.size() >= 11) {
-					model.addAttribute(numToString(num) + "pronoslist", crossProno(listByNoteProno.subList(0, 11), allraceInfos.size()));
+						&& listByNoteProno.size() >= 9) {
+					model.addAttribute(numToString(num) + "pronoslist", crossProno(listByNoteProno.subList(0, 9), allraceInfos.size()));
 				}
 				if (listByNoteProno.isEmpty()) {
 					model.addAttribute(numToString(num) + "pronoslist", new ArrayList<>());
@@ -739,7 +767,10 @@ public class UploadController {
 			List<TurfInfos> listBytxv, List<TurfInfos> listBytxp, List<TurfInfos> listBytxvh,
 			List<TurfInfos> listBytxph, List<TurfInfos> listByppc,
 
-			List<TurfInfos> listByChronos, Model model) {
+			List<TurfInfos> listByChronos,
+			
+			List<TurfInfos> listBypvcs, List<TurfInfos> listByppcs, List<TurfInfos> listBypvcsh,  List<TurfInfos> listByppcsh,
+			Model model) {
 
 		calculateNoteProno(allraceInfos, listBypvch, 1d);
 		calculateNoteProno(allraceInfos, listBypvjh, 2d);
@@ -756,8 +787,12 @@ public class UploadController {
 
 //	   calculateNoteProno(allraceInfos, listByChronos, 11d);
 		calculateNoteProno(allraceInfos, listByppc, 12d);
+		
+		calculateNoteProno(allraceInfos, listBypvcs, 13d);
+		calculateNoteProno(allraceInfos, listByppcs, 14d);
+		calculateNoteProno(allraceInfos, listBypvcsh, 15d);
+		calculateNoteProno(allraceInfos, listByppcsh, 16d);
 
-//	   System.out.println((70d/100)*75d + "tauxcrack");
 
 		return allraceInfos;
 	}
@@ -896,6 +931,20 @@ public class UploadController {
 //	   }
 		if (percentParam == 12d) {
 			tinf.setNotePercentageParameter(tinf.getPourcPlaceCheval());
+		}
+		///////////////////////////////////////////
+		
+		if (percentParam == 13d) {
+			tinf.setNotePercentageParameter(tinf.getPourcVictChevalSurface());
+		}
+		if (percentParam == 14d) {
+			tinf.setNotePercentageParameter(tinf.getPourcPlaceChevalSurface());
+		}
+		if (percentParam == 15d) {
+			tinf.setNotePercentageParameter(tinf.getPourcVictChevalSurfaceHippo());
+		}
+		if (percentParam == 16d) {
+			tinf.setNotePercentageParameter(tinf.getPourcPlaceChevalSurfaceHippo());
 		}
 
 		return tinf;

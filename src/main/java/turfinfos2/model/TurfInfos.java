@@ -259,10 +259,24 @@ public class TurfInfos {
 	private String jockey;
 	
 	private Integer age;
+	
+	private String surface;
+	
+	private Integer nbCourseSurface;
+	
+	private Integer nbCourseSurfaceHippo;
+	
+	private Double pourcVictChevalSurface;
+	
+	private Double pourcPlaceChevalSurface;
+
+	private Double pourcVictChevalSurfaceHippo;
+
+	private Double pourcPlaceChevalSurfaceHippo;
 
 
-	
-	
+
+
 	private Double ante;
 	
 	private Boolean threeEtoile;
@@ -324,7 +338,10 @@ public class TurfInfos {
 			Boolean isFavori, Boolean nulStats, String formFigs, Double ante, Boolean isSupplemented, String picto,
 			Double minRapportProbable, Double maxRapportProbable, Boolean threeEtoile, Boolean fiveEtoile, String country,
 			Boolean autostart, Boolean blueEtoile, Integer calculateEntraineurNumber, String jockey, Integer age,
-			String pronoFavoris, String pronoChancesRegulieres, Boolean purpleEtoile) {
+			String pronoFavoris, String pronoChancesRegulieres, Boolean purpleEtoile, String surface, Integer nbCourseSurface,
+			Integer nbCourseSurfaceHippo, Double pourcVictChevalSurface, Double pourcPlaceChevalSurface, Double pourcVictChevalSurfaceHippo,
+			Double pourcPlaceChevalSurfaceHippo
+			) {
 		
 		this.id = id;
 		this.horseId = horseId;
@@ -399,6 +416,8 @@ public class TurfInfos {
 		this.age = age;
 		this.pronoFavoris = pronoFavoris;
 		this.pronoChancesRegulieres = pronoChancesRegulieres;
+		this.surface = surface;
+
 
 
 
@@ -1170,6 +1189,62 @@ public class TurfInfos {
 
 	public void setPurpleEtoile(Boolean purpleEtoile) {
 		this.purpleEtoile = purpleEtoile;
+	}
+
+	public String getSurface() {
+		return surface;
+	}
+
+	public void setSurface(String surface) {
+		this.surface = surface;
+	}
+
+	public Integer getNbCourseSurface() {
+		return nbCourseSurface;
+	}
+
+	public void setNbCourseSurface(Integer nbCourseSurface) {
+		this.nbCourseSurface = nbCourseSurface;
+	}
+
+	public Integer getNbCourseSurfaceHippo() {
+		return nbCourseSurfaceHippo;
+	}
+
+	public void setNbCourseSurfaceHippo(Integer nbCourseSurfaceHippo) {
+		this.nbCourseSurfaceHippo = nbCourseSurfaceHippo;
+	}
+
+	public Double getPourcVictChevalSurface() {
+		return pourcVictChevalSurface;
+	}
+
+	public void setPourcVictChevalSurface(Double pourcVictChevalSurface) {
+		this.pourcVictChevalSurface = Precision.round(pourcVictChevalSurface, 2) ;
+	}
+
+	public Double getPourcPlaceChevalSurface() {
+		return pourcPlaceChevalSurface;
+	}
+
+	public void setPourcPlaceChevalSurface(Double pourcPlaceChevalSurface) {
+		this.pourcPlaceChevalSurface = Precision.round(pourcPlaceChevalSurface, 2) ;
+	}
+
+	public Double getPourcVictChevalSurfaceHippo() {
+		return pourcVictChevalSurfaceHippo;
+	}
+
+	public void setPourcVictChevalSurfaceHippo(Double pourcVictChevalSurfaceHippo) {
+		this.pourcVictChevalSurfaceHippo = Precision.round(pourcVictChevalSurfaceHippo, 2) ;
+	}
+
+	public Double getPourcPlaceChevalSurfaceHippo() {
+		return pourcPlaceChevalSurfaceHippo;
+	}
+
+	public void setPourcPlaceChevalSurfaceHippo(Double pourcPlaceChevalSurfaceHippo) {
+		this.pourcPlaceChevalSurfaceHippo = Precision.round(pourcPlaceChevalSurfaceHippo, 2) ;
 	}
 
 	
