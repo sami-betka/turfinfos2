@@ -248,7 +248,6 @@ public class UploadController {
 
 //			createClassementList(allraceInfos);
 
-			// création des listes filtrées et triées par parametre voulu
 			
 			allraceInfos.forEach(ti -> {
 				if(ti.getPourcVictChevalHippo() != null && ti.getPourcPlaceChevalHippo() != null) {
@@ -260,8 +259,16 @@ public class UploadController {
 				if(ti.getTxVictCoupleHippo() != null && ti.getTxPlaceCoupleHippo() != null) {
 					ti.setTxPlaceCoupleHippo(ti.getTxPlaceCoupleHippo() - ti.getTxVictCoupleHippo());
 				}
+				if(ti.getPourcVictChevalSurface() != null && ti.getPourcPlaceChevalSurface() != null) {
+					ti.setPourcPlaceChevalSurface(ti.getPourcPlaceChevalSurface() - ti.getPourcVictChevalSurface());
+				}
+				if(ti.getPourcVictChevalSurfaceHippo() != null && ti.getPourcPlaceChevalSurfaceHippo() != null) {
+					ti.setPourcPlaceChevalSurfaceHippo(ti.getPourcPlaceChevalSurfaceHippo() - ti.getPourcVictChevalSurfaceHippo());
+				}
 
 		});
+			
+			// création des listes filtrées et triées par paramètre voulu
 
 			List<TurfInfos> listBypvch = allraceInfos.stream()
 					.filter(ti -> ti.getPourcVictChevalHippo() != null && ti.getPourcVictChevalHippo() != 0d)
@@ -457,6 +464,7 @@ public class UploadController {
             ///////////// AFFECTER ETOILES///////////////
 			setEtoiles(listByChronos, listBypveh, listBypvjh, listBypvch, listByppch, listByppc, listBytxv, listBytxp, listBytxvh, listBytxph,
 					allraceInfos,
+					listBypvcs, listByppcs, listBypvcsh, listByppcsh,
 					allraceInfos.size());
 
 			Optional<TurfInfos> optTinf = allraceInfos.stream().findFirst();
@@ -1370,6 +1378,11 @@ public class UploadController {
 		  List<TurfInfos> vcoupleh,
 		  List<TurfInfos> pcoupleh,
 		  
+		  List<TurfInfos> vsurface,
+		  List<TurfInfos> psurface,
+		  List<TurfInfos> vsurfaceh,
+		  List<TurfInfos> psurfaceh,
+		  
 		  List<TurfInfos> allRace, int raceSize){
 	  
 	   
@@ -1545,6 +1558,54 @@ public class UploadController {
 				   }
 			   }
                
+               for(int i = 0; i < vsurface.size(); i++) {
+				   if(vsurface.get(i).getId().equals(ti.getId())) {
+					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
+				   }
+				   if(i == 4) {
+					   break;
+				   }
+			   }
+               
+               for(int i = 0; i < psurface.size(); i++) {
+				   if(psurface.get(i).getId().equals(ti.getId())) {
+					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
+				   }
+				   if(i == 4) {
+					   break;
+				   }
+			   }
+               
+               for(int i = 0; i < vsurfaceh.size(); i++) {
+				   if(vsurfaceh.get(i).getId().equals(ti.getId())) {
+					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
+				   }
+				   if(i == 4) {
+					   break;
+				   }
+			   }
+               
+               for(int i = 0; i < psurfaceh.size(); i++) {
+				   if(psurfaceh.get(i).getId().equals(ti.getId())) {
+					   fiveEtoilesNumber += 1;
+					   if(allRace.get(0).getRaceSpecialty().equals("P")) {
+						   purpleEtoilesNumber += 1;
+					   }
+				   }
+				   if(i == 4) {
+					   break;
+				   }
+			   }
+               
                //// Blue Etoile
                endIterAt = 2;
                if(entraineurs.size() > 0) {
@@ -1588,7 +1649,7 @@ public class UploadController {
 			   }
 			   
                
-			   if(fiveEtoilesNumber >= 6) {
+			   if(fiveEtoilesNumber >= 7) {
 				   ti.setFiveEtoile(true);
 			   } else {
 				   ti.setFiveEtoile(false);
@@ -1601,13 +1662,12 @@ public class UploadController {
 				   ti.setBlueEtoile(false);
 			   }
 			   
-			   if(purpleEtoilesNumber == 5) {
-				   ti.setPurpleEtoile(true);
-			   } else {
+//			   if(purpleEtoilesNumber == 5) {
+//				   ti.setPurpleEtoile(true);
+//			   } else {
 				   ti.setPurpleEtoile(false);
-			   }
+//			   }
 			      
-			 
 		   });
 		   
 
