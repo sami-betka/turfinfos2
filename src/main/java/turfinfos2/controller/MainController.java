@@ -66,10 +66,10 @@ public class MainController {
 
 	    }
 	
-	 @GetMapping("/test")
-	    public String test(Model model) {
+	 @GetMapping("/checkout")
+	    public String checkout(Model model) {
 
-	        return "fire";
+	        return "checkout";
 	    }
 
 	 @GetMapping("/redirect-to-reunion-infos")

@@ -559,7 +559,7 @@ public class ImportJSONService {
 		List<TurfInfos> allToSave = new ArrayList<>();
 		List<TurfInfos> all = turfInfosRepository.findAllByJour(jour);
 
-		String parisTurfId = "8aPuWVUYIPg4F_ER1ywnZ";
+		String parisTurfId = "TCMw2gC3Z8jXILfFKGPtT";
 		String extension = ".json";
 
 		/////////// create all day url/////////

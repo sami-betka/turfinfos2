@@ -6,18 +6,37 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stripe.Stripe;
 
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.TurfInfosRepository;
 
 @SpringBootApplication
 public class Turfinfos2Application {
+	
+	
+	@PostConstruct
+	public void setup() {
+		
+		Stripe.apiKey = "sk_test_51KLvojCuQTgl27fNE95cVSr5OhYDYpSXAEHstCXiS4EDhcqbjKnjMCw0FAYj2BrzRX2dLoKlVXKJOc3c05FovhuI00UE4MwxPF";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public static void main(String[] args) {
 //		create table if not exists persistent_logins ( 
