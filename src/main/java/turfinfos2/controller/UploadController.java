@@ -1649,9 +1649,12 @@ public class UploadController {
 			   }
 			   
                
-			   if(fiveEtoilesNumber >= 7) {
+			   if(allRace.size()>0 && allRace.get(0).getSurface().equals("PSF") && fiveEtoilesNumber >= 7) {
 				   ti.setFiveEtoile(true);
-			   } else {
+			   } else if(allRace.size()>0 && !allRace.get(0).getSurface().equals("PSF") && fiveEtoilesNumber >= 6) {
+				   ti.setFiveEtoile(true);
+			   }
+			   else {
 				   ti.setFiveEtoile(false);
 			   }
 			   
