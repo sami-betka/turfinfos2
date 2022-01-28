@@ -463,8 +463,8 @@ public class UploadController {
 
             ///////////// AFFECTER ETOILES///////////////
 			setEtoiles(listByChronos, listBypveh, listBypvjh, listBypvch, listByppch, listByppc, listBytxv, listBytxp, listBytxvh, listBytxph,
-					allraceInfos,
 					listBypvcs, listByppcs, listBypvcsh, listByppcsh,
+					allraceInfos,
 					allraceInfos.size());
 
 			Optional<TurfInfos> optTinf = allraceInfos.stream().findFirst();
@@ -1640,7 +1640,7 @@ public class UploadController {
 			   }
 		   }
                
-			   
+               
 			 
                if(threeEtoilesNumber >= 3) {
 				   ti.setThreeEtoile(true);
@@ -1649,9 +1649,11 @@ public class UploadController {
 			   }
 			   
                
-			   if(allRace.size()>0 && allRace.get(0).getSurface().equals("PSF") && fiveEtoilesNumber >= 7) {
+			   ti.setFiveEtoile(false);
+
+			   if(allRace.size()>0 && allRace.get(0).getSurface() != "PSF" && fiveEtoilesNumber >= 6) {
 				   ti.setFiveEtoile(true);
-			   } else if(allRace.size()>0 && !allRace.get(0).getSurface().equals("PSF") && fiveEtoilesNumber >= 6) {
+			   } else if(allRace.size()>0 && allRace.get(0).getSurface() == "PSF" && fiveEtoilesNumber >= 7) {
 				   ti.setFiveEtoile(true);
 			   }
 			   else {
