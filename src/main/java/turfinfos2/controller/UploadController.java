@@ -293,11 +293,13 @@ public class UploadController {
 					.collect(Collectors.toList());
 			Collections.reverse(listByppch);
 
-			List<TurfInfos> listByppc = allraceInfos.stream()
-					.filter(ti -> ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval() != 0d).sorted(Comparator
-							.comparingDouble(TurfInfos::getPourcPlaceCheval).thenComparingInt(TurfInfos::getNumero))
-					.collect(Collectors.toList());
-			Collections.reverse(listByppc);
+//			List<TurfInfos> listByppc = allraceInfos.stream()
+//					.filter(ti -> ti.getPourcPlaceCheval() != null && ti.getPourcPlaceCheval() != 0d).sorted(Comparator
+//							.comparingDouble(TurfInfos::getPourcPlaceCheval).thenComparingInt(TurfInfos::getNumero))
+//					.collect(Collectors.toList());
+//			Collections.reverse(listByppc);
+			List<TurfInfos> listByppc = new ArrayList<>();
+
 
 			List<TurfInfos> listByppjh = allraceInfos.stream()
 					.filter(ti -> ti.getPourcPlaceJockHippo() != null && ti.getPourcPlaceJockHippo() != 0d)
