@@ -186,16 +186,25 @@ public class UploadController {
 //		List<TurfInfos> allInfos = turfInfosRepository.findAll();
 
 
+		Integer recenceMax = 90;
+		
 		model.addAttribute("date", jour);
-		model.addAttribute("recencemax", 90);
+		model.addAttribute("recencemax", recenceMax);
+		
+		List<TurfInfos> allPremium = turfInfosRepository
+				.findAllByJourAndByReunionstring(jour, reunionstring);
+		allPremium.forEach(ti->{
+			if(ti.getRecence() == null) {
+				ti.setRecence(recenceMax -1 );
+			}
+		});
 
 		// RACESLIST
-		List<TurfInfos> allPremiumReunionInfos = turfInfosRepository
-				.findAllByJourAndByReunionstring(jour, reunionstring).stream()
+		List<TurfInfos> allPremiumReunionInfos = allPremium.stream()
 				.filter(ti -> 
 				ti.getIsRunning() != null && ti.getIsRunning() == true 
 				&& ti.getIsPremium() != null && ti.getIsPremium().equals(true)
-				&& ti.getRecence() != null && ti.getRecence() < 90
+				&& ti.getRecence() != null && ti.getRecence() < recenceMax
 				)
 				.collect(Collectors.toList());
 
