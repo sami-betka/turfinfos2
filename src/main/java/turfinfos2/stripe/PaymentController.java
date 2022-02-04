@@ -29,7 +29,9 @@ public class PaymentController {
     @GetMapping("/subscription")
     public String subscriptionPage(Model model) {
         model.addAttribute("stripePublicKey", API_PUBLIC_KEY);
-        return "subscription";
+//        return "subscription";
+        return "subscription-js";
+
     }
 
     @GetMapping("/charge")

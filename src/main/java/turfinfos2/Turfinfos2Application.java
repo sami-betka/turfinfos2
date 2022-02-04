@@ -95,21 +95,22 @@ public class Turfinfos2Application {
 		
 		
 //		TurfInfosRepository turfInfosRepository = ctx.getBean(TurfInfosRepository.class);
-//
+////
 //        List<TurfInfos> all = new ArrayList<>();
 //        all.addAll(turfInfosRepository.findAll());
-//        		
+////        		
 //        List<TurfInfos> toSave = new ArrayList<>();
-//        List<TurfInfos> toDelete = new ArrayList<>();
-//
+////        List<TurfInfos> toDelete = new ArrayList<>();
+////
 //        all.forEach(ti-> {
 //        	
-//        	if(ti.getJour().contains("2021-04-") || ti.getJour().contains("2021-01")) {
-//        		toDelete.add(ti);
+//        	if(ti.getRecence() == null) {
+//        		ti.setRecence(89);
+//        		toSave.add(ti);
 //        	}
-//        
+////        
 //        });
-////        turfInfosRepository.deleteAll(toDelete);
+//        turfInfosRepository.saveAll(toSave);
 //
 //        System.out.println("STOP");
 //        System.out.println(toDelete.size());
