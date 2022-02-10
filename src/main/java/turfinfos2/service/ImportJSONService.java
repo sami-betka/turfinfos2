@@ -559,7 +559,7 @@ public class ImportJSONService {
 		List<TurfInfos> allToSave = new ArrayList<>();
 		List<TurfInfos> all = turfInfosRepository.findAllByJour(jour);
 
-		String parisTurfId = "fW6YWENYfSUdWop8cYD1U";
+		String parisTurfId = "-5_VH0N0MIhukWR2AbSqH";
 		String extension = ".json";
 
 		/////////// create all day url/////////
@@ -972,7 +972,7 @@ public class ImportJSONService {
 
 		List<TurfInfos> all = turfInfosRepository.findAllByJour(jour);
 
-		List<Integer> allNumCourses = all.stream().map(TurfInfos::getNumcourse).collect(Collectors.toList());
+//		List<Integer> allNumCourses = all.stream().map(TurfInfos::getNumcourse).collect(Collectors.toList());
 
 		try {
 			node = new ObjectMapper().readTree(new URL(finalUrl));
