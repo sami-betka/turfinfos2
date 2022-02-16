@@ -249,6 +249,7 @@ background-color: #90EE90;
 }
 .surfacecolor{
     background-color: #FAECC3;
+    border: black solid 1px;
 }
 .vertfluo{
 	background-color: 	#83f52c;

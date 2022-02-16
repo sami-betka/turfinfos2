@@ -238,6 +238,8 @@ public class TurfInfos {
 	
 	private Boolean chevalPastille;
 	
+	private Boolean surfacePastille;
+	
 	private Integer numberOfNonRunners;
 	
 	private Boolean isCross;
@@ -340,7 +342,7 @@ public class TurfInfos {
 			Boolean autostart, Boolean blueEtoile, Integer calculateEntraineurNumber, String jockey, Integer age,
 			String pronoFavoris, String pronoChancesRegulieres, Boolean purpleEtoile, String surface, Integer nbCourseSurface,
 			Integer nbCourseSurfaceHippo, Double pourcVictChevalSurface, Double pourcPlaceChevalSurface, Double pourcVictChevalSurfaceHippo,
-			Double pourcPlaceChevalSurfaceHippo
+			Double pourcPlaceChevalSurfaceHippo, Boolean surfacePastille
 			) {
 		
 		this.id = id;
@@ -439,6 +441,7 @@ public class TurfInfos {
 		this.jockeyPastille = jockeyPastille;
 		this.couplePastille = couplePastille;
 		this.chevalPastille = chevalPastille;
+		this.surfacePastille = surfacePastille;
 		this.isCross = isCross;
 		this.isFirstInProno = isFirstInProno;
 		this.nulStats = nulStats;
@@ -1245,6 +1248,14 @@ public class TurfInfos {
 
 	public void setPourcPlaceChevalSurfaceHippo(Double pourcPlaceChevalSurfaceHippo) {
 		this.pourcPlaceChevalSurfaceHippo = Precision.round(pourcPlaceChevalSurfaceHippo, 2) ;
+	}
+
+	public Boolean getSurfacePastille() {
+		return surfacePastille;
+	}
+
+	public void setSurfacePastille(Boolean surfacePastille) {
+		this.surfacePastille = surfacePastille;
 	}
 
 	

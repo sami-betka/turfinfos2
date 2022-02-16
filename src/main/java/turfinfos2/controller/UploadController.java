@@ -470,6 +470,7 @@ public class UploadController {
 
 			///////////// AFFECTER PASTILLES///////////////
 			setPastilles(listBypvjh, listByChronos, listBypvch, listByppch, listBytxv, listBytxp, listByNoteProno,
+					listBypvcs, listByppcs,
 					allraceInfos.size());
 
             ///////////// AFFECTER ETOILES///////////////
@@ -1147,6 +1148,7 @@ public class UploadController {
 
 	private List<TurfInfos> setPastilles(List<TurfInfos> jockeys, List<TurfInfos> chronos, List<TurfInfos> vchevalh,
 			List<TurfInfos> pchevalh, List<TurfInfos> vcouple, List<TurfInfos> pcouple, List<TurfInfos> pronos,
+			List<TurfInfos> vchevals, List<TurfInfos> pchevals,
 			int raceSize) {
 
 		
@@ -1155,6 +1157,7 @@ public class UploadController {
 				ti.setChevalPastille(false);
 				ti.setJockeyPastille(false);
 				ti.setCouplePastille(false);
+				ti.setSurfacePastille(false);
 			});
 		
 
@@ -1259,10 +1262,17 @@ public class UploadController {
 			} else {
 				ti.setChevalPastille(false);
 			}
+			
 			if (!vcouple.contains(ti) && !pcouple.contains(ti)) {
 				ti.setCouplePastille(true);
 			} else {
 				ti.setCouplePastille(false);
+			}
+			
+			if (!vchevals.contains(ti) && !pchevals.contains(ti) && pronos.get(0).getSurface().equals("PSF")) {
+				ti.setSurfacePastille(true);
+			} else {
+				ti.setSurfacePastille(false);
 			}
 
 		});
