@@ -275,6 +275,9 @@ public class TurfInfos {
 	private Double pourcVictChevalSurfaceHippo;
 
 	private Double pourcPlaceChevalSurfaceHippo;
+	
+	private Double valeur;
+
 
 
 
@@ -342,7 +345,7 @@ public class TurfInfos {
 			Boolean autostart, Boolean blueEtoile, Integer calculateEntraineurNumber, String jockey, Integer age,
 			String pronoFavoris, String pronoChancesRegulieres, Boolean purpleEtoile, String surface, Integer nbCourseSurface,
 			Integer nbCourseSurfaceHippo, Double pourcVictChevalSurface, Double pourcPlaceChevalSurface, Double pourcVictChevalSurfaceHippo,
-			Double pourcPlaceChevalSurfaceHippo, Boolean surfacePastille
+			Double pourcPlaceChevalSurfaceHippo, Boolean surfacePastille, Double valeur
 			) {
 		
 		this.id = id;
@@ -419,6 +422,8 @@ public class TurfInfos {
 		this.pronoFavoris = pronoFavoris;
 		this.pronoChancesRegulieres = pronoChancesRegulieres;
 		this.surface = surface;
+		this.valeur = valeur;
+
 
 
 
@@ -1256,6 +1261,14 @@ public class TurfInfos {
 
 	public void setSurfacePastille(Boolean surfacePastille) {
 		this.surfacePastille = surfacePastille;
+	}
+
+	public Double getValeur() {
+		return valeur;
+	}
+
+	public void setValeur(Double valeur) {
+		this.valeur = Precision.round(valeur, 2);
 	}
 
 	

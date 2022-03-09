@@ -36,9 +36,31 @@
   </div>
   
   
+<!--    <div class="" style="margin-top: 100px;"> -->
+<!--     <a th:href="@{/delete-reunion?jour={jour}(jour=${jour})}" type="button" class="btn btn-secondary">Supprimer une réunion</a> -->
+<!--   </div> -->
+  
+   <form th:action="@{delete-reunion?jour={jour}(jour=${jour})}" method="POST">
+  
+    <div class="form-group col-md-12" style="margin-top: 50px; border: solid black 1px;">
+      <label for="">Réunion à supprimer</label>
+      <select class="form-control" name="reunionString">
+        <option value="">Choisir...</option>
+           <option th:each="reunion : ${reunions}" th:value="${reunion}"
+		      th:text="${reunion}">
+		   </option>      
+     </select>
+               <button type="submit"  style="margin-top: 10px;" class="btn btn-primary text-dark">Supprimer</button>
+     
+    </div>
+    
+    </form>
+  
   <div class="" style="margin-top: 100px;">
     <a th:href="@{/delete-day?jour={jour}(jour=${jour})}" type="button" class="btn btn-secondary">Supprimer la journée</a>
   </div>
+  
+  
 <!--   <div class="btn-group mr-2" role="group" aria-label="Third group"> -->
 <!--     <a th:href="@{/reunion-infos?reunion=3}" type="button" class="btn btn-secondary">3</a> -->
 <!--   </div> -->

@@ -32,7 +32,9 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 import turfinfos2.model.TurfInfos;
+import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
+import turfinfos2.service.ResultService;
 import turfinfos2.service.TurfInfoService;
 
 @Controller
@@ -40,9 +42,15 @@ public class UploadController {
 
 	@Autowired
 	TurfInfosRepository turfInfosRepository;
+	
+	@Autowired
+	ResultRepository resultRepository;
 
 	@Autowired
 	TurfInfoService turfInfoService;
+	
+	@Autowired
+	ResultService resultService;
 
 	@GetMapping("/upload")
 	public String index(Model model) {
@@ -204,9 +212,12 @@ public class UploadController {
 				.filter(ti -> 
 				ti.getIsRunning() != null && ti.getIsRunning() == true 
 				&& ti.getIsPremium() != null && ti.getIsPremium().equals(true)
-				&& ti.getRecence() != null && ti.getRecence() < recenceMax
+//				&& ti.getRecence() != null && ti.getRecence() < recenceMax
 				)
 				.collect(Collectors.toList());
+		//Ajouter bon coups du jour
+		List<List<TurfInfos>> bigList = new ArrayList<>();
+		/////////////////////////
 
 		List<TurfInfos> reunionCracks = new ArrayList<>();
 		Map<String, String> tayPronos = new HashMap<>();
@@ -218,14 +229,7 @@ public class UploadController {
 		Collections.reverse(list);
 		distinctNumraces = new LinkedHashSet<>(list);
 
-		// Cast
-//		 LinkedList<String> distinctNumracesString = new LinkedList<>();
-//				 
-//		    for(Integer i : distinctNumraces) {
-//		    	distinctNumracesString.add(i.toString());
-//		    }
-
-//		System.out.println(distinctNumraces.size());
+		
 
 		model.addAttribute("distinctnumraces", distinctNumraces);
 
@@ -235,8 +239,10 @@ public class UploadController {
 			// Infos de la course en question
 			allraceInfos = allPremiumReunionInfos.stream().filter(ti -> ti.getC().equals(num))
 					.collect(Collectors.toList());
+			
+			int raceSize = allraceInfos.get(0).getNumberOfInitialRunners();
 
-			model.addAttribute("racesize", allraceInfos.size());
+			model.addAttribute("racesize", raceSize);
 
 			model.addAttribute(numToString(num) + "ispick5", allraceInfos.get(0).getIsPick5());
 			model.addAttribute(numToString(num) + "istqq", allraceInfos.get(0).getIsTQQ());
@@ -415,6 +421,12 @@ public class UploadController {
 					.filter(ti -> ti.getDistanceAndSpecialtyChrono() != null).sorted(Comparator
 							.comparing(TurfInfos::getDistanceAndSpecialtyChrono).thenComparing(TurfInfos::getNumero))
 					.collect(Collectors.toList());
+			
+			List<TurfInfos> listByValeur = allraceInfos.stream()
+					.filter(ti -> ti.getValeur() != null && ti.getValeur() > 0).sorted(Comparator
+							.comparing(TurfInfos::getValeur).thenComparing(TurfInfos::getNumero, (int1, int2) -> int2-int1))
+					.collect(Collectors.toList());
+			Collections.reverse(listByValeur);
 
 
 			// CLASSEMENT A L'ARRIVEE
@@ -507,25 +519,72 @@ public class UploadController {
 
 
 
-				if (listByChronoParisTurf.size() < 9) {
+				if (listByChronoParisTurf.size() < 90) {
 					model.addAttribute(numToString(num) + "paristurfchronoslist", listByChronoParisTurf);
 				}
-				if (listByChronoParisTurf.size() >= 9) {
-					model.addAttribute(numToString(num) + "paristurfchronoslist", listByChronoParisTurf.subList(0, 9));
-				}
+//				if (listByChronoParisTurf.size() >= 9) {
+//					model.addAttribute(numToString(num) + "paristurfchronoslist", listByChronoParisTurf.subList(0, 9));
+//				}
 
 				model.addAttribute(numToString(num) + "chronoslist", listByChronos);
 				model.addAttribute(numToString(num) + "taypronoslist", listByTayPronos);
 				model.addAttribute(numToString(num) + "drawlist", listByDraw);
+				
+				
+				Integer sub = 0;
 
 				if (!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0
-						&& listByNoteProno.size() < 11) {
-					model.addAttribute(numToString(num) + "pronoslist", crossProno(listByNoteProno, allraceInfos.size()));
+						&& raceSize >= 10) {
+//					model.addAttribute(numToString(num) + "pronoslist", listByNoteProno.subList(0, 8 + numberOfRecence));
+			        sub = 8;
 				}
 				if (!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0
-						&& listByNoteProno.size() >= 9) {
-					model.addAttribute(numToString(num) + "pronoslist", crossProno(listByNoteProno.subList(0, 9), allraceInfos.size()));
+						 && raceSize >= 8 && raceSize < 10) {
+//					model.addAttribute(numToString(num) + "pronoslist", listByNoteProno.subList(0, 6 + numberOfRecence));
+			        sub = 6;
 				}
+				if (!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0
+						&& raceSize > 4 && raceSize <= 7) {
+//					model.addAttribute(numToString(num) + "pronoslist", listByNoteProno.subList(0, 5 + numberOfRecence));
+			        sub = 5;
+				}
+				
+				if (!listByNoteProno.isEmpty() && listByNoteProno.get(0).getNoteProno() > 0
+						&& raceSize < 5) {
+//					model.addAttribute(numToString(num) + "pronoslist", listByNoteProno);
+					sub = listByNoteProno.size();
+				}
+				
+				int numberOfRecence = 0;
+				
+				if(!listByNoteProno.isEmpty() && listByNoteProno.size() >= sub) {
+					for(TurfInfos i : listByNoteProno.subList(0, sub)) {
+						if(i.getRecence() > recenceMax) {
+							numberOfRecence += 1;
+							if((sub + numberOfRecence) >= raceSize) {
+								numberOfRecence -= 1;
+							}
+						}
+					}
+					if(numberOfRecence > 1 ) {
+						numberOfRecence = 1;
+					};
+				}
+				
+				//A modifier  et numberOfRecence si besoin d'un cheval en plus
+				numberOfRecence = 0;
+				
+								
+				if(!sub.equals(null) && (sub + numberOfRecence) <= listByNoteProno.size()) {
+					model.addAttribute(numToString(num) + "pronoslist", listByNoteProno.subList(0, sub + numberOfRecence));
+					bigList.add(listByNoteProno.subList(0, sub + numberOfRecence));
+				} else {
+					model.addAttribute(numToString(num) + "pronoslist", listByNoteProno);
+					bigList.add(listByNoteProno);
+				}
+//				model.addAttribute("bonscoupsdujour", resultService.createBonCoupsDuJour(bigList, resultRepository.findAllByJourAndReunion(jour, allraceInfos.get(0).getR())));
+//						System.out.println(resultService.createBonCoupsDuJour(bigList, resultRepository.findAllByJourAndReunion(jour, allraceInfos.get(0).getR())).size() + " mapsizeb");
+//				
 				if (listByNoteProno.isEmpty()) {
 					model.addAttribute(numToString(num) + "pronoslist", new ArrayList<>());
 				}
@@ -560,8 +619,10 @@ public class UploadController {
 					if (allraceInfos.get(0).getRaceSpecialty().equals("A")
 							|| allraceInfos.get(0).getRaceSpecialty().equals("M")) {
 						model.addAttribute("specialty", "trot");
-					} else if (allraceInfos.get(0).getRaceSpecialty().equals("P")) {
+					} else if (!allraceInfos.get(0).getRaceSpecialty().equals("A")
+							&& !allraceInfos.get(0).getRaceSpecialty().equals("M")) {
 						model.addAttribute("specialty", "galop");
+						model.addAttribute(numToString(num) + "valeurlist", listByValeur);
 					}
 				} else {
 					model.addAttribute("specialty", "none");
@@ -584,6 +645,12 @@ public class UploadController {
 			model.addAttribute(numToString(num) + "race", num);
 
 		}
+		
+		////////////Boncoupsdu jour//////////////
+		Collections.reverse(bigList);
+		model.addAttribute("bonscoupsdujour", resultService.createBonCoupsDuJour(bigList, resultRepository.findAllByJourAndReunion(jour, allraceInfos.get(0).getR())));
+		System.out.println(resultService.createBonCoupsDuJour(bigList, resultRepository.findAllByJourAndReunion(jour, allraceInfos.get(0).getR())).size() + " mapsizeb");
+        System.out.println(bigList.size() + " big");
 
 		//////////// CRACKS/////////////////
 		List<TurfInfos> crackList = reunionCracks.stream().filter(ti -> ti.getNoteProno() >= 30)

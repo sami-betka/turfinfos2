@@ -46,3 +46,31 @@ function spinnerFunction() {
     textToHide.style.display = 'none';
     textToShow.style.display = '';
   }
+
+  //5//
+  function spinnerFunction5() {
+    var spinner = document.getElementById("mySpinner5");
+    var textToHide = document.getElementById("myTextToHide5");
+    var textToShow = document.getElementById("myTextToShow5");
+
+    spinner.classList.add("spinner-border");
+    spinner.classList.add("spinner-border-sm");
+    textToHide.style.display = 'none';
+    textToShow.style.display = '';
+  }
+
+  //CONFIRM PASSWORD//
+
+  var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;

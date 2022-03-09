@@ -1,23 +1,15 @@
 package turfinfos2;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stripe.Stripe;
 
-import turfinfos2.model.TurfInfos;
-import turfinfos2.repository.TurfInfosRepository;
+import turfinfos2.model.AppRole;
+import turfinfos2.repository.AppRoleRepository;
 
 @SpringBootApplication
 public class Turfinfos2Application {
@@ -39,12 +31,28 @@ public class Turfinfos2Application {
 	
 
 	public static void main(String[] args) {
+		
+		ApplicationContext ctx = SpringApplication.run(Turfinfos2Application.class, args);
+
+		
+//		//create role user
+//		AppRoleRepository appRoleRepository = ctx.getBean(AppRoleRepository.class);
+//		if (appRoleRepository.findAll().isEmpty()) {
+//			appRoleRepository.save(new AppRole(1l, "ROLE_ADMIN"));
+//			appRoleRepository.save(new AppRole(2l, "ROLE_USER"));
+//		    appRoleRepository.save(new AppRole(3l, "ROLE_PREMIUM"));
+//		}
+		
+		
 //		create table if not exists persistent_logins ( 
 //				  username varchar_ignorecase(100) not null, 
 //				  series varchar(64) primary key, 
 //				  token varchar(64) not null, 
 //				  last_used timestamp not null 
 //				);
+		
+		
+		
 		
 		//////CRON//
 //		second, minute, hour, day of month, month, day(s) of week
@@ -57,7 +65,6 @@ public class Turfinfos2Application {
 //				* "0 0 9-17 * * MON-FRI" = on the hour nine-to-five weekdays
 //				* "0 0 0 25 12 ?" = every Christmas Day at midnight
 		
-		ApplicationContext ctx = SpringApplication.run(Turfinfos2Application.class, args);
 		
 //		AppRoleRepository appRoleRepository = ctx.getBean(AppRoleRepository.class);
 //		if (appRoleRepository.findAll().isEmpty()) {

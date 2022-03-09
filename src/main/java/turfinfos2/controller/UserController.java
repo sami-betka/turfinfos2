@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,7 +72,7 @@ public class UserController {
 			redirect.addFlashAttribute("usernamealreadyexists", "Nom d'utilisateur déja utilisé");
 			return "redirect:/create-account";
 		}
-		user.setPassword(encrytedPasswordUtils.encrytePassword(user.getPassword()));
+		user.setEncrytedPassword(encrytedPasswordUtils.encrytePassword(user.getEncrytedPassword()));
 
 		UserRole userRole = new UserRole(user, appRoleRepository.findById(2L).get());
 
@@ -87,11 +89,64 @@ public class UserController {
 //			return "redirect:/login";
 //		}
 		
+		UserAccount user = new UserAccount();
+		user.setUserName("sam");
+		user.setEmail("dfghj@dfghj");
+		user.setEncrytedPassword("123");
+		
+		model.addAttribute("user", user);
+
 		model.addAttribute("active", true);
 		navbarInfos(model);
 
-		return "upload";
+		return "my-infos";
 	}	
+	
+	@RequestMapping(value = "/edit-my-infos")
+	public String editUser(Model model, Principal principal) {
+
+//		if (principal == null) {
+//			return "redirect:/login";
+//		}
+
+//		UserAccount user = userRepository.findByUserName(principal.getName());
+		UserAccount user = new UserAccount();
+		user.setUserName("sam");
+		user.setEmail("dfghj@dfghj");
+		user.setEncrytedPassword("123");
+
+		model.addAttribute("user", user);
+
+		navbarInfos(model);
+		return "edit-my-infos";
+
+	}
+
+	@PostMapping(value = "/update-my-infos")
+	public String updateUser(@Valid UserAccount user, Model model, BindingResult bindingresult, Principal principal,RedirectAttributes redirect) {
+		if (bindingresult.hasErrors()) {
+			redirect.addFlashAttribute("createsuccess", true);
+
+			return "redirect:/edit-my-infos";
+		}
+		
+//		if (principal == null) {
+//			return "redirect:/login";
+//		}
+//		UserAccount user = userAccountRepository.findByUserName(principal.getName());
+//		if (user == null) {
+//			return "redirect:/login";
+//		}
+		
+		model.addAttribute("user", user);
+		navbarInfos(model);
+		
+		user.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(user.getEncrytedPassword()));
+//			userRepository.save(user);
+
+		return "redirect:/my-infos";
+		
+	}
 	 
 		@GetMapping("/login")
 		public String loginPage(@RequestParam(name = "error", required = false) boolean error, Model model, Principal principal) {

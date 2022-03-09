@@ -19,5 +19,14 @@ public interface ResultRepository extends JpaRepository<Resultat, Long>{
 
 			)
 	List<Resultat> findAllByJour(String jour);
+	
+	@Query("SELECT r FROM Resultat r "
+			+ "WHERE r.jour = :jour "
+			+ "AND r.R = :R"
+//			+ "AND ti.pourcVictJockHippo != 0 "
+//			+ "AND ti.pourcVictEntHippo != 0 "
+
+			)
+	List<Resultat> findAllByJourAndReunion (String jour, String R);
 }
 

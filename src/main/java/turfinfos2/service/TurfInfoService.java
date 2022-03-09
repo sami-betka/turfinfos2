@@ -204,6 +204,8 @@ public class TurfInfoService {
 //    	infoToUpdate.setTxPlaceCoupleHippo(info.getTxPlaceCoupleHippo());
     	infoToUpdate.setPronoFavoris(info.getPronoFavoris());
     	infoToUpdate.setPronoChancesRegulieres(info.getPronoChancesRegulieres());
+    	
+    	infoToUpdate.setValeur(info.getValeur());
 
 
     	

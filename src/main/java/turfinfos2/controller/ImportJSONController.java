@@ -62,7 +62,7 @@ public class ImportJSONController {
 					return "redirect:/day-infos?jour=" + jour;
 	}
 	
-	@GetMapping("/upload-data-date-range")
+	@PostMapping("/upload-data-date-range")
     public String uploadJSONFileDateRange(
     		@RequestParam(name = "datedebut", required = false, defaultValue = "2018-07-01") String datedebut, 
 			@RequestParam(name = "datefin", required = false, defaultValue = "2018-08-31") String datefin) {
@@ -114,7 +114,7 @@ public class ImportJSONController {
 					return "redirect:/";
 	}
 	
-	@GetMapping("/upload-rapports-date-range")
+	@PostMapping("/upload-rapports-date-range")
     public String uploadRapportsFileDateRange(
     		@RequestParam(name = "datedebut", required = false, defaultValue = "2018-08-31") String datedebut, 
 			@RequestParam(name = "datefin", required = false, defaultValue = "2018-12-31") String datefin) {
@@ -171,31 +171,31 @@ public class ImportJSONController {
 			return "redirect:/";
 	}
 	
-	@PostMapping("/update-paris-turf-json-data-from-url")
-    public String uploadJSONFileByRace(@RequestParam("url") String url, Model model, RedirectAttributes redirect) {
-
-		 JsonNode node;
-         String jour = "";
-         
-			try {
-				node = new ObjectMapper().readTree(new URL(url));
-				jour = node.get("pageProps").get("date").textValue();
-				importJSONService.createAllDayInfosFromParisTurfJson(url, true);
-				return "redirect:/day-infos?jour=" + jour;
-
-
-				
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		
-		return "redirect:/";
-	}
+//	@PostMapping("/update-paris-turf-json-data-from-url")
+//    public String uploadJSONFileByRace(@RequestParam("url") String url, Model model, RedirectAttributes redirect) {
+//
+//		 JsonNode node;
+//         String jour = "";
+//         
+//			try {
+//				node = new ObjectMapper().readTree(new URL(url));
+//				jour = node.get("pageProps").get("date").textValue();
+//				importJSONService.createAllDayInfosFromParisTurfJson(url, true);
+//				return "redirect:/day-infos?jour=" + jour;
+//
+//
+//				
+//			} catch (MalformedURLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//		
+//		return "redirect:/";
+//	}
 	
 	@PostMapping("/upload-rapports-json-data-from-url")
     public String uploadRapportsFile(@RequestParam("jour") String jour, Model model, RedirectAttributes redirect) {
@@ -233,20 +233,25 @@ public class ImportJSONController {
 			return "redirect:/day-infos?jour=" + jour;
      	}
 	
-	///////////////////////////////////////////////////////////
-	
-	private String setParisTurfId (String parisTurfId, Model model) {
-		ParisTurfInfosConfig configToUpdate = parisTurfInfoConfigRepository.findAll().stream().findFirst().get();
+	@PostMapping("/update-paris-turf-id")
+	public String setParisTurfId (@RequestParam("paristurfid") String parisTurfId, Model model) {
 		
-		configToUpdate.setParisTurfId(parisTurfId);
-		parisTurfInfoConfigRepository.save(configToUpdate);
+		parisTurfInfoConfigRepository.deleteAll();
+		
+		
+		ParisTurfInfosConfig newConfig = new ParisTurfInfosConfig();
+		
+		newConfig.setParisTurfId(parisTurfId);
+		parisTurfInfoConfigRepository.save(newConfig);
 		
 		model.addAttribute("idupdated", true);
 		
-		return "update";
+		return "redirect:/upload";
 		
 	}
 	
+	///////////////////////////////////////////////////////////
+
 	   private void navbarInfos(Model model) {
 		   
 //		   List<TurfInfos> allInfos = turfInfosRepository.findAll();

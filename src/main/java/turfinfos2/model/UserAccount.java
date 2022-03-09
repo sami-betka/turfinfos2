@@ -22,11 +22,11 @@ public class UserAccount {
 		super();
 	}
 
-	public UserAccount(Long id, String userName, String password, String firstName, String lastName, String email) {
+	public UserAccount(Long id, String userName, String encrytedPassword, String firstName, String lastName, String email) {
 		super();
 		this.id = id;
 		this.userName = userName;
-		this.password = password;
+		this.encrytedPassword = encrytedPassword;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -40,7 +40,7 @@ public class UserAccount {
 	@Column(name = "user_name", nullable = false, unique = true)
 	private String userName;
 	
-	private String password;
+	private String encrytedPassword;
 	
 	private String firstName;
 	
@@ -70,12 +70,12 @@ public class UserAccount {
 		this.userName = userName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getEncrytedPassword() {
+		return encrytedPassword;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setEncrytedPassword(String encrytedPassword) {
+		this.encrytedPassword = encrytedPassword;
 	}
 
 	public String getFirstName() {

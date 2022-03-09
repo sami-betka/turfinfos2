@@ -15,19 +15,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
 import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 import turfinfos2.repository.UserAccountRepository;
 import turfinfos2.repository.UserRoleRepository;
+import turfinfos2.service.EmailService;
 import turfinfos2.service.TwilioService;
 
 @Controller
 public class MainController {
 	
 	@Autowired
-	UserAccountRepository userRepository;
+	UserAccountRepository userAccountRepository;
 	
 	@Autowired
 	UserRoleRepository userRoleRepository;
@@ -41,6 +41,25 @@ public class MainController {
 	@Autowired
 	TwilioService service;
 	
+	@Autowired
+	EmailService emailService;
+	
+
+	 @GetMapping("/test-email")
+	    public String testEmail(Model model) {
+		 
+//		 String to = "sami1206@hotmail.fr";
+		 String to = "djetayyy@gmail.com";
+
+	    	
+		 emailService.sendMail(to, "Salut mon cochon, c'est Sami de SamTay Infos !", "Cet email pour te confirmer que j'ai bien mis en place l'envoi des emails. On va les baiser bientot !");
+
+         navbarInfos(model);
+
+	    	 return "home";
+
+	    }
+	
 	 @GetMapping("/")
 	    public String home(Model model) {
 	    	
@@ -50,9 +69,8 @@ public class MainController {
 //             .findAny().get();
 //             
 //             System.out.println(resultat.toString());
-             
-             
-	    	 
+		 
+		 
 	         navbarInfos(model);
 	         
 	         //"+33752447037"
@@ -71,6 +89,14 @@ public class MainController {
 
 	        return "checkout";
 	    }
+	 
+	 @GetMapping("/contact")
+	    public String contact(Model model) {
+
+         navbarInfos(model);
+
+	     return "contact";
+	    }
 
 	 @GetMapping("/redirect-to-reunion-infos")
 	    public String redirectToReunionInfos(
@@ -83,17 +109,23 @@ public class MainController {
 			return "redirect:/reunion-infos?jour=" + jour + "&reunion=" + reunion;
 	    }
 	
-    @GetMapping("/nav")
-    public String nav(Model model) {
-
-        return "_nav-components";
-    }
-    
-    @GetMapping("/doigt")
-    public String doigt(Model model) {
-    	
-        return "doigt";
-    }
+//		@GetMapping("/sendmail")
+//		public String sendMail(Model model, Principal principal) {
+//
+//			UserAccount user = userAccountRepository.findByUserName(principal.getName());
+//
+//			Mail mail = new Mail();
+//			mail.setMailFrom("samtetedestup@gmail.com");
+//			mail.setMailTo(user.getEmail());
+//			mail.setMailSubject("Confirmation de commande");
+//			mail.setMailContent("Commande confirmée");
+//			mailService.sendEmail(mail, principal);
+//
+//			navbarAttributes(model, principal);
+//
+//			return "mailconfirmation";
+//
+//		}
     
     ///////////////////////////////////////////////////////////////////////////////
     

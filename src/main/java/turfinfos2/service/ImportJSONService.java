@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import turfinfos2.model.Resultat;
 import turfinfos2.model.TurfInfos;
+import turfinfos2.repository.ParisTurfInfoConfigRepository;
 import turfinfos2.repository.ResultRepository;
 import turfinfos2.repository.TurfInfosRepository;
 
@@ -43,6 +44,9 @@ public class ImportJSONService {
 
 	@Autowired
 	ResultRepository resultRepository;
+	
+	@Autowired
+	ParisTurfInfoConfigRepository parisTurfInfoConfigRepository;
 
 	public List<TurfInfos> createAllRaceInfosFromParisTurfJson(String url, List<TurfInfos> all) {
 
@@ -107,8 +111,7 @@ public class ImportJSONService {
 				turfInfo.setJour(jour);
 				turfInfo.setHour(finalHour);
 
-				if (node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("pmuNumber")
-						.intValue() != 0) {
+				if (node.get("pageProps").get("initialState").get("currentPage").get("meeting").get("pmuNumber").intValue() != 0) {
 					turfInfo.setR(String.valueOf(node.get("pageProps").get("initialState").get("currentPage")
 							.get("meeting").get("pmuNumber").intValue()));
 //                    turfInfo.setPronoFavoris(node.get("pageProps").get("initialState").get("currentPage").get("webTips").get("tips").get("A").get("horseIdList").textValue());
@@ -127,15 +130,17 @@ public class ImportJSONService {
 
 //					turfInfo.setHorseId(node.get("pageProps").get("initialState").get("racecards").get("runners")
 //							.get(numcourse).get(i).get("horseId").intValue());
-					turfInfo.setTableId(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setTableId(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("id").textValue());
-					turfInfo.setEntraineur(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setEntraineur(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("trainerName").textValue());
-					turfInfo.setJockey(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setJockey(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("jockeyName").textValue());
 					turfInfo.setNumcourse(Integer.valueOf(numcourse));
-					turfInfo.setNumero(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setNumero(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("saddle").intValue());
+					turfInfo.setValeur(node.get("pageProps").get("initialState").get("raceCards").get("runners")
+							.get(numcourse).get(i).get("handicapRatingKg").doubleValue());
 
 //					turfInfo.setBlinkersFirstTime(node.get("pageProps").get("initialState").get("racecards")
 //							.get("runners").get(numcourse).get(i).get("blinkersFirstTime").booleanValue());
@@ -145,7 +150,7 @@ public class ImportJSONService {
 //							.get("runners").get(numcourse).get(i).get("protectionFirstTime").booleanValue());
 //					turfInfo.setFormFigs(node.get("pageProps").get("initialState").get("racecards").get("runners")
 //							.get(numcourse).get(i).get("formFigs").textValue());
-					turfInfo.setAge(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setAge(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("age").intValue());
 
 					turfInfo.setCl("");
@@ -253,26 +258,26 @@ public class ImportJSONService {
 
 					if (turfInfo.getRaceSpecialty().equals("A") || turfInfo.getRaceSpecialty().equals("M")) {
 						if (turfInfo.getRaceSpecialty()
-								.equals(node.get("pageProps").get("initialState").get("racecards").get("runners")
+								.equals(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 										.get(numcourse).get(i).get("records").get("distance").get("specialty")
 										.textValue())) {
 							turfInfo.setDistanceAndSpecialtyChrono(node.get("pageProps").get("initialState")
-									.get("racecards").get("runners").get(numcourse).get(i).get("records")
+									.get("raceCards").get("runners").get(numcourse).get(i).get("records")
 									.get("distance").get("redkm").textValue());
 						}
 					}
 
-					turfInfo.setRanking(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setRanking(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("ranking").intValue());
-					turfInfo.setLiveOdd(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setLiveOdd(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("operatorOdds").get("PMU").get("liveOdd").doubleValue());
-					turfInfo.setIsRunning(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setIsRunning(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("isRunning").booleanValue());
 					turfInfo.setIsTQQ(node.get("pageProps").get("race").get("isTQQ").booleanValue());
 					turfInfo.setNumberOfInitialRunners(numberofRunners);
 					turfInfo.setNumberOfNonRunners(
 							node.get("pageProps").get("race").get("numberOfNonRunners").intValue());
-					turfInfo.setDraw(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setDraw(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("draw").intValue());
 
 					if (node.get("pageProps").get("race").get("operatorBetTypes") != null
@@ -310,7 +315,7 @@ public class ImportJSONService {
 
 					//					turfInfo.setPicto(node.get("pageProps").get("initialState").get("racecards").get("runners")
 //							.get(numcourse).get(i).get("operatorOdds").get("PMU").get("picto").textValue());
-					turfInfo.setIsSupplemented(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setIsSupplemented(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("isSupplemented").booleanValue());
 
 				} else {
@@ -334,15 +339,17 @@ public class ImportJSONService {
 
 //					turfInfo.setHorseId(node.get("pageProps").get("initialState").get("racecards").get("runners")
 //							.get(numcourse).get(i).get("horseId").intValue());
-					turfInfo.setTableId(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setTableId(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("id").textValue());
-					turfInfo.setEntraineur(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setEntraineur(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("trainerName").textValue());
-					turfInfo.setJockey(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setJockey(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("jockeyName").textValue());
 					turfInfo.setNumcourse(Integer.valueOf(numcourse));
-					turfInfo.setNumero(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setNumero(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("saddle").intValue());
+					turfInfo.setValeur(node.get("pageProps").get("initialState").get("raceCards").get("runners")
+							.get(numcourse).get(i).get("handicapRatingKg").doubleValue());
 
 //					turfInfo.setBlinkersFirstTime(node.get("pageProps").get("initialState").get("racecards")
 //							.get("runners").get(numcourse).get(i).get("blinkersFirstTime").booleanValue());
@@ -455,26 +462,26 @@ public class ImportJSONService {
 
 					if (turfInfo.getRaceSpecialty().equals("A") || turfInfo.getRaceSpecialty().equals("M")) {
 						if (turfInfo.getRaceSpecialty()
-								.equals(node.get("pageProps").get("initialState").get("racecards").get("runners")
+								.equals(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 										.get(numcourse).get(i).get("records").get("distance").get("specialty")
 										.textValue())) {
 							turfInfo.setDistanceAndSpecialtyChrono(node.get("pageProps").get("initialState")
-									.get("racecards").get("runners").get(numcourse).get(i).get("records")
+									.get("raceCards").get("runners").get(numcourse).get(i).get("records")
 									.get("distance").get("redkm").textValue());
 						}
 					}
 
-					turfInfo.setRanking(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setRanking(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("ranking").intValue());
-					turfInfo.setLiveOdd(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setLiveOdd(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("operatorOdds").get("PMU").get("liveOdd").doubleValue());
-					turfInfo.setIsRunning(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setIsRunning(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("isRunning").booleanValue());
 					turfInfo.setIsTQQ(node.get("pageProps").get("race").get("isTQQ").booleanValue());
 					turfInfo.setNumberOfInitialRunners(numberofRunners);
 					turfInfo.setNumberOfNonRunners(
 							node.get("pageProps").get("race").get("numberOfNonRunners").intValue());
-					turfInfo.setDraw(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setDraw(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("draw").intValue());
 
 					if (node.get("pageProps").get("race").get("operatorBetTypes") != null
@@ -511,7 +518,7 @@ public class ImportJSONService {
 
 					//					turfInfo.setPicto(node.get("pageProps").get("initialState").get("racecards").get("runners")
 //							.get(numcourse).get(i).get("operatorOdds").get("PMU").get("picto").textValue());
-					turfInfo.setIsSupplemented(node.get("pageProps").get("initialState").get("racecards").get("runners")
+					turfInfo.setIsSupplemented(node.get("pageProps").get("initialState").get("raceCards").get("runners")
 							.get(numcourse).get(i).get("isSupplemented").booleanValue());
 
 				}
@@ -559,7 +566,10 @@ public class ImportJSONService {
 		List<TurfInfos> allToSave = new ArrayList<>();
 		List<TurfInfos> all = turfInfosRepository.findAllByJour(jour);
 
-		String parisTurfId = "Y7Cb2KKn9pWXhKtxn4TSy";
+		
+		String parisTurfId = parisTurfInfoConfigRepository.findAll().stream().findFirst().get().getParisTurfId();
+
+//		String parisTurfId = "OkPisXl_A9XILGlSZTD2l";
 		String extension = ".json";
 
 		/////////// create all day url/////////
@@ -579,17 +589,17 @@ public class ImportJSONService {
 		try {
 			node = new ObjectMapper().readTree(new URL(finaldayUrl));
 //			String jour = node.get("pageProps").get("date").textValue();
-			Integer numberofRaces = node.get("pageProps").get("initialState").get("racecards").get("races").get(jour)
+			Integer numberofRaces = node.get("pageProps").get("initialState").get("raceCards").get("races").get(jour)
 					.size();
 			List<String> uuids = new ArrayList<>();
 
 			for (int i = 0; i < numberofRaces; i++) {
 
-				if (node.get("pageProps").get("initialState").get("racecards").get("races").get(jour).get(i)
+				if (node.get("pageProps").get("initialState").get("raceCards").get("races").get(jour).get(i)
 						.get("isPremium").booleanValue() == true
-						&& node.get("pageProps").get("initialState").get("racecards").get("races").get(jour).get(i)
+						&& node.get("pageProps").get("initialState").get("raceCards").get("races").get(jour).get(i)
 								.get("isCanceled").booleanValue() == false) {
-					String uuid = node.get("pageProps").get("initialState").get("racecards").get("races").get(jour)
+					String uuid = node.get("pageProps").get("initialState").get("raceCards").get("races").get(jour)
 							.get(i).get("uuid").textValue();
 					uuids.add(uuid);
 				}
@@ -695,9 +705,12 @@ public class ImportJSONService {
 
 					if (node.isMissingNode() == false) {
 
-			
+                        Integer numberOfInitialRunners = all.stream().filter(ti -> 
+                                ti.getR().equals(entry.getKey())
+                        		&& ti.getC().equals(race)).findFirst().get().getNumberOfInitialRunners();
+						
 //						Resultat resultat = resultService.createResult(jour, entry.getKey(), race, node, url, allResults);
-						allResultToSave.add(resultService.createResult(jour, entry.getKey(), race, node, url, allResults));
+						allResultToSave.add(resultService.createResult(jour, entry.getKey(), race, node, url, allResults, numberOfInitialRunners));
 
 						allByJour.forEach(ti -> {
 

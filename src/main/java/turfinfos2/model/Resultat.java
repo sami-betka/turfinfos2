@@ -27,6 +27,9 @@ public class Resultat {
 	private Integer C;
 	
 	private Integer numcourse;
+	
+	private Integer numberOfInitialRunners;
+
 
     //////////////////////////////////////////////////////////////////////
 	
@@ -95,7 +98,7 @@ public class Resultat {
 	private Double quinteBonus3Rapport;
 	
 	
-	public Resultat(Long id, String jour, String hour, String r, Integer c, Integer numcourse, String simpleGagnant,
+	public Resultat(Long id, String jour, String hour, String r, Integer c, Integer numcourse, Integer numberOfInitialRunners, String simpleGagnant,
 			Double simpleGagnantRapport, String simplePlace1, Double simplePlaceRapport1, String simplePlace2,
 			Double simplePlaceRapport2, String simplePlace3, Double simplePlaceRapport3, String coupleGagnant,
 			Double coupleGagnantRapport, String couplePlace1, Double couplePlaceRapport1, String couplePlace2,
@@ -115,6 +118,7 @@ public class Resultat {
 		this.R = r;
 		this.C = c;
 		this.numcourse = numcourse;
+		this.numberOfInitialRunners = numberOfInitialRunners;
 		this.simpleGagnant = simpleGagnant;
 		this.simpleGagnantRapport = simpleGagnantRapport;
 		this.simplePlace1 = simplePlace1;
@@ -700,6 +704,16 @@ public class Resultat {
 				+ quarteDesordreRapport + ", quarteBonusRapport=" + quarteBonusRapport + ", quinte=" + quinte
 				+ ", quinteOrdreRapport=" + quinteOrdreRapport + ", quinteDesordreRapport=" + quinteDesordreRapport
 				+ ", quinteBonus4Rapport=" + quinteBonus4Rapport + ", quinteBonus3Rapport=" + quinteBonus3Rapport + "]";
+	}
+
+
+	public Integer getNumberOfInitialRunners() {
+		return numberOfInitialRunners;
+	}
+
+
+	public void setNumberOfInitialRunners(Integer numberOfInitialRunners) {
+		this.numberOfInitialRunners = numberOfInitialRunners;
 	}
 
 

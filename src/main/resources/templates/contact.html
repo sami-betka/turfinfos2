@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link th:href="@{css/style.css}" rel="stylesheet" />
+        <link th:href="@{css/footer.css}" rel="stylesheet" />
+    
+</head>
+<body>
+        		<div th:replace="_nav-components :: nav">...</div>
+
+       <div style="margin-top: 120px;" class="row">       
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+       
+            <div class="card op">
+              <div class="card-header">
+                <h5 class="title">Nous contacter</h5>
+              </div>
+              <div class="card-body">
+                <form th:action="@{/receive-contact-mail}" method="POST">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Adresse email</label>
+                        <input name="mailadress" type="text" class="form-control" placeholder="" value="">
+                      </div>
+                    </div>
+                  </div>
+                    <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="story">Votre message</label>
+                        <br>
+<textarea class="form-control" id="story" name="message"
+          rows="5" cols="33">
+Tapez votre message...
+</textarea>                     
+                     </div>
+                    </div>
+                  </div>
+<!--                     <div class="col-md-12"> -->
+<!--                       <div class="form-group"> -->
+<!--                         <label>Confirmation mot de passe</label> -->
+<!--                         <input name="passwordConfirmation" type="text" class="form-control" placeholder="" value=""> -->
+<!--                       </div> -->
+<!--                     </div> -->
+<!--                   </div> -->
+                  
+                 <button type="submit" class="btn btn-primary btn-user btn-block">Envoyer</button> 
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        
+        
+        				<div th:replace="_nav-components :: footer">...</div>
+        
+
+	<script type="text/javascript" th:src="@{/js/test.js}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+
+</body>
+</html>
